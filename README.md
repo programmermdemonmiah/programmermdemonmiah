@@ -29,7 +29,7 @@ Welcome to my GitHub profile! I'm a dedicated Flutter developer with a passion f
 
 ### 📞 *Contact Me:*
 - *Email:* [contact.mdemonmiah@gmail.com](mailto:contact.mdemonmiah@gmail.com)
-- *LinkedIn:* [mdemonmiah](https://www.linkedin.com/in/mdemonmiah)
+- *LinkedIn:* [Md. Emon Miah](https://www.linkedin.com/in/mdemonmiah)
 - *Location:* Dhaka, Bangladesh
 
 ---
