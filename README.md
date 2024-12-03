@@ -1,6 +1,6 @@
 # 👋 Hello, I'm MD. EMON MIAH! Nice to meet you!
 
-### Junior Software Developer | Flutter (Android & iOS)
+### Software Developer | Flutter (Android & iOS)
 
 Welcome to my GitHub profile! I'm a dedicated Flutter developer with a passion for creating high-performance, cross-platform mobile applications. My focus is on building intuitive user interfaces and delivering seamless user experiences. I specialize in Flutter and Dart, with a strong foundation in state management solutions like GetX and Provider. Additionally, I have experience integrating APIs, managing databases, and ensuring responsive design across various devices. Whether it's building from scratch or improving existing projects, I strive for clean, maintainable, and efficient code.
 
