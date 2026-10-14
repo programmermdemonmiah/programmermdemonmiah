@@ -8,6 +8,8 @@ import {
   ExternalLink,
   ChevronUp,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   LayoutGrid,
   CreditCard,
   Smartphone,
@@ -16,52 +18,222 @@ import {
   ShieldCheck,
   Github,
   CheckCircle2,
+  Monitor,
+  Maximize2,
+  X,
 } from "lucide-react";
 
 import { VERIFIED_PROJECTS, type VerifiedProject } from "@/app/data/projectRegistry";
 
 const CATEGORIES = ["All", "Mobile App", "Enterprise SaaS", "E-Commerce", "Healthcare", "Full Stack Web"] as const;
 
+interface LightboxPayload {
+  images: string[];
+  index: number;
+  projectName: string;
+  category: string;
+  liveUrl?: string;
+}
+
 interface ProjectCardContentProps {
   project: VerifiedProject;
   index: number;
   total: number;
   layout?: "card" | "grid";
+  onOpenLightbox: (payload: LightboxPayload) => void;
 }
 
-function ProjectCardContent({ project, index, total, layout = "card" }: ProjectCardContentProps) {
+function getScreenshotMeta(url: string, category: string) {
+  if (url.includes("-desktop.png")) {
+    return { label: "Live Desktop Screenshot", icon: "desktop" as const };
+  }
+  if (url.includes("-mobile.png")) {
+    return { label: "Live Mobile View", icon: "mobile" as const };
+  }
+  if (url.includes("play-lh.googleusercontent.com") || url.includes("googleplay")) {
+    return { label: "Verified Google Play Store", icon: "store" as const };
+  }
+  if (url.includes("mzstatic.com") || url.includes("apple.com")) {
+    return { label: "Verified Apple App Store", icon: "store" as const };
+  }
+  if (category === "Mobile App") {
+    return { label: "Mobile App Screen", icon: "mobile" as const };
+  }
+  return { label: "Live System Capture", icon: "desktop" as const };
+}
+
+function ProjectScreenshotCarousel({
+  screenshots,
+  fallbackImage,
+  projectName,
+  category,
+  onOpenLightbox,
+  priority = false,
+  cardIndex,
+  totalCards,
+  status,
+}: {
+  screenshots: string[];
+  fallbackImage: string;
+  projectName: string;
+  category: string;
+  onOpenLightbox: (idx: number) => void;
+  priority?: boolean;
+  cardIndex: number;
+  totalCards: number;
+  status: string;
+}) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const images = screenshots && screenshots.length > 0 ? screenshots : [fallbackImage];
+  const currentUrl = images[activeIdx] || fallbackImage;
+  const meta = getScreenshotMeta(currentUrl, category);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActiveIdx((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActiveIdx((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleDotClick = (e: React.MouseEvent, idx: number) => {
+    e.stopPropagation();
+    setActiveIdx(idx);
+  };
+
+  return (
+    <div className="project-screenshot-carousel">
+      {/* Top Floating Badges */}
+      <div className="project-media-top-badges">
+        <div className="project-top-badges-left">
+          <span className="project-index-pill">
+            #{String(cardIndex + 1).padStart(2, "0")} / {String(totalCards).padStart(2, "0")}
+          </span>
+          <span className="project-status-pill">
+            <span className="status-live-dot" aria-hidden="true" />
+            <span>{status}</span>
+          </span>
+        </div>
+
+        <button
+          type="button"
+          className="carousel-zoom-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenLightbox(activeIdx);
+          }}
+          title="Inspect Full-Resolution Screenshot"
+          aria-label="Inspect Full-Resolution Screenshot"
+        >
+          <Maximize2 size={13} aria-hidden="true" />
+        </button>
+      </div>
+
+      {/* Main Image Stage */}
+      <div
+        className="carousel-image-stage"
+        onClick={() => onOpenLightbox(activeIdx)}
+        title="Click to view full-resolution screenshot"
+      >
+        <Image
+          key={currentUrl}
+          src={currentUrl}
+          alt={`${projectName} - ${meta.label} (${activeIdx + 1}/${images.length})`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+          className="project-image"
+          priority={priority}
+        />
+        <div className="project-media-overlay" />
+      </div>
+
+      {/* Multi-Screen Navigation Arrows */}
+      {images.length > 1 && (
+        <div className="carousel-nav-arrows">
+          <button
+            type="button"
+            className="carousel-nav-btn carousel-nav-prev"
+            onClick={handlePrev}
+            aria-label="Previous screenshot"
+            title="Previous screenshot"
+          >
+            <ChevronLeft size={16} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="carousel-nav-btn carousel-nav-next"
+            onClick={handleNext}
+            aria-label="Next screenshot"
+            title="Next screenshot"
+          >
+            <ChevronRight size={16} aria-hidden="true" />
+          </button>
+        </div>
+      )}
+
+      {/* Bottom Bar: Source Tag & Dot Indicators */}
+      <div className="carousel-bottom-bar">
+        <span className="carousel-source-badge">
+          {meta.icon === "desktop" && <Monitor size={12} aria-hidden="true" />}
+          {meta.icon === "mobile" && <Smartphone size={12} aria-hidden="true" />}
+          {meta.icon === "store" && <ShieldCheck size={12} aria-hidden="true" />}
+          <span>{meta.label}</span>
+          {images.length > 1 && (
+            <span style={{ opacity: 0.7, marginLeft: 3 }}>
+              ({activeIdx + 1}/{images.length})
+            </span>
+          )}
+        </span>
+
+        {images.length > 1 && (
+          <div className="carousel-dots-wrap" role="tablist" aria-label="Screenshots">
+            {images.map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                type="button"
+                className={`carousel-dot-btn ${dotIdx === activeIdx ? "carousel-dot-active" : ""}`}
+                onClick={(e) => handleDotClick(e, dotIdx)}
+                title={`View screenshot ${dotIdx + 1} of ${images.length}`}
+                aria-label={`View screenshot ${dotIdx + 1} of ${images.length}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ProjectCardContent({ project, index, total, layout = "card", onOpenLightbox }: ProjectCardContentProps) {
   const isGrid = layout === "grid";
+  const allScreens = project.screenshots && project.screenshots.length > 0 ? project.screenshots : [project.image];
 
   return (
     <div className={`verified-project-card ${isGrid ? "verified-project-grid-card" : "verified-project-deck-card"}`}>
       {/* Media Column / Area */}
       <div className="project-media-col">
         <div className="project-media-frame">
-          <Image
-            src={project.image}
-            alt={project.name}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-            className="project-image"
+          <ProjectScreenshotCarousel
+            screenshots={allScreens}
+            fallbackImage={project.image}
+            projectName={project.name}
+            category={project.category}
+            status={project.status}
+            cardIndex={index}
+            totalCards={total}
             priority={index < 2}
+            onOpenLightbox={(imgIdx) => {
+              onOpenLightbox({
+                images: allScreens,
+                index: imgIdx,
+                projectName: project.name,
+                category: project.category,
+                liveUrl: project.liveUrl,
+              });
+            }}
           />
-          <div className="project-media-overlay" />
-
-          {/* Top Floating Badges */}
-          <div className="project-media-top-badges">
-            <span className="project-index-pill">
-              #{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-            </span>
-            <span className="project-status-pill">
-              <span className="status-live-dot" aria-hidden="true" />
-              <span>{project.status}</span>
-            </span>
-          </div>
-
-          {/* Category Chip */}
-          <div className="project-media-bottom-chip">
-            <span className="project-category-chip">{project.category}</span>
-          </div>
         </div>
 
         {/* Quick Highlights Box under media */}
@@ -170,14 +342,14 @@ function ProjectCardContent({ project, index, total, layout = "card" }: ProjectC
 }
 
 // Framer Motion Animation Variants for the Upper & Bottom Card Swap
-const cardVariants = {
+const cardVariants: Variants = {
   enter: (direction: number) => ({
     y: direction > 0 ? 80 : -80,
     opacity: 0,
     scale: 0.94,
     rotateX: direction > 0 ? 6 : -6,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 28,
     },
@@ -189,7 +361,7 @@ const cardVariants = {
     rotateX: 0,
     zIndex: 10,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 320,
       damping: 30,
     },
@@ -201,7 +373,7 @@ const cardVariants = {
     rotateX: direction > 0 ? -8 : 8,
     zIndex: 1,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 28,
     },
@@ -214,7 +386,29 @@ export default function ProjectsSection() {
   const [viewMode, setViewMode] = useState<"card" | "grid">("card");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [lightbox, setLightbox] = useState<LightboxPayload | null>(null);
   const isThrottledRef = useRef(false);
+
+  // Lightbox keyboard navigation & body lock
+  useEffect(() => {
+    if (lightbox) {
+      const handleLightboxKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setLightbox(null);
+        } else if (e.key === "ArrowLeft") {
+          setLightbox((prev) =>
+            prev ? { ...prev, index: prev.index > 0 ? prev.index - 1 : prev.images.length - 1 } : null
+          );
+        } else if (e.key === "ArrowRight") {
+          setLightbox((prev) =>
+            prev ? { ...prev, index: prev.index < prev.images.length - 1 ? prev.index + 1 : 0 } : null
+          );
+        }
+      };
+      window.addEventListener("keydown", handleLightboxKey);
+      return () => window.removeEventListener("keydown", handleLightboxKey);
+    }
+  }, [lightbox]);
 
   // Filter only approved, verified projects from registry
   const filteredProjects = useMemo(() => {
@@ -288,10 +482,10 @@ export default function ProjectsSection() {
     }
   };
 
-  // Keyboard navigation
+  // Keyboard navigation for card deck
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (viewMode !== "card") return;
+      if (viewMode !== "card" || lightbox !== null) return;
       if (e.key === "ArrowDown") {
         handleNextCard();
       } else if (e.key === "ArrowUp") {
@@ -301,7 +495,7 @@ export default function ProjectsSection() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [viewMode, handleNextCard, handlePrevCard]);
+  }, [viewMode, lightbox, handleNextCard, handlePrevCard]);
 
   const currentProject = filteredProjects[currentIndex];
   const nextProject = currentIndex + 1 < filteredProjects.length ? filteredProjects[currentIndex + 1] : null;
@@ -534,6 +728,7 @@ export default function ProjectsSection() {
                       index={currentIndex}
                       total={filteredProjects.length}
                       layout="card"
+                      onOpenLightbox={(payload) => setLightbox(payload)}
                     />
                   </motion.div>
                 )}
@@ -559,6 +754,7 @@ export default function ProjectsSection() {
                 index={idx}
                 total={filteredProjects.length}
                 layout="grid"
+                onOpenLightbox={(payload) => setLightbox(payload)}
               />
             ))}
           </div>
@@ -572,6 +768,135 @@ export default function ProjectsSection() {
           </span>
         </div>
       </div>
+
+      {/* Fullscreen High-Resolution Screenshot Lightbox Modal */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="screenshot-lightbox-backdrop"
+            onClick={() => setLightbox(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.93, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.93, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              className="screenshot-lightbox-dialog"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Lightbox Header */}
+              <div className="lightbox-header">
+                <div className="lightbox-title-area">
+                  <h4 className="lightbox-project-name">{lightbox.projectName}</h4>
+                  <span className="lightbox-source-pill">
+                    {getScreenshotMeta(lightbox.images[lightbox.index], lightbox.category).label}
+                  </span>
+                  <span className="lightbox-counter-pill">
+                    {lightbox.index + 1} / {lightbox.images.length}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  className="lightbox-close-btn"
+                  onClick={() => setLightbox(null)}
+                  aria-label="Close screenshot preview"
+                  title="Close preview (Esc)"
+                >
+                  <X size={18} aria-hidden="true" />
+                </button>
+              </div>
+
+              {/* Lightbox Stage */}
+              <div className="lightbox-stage">
+                {lightbox.images.length > 1 && (
+                  <button
+                    type="button"
+                    className="lightbox-nav-btn lightbox-nav-prev"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightbox((prev) =>
+                        prev
+                          ? {
+                              ...prev,
+                              index: prev.index > 0 ? prev.index - 1 : prev.images.length - 1,
+                            }
+                          : null
+                      );
+                    }}
+                    aria-label="Previous screenshot"
+                    title="Previous (ArrowLeft)"
+                  >
+                    <ChevronLeft size={22} aria-hidden="true" />
+                  </button>
+                )}
+
+                <div className="lightbox-image-wrap">
+                  <Image
+                    key={lightbox.images[lightbox.index]}
+                    src={lightbox.images[lightbox.index]}
+                    alt={`${lightbox.projectName} - ${lightbox.index + 1}`}
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                    priority
+                  />
+                </div>
+
+                {lightbox.images.length > 1 && (
+                  <button
+                    type="button"
+                    className="lightbox-nav-btn lightbox-nav-next"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLightbox((prev) =>
+                        prev
+                          ? {
+                              ...prev,
+                              index: prev.index < prev.images.length - 1 ? prev.index + 1 : 0,
+                            }
+                          : null
+                      );
+                    }}
+                    aria-label="Next screenshot"
+                    title="Next (ArrowRight)"
+                  >
+                    <ChevronRight size={22} aria-hidden="true" />
+                  </button>
+                )}
+              </div>
+
+              {/* Lightbox Footer */}
+              <div className="lightbox-footer">
+                <div className="lightbox-hint">
+                  <span>Keyboard:</span>
+                  <kbd>←</kbd>
+                  <kbd>→</kbd>
+                  <span>to browse,</span>
+                  <kbd>Esc</kbd>
+                  <span>to close</span>
+                </div>
+
+                {lightbox.liveUrl && (
+                  <a
+                    href={lightbox.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="lightbox-action-link"
+                  >
+                    <span>Visit Live Target</span>
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
