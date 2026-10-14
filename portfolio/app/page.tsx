@@ -21,7 +21,7 @@ const projects = [
     stack: ["Flutter", "Riverpod", "E-commerce"],
     tone: "red", liveUrl: "https://play.google.com/store/apps/details?id=com.genters.customer",
     liveLabel: "View on Google Play",
-    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.genters.customer"
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.genters.customer"
   },
   {
     number: "04", name: "Asmi", category: "ONLINE SUPERMARKET",
@@ -37,7 +37,7 @@ const projects = [
     stack: ["Flutter", "E-commerce", "Mobile"],
     tone: "red", liveUrl: "https://play.google.com/store/apps/details?id=com.fantasymart.customer",
     liveLabel: "View on Google Play",
-    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.fantasymart.customer"
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.fantasymart.customer"
   },
   {
     number: "06", name: "Medly", category: "DIGITAL READING",
@@ -45,7 +45,7 @@ const projects = [
     stack: ["Flutter", "Mobile UI", "Content"],
     tone: "orange", liveUrl: "https://play.google.com/store/apps/details?id=com.medly.app",
     liveLabel: "View on Google Play",
-    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.medly.app"
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.medly.app"
   },
   {
     number: "07", name: "Swish", category: "MOBILE APPLICATION",
@@ -53,7 +53,7 @@ const projects = [
     stack: ["Flutter", "GetX", "Mobile"],
     tone: "red", liveUrl: "https://play.google.com/store/apps/details?id=com.swish.app",
     liveLabel: "View on Google Play",
-    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.swish.app"
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.swish.app"
   },
   {
     number: "08", name: "Ecom Matrix", category: "MULTI-VENDOR COMMERCE",
@@ -61,7 +61,7 @@ const projects = [
     stack: ["Flutter", "E-commerce", "Customer & Seller Apps"],
     tone: "orange", liveUrl: "https://play.google.com/store/apps/details?id=com.ecommatrix.customer",
     liveLabel: "View on Google Play",
-    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.ecommatrix.customer"
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/?url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.ecommatrix.customer"
   },
   {
     number: "09", name: "Live Streaming Platform", category: "REALTIME & VIDEO",
