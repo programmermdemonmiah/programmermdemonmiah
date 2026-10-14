@@ -102,19 +102,19 @@ I enjoy taking a product from **idea → architecture → development → deploy
 
 <p align="center">
   <a href="https://github.com/programmermdemonmiah">
-    <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=programmermdemonmiah&bg_color=0d1117&color=c9d1d9&line=58a6ff&point=bc8cff&area=true&area_color=1f6feb&hide_border=true&custom_title=Contribution%20Activity" alt="GitHub contribution activity graph" />
+    <img src="https://ghchart.rshah.org/58a6ff/programmermdemonmiah" alt="GitHub contribution activity heatmap for programmermdemonmiah" width="100%" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://img.shields.io/badge/PROFILE-GitHub-161b22?style=for-the-badge&logo=github&logoColor=white" alt="GitHub profile" />
+    <img src="https://img.shields.io/badge/EXPLORE-GitHub%20Activity-161b22?style=for-the-badge&logo=github&logoColor=white" alt="Explore GitHub activity" />
   </a>
-  <img src="https://img.shields.io/badge/UPDATES-Automatic-238636?style=for-the-badge&logo=githubactions&logoColor=white" alt="Automatically updated activity graph" />
-  <img src="https://img.shields.io/badge/PRIVACY-First-8957e5?style=for-the-badge&logo=github&logoColor=white" alt="Privacy first" />
+  <img src="https://img.shields.io/badge/DESIGN-Dark%20%7C%20Blue-1f6feb?style=for-the-badge" alt="Dark blue design" />
+  <img src="https://img.shields.io/badge/TOKEN-Not%20Required-238636?style=for-the-badge&logo=github&logoColor=white" alt="No token required" />
 </p>
 
-> **Private by design:** No personal access token, local script, or private-repository permission is needed for this README. To show private activity in GitHub's own contribution graph, enable **GitHub → Settings → Profile → Include private contributions**. This keeps private repository names and code hidden. The embedded activity graph is an automatically generated visualization; it is not a guaranteed raw commit total across every private repository.
+> The contribution heatmap is generated automatically by an external image service. To include private activity in GitHub's own contribution graph, enable **Settings → Profile → Include private contributions**. This README widget does not promise a complete raw commit count across private repositories. If the image provider is unavailable, the [GitHub contribution overview](https://github.com/programmermdemonmiah?tab=overview) remains available.
 
 ### 🤝 Let's Connect
 
