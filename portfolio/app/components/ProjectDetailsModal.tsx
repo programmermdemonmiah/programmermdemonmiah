@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -15,6 +15,9 @@ import {
   Lock,
   Cpu,
   ShieldCheck,
+  Globe,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import type { VerifiedProject } from "@/app/data/projectRegistry";
 
@@ -38,30 +41,36 @@ function getCategoryIcon(category: string) {
   }
 }
 
-function getPlatformPills(project: VerifiedProject): string[] {
-  const pills: string[] = [];
-  const s = project.stack.map((t) => t.toLowerCase());
-
-  if (project.category === "Mobile App" || s.includes("flutter") || s.includes("dart")) {
-    pills.push("Android Mobile", "iOS Mobile");
-    if (project.stack.some((t) => t.toLowerCase().includes("tv"))) {
-      pills.push("Android Smart TV");
-    }
+function detectScreenshotPlatform(url: string, projectCategory: string): "web" | "android" | "ios" {
+  if (url.includes("play-lh.googleusercontent.com") || url.includes("googleplay")) {
+    return "android";
   }
-
-  if (s.includes("next.js") || s.includes("react") || s.includes("vue") || s.includes("laravel") || s.includes("django")) {
-    pills.push("Responsive Web UI");
+  if (url.includes("mzstatic.com") || url.includes("apple.com")) {
+    return "ios";
   }
-
-  if (s.includes("go (gin)") || s.includes("microservices") || s.includes("docker") || s.includes("websockets")) {
-    pills.push("High-Concurrency Microservices");
+  if (url.includes("-desktop.png") || url.includes("-mobile.png") || url.includes("vercel.app") || url.includes("deepverselab.com")) {
+    return "web";
   }
-
-  if (pills.length === 0) {
-    pills.push("Full Stack Software Platform");
+  if (projectCategory === "Mobile App") {
+    return "android";
   }
+  return "web";
+}
 
-  return pills;
+function getScreenshotBadge(url: string): { label: string; icon: "web" | "android" | "ios" } {
+  if (url.includes("-desktop.png")) {
+    return { label: "Web Desktop View", icon: "web" };
+  }
+  if (url.includes("-mobile.png")) {
+    return { label: "Web Mobile View", icon: "web" };
+  }
+  if (url.includes("play-lh.googleusercontent.com") || url.includes("googleplay")) {
+    return { label: "Google Play Store", icon: "android" };
+  }
+  if (url.includes("mzstatic.com") || url.includes("apple.com")) {
+    return { label: "Apple App Store", icon: "ios" };
+  }
+  return { label: "Verified Production UI", icon: "web" };
 }
 
 export default function ProjectDetailsModal({
@@ -69,6 +78,13 @@ export default function ProjectDetailsModal({
   onClose,
   onOpenLightbox,
 }: ProjectDetailsModalProps) {
+  const [activeTab, setActiveTab] = useState<string>("All");
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [hasDragged, setHasDragged] = useState(false);
+
   // Close on Escape key
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -82,6 +98,7 @@ export default function ProjectDetailsModal({
   useEffect(() => {
     if (project) {
       document.body.style.overflow = "hidden";
+      setActiveTab("All");
     } else {
       document.body.style.overflow = "";
     }
@@ -90,11 +107,106 @@ export default function ProjectDetailsModal({
     };
   }, [project]);
 
+  // Categorize screenshots by platform
+  const categorizedScreenshots = useMemo(() => {
+    if (!project) return { all: [], web: [], android: [], ios: [] };
+
+    const all = project.screenshots || [];
+    const web: string[] = [];
+    const android: string[] = [];
+    const ios: string[] = [];
+
+    // Check if project has explicit screenshotsByPlatform
+    if (project.screenshotsByPlatform) {
+      if (Array.isArray(project.screenshotsByPlatform.web)) {
+        web.push(...project.screenshotsByPlatform.web);
+      }
+      if (Array.isArray(project.screenshotsByPlatform.android)) {
+        android.push(...project.screenshotsByPlatform.android);
+      }
+      if (Array.isArray(project.screenshotsByPlatform.ios)) {
+        ios.push(...project.screenshotsByPlatform.ios);
+      }
+    }
+
+    // Fallback: detect from URLs if screenshotsByPlatform was empty
+    if (web.length === 0 && android.length === 0 && ios.length === 0) {
+      for (const url of all) {
+        const plat = detectScreenshotPlatform(url, project.category);
+        if (plat === "web") web.push(url);
+        else if (plat === "android") android.push(url);
+        else if (plat === "ios") ios.push(url);
+      }
+    }
+
+    return { all, web, android, ios };
+  }, [project]);
+
+  // Tabs to display
+  const availableTabs = useMemo(() => {
+    const tabs = [];
+    const { all, web, android, ios } = categorizedScreenshots;
+    if (all.length > 0) {
+      tabs.push({ id: "All", label: "All Screenshots", count: all.length });
+    }
+    if (web.length > 0) {
+      tabs.push({ id: "Web", label: "Web UI", count: web.length });
+    }
+    if (android.length > 0) {
+      tabs.push({ id: "Android", label: "Google Play", count: android.length });
+    }
+    if (ios.length > 0) {
+      tabs.push({ id: "iOS", label: "App Store", count: ios.length });
+    }
+    return tabs;
+  }, [categorizedScreenshots]);
+
+  // Current visible screenshots based on active tab
+  const displayedScreenshots = useMemo(() => {
+    if (activeTab === "Web") return categorizedScreenshots.web;
+    if (activeTab === "Android") return categorizedScreenshots.android;
+    if (activeTab === "iOS") return categorizedScreenshots.ios;
+    return categorizedScreenshots.all;
+  }, [activeTab, categorizedScreenshots]);
+
+  // Drag interaction handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!trackRef.current) return;
+    setIsMouseDown(true);
+    setHasDragged(false);
+    setStartX(e.pageX - trackRef.current.offsetLeft);
+    setScrollLeft(trackRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown || !trackRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - trackRef.current.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    if (Math.abs(walk) > 6) {
+      setHasDragged(true);
+    }
+    trackRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+
+  const scrollGallery = (direction: "left" | "right") => {
+    if (!trackRef.current) return;
+    const scrollAmount = direction === "left" ? -340 : 340;
+    trackRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
   if (!project) return null;
 
   const CategoryIcon = getCategoryIcon(project.category);
-  const platforms = getPlatformPills(project);
-  const hasRealScreenshots = Array.isArray(project.screenshots) && project.screenshots.length > 0;
+  const platforms = project.platforms && project.platforms.length > 0
+    ? project.platforms
+    : [project.category === "Mobile App" ? "Android" : "Web", "Backend / Cloud"];
+
+  const hasRealScreenshots = displayedScreenshots.length > 0;
 
   return (
     <AnimatePresence>
@@ -140,49 +252,116 @@ export default function ProjectDetailsModal({
             </div>
 
             {/* Platform Badges */}
-            <div className="modal-platform-row" aria-label="Platform availability">
-              <span className="platform-row-label">Platform Targets:</span>
+            <div className="modal-platform-row" aria-label="Available verified platforms">
+              <span className="platform-row-label">Verified Platforms:</span>
               <div className="platform-chips">
                 {platforms.map((p) => (
                   <span key={p} className="platform-chip">
-                    {p}
+                    <span className="platform-chip-bullet" aria-hidden="true" />
+                    <span>{p}</span>
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Media Showcase (Real Screenshots or Clean In-Development State) */}
+            {/* Media Showcase (Platform-Aware Screenshot Gallery or In-Development Stage) */}
             <div className="modal-media-showcase">
               {hasRealScreenshots ? (
-                <div className="modal-screenshots-grid">
-                  {project.screenshots.map((img, sIdx) => (
-                    <div
-                      key={img + sIdx}
-                      className="modal-screenshot-frame"
-                      onClick={() =>
-                        onOpenLightbox?.({
-                          images: project.screenshots,
-                          index: sIdx,
-                          projectName: project.name,
-                          category: project.category,
-                          liveUrl: project.liveUrl,
-                        })
-                      }
-                      title="Inspect full-resolution screenshot"
-                    >
-                      <Image
-                        src={img}
-                        alt={`${project.name} verified screenshot ${sIdx + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="modal-screenshot-img"
-                      />
-                      <div className="modal-screenshot-overlay">
-                        <Maximize2 size={16} aria-hidden="true" />
-                        <span>Enlarge Screenshot</span>
+                <div className="modal-gallery-wrapper">
+                  {/* Gallery Platform Tabs & Controls */}
+                  <div className="modal-gallery-top-bar">
+                    {availableTabs.length > 1 && (
+                      <div className="modal-platform-tabs" role="tablist" aria-label="Platform screenshot filters">
+                        {availableTabs.map((t) => (
+                          <button
+                            key={t.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={activeTab === t.id}
+                            className={`modal-platform-tab ${activeTab === t.id ? "active" : ""}`}
+                            onClick={() => setActiveTab(t.id)}
+                          >
+                            <span>{t.label}</span>
+                            <span className="tab-count">({t.count})</span>
+                          </button>
+                        ))}
                       </div>
+                    )}
+
+                    <div className="modal-gallery-nav-btns">
+                      <span className="gallery-drag-hint">Drag or swipe to explore</span>
+                      <button
+                        type="button"
+                        className="gallery-nav-btn"
+                        onClick={() => scrollGallery("left")}
+                        aria-label="Scroll screenshots left"
+                      >
+                        <ChevronLeft size={15} aria-hidden="true" />
+                      </button>
+                      <button
+                        type="button"
+                        className="gallery-nav-btn"
+                        onClick={() => scrollGallery("right")}
+                        aria-label="Scroll screenshots right"
+                      >
+                        <ChevronRight size={15} aria-hidden="true" />
+                      </button>
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Horizontal Drag/Swipe Screenshot Track */}
+                  <div
+                    ref={trackRef}
+                    className={`modal-gallery-track ${isMouseDown ? "is-dragging" : ""}`}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                  >
+                    {displayedScreenshots.map((img, sIdx) => {
+                      const badge = getScreenshotBadge(img);
+                      return (
+                        <div
+                          key={img + sIdx}
+                          className="modal-gallery-card"
+                          onClick={() => {
+                            if (!hasDragged) {
+                              onOpenLightbox?.({
+                                images: displayedScreenshots,
+                                index: sIdx,
+                                projectName: project.name,
+                                category: project.category,
+                                liveUrl: project.webUrl || project.googlePlayUrl || project.liveUrl,
+                              });
+                            }
+                          }}
+                          title="Click to zoom screenshot (or drag to scroll)"
+                        >
+                          <Image
+                            src={img}
+                            alt={`${project.name} verified UI screenshot ${sIdx + 1}`}
+                            fill
+                            sizes="(max-width: 768px) 85vw, 420px"
+                            className="modal-gallery-img"
+                            draggable={false}
+                          />
+                          <div className="modal-gallery-overlay">
+                            <Maximize2 size={16} aria-hidden="true" />
+                            <span>Enlarge UI</span>
+                          </div>
+
+                          <div className="modal-gallery-card-badge">
+                            {badge.icon === "android" ? (
+                              <Smartphone size={11} aria-hidden="true" />
+                            ) : (
+                              <Globe size={11} aria-hidden="true" />
+                            )}
+                            <span>{badge.label}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               ) : (
                 <div className="modal-preview-unavailable-box">
@@ -195,8 +374,8 @@ export default function ProjectDetailsModal({
                       : "Production Architecture Verified in Codebase"}
                   </h4>
                   <p className="unavailable-desc">
-                    Source code and architectural structure are authenticated in internal GitHub
-                    repositories. Live UI capture will be published following production store/domain release.
+                    Source code and architectural structure are authenticated across internal GitHub
+                    repositories. Live UI capture will be automatically synchronized upon production store/domain release.
                   </p>
                   <div className="unavailable-rule-notice">
                     <ShieldCheck size={14} aria-hidden="true" />
@@ -278,11 +457,56 @@ export default function ProjectDetailsModal({
                   </div>
                 </div>
 
-                {/* Verified Endpoints & Actions */}
+                {/* Verified Platform Endpoints & Action Links */}
                 <div className="modal-actions-card">
-                  <h3 className="spec-subheading">Verified Endpoints</h3>
+                  <h3 className="spec-subheading">Verified Platform Endpoints</h3>
 
-                  {project.liveUrl && (
+                  {/* Web Deployment Button */}
+                  {project.webUrl && (
+                    <a
+                      href={project.webUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary-sm modal-action-btn modal-action-btn-web"
+                    >
+                      <Globe size={14} aria-hidden="true" />
+                      <span>Visit Website</span>
+                      <ExternalLink size={13} aria-hidden="true" />
+                    </a>
+                  )}
+
+                  {/* Google Play Store Button */}
+                  {project.googlePlayUrl && (
+                    <a
+                      href={project.googlePlayUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary-sm modal-action-btn modal-action-btn-play"
+                      style={{ background: "linear-gradient(135deg, #059669 0%, #047857 100%)" }}
+                    >
+                      <Smartphone size={14} aria-hidden="true" />
+                      <span>Google Play</span>
+                      <ExternalLink size={13} aria-hidden="true" />
+                    </a>
+                  )}
+
+                  {/* Apple App Store Button */}
+                  {project.appStoreUrl && (
+                    <a
+                      href={project.appStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary-sm modal-action-btn modal-action-btn-appstore"
+                      style={{ background: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)" }}
+                    >
+                      <Smartphone size={14} aria-hidden="true" />
+                      <span>App Store</span>
+                      <ExternalLink size={13} aria-hidden="true" />
+                    </a>
+                  )}
+
+                  {/* Fallback to liveUrl if neither webUrl nor googlePlayUrl is set */}
+                  {!project.webUrl && !project.googlePlayUrl && !project.appStoreUrl && project.liveUrl && (
                     <a
                       href={project.liveUrl}
                       target="_blank"
@@ -291,13 +515,14 @@ export default function ProjectDetailsModal({
                     >
                       <span>
                         {project.packageId
-                          ? "Open Google Play Store Listing"
+                          ? "Open Google Play Store"
                           : "Launch Verified Live System"}
                       </span>
                       <ExternalLink size={14} aria-hidden="true" />
                     </a>
                   )}
 
+                  {/* Secondary Verified URL */}
                   {project.secondaryUrl && (
                     <a
                       href={project.secondaryUrl.url}
@@ -310,7 +535,8 @@ export default function ProjectDetailsModal({
                     </a>
                   )}
 
-                  {!project.liveUrl && !project.secondaryUrl && (
+                  {/* Private development indicator */}
+                  {!project.webUrl && !project.googlePlayUrl && !project.appStoreUrl && !project.liveUrl && !project.secondaryUrl && (
                     <div className="modal-unreleased-pill">
                       <Lock size={12} aria-hidden="true" />
                       <span>Private Development Codebase</span>

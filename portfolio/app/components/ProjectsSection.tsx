@@ -378,6 +378,21 @@ function VerticalSwiperCard({
           </div>
         )}
 
+        {/* Verified Platforms Row */}
+        {project.platforms && project.platforms.length > 0 && (
+          <div className="vertical-platforms-row" aria-label="Available verified platforms">
+            <span className="vertical-platforms-label">Platforms:</span>
+            <div className="vertical-platforms-list">
+              {project.platforms.map((p) => (
+                <span key={p} className="vertical-platform-pill">
+                  <span className="platform-bullet" aria-hidden="true" />
+                  <span>{p}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Technology Stack Pills */}
         <div className="vertical-stack-wrap">
           {project.stack.map((tech) => (
@@ -414,7 +429,65 @@ function VerticalSwiperCard({
               <span>View Specs</span>
             </button>
 
-            {project.liveUrl && (
+            {/* Verified Web Link */}
+            {project.webUrl && (
+              <a
+                href={project.webUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="vertical-action-btn-primary"
+                style={{
+                  background: `linear-gradient(135deg, ${theme.accent} 0%, #991B1B 100%)`,
+                  borderColor: theme.accent,
+                }}
+                title={`Visit verified website for ${project.name}`}
+              >
+                <Globe size={13} aria-hidden="true" />
+                <span>Visit Website</span>
+                <ExternalLink size={12} aria-hidden="true" />
+              </a>
+            )}
+
+            {/* Verified Google Play Link */}
+            {project.googlePlayUrl && (
+              <a
+                href={project.googlePlayUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="vertical-action-btn-primary"
+                style={{
+                  background: "linear-gradient(135deg, #059669 0%, #047857 100%)",
+                  borderColor: "#10B981",
+                }}
+                title={`Open ${project.name} on Google Play`}
+              >
+                <Smartphone size={13} aria-hidden="true" />
+                <span>Google Play</span>
+                <ExternalLink size={12} aria-hidden="true" />
+              </a>
+            )}
+
+            {/* Verified App Store Link */}
+            {project.appStoreUrl && (
+              <a
+                href={project.appStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="vertical-action-btn-primary"
+                style={{
+                  background: "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+                  borderColor: "#3B82F6",
+                }}
+                title={`Open ${project.name} on App Store`}
+              >
+                <Smartphone size={13} aria-hidden="true" />
+                <span>App Store</span>
+                <ExternalLink size={12} aria-hidden="true" />
+              </a>
+            )}
+
+            {/* Fallback to liveUrl if neither webUrl nor googlePlayUrl is set */}
+            {!project.webUrl && !project.googlePlayUrl && !project.appStoreUrl && project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
@@ -428,7 +501,7 @@ function VerticalSwiperCard({
               >
                 <span>
                   {project.packageId
-                    ? "Google Play Store"
+                    ? "Google Play"
                     : "Launch Live System"}
                 </span>
                 <ExternalLink size={13} aria-hidden="true" />

@@ -619,11 +619,21 @@ export interface VerifiedProject {
   architecture: string;
   stack: string[];
   role: string;
+  platforms: Array<"Web" | "Android" | "iOS" | "Desktop" | "Smart TV" | "Backend / Cloud" | "Admin" | (string & {})>;
   highlights: string[];
   metrics: { label: string; value: string }[];
   image: string;
   screenshots: string[];
+  screenshotsByPlatform?: {
+    web?: string[];
+    android?: string[];
+    ios?: string[];
+    desktop?: string[];
+  };
   liveUrl?: string;
+  webUrl?: string;
+  googlePlayUrl?: string;
+  appStoreUrl?: string;
   secondaryUrl?: { label: string; url: string };
   githubUrl?: string;
   packageId?: string;
@@ -633,13 +643,18 @@ export interface VerifiedProject {
     iconUrl: string | null;
     storeUrl: string;
   };
+  createdAt: string;
   lastSyncedAt: string;
   verifiedLive: boolean;
   approved: boolean;
   auditNotes: string;
 }
 
-export const VERIFIED_PROJECTS: VerifiedProject[] = ${JSON.stringify(projects, null, 2)};
+export const VERIFIED_PROJECTS: VerifiedProject[] = ${JSON.stringify(
+  [...projects].sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()),
+  null,
+  2
+)};
 `;
 
   fs.mkdirSync(path.dirname(TS_REGISTRY_PATH), { recursive: true });

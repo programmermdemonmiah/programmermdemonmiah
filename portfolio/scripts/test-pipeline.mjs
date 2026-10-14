@@ -204,6 +204,46 @@ async function runAllTests() {
     }
   });
 
+  // SUITE 6: Intelligent Grouping, Chronological Sorting & Multi-Platform Links
+  console.log("\n\x1b[1m[Suite 6: Intelligent Grouping, Chronological Sorting & Multi-Platform]\x1b[0m");
+
+  await test("Projects are strictly sorted by GitHub created_at date descending (newest first)", () => {
+    const jsonPath = path.join(rootDir, "app", "data", "discoveredProjects.json");
+    const projects = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+    for (let i = 0; i < projects.length - 1; i++) {
+      const dateA = new Date(projects[i].createdAt).getTime();
+      const dateB = new Date(projects[i + 1].createdAt).getTime();
+      assert.ok(
+        dateA >= dateB,
+        `Project #${i} (${projects[i].name} - ${projects[i].createdAt}) must be newer than or equal to #${i + 1} (${projects[i + 1].name} - ${projects[i + 1].createdAt})`
+      );
+    }
+  });
+
+  await test("Projects specify verified platforms array and distinct verified action URLs", () => {
+    const jsonPath = path.join(rootDir, "app", "data", "discoveredProjects.json");
+    const projects = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+    for (const p of projects) {
+      assert.ok(Array.isArray(p.platforms) && p.platforms.length > 0, `${p.id} must define platforms array`);
+      if (p.webUrl) {
+        assert.match(p.webUrl, /^https?:\/\//, `${p.id} webUrl must be valid URL`);
+      }
+      if (p.googlePlayUrl) {
+        assert.match(p.googlePlayUrl, /play\.google\.com/, `${p.id} googlePlayUrl must point to Google Play`);
+      }
+    }
+  });
+
+  await test("Xovalley dual-platform project contains both verified Web and Android screenshots", () => {
+    const jsonPath = path.join(rootDir, "app", "data", "discoveredProjects.json");
+    const projects = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+    const xovalley = projects.find((p) => p.id === "xovalley-ecommerce");
+    assert.ok(xovalley, "Xovalley project must exist");
+    assert.ok(xovalley.screenshotsByPlatform, "Must have screenshotsByPlatform");
+    assert.ok(xovalley.screenshotsByPlatform.web?.length > 0, "Must have web screenshots");
+    assert.ok(xovalley.screenshotsByPlatform.android?.length > 0, "Must have android screenshots");
+  });
+
   console.log("\n========================================================");
   console.log(`TEST RESULTS: ${passed} passed, ${failed} failed`);
   console.log("========================================================\n");
