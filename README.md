@@ -102,13 +102,13 @@ I enjoy taking a product from **idea → architecture → development → deploy
 
 <p align="center">
   <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://ghchart.rshah.org/2ea043/programmermdemonmiah" alt="GitHub contribution activity heatmap for programmermdemonmiah" width="100%" />
+    <img src="https://ghchart.rshah.org/0e4429/programmermdemonmiah" alt="GitHub contribution activity heatmap for programmermdemonmiah" width="100%" />
   </a>
 </p>
 
 <p align="center">
   <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://img.shields.io/badge/GITHUB%20ACTIVITY-View%20Profile-238636?style=for-the-badge&logo=github&logoColor=white" alt="View GitHub activity" />
+    <img src="https://img.shields.io/badge/GITHUB%20ACTIVITY-View%20Profile-0e4429?style=for-the-badge&logo=github&logoColor=white" alt="View GitHub activity" />
   </a>
 </p>
 
