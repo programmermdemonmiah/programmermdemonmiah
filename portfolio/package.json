@@ -15,7 +15,8 @@
     "react-dom": "19.1.7",
     "pdfkit": "^0.17.2",
     "framer-motion": "^12.38.0",
-    "lucide-react": "^0.344.0"
+    "lucide-react": "^0.344.0",
+    "@google/model-viewer": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",
