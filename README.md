@@ -54,8 +54,6 @@ I enjoy taking a product from **idea → architecture → development → deploy
   <img src="https://skillicons.dev/icons?i=go" width="48" height="48" alt="Go" />
   <img src="https://skillicons.dev/icons?i=php" width="48" height="48" alt="PHP" />
   <img src="https://skillicons.dev/icons?i=laravel" width="48" height="48" alt="Laravel" />
-  <img src="https://skillicons.dev/icons?i=python" width="48" height="48" alt="Python" />
-  <img src="https://skillicons.dev/icons?i=fastapi" width="48" height="48" alt="FastAPI" />
 </p>
 
 **Databases & Storage**
@@ -104,8 +102,10 @@ I enjoy taking a product from **idea → architecture → development → deploy
 
 <p align="center">
   <img height="165" src="https://github-readme-stats.vercel.app/api?username=programmermdemonmiah&show_icons=true&theme=transparent&hide_border=true" alt="GitHub Stats" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=programmermdemonmiah&layout=compact&theme=transparent&hide_border=true" alt="Top Languages" />
+  <img height="165" src="https://github-readme-streak-stats.herokuapp.com/?user=programmermdemonmiah&theme=transparent&hide_border=true" alt="GitHub Contribution Streak" />
 </p>
+
+> **Note:** GitHub Top Languages reflects language usage in analyzed public repositories, not overall expertise. It may not reliably include private repositories, so this profile avoids showing a potentially misleading language ranking.
 
 ### 🤝 Let's Connect
 
