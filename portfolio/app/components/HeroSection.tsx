@@ -47,8 +47,8 @@ export default function HeroSection() {
             <span className="stack-tag stack-tag-highlight">Go (Gin)</span>
             <span className="stack-tag stack-tag-highlight">PHP (Laravel)</span>
             <span className="stack-tag">Python &amp; Django</span>
-            <span className="stack-tag">WebSocket Real-time</span>
-            <span className="stack-tag">MySQL &amp; Firebase</span>
+            <span className="stack-tag">PostgreSQL &amp; MySQL</span>
+            <span className="stack-tag">Firebase</span>
             <span className="stack-tag">Payment Gateways</span>
           </div>
 

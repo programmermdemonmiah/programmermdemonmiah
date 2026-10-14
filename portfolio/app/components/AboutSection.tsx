@@ -3,6 +3,7 @@ import {
   Linkedin,
   ArrowUpRight,
   FileText,
+  FileDown,
   Briefcase,
   GraduationCap,
   Calendar,
@@ -144,9 +145,14 @@ export default function AboutSection() {
                   <span>LinkedIn</span>
                   <ArrowUpRight size={13} aria-hidden="true" />
                 </a>
-                <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="about-link">
+                <a href="/cv" className="about-link">
                   <FileText size={16} aria-hidden="true" />
-                  <span>Full Résumé (PDF)</span>
+                  <span>Curriculum Vitae</span>
+                  <ArrowUpRight size={13} aria-hidden="true" />
+                </a>
+                <a href="/cv.pdf" download="MD_Emon_Miah_CV.pdf" className="about-link">
+                  <FileDown size={16} aria-hidden="true" />
+                  <span>Download PDF</span>
                   <ArrowUpRight size={13} aria-hidden="true" />
                 </a>
               </div>

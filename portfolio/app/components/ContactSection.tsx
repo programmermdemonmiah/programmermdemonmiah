@@ -6,6 +6,7 @@ import {
   Github,
   Linkedin,
   FileDown,
+  FileText,
   ArrowUp,
   ArrowUpRight,
   Check,
@@ -178,14 +179,24 @@ export default function ContactSection() {
                 </a>
 
                 <a
-                  href="/cv.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/cv"
                   className="channel-link-card channel-link-highlight"
                 >
                   <div className="channel-link-inner">
+                    <FileText size={18} aria-hidden="true" />
+                    <span className="channel-link-title">View Curriculum Vitae</span>
+                  </div>
+                  <ArrowUpRight size={14} className="channel-link-arrow" aria-hidden="true" />
+                </a>
+
+                <a
+                  href="/cv.pdf"
+                  download="MD_Emon_Miah_CV.pdf"
+                  className="channel-link-card"
+                >
+                  <div className="channel-link-inner">
                     <FileDown size={18} aria-hidden="true" />
-                    <span className="channel-link-title">Download CV</span>
+                    <span className="channel-link-title">Download CV (PDF)</span>
                   </div>
                   <ArrowUpRight size={14} className="channel-link-arrow" aria-hidden="true" />
                 </a>

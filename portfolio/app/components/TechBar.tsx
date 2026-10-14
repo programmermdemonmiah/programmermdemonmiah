@@ -64,7 +64,7 @@ const TECH_ITEMS: TechItem[] = [
     border: "rgba(250, 204, 21, 0.32)",
   },
   {
-    name: "MySQL & Database",
+    name: "PostgreSQL & MySQL",
     category: "Databases",
     icon: Database,
     color: "#60A5FA",

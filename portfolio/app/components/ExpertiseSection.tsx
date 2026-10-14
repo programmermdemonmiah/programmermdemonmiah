@@ -57,7 +57,7 @@ const EXPERTISE_AREAS = [
     icon: CreditCard,
     description:
       "End-to-end integration of regional and international payment gateways (bKash, Nagad, SSLCommerz, Stripe, PayPal). Token and OTP-based authentication, API security, and database optimization.",
-    skills: ["bKash & Nagad", "SSLCommerz", "Stripe & PayPal", "OTP & JWT Auth", "MySQL Optimization", "Firebase"],
+    skills: ["bKash & Nagad", "SSLCommerz", "Stripe & PayPal", "OTP & JWT Auth", "PostgreSQL & MySQL", "Firebase"],
   },
 ];
 

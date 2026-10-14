@@ -107,10 +107,8 @@ export default function Navbar() {
         <div className="nav-actions">
           <a
             className="btn-outline-sm cv-btn"
-            href="/cv.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Download Curriculum Vitae (PDF)"
+            href="/cv"
+            title="View Professional Curriculum Vitae"
           >
             <FileDown size={14} aria-hidden="true" />
             <span>CV</span>
@@ -187,13 +185,11 @@ export default function Navbar() {
           </a>
           <a
             className="btn-outline mobile-full-btn"
-            href="/cv.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/cv"
             onClick={() => setMenuOpen(false)}
           >
             <FileDown size={16} aria-hidden="true" />
-            <span>Download Résumé (PDF)</span>
+            <span>Curriculum Vitae</span>
           </a>
         </div>
       </div>
