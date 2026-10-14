@@ -557,7 +557,7 @@ export default function Home() {
                   <p>{service.description}</p>
                 </div>
                 <Icon size={23} strokeWidth={1.7} aria-hidden="true" />
-              </article>
+              </motion.article>
             );
           })}
         </div>
