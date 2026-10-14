@@ -471,7 +471,7 @@ export default function Home() {
   return (
     <main>
       <header className="site-header" id="top">
-        <nav className="navigation" aria-label="Main navigation">
+        <motion.nav className="navigation" aria-label="Main navigation" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}>
           <a className="brand" href="#top">
             <span className="brand-mark">EM</span>
             <span>
@@ -500,7 +500,7 @@ export default function Home() {
         </nav>
 
         <div className="hero">
-          <div className="hero-copy">
+          <motion.div className="hero-copy" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}>
             <p className="eyebrow"><span /> Software engineer · Bangladesh</p>
             <h1>Building software<br />that <span>works.</span></h1>
             <p className="hero-description">
@@ -515,8 +515,8 @@ export default function Home() {
             <ul className="tech-list" aria-label="Main technologies">
               <li>Flutter</li><li>Go</li><li>Next.js</li><li>Laravel</li>
             </ul>
-          </div>
-          <ThreeDModel />
+          </motion.div>
+          <motion.div className="hero-model-motion" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}><ThreeDModel /></motion.div>
         </div>
       </header>
 
