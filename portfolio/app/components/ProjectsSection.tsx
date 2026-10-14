@@ -1,27 +1,32 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
+import { Navigation, Pagination, Keyboard, Mousewheel, A11y, FreeMode } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 import {
   Search,
   ExternalLink,
-  ChevronUp,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   LayoutGrid,
-  CreditCard,
   Smartphone,
   Globe,
   Layers,
   ShieldCheck,
   Github,
   CheckCircle2,
-  Monitor,
   Maximize2,
   X,
+  GripHorizontal,
 } from "lucide-react";
 
 import { VERIFIED_PROJECTS, type VerifiedProject } from "@/app/data/projectRegistry";
@@ -40,13 +45,13 @@ interface ProjectCardContentProps {
   project: VerifiedProject;
   index: number;
   total: number;
-  layout?: "card" | "grid";
+  layout?: "carousel" | "grid";
   onOpenLightbox: (payload: LightboxPayload) => void;
 }
 
 function getScreenshotMeta(url: string, category: string) {
   if (url.includes("-desktop.png")) {
-    return { label: "Live Desktop Screenshot", icon: "desktop" as const };
+    return { label: "Live Desktop View", icon: "desktop" as const };
   }
   if (url.includes("-mobile.png")) {
     return { label: "Live Mobile View", icon: "mobile" as const };
@@ -118,25 +123,22 @@ function ProjectScreenshotCarousel({
 
   const slideVariants: Variants = {
     enter: (dir: number) => ({
-      x: shouldReduceMotion ? 0 : dir > 0 ? 32 : -32,
+      x: shouldReduceMotion ? 0 : dir > 0 ? 18 : -18,
       opacity: 0,
-      scale: shouldReduceMotion ? 1 : 0.985,
     }),
     center: {
       x: 0,
       opacity: 1,
-      scale: 1,
       transition: {
-        duration: shouldReduceMotion ? 0.15 : 0.32,
+        duration: shouldReduceMotion ? 0.12 : 0.25,
         ease: [0.16, 1, 0.3, 1],
       },
     },
     exit: (dir: number) => ({
-      x: shouldReduceMotion ? 0 : dir > 0 ? -32 : 32,
+      x: shouldReduceMotion ? 0 : dir > 0 ? -18 : 18,
       opacity: 0,
-      scale: shouldReduceMotion ? 1 : 0.985,
       transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.22,
+        duration: shouldReduceMotion ? 0.1 : 0.18,
         ease: [0.16, 1, 0.3, 1],
       },
     }),
@@ -170,21 +172,11 @@ function ProjectScreenshotCarousel({
         </button>
       </div>
 
-      {/* Main Image Stage with Drag / Swipe and Smooth Slide Transition */}
-      <motion.div
+      {/* Main Image Stage with Crossfade Transition */}
+      <div
         className="carousel-image-stage"
         onClick={() => onOpenLightbox(activeIdx)}
-        title="Click to view full-resolution screenshot (Drag or swipe to browse)"
-        drag={images.length > 1 ? "x" : false}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.2}
-        onDragEnd={(_, info) => {
-          if (info.offset.x < -35 || info.velocity.x < -300) {
-            handleNext();
-          } else if (info.offset.x > 35 || info.velocity.x > 300) {
-            handlePrev();
-          }
-        }}
+        title="Click to inspect full-resolution screenshot"
       >
         {/* Skeleton Shimmer Loading Placeholder */}
         {!isLoaded && <div className="carousel-skeleton-shimmer" aria-hidden="true" />}
@@ -203,16 +195,17 @@ function ProjectScreenshotCarousel({
               src={currentUrl}
               alt={`${projectName} - ${meta.label} (${activeIdx + 1}/${images.length})`}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={`project-image ${meta.icon === "store" ? "project-image-contain" : "project-image-cover"}`}
               priority={priority}
+              draggable={false}
               onLoad={() => setIsLoaded(true)}
               style={{ opacity: isLoaded ? 1 : 0 }}
             />
             <div className="project-media-overlay" />
           </motion.div>
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       {/* Multi-Screen Navigation Arrows */}
       {images.length > 1 && (
@@ -241,24 +234,23 @@ function ProjectScreenshotCarousel({
       {/* Bottom Bar: Source Tag & Dot Indicators */}
       <div className="carousel-bottom-bar">
         <span className="carousel-source-badge">
-          {meta.icon === "desktop" && <Monitor size={12} aria-hidden="true" />}
-          {meta.icon === "mobile" && <Smartphone size={12} aria-hidden="true" />}
-          {meta.icon === "store" && <ShieldCheck size={12} aria-hidden="true" />}
-          <span>{meta.label}</span>
-          {images.length > 1 && (
-            <span style={{ opacity: 0.7, marginLeft: 3 }}>
-              ({activeIdx + 1}/{images.length})
-            </span>
+          {meta.icon === "store" ? (
+            <Smartphone size={11} aria-hidden="true" />
+          ) : (
+            <Globe size={11} aria-hidden="true" />
           )}
+          <span>{meta.label}</span>
         </span>
 
         {images.length > 1 && (
-          <div className="carousel-dots-wrap" role="tablist" aria-label="Screenshots">
+          <div className="carousel-dots-row" role="tablist" aria-label="Screenshots">
             {images.map((_, dotIdx) => (
               <button
                 key={dotIdx}
                 type="button"
-                className={`carousel-dot-btn ${dotIdx === activeIdx ? "carousel-dot-active" : ""}`}
+                role="tab"
+                aria-selected={dotIdx === activeIdx}
+                className={`carousel-dot ${dotIdx === activeIdx ? "carousel-dot-active" : ""}`}
                 onClick={(e) => handleDotClick(e, dotIdx)}
                 title={`View screenshot ${dotIdx + 1} of ${images.length}`}
                 aria-label={`View screenshot ${dotIdx + 1} of ${images.length}`}
@@ -271,13 +263,26 @@ function ProjectScreenshotCarousel({
   );
 }
 
-function ProjectCardContent({ project, index, total, layout = "card", onOpenLightbox }: ProjectCardContentProps) {
+function ProjectCardContent({
+  project,
+  index,
+  total,
+  layout = "carousel",
+  onOpenLightbox,
+}: ProjectCardContentProps) {
   const isGrid = layout === "grid";
-  const allScreens = project.screenshots && project.screenshots.length > 0 ? project.screenshots : [project.image];
+  const allScreens =
+    project.screenshots && project.screenshots.length > 0
+      ? project.screenshots
+      : [project.image];
 
   return (
-    <div className={`verified-project-card ${isGrid ? "verified-project-grid-card" : "verified-project-deck-card"}`}>
-      {/* Media Column / Area */}
+    <div
+      className={`verified-project-card ${
+        isGrid ? "verified-project-grid-card" : "verified-project-carousel-card"
+      }`}
+    >
+      {/* Media Column / Card Header */}
       <div className="project-media-col">
         <div className="project-media-frame">
           <ProjectScreenshotCarousel
@@ -305,7 +310,7 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
         <div className="project-highlights-box">
           <p className="project-highlights-title">
             <ShieldCheck size={14} className="highlights-icon" aria-hidden="true" />
-            <span>Verified System Capabilities</span>
+            <span>Verified Capabilities</span>
           </p>
           <ul className="project-highlights-list">
             {project.highlights.map((h, i) => (
@@ -315,7 +320,7 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
         </div>
       </div>
 
-      {/* Content Column */}
+      {/* Content Column / Card Body */}
       <div className="project-content-col">
         {/* Title & Tagline */}
         <div className="project-header-block">
@@ -357,7 +362,7 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
           ))}
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons Row */}
         <div className="project-actions-row">
           {project.liveUrl && (
             <a
@@ -371,7 +376,11 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
               ) : (
                 <Globe size={15} aria-hidden="true" />
               )}
-              <span>{project.category === "Mobile App" ? "Google Play Store" : "Verified Live System"}</span>
+              <span>
+                {project.category === "Mobile App"
+                  ? "Google Play Store"
+                  : "Verified Live System"}
+              </span>
               <ExternalLink size={13} className="btn-arrow-icon" aria-hidden="true" />
             </a>
           )}
@@ -407,165 +416,63 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
   );
 }
 
-// Framer Motion Animation Variants for the Upper & Bottom Card Swap
-const cardVariants: Variants = {
-  enter: (direction: number) => ({
-    y: direction > 0 ? 80 : -80,
-    opacity: 0,
-    scale: 0.94,
-    rotateX: direction > 0 ? 6 : -6,
-    transition: {
-      type: "spring" as const,
-      stiffness: 300,
-      damping: 28,
-    },
-  }),
-  center: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    rotateX: 0,
-    zIndex: 10,
-    transition: {
-      type: "spring" as const,
-      stiffness: 320,
-      damping: 30,
-    },
-  },
-  exit: (direction: number) => ({
-    y: direction > 0 ? -110 : 110,
-    opacity: 0,
-    scale: 0.92,
-    rotateX: direction > 0 ? -8 : 8,
-    zIndex: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 300,
-      damping: 28,
-    },
-  }),
-};
-
 export default function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<"card" | "grid">("card");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [viewMode, setViewMode] = useState<"carousel" | "grid">("carousel");
   const [lightbox, setLightbox] = useState<LightboxPayload | null>(null);
-  const isThrottledRef = useRef(false);
 
-  // Lightbox keyboard navigation & body lock
-  useEffect(() => {
-    if (lightbox) {
-      const handleLightboxKey = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setLightbox(null);
-        } else if (e.key === "ArrowLeft") {
-          setLightbox((prev) =>
-            prev ? { ...prev, index: prev.index > 0 ? prev.index - 1 : prev.images.length - 1 } : null
-          );
-        } else if (e.key === "ArrowRight") {
-          setLightbox((prev) =>
-            prev ? { ...prev, index: prev.index < prev.images.length - 1 ? prev.index + 1 : 0 } : null
-          );
-        }
-      };
-      window.addEventListener("keydown", handleLightboxKey);
-      return () => window.removeEventListener("keydown", handleLightboxKey);
-    }
-  }, [lightbox]);
+  // Swiper carousel state
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
-  // Filter only approved, verified projects from registry
+  // Filter projects by active category and search query
   const filteredProjects = useMemo(() => {
     return VERIFIED_PROJECTS.filter((project) => {
-      if (!project.approved) return false;
-
       if (activeCategory !== "All" && project.category !== activeCategory) {
         return false;
       }
 
-      if (searchQuery.trim()) {
-        const query = searchQuery.trim().toLowerCase();
-        const searchable = `${project.name} ${project.category} ${project.description} ${project.architecture} ${project.role} ${project.stack.join(" ")}`.toLowerCase();
-        if (!searchable.includes(query)) return false;
-      }
+      if (!searchQuery.trim()) return true;
 
-      return true;
+      const q = searchQuery.toLowerCase();
+      const matchName = project.name.toLowerCase().includes(q);
+      const matchTag = project.tagline.toLowerCase().includes(q);
+      const matchDesc = project.description.toLowerCase().includes(q);
+      const matchRole = project.role.toLowerCase().includes(q);
+      const matchArch = project.architecture.toLowerCase().includes(q);
+      const matchStack = project.stack.some((s) => s.toLowerCase().includes(q));
+
+      return matchName || matchTag || matchDesc || matchRole || matchArch || matchStack;
     });
   }, [activeCategory, searchQuery]);
 
-  // Keep index within bounds
-  useEffect(() => {
-    if (currentIndex >= filteredProjects.length) {
-      setCurrentIndex(Math.max(0, filteredProjects.length - 1));
-    }
-  }, [filteredProjects.length, currentIndex]);
-
-  const handleNextCard = useCallback(() => {
-    if (isThrottledRef.current || filteredProjects.length <= 1) return;
-    if (currentIndex < filteredProjects.length - 1) {
-      isThrottledRef.current = true;
-      setDirection(1);
-      setCurrentIndex((prev) => prev + 1);
-      setTimeout(() => {
-        isThrottledRef.current = false;
-      }, 420);
-    }
-  }, [currentIndex, filteredProjects.length]);
-
-  const handlePrevCard = useCallback(() => {
-    if (isThrottledRef.current || filteredProjects.length <= 1) return;
-    if (currentIndex > 0) {
-      isThrottledRef.current = true;
-      setDirection(-1);
-      setCurrentIndex((prev) => prev - 1);
-      setTimeout(() => {
-        isThrottledRef.current = false;
-      }, 420);
-    }
-  }, [currentIndex, filteredProjects.length]);
-
-  const handleJumpToCard = (index: number) => {
-    if (index === currentIndex || isThrottledRef.current) return;
-    isThrottledRef.current = true;
-    setDirection(index > currentIndex ? 1 : -1);
-    setCurrentIndex(index);
-    setTimeout(() => {
-      isThrottledRef.current = false;
-    }, 420);
+  // Handle slide change in Swiper
+  const handleSlideChange = (swiper: SwiperType) => {
+    setActiveSlideIndex(swiper.activeIndex);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
   };
 
-  // Wheel listener: card wise swap on scroll
-  const handleDeckWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (viewMode !== "card") return;
-    if (Math.abs(e.deltaY) > 35) {
-      if (e.deltaY > 0) {
-        handleNextCard();
-      } else {
-        handlePrevCard();
-      }
-    }
+  const handleCarouselPrev = () => {
+    swiperInstance?.slidePrev();
   };
 
-  // Keyboard navigation for card deck
+  const handleCarouselNext = () => {
+    swiperInstance?.slideNext();
+  };
+
+  // Reset swiper to slide 0 when category or search changes
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (viewMode !== "card" || lightbox !== null) return;
-      if (e.key === "ArrowDown") {
-        handleNextCard();
-      } else if (e.key === "ArrowUp") {
-        handlePrevCard();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [viewMode, lightbox, handleNextCard, handlePrevCard]);
-
-  const currentProject = filteredProjects[currentIndex];
-  const nextProject = currentIndex + 1 < filteredProjects.length ? filteredProjects[currentIndex + 1] : null;
-  const secondNextProject = currentIndex + 2 < filteredProjects.length ? filteredProjects[currentIndex + 2] : null;
+    if (swiperInstance && !swiperInstance.destroyed) {
+      swiperInstance.slideTo(0, 0);
+      setActiveSlideIndex(0);
+      setIsBeginning(true);
+      setIsEnd(swiperInstance.isEnd);
+    }
+  }, [activeCategory, searchQuery, swiperInstance]);
 
   return (
     <section className="projects-section" id="projects" aria-label="Verified Production Projects">
@@ -595,13 +502,13 @@ export default function ProjectsSection() {
             <div className="view-mode-toggle" role="group" aria-label="View mode toggle">
               <button
                 type="button"
-                className={`view-mode-btn ${viewMode === "card" ? "view-mode-btn-active" : ""}`}
-                onClick={() => setViewMode("card")}
-                title="Upper & Bottom Card Deck Swapper"
-                aria-pressed={viewMode === "card"}
+                className={`view-mode-btn ${viewMode === "carousel" ? "view-mode-btn-active" : ""}`}
+                onClick={() => setViewMode("carousel")}
+                title="Draggable Horizontal Carousel (Mouse / Touch / Trackpad)"
+                aria-pressed={viewMode === "carousel"}
               >
-                <CreditCard size={14} aria-hidden="true" />
-                <span>Card Swapper Deck</span>
+                <GripHorizontal size={14} aria-hidden="true" />
+                <span>Draggable Carousel</span>
               </button>
               <button
                 type="button"
@@ -640,7 +547,6 @@ export default function ProjectsSection() {
                   className={`category-tab ${isActive ? "category-tab-active" : ""}`}
                   onClick={() => {
                     setActiveCategory(cat);
-                    setCurrentIndex(0);
                   }}
                 >
                   {isActive && (
@@ -663,20 +569,14 @@ export default function ProjectsSection() {
               className="project-search-input"
               placeholder="Search verified projects by technology or role..."
               value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentIndex(0);
-              }}
+              onChange={(e) => setSearchQuery(e.target.value)}
               aria-label="Search verified projects"
             />
             {searchQuery && (
               <button
                 type="button"
                 className="search-clear-btn"
-                onClick={() => {
-                  setSearchQuery("");
-                  setCurrentIndex(0);
-                }}
+                onClick={() => setSearchQuery("")}
                 aria-label="Clear search"
               >
                 ✕
@@ -685,53 +585,52 @@ export default function ProjectsSection() {
           </div>
         </div>
 
-        {/* Counter & Card Swap Navigator Row */}
+        {/* Counter & Drag Navigation Row */}
         <div className="projects-counter-row">
           <span className="counter-text">
             Showing <strong>{filteredProjects.length}</strong> verified production {filteredProjects.length === 1 ? "project" : "projects"}
-            {viewMode === "card" && filteredProjects.length > 0 && (
-              <span className="vertical-deck-status">
+            {viewMode === "carousel" && filteredProjects.length > 0 && (
+              <span className="drag-helper-text">
                 {" · "}
-                <strong>Card {currentIndex + 1} of {filteredProjects.length}</strong>
-                {" · Swap Upper / Bottom"}
+                <GripHorizontal size={13} className="inline-drag-icon" aria-hidden="true" />
+                <span>Drag horizontally with mouse or swipe</span>
               </span>
             )}
           </span>
 
-          {viewMode === "card" && filteredProjects.length > 0 && (
-            <div className="card-swap-controls">
-              <button
-                type="button"
-                className="card-swap-arrow-btn"
-                onClick={handlePrevCard}
-                disabled={currentIndex === 0}
-                aria-label="Previous card (swap down from top)"
-                title="Swap Upper Card (ArrowUp)"
-              >
-                <ChevronUp size={18} aria-hidden="true" />
-                <span className="swap-btn-label">Upper Card</span>
-              </button>
-
+          {viewMode === "carousel" && filteredProjects.length > 0 && (
+            <div className="carousel-drag-nav-controls">
               <span className="card-counter-indicator" aria-live="polite">
-                {String(currentIndex + 1).padStart(2, "0")} / {String(filteredProjects.length).padStart(2, "0")}
+                {String(activeSlideIndex + 1).padStart(2, "0")} / {String(filteredProjects.length).padStart(2, "0")}
               </span>
 
-              <button
-                type="button"
-                className="card-swap-arrow-btn"
-                onClick={handleNextCard}
-                disabled={currentIndex === filteredProjects.length - 1}
-                aria-label="Next card (swap up to top)"
-                title="Swap Bottom Card (ArrowDown)"
-              >
-                <span className="swap-btn-label">Bottom Card</span>
-                <ChevronDown size={18} aria-hidden="true" />
-              </button>
+              <div className="carousel-arrow-buttons">
+                <button
+                  type="button"
+                  className="carousel-arrow-btn"
+                  onClick={handleCarouselPrev}
+                  disabled={isBeginning}
+                  aria-label="Previous project slide"
+                  title="Previous slide (Left Arrow)"
+                >
+                  <ChevronLeft size={18} aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className="carousel-arrow-btn"
+                  onClick={handleCarouselNext}
+                  disabled={isEnd}
+                  aria-label="Next project slide"
+                  title="Next slide (Right Arrow)"
+                >
+                  <ChevronRight size={18} aria-hidden="true" />
+                </button>
+              </div>
             </div>
           )}
         </div>
 
-        {/* Project Card System Display */}
+        {/* Project Card Presentation Display */}
         {filteredProjects.length === 0 ? (
           <div className="projects-empty-state">
             <Layers size={36} className="empty-icon" aria-hidden="true" />
@@ -743,118 +642,92 @@ export default function ProjectsSection() {
               onClick={() => {
                 setActiveCategory("All");
                 setSearchQuery("");
-                setCurrentIndex(0);
               }}
             >
               Reset Filters
             </button>
           </div>
-        ) : viewMode === "card" ? (
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="card-system-stage"
-            onWheel={handleDeckWheel}
-          >
-            {/* Quick Card Thumb Selector */}
-            <div className="card-deck-selector-row" role="tablist" aria-label="Jump directly to project card">
-              {filteredProjects.map((p, idx) => {
-                const isActive = idx === currentIndex;
-                return (
-                  <button
-                    key={p.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => handleJumpToCard(idx)}
-                    className={`card-deck-chip ${isActive ? "card-deck-chip-active" : ""}`}
-                    title={p.name}
-                  >
-                    <span className="chip-num">#{String(idx + 1).padStart(2, "0")}</span>
-                    <span className="chip-name">{p.name.split(" ")[0]}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* 3D Stack Container */}
-            <div className="card-deck-stack-area">
-              {/* Stack Layer 2 (Deepest Preview Card) */}
-              {secondNextProject && (
-                <div className="deck-ghost-card deck-ghost-card-2" aria-hidden="true">
-                  <div className="ghost-header">
-                    <span className="ghost-num">#{String(currentIndex + 3).padStart(2, "0")}</span>
-                    <span className="ghost-name">{secondNextProject.name}</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Stack Layer 1 (Immediate Next Preview Card) */}
-              {nextProject && (
-                <div
-                  className="deck-ghost-card deck-ghost-card-1"
-                  onClick={handleNextCard}
-                  title="Click to swap to this card"
-                  aria-hidden="true"
-                >
-                  <div className="ghost-header">
-                    <span className="ghost-num">#{String(currentIndex + 2).padStart(2, "0")}</span>
-                    <span className="ghost-name">{nextProject.name}</span>
-                    <span className="ghost-pill">Next in Deck ↓</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Foreground Animated Active Card */}
-              <AnimatePresence custom={direction} mode="wait">
-                {currentProject && (
+        ) : viewMode === "carousel" ? (
+          <div className="projects-carousel-container">
+            <Swiper
+              modules={[Navigation, Pagination, Keyboard, Mousewheel, A11y, FreeMode]}
+              onSwiper={(swiper) => {
+                setSwiperInstance(swiper);
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
+              }}
+              onSlideChange={handleSlideChange}
+              grabCursor={true}
+              simulateTouch={true}
+              touchEventsTarget="container"
+              touchRatio={1.2}
+              threshold={6}
+              preventClicks={true}
+              preventClicksPropagation={false}
+              speed={520}
+              resistance={true}
+              resistanceRatio={0.75}
+              keyboard={{ enabled: true, onlyInViewport: true }}
+              mousewheel={{ forceToAxis: true, releaseOnEdges: true, sensitivity: 1 }}
+              watchSlidesProgress={true}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1.12,
+                  spaceBetween: 16,
+                },
+                640: {
+                  slidesPerView: 1.6,
+                  spaceBetween: 22,
+                },
+                1024: {
+                  slidesPerView: 2.25,
+                  spaceBetween: 28,
+                },
+                1400: {
+                  slidesPerView: 2.65,
+                  spaceBetween: 32,
+                },
+              }}
+              className="projects-draggable-swiper"
+            >
+              {filteredProjects.map((project, idx) => (
+                <SwiperSlide key={project.id} className="project-carousel-slide">
                   <motion.div
-                    key={currentProject.id}
-                    custom={direction}
-                    variants={cardVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="deck-active-card-motion"
+                    initial={{ opacity: 0, y: 26, scale: 0.985 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{
+                      duration: 0.48,
+                      delay: Math.min(idx * 0.08, 0.35),
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="carousel-card-motion-shell"
                   >
                     <ProjectCardContent
-                      project={currentProject}
-                      index={currentIndex}
+                      project={project}
+                      index={idx}
                       total={filteredProjects.length}
-                      layout="card"
+                      layout="carousel"
                       onOpenLightbox={(payload) => setLightbox(payload)}
                     />
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Quick Action Hint */}
-            <div className="card-deck-hint-bar">
-              <span className="hint-chip">
-                <span>Use</span>
-                <kbd>▲ Upper</kbd>
-                <kbd>▼ Bottom</kbd>
-                <span>Buttons or Mouse Wheel to Swap Cards</span>
-              </span>
-            </div>
-          </motion.div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         ) : (
           <div className="projects-grid-container">
             {filteredProjects.map((project, idx) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 35 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 26, scale: 0.985 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{
-                  duration: 0.55,
-                  delay: Math.min(idx * 0.08, 0.4),
+                  duration: 0.48,
+                  delay: Math.min(idx * 0.08, 0.35),
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                layout
                 className="grid-card-motion-wrapper"
               >
                 <ProjectCardContent
@@ -901,118 +774,63 @@ export default function ProjectsSection() {
             onClick={() => setLightbox(null)}
           >
             <motion.div
-              initial={{ scale: 0.93, opacity: 0 }}
+              initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.93, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="screenshot-lightbox-dialog"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Lightbox Header */}
-              <div className="lightbox-header">
-                <div className="lightbox-title-area">
-                  <h4 className="lightbox-project-name">{lightbox.projectName}</h4>
-                  <span className="lightbox-source-pill">
-                    {getScreenshotMeta(lightbox.images[lightbox.index], lightbox.category).label}
-                  </span>
-                  <span className="lightbox-counter-pill">
-                    {lightbox.index + 1} / {lightbox.images.length}
+              <div className="screenshot-lightbox-header">
+                <div className="lightbox-title-wrap">
+                  <span className="lightbox-project-name">{lightbox.projectName}</span>
+                  <span className="lightbox-sep">·</span>
+                  <span className="lightbox-counter">
+                    Screen {lightbox.index + 1} of {lightbox.images.length}
                   </span>
                 </div>
-
                 <button
                   type="button"
                   className="lightbox-close-btn"
                   onClick={() => setLightbox(null)}
-                  aria-label="Close screenshot preview"
-                  title="Close preview (Esc)"
+                  aria-label="Close screenshot modal"
                 >
                   <X size={18} aria-hidden="true" />
                 </button>
               </div>
 
-              {/* Lightbox Stage */}
-              <div className="lightbox-stage">
-                {lightbox.images.length > 1 && (
-                  <button
-                    type="button"
-                    className="lightbox-nav-btn lightbox-nav-prev"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setLightbox((prev) =>
-                        prev
-                          ? {
-                              ...prev,
-                              index: prev.index > 0 ? prev.index - 1 : prev.images.length - 1,
-                            }
-                          : null
-                      );
-                    }}
-                    aria-label="Previous screenshot"
-                    title="Previous (ArrowLeft)"
-                  >
-                    <ChevronLeft size={22} aria-hidden="true" />
-                  </button>
-                )}
-
-                <div className="lightbox-image-wrap">
-                  <Image
-                    key={lightbox.images[lightbox.index]}
-                    src={lightbox.images[lightbox.index]}
-                    alt={`${lightbox.projectName} - ${lightbox.index + 1}`}
-                    fill
-                    className="object-contain"
-                    sizes="100vw"
-                    priority
-                  />
-                </div>
-
-                {lightbox.images.length > 1 && (
-                  <button
-                    type="button"
-                    className="lightbox-nav-btn lightbox-nav-next"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setLightbox((prev) =>
-                        prev
-                          ? {
-                              ...prev,
-                              index: prev.index < prev.images.length - 1 ? prev.index + 1 : 0,
-                            }
-                          : null
-                      );
-                    }}
-                    aria-label="Next screenshot"
-                    title="Next (ArrowRight)"
-                  >
-                    <ChevronRight size={22} aria-hidden="true" />
-                  </button>
-                )}
+              <div className="screenshot-lightbox-viewport">
+                <Image
+                  src={lightbox.images[lightbox.index] || lightbox.images[0]}
+                  alt={`${lightbox.projectName} high resolution capture`}
+                  fill
+                  sizes="90vw"
+                  className="screenshot-lightbox-img"
+                  priority
+                />
               </div>
 
-              {/* Lightbox Footer */}
-              <div className="lightbox-footer">
-                <div className="lightbox-hint">
-                  <span>Keyboard:</span>
-                  <kbd>←</kbd>
-                  <kbd>→</kbd>
-                  <span>to browse,</span>
-                  <kbd>Esc</kbd>
-                  <span>to close</span>
+              {/* Lightbox Thumbnails / Next-Prev if multi-screen */}
+              {lightbox.images.length > 1 && (
+                <div className="lightbox-strip">
+                  {lightbox.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`lightbox-thumb-btn ${idx === lightbox.index ? "lightbox-thumb-active" : ""}`}
+                      onClick={() => setLightbox({ ...lightbox, index: idx })}
+                    >
+                      <Image
+                        src={img}
+                        alt={`Thumbnail ${idx + 1}`}
+                        width={64}
+                        height={40}
+                        className="lightbox-thumb-img"
+                      />
+                    </button>
+                  ))}
                 </div>
-
-                {lightbox.liveUrl && (
-                  <a
-                    href={lightbox.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="lightbox-action-link"
-                  >
-                    <span>Visit Live Target</span>
-                    <ExternalLink size={14} aria-hidden="true" />
-                  </a>
-                )}
-              </div>
+              )}
             </motion.div>
           </motion.div>
         )}

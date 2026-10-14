@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight, FileDown } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -13,6 +14,7 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -64,6 +66,10 @@ export default function Navbar() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <header className={`site-header no-print ${scrolled ? "site-header-scrolled" : ""}`}>

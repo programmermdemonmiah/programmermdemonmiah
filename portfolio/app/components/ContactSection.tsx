@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Mail,
   Github,
@@ -234,6 +235,7 @@ export default function ContactSection() {
               <a href="#expertise" className="footer-link">Expertise</a>
               <a href="#projects" className="footer-link">Projects</a>
               <a href="#contact" className="footer-link">Contact</a>
+              <Link href="/admin" className="footer-link">Admin</Link>
             </nav>
 
             <button

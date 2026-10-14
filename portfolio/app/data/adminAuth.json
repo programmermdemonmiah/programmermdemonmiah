@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "admin-emon-01",
+      "username": "admin",
+      "email": "admin@emonmiah.com",
+      "name": "MD. Emon Miah",
+      "role": "admin",
+      "salt": "7f8b9c1d2e3f4a5b6c7d8e9f0a1b2c3d",
+      "passwordHash": "dc7d8ec4a3841571417e9ba7a140c07b2fbbc476cc51c1b8621945e87bedf916f771b2bad387713ed6b08b29b4b6bb566823a2e933a06c26fa839fb9085166cc",
+      "createdAt": "2026-10-15T00:00:00.000Z",
+      "updatedAt": "2026-10-15T00:00:00.000Z"
+    }
+  ]
+}
