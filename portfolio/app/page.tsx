@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import ThreeDModel from "./components/ThreeDModel";
+import MarqueeSection from "./components/MarqueeSection";
+import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Code2,
@@ -392,7 +394,7 @@ function ContactLink({ compact = false }: { compact?: boolean }) {
 
 function ProjectCard({ project }: { project: PortfolioProject }) {
   return (
-    <article className="project-card">
+    <motion.article className="project-card" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
       <a
         className={`project-art art-${project.tone}`}
         href={project.liveUrl || "#contact"}
@@ -434,7 +436,7 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -518,6 +520,8 @@ export default function Home() {
         </div>
       </header>
 
+      <MarqueeSection />
+
       <section className="about section" id="about">
         <div className="section-heading">
           <p className="eyebrow">A little about me</p>
@@ -546,7 +550,7 @@ export default function Home() {
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <article className="service-row" key={service.number}>
+              <motion.article className="service-row" key={service.number} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.65, delay: Number(service.number) * 0.07, ease: [0.25, 0.1, 0.25, 1] }}>
                 <span className="service-number">{service.number}</span>
                 <div>
                   <h3>{service.title}</h3>
