@@ -3,12 +3,21 @@
 <img src="assets/profile-hero.svg" alt="MD. Emon Miah — Software Engineer" width="100%" />
 
 <p>
+  <a href="https://programmermdemonmiah.vercel.app"><img src="https://img.shields.io/badge/Portfolio-Visit%20Website-2f6b43?style=for-the-badge&logo=vercel&logoColor=white" alt="Personal portfolio website" /></a>
   <a href="https://github.com/programmermdemonmiah"><img src="https://img.shields.io/badge/GitHub-Explore%20Profile-161b22?style=for-the-badge&logo=github&logoColor=c9d1d9" alt="GitHub profile" /></a>
   <a href="https://www.linkedin.com/in/mdemonmiah"><img src="https://img.shields.io/badge/LinkedIn-Connect-161b22?style=for-the-badge&logo=linkedin&logoColor=0A66C2" alt="LinkedIn" /></a>
   <a href="mailto:contact.mdemonmiah@gmail.com"><img src="https://img.shields.io/badge/Email-Get%20in%20touch-161b22?style=for-the-badge&logo=gmail&logoColor=EA4335" alt="Email" /></a>
 </p>
 
 </div>
+
+---
+
+## 00 — Personal Portfolio
+
+Explore my portfolio website for an overview of my engineering focus, selected project areas, technical capabilities, and résumé.
+
+**[Visit programmermdemonmiah.vercel.app ↗](https://programmermdemonmiah.vercel.app)**
 
 ---
 
