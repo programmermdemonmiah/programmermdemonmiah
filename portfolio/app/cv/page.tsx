@@ -52,7 +52,7 @@ export default function CVPage() {
                   FULL STACK MOBILE &amp; BACKEND DEVELOPER
                 </p>
                 <p className="cv-tech-subline">
-                  Flutter (GetX / Provider) · Go (Gin) · PHP (Laravel) · Python (Django) · Real-Time WebSockets
+                  Flutter · Go (Gin) · PHP (Laravel) · Python (Django) · Real-Time WebSockets · PostgreSQL
                 </p>
               </div>
 
@@ -69,13 +69,13 @@ export default function CVPage() {
               </div>
             </div>
 
-            {/* Contact Pills */}
+            {/* Contact Details */}
             <div className="cv-contact-grid">
               <div className="cv-contact-item">
                 <span className="cv-contact-label">Phone</span>
-                <a href="tel:+8801405665854" className="cv-contact-val">+880 1405-665854</a>
+                <a href="tel:+8801405665854" className="cv-contact-val">+8801405665854</a>
                 <span className="cv-contact-sep">/</span>
-                <a href="tel:+8801568147387" className="cv-contact-val">+880 1568-147387</a>
+                <a href="tel:+8801568147387" className="cv-contact-val">+8801568147387</a>
               </div>
               <div className="cv-contact-item">
                 <span className="cv-contact-label">Email</span>
@@ -83,15 +83,15 @@ export default function CVPage() {
               </div>
               <div className="cv-contact-item">
                 <span className="cv-contact-label">Location</span>
-                <span className="cv-contact-val">Uttara, Dhaka, Bangladesh</span>
+                <span className="cv-contact-val">Uttara-15, Dhaka, Bangladesh</span>
+              </div>
+              <div className="cv-contact-item">
+                <span className="cv-contact-label">LinkedIn</span>
+                <a href="https://linkedin.com/in/MdEmonMiah" target="_blank" rel="noopener noreferrer" className="cv-contact-val">linkedin.com/in/MdEmonMiah</a>
               </div>
               <div className="cv-contact-item">
                 <span className="cv-contact-label">GitHub</span>
                 <a href="https://github.com/programmermdemonmiah" target="_blank" rel="noopener noreferrer" className="cv-contact-val">github.com/programmermdemonmiah</a>
-              </div>
-              <div className="cv-contact-item">
-                <span className="cv-contact-label">LinkedIn</span>
-                <a href="https://www.linkedin.com/in/MdEmonMiah" target="_blank" rel="noopener noreferrer" className="cv-contact-val">linkedin.com/in/MdEmonMiah</a>
               </div>
               <div className="cv-contact-item">
                 <span className="cv-contact-label">Portfolio</span>
@@ -100,7 +100,7 @@ export default function CVPage() {
             </div>
           </header>
 
-          {/* Section: Executive Summary */}
+          {/* Section: Professional Summary */}
           <section className="cv-section">
             <h2 className="cv-sec-title">
               <span className="cv-sec-bar" />
@@ -108,7 +108,7 @@ export default function CVPage() {
             </h2>
             <div className="cv-summary-card">
               <p>
-                Senior Full Stack Engineer with extensive experience architecting high-performance cross-platform Flutter applications and scalable backend microservices. Proven track record designing low-latency real-time systems using WebSockets in Go (Gin), modular REST APIs in Laravel and Django, and complex enterprise ERPs. Specialist in Clean Architecture, reactive state management (GetX / Provider), payment gateway integrations (bKash, Nagad, Stripe, SSLCommerz), and high-throughput concurrent workflows with 99.9% uptime.
+                Full Stack Engineer specializing in high performance Flutter applications and scalable backend systems. Proven experience in designing real time architectures using WebSocket, building fintech, healthcare, live streaming and e-commerce platforms. Strong focus on clean architecture, modular code and production ready system design.
               </p>
             </div>
           </section>
@@ -125,97 +125,175 @@ export default function CVPage() {
                 <h3 className="cv-company-name">N. I. Biz Soft</h3>
                 <span className="cv-company-loc">Uttara-15, Dhaka, Bangladesh</span>
               </div>
-              <span className="cv-badge cv-badge-primary">Dec 2023 – May 2026 (2.5+ Years Full-Time)</span>
+              <span className="cv-badge cv-badge-primary">12/2023 – 05/2026</span>
             </div>
 
             <div className="cv-roles-stack">
-              {/* Role 1 */}
+              {/* Role 1: Senior Software Engineer */}
               <div className="cv-role-card">
                 <div className="cv-role-head">
                   <h4 className="cv-role-title-text">Senior Software Engineer (Mobile &amp; Backend)</h4>
-                  <span className="cv-role-period">May 2025 – May 2026</span>
+                  <span className="cv-role-period">12/2023 – 05/2026</span>
                 </div>
                 <ul className="cv-bullet-list">
-                  <li>Spearheaded full-stack engineering across multi-platform Flutter apps and microservice backend systems.</li>
-                  <li>Engineered scalable real-time architectures using WebSockets in Go and live video/audio pipelines (Zego Cloud).</li>
-                  <li>Designed and optimized RESTful API architectures in Go (Gin), Laravel, and Django with connection pooling.</li>
-                  <li>Led technical code reviews, guided clean architectural standards, and oversaw CI/CD production deployments.</li>
-                  <li>Architected high-throughput concurrency models utilizing Go routines for live room streaming and viewer presence.</li>
+                  <li>Leading full stack system development (Flutter + Backend)</li>
+                  <li>Designing scalable real time architectures (WebSocket based systems)</li>
+                  <li>Backend development in Go (Gin), Laravel &amp; Django</li>
+                  <li>System design for fintech, e-commerce and live streaming platforms</li>
+                  <li>API architecture design &amp; performance optimization</li>
+                  <li>Mentoring junior developers and reviewing code structure</li>
+                  <li>Handling production level deployments and system stability</li>
                 </ul>
               </div>
 
-              {/* Role 2 */}
+              {/* Role 2: Mid-Level Developer */}
               <div className="cv-role-card">
                 <div className="cv-role-head">
                   <h4 className="cv-role-title-text">Mid-Level Mobile &amp; Backend Developer</h4>
-                  <span className="cv-role-period">Apr 2024 – Apr 2025</span>
+                  <span className="cv-role-period">N. I. Biz Soft</span>
                 </div>
                 <ul className="cv-bullet-list">
-                  <li>Built and optimized full-stack systems bridging cross-platform mobile clients with relational database backends.</li>
-                  <li>Integrated multi-channel payment gateways including bKash, Nagad, Stripe, and SSLCommerz with webhook verification.</li>
-                  <li>Implemented real-time bi-directional messaging, order status feeds, and rider GPS location tracking.</li>
-                  <li>Significantly reduced app cold-start latencies and improved SQL query indexing for large product catalogs.</li>
+                  <li>Worked as Full Stack (Flutter + Backend) developer</li>
+                  <li>Built scalable API integrations with backend systems</li>
+                  <li>Implemented real time features using WebSocket (Go)</li>
+                  <li>Payment gateway integration (bKash, Nagad, SSLCommerz)</li>
+                  <li>Improved app performance &amp; backend response time</li>
+                  <li>Collaborated on system level architecture decisions</li>
                 </ul>
               </div>
 
-              {/* Role 3 */}
+              {/* Role 3: App Developer */}
               <div className="cv-role-card">
                 <div className="cv-role-head">
                   <h4 className="cv-role-title-text">App Developer</h4>
-                  <span className="cv-role-period">Dec 2023 – Mar 2024</span>
+                  <span className="cv-role-period">N. I. Biz Soft</span>
                 </div>
                 <ul className="cv-bullet-list">
-                  <li>Developed production-ready cross-platform mobile applications for Android &amp; iOS using Flutter and Dart.</li>
-                  <li>Implemented clean state management architectures utilizing GetX (Reactive/DI) and Provider patterns.</li>
-                  <li>Integrated RESTful APIs using Dio and HTTP client with structured interceptors, error handling, and token refresh.</li>
-                  <li>Built custom responsive UI layouts matching Figma prototypes with high visual fidelity and smooth 60fps animations.</li>
+                  <li>Flutter mobile application development (Android &amp; iOS)</li>
+                  <li>REST API integration and UI implementation</li>
+                  <li>State management (GetX / Provider)</li>
+                  <li>Bug fixing, feature implementation and app maintenance</li>
+                  <li>Clean architecture basics (Service + Repository pattern)</li>
                 </ul>
               </div>
             </div>
           </section>
 
-          {/* Section: Technical Skills Matrix */}
+          {/* Section: Education */}
           <section className="cv-section">
             <h2 className="cv-sec-title">
               <span className="cv-sec-bar" />
-              <span>Technical Skills &amp; Core Competencies</span>
+              <span>Education</span>
+            </h2>
+
+            <div className="cv-edu-table-wrap">
+              <table className="cv-table">
+                <thead>
+                  <tr>
+                    <th>Degree / Certificate</th>
+                    <th>Institution</th>
+                    <th>Result / CGPA</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="cv-td-bold">BSC in CSE</td>
+                    <td>Uttara University</td>
+                    <td>Bachelor of Science</td>
+                    <td><span className="cv-pill cv-pill-active">Running / Enrolled</span></td>
+                  </tr>
+                  <tr>
+                    <td className="cv-td-bold">Diploma in Engineering</td>
+                    <td>Sylhet Polytechnic Institute</td>
+                    <td className="cv-td-accent">CGPA: 3.68 / 4.00</td>
+                    <td>Completed</td>
+                  </tr>
+                  <tr>
+                    <td className="cv-td-bold">HSC</td>
+                    <td>M.A.H.K Bhashani Degree College</td>
+                    <td className="cv-td-accent">GPA: 4.33 / 5.00</td>
+                    <td>Completed</td>
+                  </tr>
+                  <tr>
+                    <td className="cv-td-bold">SSC</td>
+                    <td>P.T.M High School</td>
+                    <td className="cv-td-accent">GPA: 4.33 / 5.00</td>
+                    <td>Completed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* Section: Technical Skills */}
+          <section className="cv-section">
+            <h2 className="cv-sec-title">
+              <span className="cv-sec-bar" />
+              <span>Technical Skills</span>
             </h2>
 
             <div className="cv-skills-grid">
               <div className="cv-skill-card">
-                <h4 className="cv-skill-cat">Mobile App Development</h4>
-                <p className="cv-skill-tags">
-                  Flutter, Dart, Clean Architecture, MVC, MVVM, Dio, SQLite (Sqflite), SharedPreferences, 60fps Animations, Profiling
-                </p>
+                <h4 className="cv-skill-cat">Mobile App Development (Flutter)</h4>
+                <ul className="cv-skill-detail-list">
+                  <li>Cross platform app development (Android &amp; iOS)</li>
+                  <li>Clean Architecture (Layered, Scalable, Maintainable)</li>
+                  <li>MVC, MVVM design patterns</li>
+                  <li>API Integration (REST, Dio, HTTP)</li>
+                  <li>Performance optimization &amp; reusable components</li>
+                </ul>
               </div>
+
               <div className="cv-skill-card">
-                <h4 className="cv-skill-cat">State Management</h4>
-                <p className="cv-skill-tags">
-                  GetX (Advanced: Reactive State, DI, Route Management), Provider (App-wide state), Riverpod (Multi-state handling)
-                </p>
+                <h4 className="cv-skill-cat">State Management (Flutter)</h4>
+                <ul className="cv-skill-detail-list">
+                  <li><strong>GetX (Advanced):</strong> Reactive state management, Dependency Injection, Route management</li>
+                  <li><strong>Provider (Advanced):</strong> Scalable state handling, App-wide state management</li>
+                  <li><strong>Riverpod (Mid Level):</strong> Scalable state handling, Big project and multi state handling</li>
+                </ul>
               </div>
+
               <div className="cv-skill-card">
-                <h4 className="cv-skill-cat">Backend Frameworks</h4>
-                <p className="cv-skill-tags">
-                  Go (Golang — Gin Framework, Goroutines, Concurrency), PHP (Laravel — MVC, Repository, Blade), Python (Django, Flask)
-                </p>
+                <h4 className="cv-skill-cat">Local Storage (Flutter)</h4>
+                <ul className="cv-skill-detail-list">
+                  <li><strong>SQLite (Sqflite):</strong> Structured relational local database, Complex query handling, Data persistence with schema design</li>
+                  <li><strong>SharedPreferences:</strong> Key value storage, Lightweight data persistence (token, settings)</li>
+                </ul>
               </div>
+
               <div className="cv-skill-card">
-                <h4 className="cv-skill-cat">Databases &amp; Storage</h4>
-                <p className="cv-skill-tags">
-                  PostgreSQL (PgSQL), MySQL (Relational Schema Design, Indexing &amp; Query Tuning), SQLite, Firebase (Firestore, Realtime DB)
-                </p>
+                <h4 className="cv-skill-cat">Backend Development</h4>
+                <ul className="cv-skill-detail-list">
+                  <li><strong>Go (Golang) – Gin Framework:</strong> REST API development, WebSocket (real time system), Middleware, routing, error handling, Concurrent system design</li>
+                  <li><strong>PHP (Laravel):</strong> MVC architecture, Repository architecture, REST API development, Authentication &amp; authorization, ERP &amp; E-commerce system, Blade, Ajax</li>
+                  <li><strong>Python:</strong> Django (backend &amp; API &amp; Template Based), Flask</li>
+                </ul>
               </div>
+
               <div className="cv-skill-card">
-                <h4 className="cv-skill-cat">Real-Time &amp; Integration</h4>
-                <p className="cv-skill-tags">
-                  WebSockets, Socket.IO, Zego Cloud WebRTC, bKash, Nagad, Stripe, PayPal, SSLCommerz, JWT, OAuth 2.0, OTP Services
-                </p>
+                <h4 className="cv-skill-cat">Database Systems</h4>
+                <ul className="cv-skill-detail-list">
+                  <li><strong>MySQL:</strong> Relational database design &amp; query optimization</li>
+                  <li><strong>PostgreSQL (PgSQL):</strong> Relational schema design, indexing &amp; performance tuning</li>
+                  <li><strong>Firebase:</strong> Firestore / Realtime Database</li>
+                </ul>
               </div>
+
               <div className="cv-skill-card">
-                <h4 className="cv-skill-cat">DevOps &amp; Tooling</h4>
+                <h4 className="cv-skill-cat">System Design &amp; Integration</h4>
+                <ul className="cv-skill-detail-list">
+                  <li>Real time systems (WebSockets, Socket.io)</li>
+                  <li>Payment gateway integration: bKash, Nagad, Stripe, PayPal, SSLCommerz</li>
+                  <li>OTP &amp; token based authentication</li>
+                  <li>API security &amp; performance optimization</li>
+                </ul>
+              </div>
+
+              <div className="cv-skill-card" style={{ gridColumn: "1 / -1" }}>
+                <h4 className="cv-skill-cat">Tools &amp; Environment</h4>
                 <p className="cv-skill-tags">
-                  VS Code, Android Studio, Xcode, Git, GitHub Actions, Postman, Linux Terminal, Docker (Basics)
+                  VS Code, Android Studio, Xcode, Git, Postman, Docker (Basic)
                 </p>
               </div>
             </div>
@@ -225,16 +303,16 @@ export default function CVPage() {
           <section className="cv-section">
             <h2 className="cv-sec-title">
               <span className="cv-sec-bar" />
-              <span>Key Commercial &amp; Production Projects</span>
+              <span>Key Projects</span>
             </h2>
 
             <div className="cv-projects-stack">
-              {/* Project 1 */}
+              {/* Project 1: Swish Live Streaming */}
               <div className="cv-project-card">
                 <div className="cv-proj-top">
                   <div>
-                    <h3 className="cv-proj-name">1. Live Streaming Mobile Platform</h3>
-                    <p className="cv-proj-sub">Full Stack Engineer (Flutter + Go Microservices) · Flutter Mobile App + Go Backend</p>
+                    <h3 className="cv-proj-name">Live Streaming Platform</h3>
+                    <p className="cv-proj-sub"><strong>Platform:</strong> Flutter App + Go Backend (Microservices Architecture)</p>
                   </div>
                   <a
                     href="https://play.google.com/store/apps/details?id=com.swish.app"
@@ -246,21 +324,35 @@ export default function CVPage() {
                   </a>
                 </div>
                 <div className="cv-proj-arch">
-                  <strong>Architecture:</strong> Separate Go microservices (API Server + Core Backend), WebSocket real-time pipelines, and Goroutine concurrency.
+                  <strong>System Architecture:</strong>
+                  <ul className="cv-sub-bullets">
+                    <li>Separate Go based microservices (API Server + Streaming Core Backend)</li>
+                    <li>WebSocket based real time communication system</li>
+                    <li>Scalable event driven architecture for live interactions</li>
+                  </ul>
                 </div>
-                <ul className="cv-bullet-list">
-                  <li>Engineered real-time audio and video live streaming with host approval room join/leave workflow.</li>
-                  <li>Integrated VIP instant-join privileges, virtual gift economy system, and live rankings with animated entries.</li>
-                  <li>Handled high-throughput viewer concurrency utilizing Go routines, event dispatchers, and stateful memory caches.</li>
-                </ul>
+                <div className="cv-proj-features">
+                  <strong>Core Features:</strong>
+                  <ul className="cv-bullet-list">
+                    <li>Real time audio/video live streaming</li>
+                    <li>Live room join/leave system</li>
+                    <li>Host controlled join request approval system</li>
+                    <li>VIP instant join &amp; premium access system</li>
+                    <li>Gift sending &amp; virtual economy system</li>
+                    <li>Live ranking system with entry animations</li>
+                    <li>Viewer tracking in real time</li>
+                    <li>High performance concurrency handling (Go routines)</li>
+                  </ul>
+                </div>
+                <p className="cv-role-tag"><strong>Role:</strong> Full Stack Engineer (Flutter + Go Microservice Backend)</p>
               </div>
 
-              {/* Project 2 */}
+              {/* Project 2: LA'AM ERP */}
               <div className="cv-project-card">
                 <div className="cv-proj-top">
                   <div>
-                    <h3 className="cv-proj-name">2. LA’AM Enterprise Garments ERP System</h3>
-                    <p className="cv-proj-sub">System Architect &amp; Backend Developer · Web Platform (Laravel + MySQL) + WordPress Pipeline</p>
+                    <h3 className="cv-proj-name">LA’AM ERP System, Enterprise Resource Planning System</h3>
+                    <p className="cv-proj-sub"><strong>Platform:</strong> Web System + Backend</p>
                   </div>
                   <a
                     href="https://erpecom.deepverselab.com/login"
@@ -271,182 +363,195 @@ export default function CVPage() {
                     Live Portal ↗
                   </a>
                 </div>
-                <div className="cv-proj-arch">
-                  <strong>Architecture:</strong> Laravel MVC engine with direct WordPress order sync, inventory webhooks, and courier tracking pipelines.
+                <div className="cv-proj-features">
+                  <strong>Core Modules:</strong>
+                  <ul className="cv-bullet-list">
+                    <li>Employee Management System (Role based access control)</li>
+                    <li>Team based role &amp; permission system</li>
+                    <li>Incentive system per employee &amp; per product</li>
+                    <li>Courier integration system &amp; auto courier status tracking system</li>
+                    <li>Shipping system (weight based calculation)</li>
+                    <li>Inventory management system</li>
+                    <li>Accounting module (income, expense, profit/loss)</li>
+                    <li>Wallet system for employees</li>
+                    <li>Reporting dashboard (full business analytics)</li>
+                  </ul>
                 </div>
-                <ul className="cv-bullet-list">
-                  <li>Multi-tier employee Role-Based Access Control (RBAC), team permissions, and incentive calculation rules.</li>
-                  <li>Courier auto-tracking with dynamic weight-based shipping calculation and real-time inventory ledger.</li>
-                  <li>Complete accounting module (income, expense, profit/loss balance sheets) and employee internal wallet system.</li>
-                </ul>
+                <div className="cv-proj-arch">
+                  <strong>Integration Systems:</strong>
+                  <ul className="cv-sub-bullets">
+                    <li>WordPress plugin integration (order sync)</li>
+                    <li>WordPress order → direct ERP pipeline</li>
+                    <li>Real time order &amp; inventory sync</li>
+                  </ul>
+                </div>
+                <p className="cv-role-tag"><strong>Role:</strong> System Architect &amp; Backend Developer</p>
               </div>
 
-              {/* Project 3 */}
+              {/* Project 3: Xovalley */}
               <div className="cv-project-card">
                 <div className="cv-proj-top">
                   <div>
-                    <h3 className="cv-proj-name">3. Xovalley — Multi Vendor E-Commerce Platform</h3>
-                    <p className="cv-proj-sub">Full Stack Engineer (Laravel + Flutter + System Design) · Web (React.js) + 3 Flutter Apps + Laravel REST API</p>
+                    <h3 className="cv-proj-name">Xovalley – Multi Vendor E-commerce Platform</h3>
+                    <p className="cv-proj-sub"><strong>Platform:</strong> Web + Mobile + Admin + Delivery System Backend</p>
                   </div>
                   <div className="cv-proj-links-wrap">
                     <a href="https://xovalley.com" target="_blank" rel="noopener noreferrer" className="cv-proj-link">Web Store ↗</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.xovalley.user_app" target="_blank" rel="noopener noreferrer" className="cv-proj-link">Play Store ↗</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.xovalley.user_app" target="_blank" rel="noopener noreferrer" className="cv-proj-link">Google Play App ↗</a>
                   </div>
                 </div>
                 <div className="cv-proj-arch">
-                  <strong>Architecture:</strong> Unified Laravel API backend powering customer, vendor, and rider Flutter apps with live delivery tracking.
+                  <strong>Technology Stack:</strong> Laravel (API + Core Business Logic) · React.js (Web Frontend) · Flutter (Customer App, Seller App, Delivery Man App)
                 </div>
-                <ul className="cv-bullet-list">
-                  <li>Multi-vendor marketplace cataloging, seller commissions, and automated vendor payout ledger.</li>
-                  <li>Customer App, Seller App, and Delivery Man App with live Google Maps rider GPS location updates.</li>
-                  <li>Integrated multi-channel payment gateway verification (bKash, Nagad, debit/credit cards) with webhook logs.</li>
-                </ul>
+                <div className="cv-proj-features">
+                  <strong>Features:</strong>
+                  <ul className="cv-bullet-list">
+                    <li>Multi vendor marketplace system</li>
+                    <li>Product, cart, order management</li>
+                    <li>Delivery tracking system</li>
+                    <li>Affiliate marketing system</li>
+                    <li>Commission &amp; payout system</li>
+                    <li>Payment gateway integration</li>
+                  </ul>
+                </div>
+                <p className="cv-role-tag"><strong>Role:</strong> Full Stack Engineer (Laravel + Flutter + System Design)</p>
               </div>
 
-              {/* Project 4 */}
+              {/* Project 4: ARACO Healthcare */}
               <div className="cv-project-card">
                 <div className="cv-proj-top">
                   <div>
-                    <h3 className="cv-proj-name">4. ARACO Healthcare Ecosystem</h3>
-                    <p className="cv-proj-sub">Full Stack Engineer (Flutter + Django + System Design) · Flutter App (GetX) + Django Web Admin + Zego Cloud</p>
+                    <h3 className="cv-proj-name">ARACO Healthcare System, Healthcare Ecosystem</h3>
+                    <p className="cv-proj-sub"><strong>Platform:</strong> Flutter App + Web System · <strong>Backend:</strong> Django + Template based Admin Panel</p>
                   </div>
                   <a href="https://araco.com.bd" target="_blank" rel="noopener noreferrer" className="cv-proj-link">Live Portal ↗</a>
                 </div>
-                <div className="cv-proj-arch">
-                  <strong>Architecture:</strong> GetX client state architecture connected to Zego Cloud WebRTC pipelines and Django administration backend.
+                <div className="cv-proj-features">
+                  <strong>Mobile App Features (Flutter + GetX):</strong>
+                  <ul className="cv-bullet-list">
+                    <li>Online pharmacy system (medicine order + prescription upload)</li>
+                    <li>Doctor appointment &amp; telemedicine system</li>
+                    <li>Video/audio calling (Zego Cloud integration)</li>
+                    <li>Lab test booking system &amp; Caregiver booking system</li>
+                    <li>Health package subscription system</li>
+                  </ul>
                 </div>
-                <ul className="cv-bullet-list">
-                  <li>Online pharmacy with digital prescription upload, order fulfillment, and automatic customer dispatch.</li>
-                  <li>Doctor appointment scheduling with encrypted video/audio consultations powered by Zego Cloud WebRTC.</li>
-                  <li>Clinical lab test home sample collection booking, automated report delivery, and clinic admin POS billing.</li>
-                </ul>
+                <div className="cv-proj-arch">
+                  <strong>Healthcare Workflow:</strong> Patient → Doctor appointment → Video consultation → E-prescription · Lab technician home collection system → digital report delivery · Health package auto doctor assignment
+                </div>
+                <div className="cv-proj-features">
+                  <strong>Admin System:</strong> Role based access control (RBAC), POS system, Inventory management, Invoice generation, Staff &amp; doctor management system
+                </div>
+                <p className="cv-role-tag"><strong>Role:</strong> Full Stack Engineer (Flutter + Django + System Design)</p>
               </div>
 
-              {/* Project 5 */}
+              {/* Project 5: Propeta */}
               <div className="cv-project-card">
                 <div className="cv-proj-top">
                   <div>
-                    <h3 className="cv-proj-name">5. Propeta — Real Estate Discovery Platform</h3>
-                    <p className="cv-proj-sub">Full Stack Engineer (Flutter + Django + System Design) · Flutter Mobile Application + Django REST API</p>
+                    <h3 className="cv-proj-name">Propeta – Real Estate Platform</h3>
+                    <p className="cv-proj-sub"><strong>Platform:</strong> Flutter App + API Backend</p>
                   </div>
                 </div>
-                <div className="cv-proj-arch">
-                  <strong>Architecture:</strong> Layered Service-Repository architecture with geocoded spatial indexing and local offline state caching.
+                <div className="cv-proj-features">
+                  <strong>Features:</strong>
+                  <ul className="cv-bullet-list">
+                    <li>Property listing system</li>
+                    <li>Property search &amp; filtering</li>
+                    <li>Agent based listing system</li>
+                    <li>API driven architecture</li>
+                    <li>MVC based backend structure</li>
+                  </ul>
                 </div>
-                <ul className="cv-bullet-list">
-                  <li>Multi-criteria spatial search &amp; filtering (price brackets, geo-coordinates, property types, and verified amenities).</li>
-                  <li>Agent portfolio verification, in-app client inquiry routing, and high-resolution photo gallery viewer.</li>
-                </ul>
+                <p className="cv-role-tag"><strong>Role:</strong> Mobile App Developer</p>
               </div>
 
-              {/* Project 6 */}
+              {/* Project 6: CashMart */}
               <div className="cv-project-card">
                 <div className="cv-proj-top">
                   <div>
-                    <h3 className="cv-proj-name">6. CashMart — Digital Banking &amp; Mobile Wallet</h3>
-                    <p className="cv-proj-sub">Backend Engineer (Django API) &amp; Mobile Developer · Flutter Mobile Application + Django (Python) Backend</p>
+                    <h3 className="cv-proj-name">CashMart – Digital Banking + E-commerce System</h3>
+                    <p className="cv-proj-sub"><strong>Platform:</strong> Flutter App · <strong>Backend:</strong> Django (Python)</p>
                   </div>
                 </div>
-                <div className="cv-proj-arch">
-                  <strong>Architecture:</strong> Secure cryptographic ledger with multi-factor OTP validation and QR code transaction verification.
+                <div className="cv-proj-features">
+                  <strong>Core Banking Features:</strong>
+                  <ul className="cv-bullet-list">
+                    <li>Send money system</li>
+                    <li>Cashout via QR system</li>
+                    <li>Transaction history with export (PDF)</li>
+                    <li>OTP based authentication</li>
+                    <li>Wallet system</li>
+                  </ul>
                 </div>
-                <ul className="cv-bullet-list">
-                  <li>Instant peer-to-peer balance transfers, QR code cashout at agent outlets, and exportable PDF statements.</li>
-                  <li>Tiered deposit rewards, profit-sharing calculation rules, and strict audit-trail security logging.</li>
-                </ul>
+                <div className="cv-proj-arch">
+                  <strong>E-commerce + Finance Hybrid:</strong> Product purchase system, Profit sharing system (purchase based earning logic), MLM style deposit &amp; reward system, Balance + commission tracking system
+                </div>
+                <p className="cv-role-tag"><strong>Role:</strong> Backend Engineer (Django API Development)</p>
               </div>
             </div>
           </section>
 
-          {/* Section: Education */}
+          {/* Section: Training */}
           <section className="cv-section">
             <h2 className="cv-sec-title">
               <span className="cv-sec-bar" />
-              <span>Education &amp; Academic Background</span>
-            </h2>
-
-            <div className="cv-edu-table-wrap">
-              <table className="cv-table">
-                <thead>
-                  <tr>
-                    <th>Degree / Qualification</th>
-                    <th>Institution</th>
-                    <th>Result / Grade</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="cv-td-bold">BSc in Computer Science &amp; Engineering (CSE)</td>
-                    <td>Uttara University, Dhaka</td>
-                    <td>Bachelor of Science</td>
-                    <td><span className="cv-pill cv-pill-active">Running / Enrolled</span></td>
-                  </tr>
-                  <tr>
-                    <td className="cv-td-bold">Diploma in Engineering</td>
-                    <td>Sylhet Polytechnic Institute, Sylhet</td>
-                    <td className="cv-td-accent">CGPA: 3.68 / 4.00</td>
-                    <td>Completed</td>
-                  </tr>
-                  <tr>
-                    <td className="cv-td-bold">Higher Secondary Certificate (HSC)</td>
-                    <td>M.A.H.K Bhashani Degree College</td>
-                    <td className="cv-td-accent">GPA: 4.33 / 5.00</td>
-                    <td>Completed</td>
-                  </tr>
-                  <tr>
-                    <td className="cv-td-bold">Secondary School Certificate (SSC)</td>
-                    <td>P.T.M High School</td>
-                    <td className="cv-td-accent">GPA: 4.33 / 5.00</td>
-                    <td>Completed</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* Section: Professional Training */}
-          <section className="cv-section">
-            <h2 className="cv-sec-title">
-              <span className="cv-sec-bar" />
-              <span>Professional Training &amp; Certifications</span>
+              <span>Training</span>
             </h2>
             <div className="cv-training-card">
               <div className="cv-training-top">
-                <h4 className="cv-training-name">Mobile Application Development (Flutter &amp; Dart)</h4>
-                <span className="cv-training-date">Aug 2023 – Nov 2023</span>
+                <h4 className="cv-training-name">Mobile Application Development (Flutter)</h4>
+                <span className="cv-training-date">08/2023 – 11/2023</span>
               </div>
               <p className="cv-training-desc">
-                <strong>Atova Technology</strong> — Intensive hands-on training covering Clean Architecture, reactive state management (GetX/Provider), Dio REST networking, local caching, and native Android/iOS platform channels.
+                <strong>Atova Technology</strong> — Professional training in cross-platform mobile development, clean architecture, reactive state management, and production API integration.
               </p>
             </div>
           </section>
 
-          {/* Section: Languages & Strengths Grid */}
+          {/* Section: Programming Languages & Languages */}
           <section className="cv-section">
             <div className="cv-split-grid">
               <div className="cv-split-card">
-                <h3 className="cv-split-title">Languages</h3>
-                <ul className="cv-check-list">
-                  <li><strong>Bangla:</strong> Native fluency</li>
-                  <li><strong>English:</strong> Professional working proficiency</li>
-                </ul>
+                <h3 className="cv-split-title">Programming Languages</h3>
+                <p className="cv-tech-pills">
+                  <span className="tech-pill">Dart</span>
+                  <span className="tech-pill">Go</span>
+                  <span className="tech-pill">PHP</span>
+                  <span className="tech-pill">Python</span>
+                </p>
               </div>
               <div className="cv-split-card">
-                <h3 className="cv-split-title">Core Architectural Strengths</h3>
+                <h3 className="cv-split-title">Languages</h3>
                 <ul className="cv-check-list">
-                  <li>Full-Stack system architecture &amp; high concurrency (Goroutines)</li>
-                  <li>Production Clean Architecture &amp; maintainable modular codebases</li>
-                  <li>Low-latency WebSocket &amp; WebRTC media streaming systems</li>
+                  <li><strong>Bangla:</strong> Native</li>
+                  <li><strong>English:</strong> Fluent</li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          {/* Section: Core Strengths */}
+          <section className="cv-section">
+            <h2 className="cv-sec-title">
+              <span className="cv-sec-bar" />
+              <span>Core Strengths</span>
+            </h2>
+            <div className="cv-summary-card">
+              <ul className="cv-bullet-list">
+                <li>Full Stack System Development</li>
+                <li>Real time Application Engineering (WebSocket, Socket.io)</li>
+                <li>Clean &amp; Scalable Architecture</li>
+                <li>API Design &amp; Integration</li>
+                <li>Problem Solving &amp; Performance Optimization</li>
+              </ul>
             </div>
           </section>
 
           {/* Bottom Footer on Web */}
           <footer className="cv-bottom-footer">
-            <p>MD. Emon Miah — Full Stack Mobile &amp; Backend Developer · Uttara, Dhaka, Bangladesh</p>
-            <p className="cv-foot-sub">Updated for 2026 Production Standards</p>
+            <p>MD. Emon Miah — Full Stack Mobile &amp; Backend Developer · Uttara-15, Dhaka, Bangladesh</p>
+            <p className="cv-foot-sub">Updated Professional Curriculum Vitae</p>
           </footer>
         </article>
       </main>

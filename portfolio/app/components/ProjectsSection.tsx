@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import {
   Search,
   ExternalLink,
@@ -84,23 +84,61 @@ function ProjectScreenshotCarousel({
   status: string;
 }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(1);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
   const images = screenshots && screenshots.length > 0 ? screenshots : [fallbackImage];
   const currentUrl = images[activeIdx] || fallbackImage;
   const meta = getScreenshotMeta(currentUrl, category);
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActiveIdx((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-  };
+  // Reset loading shimmer whenever image changes
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [currentUrl]);
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrev = useCallback((e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setSlideDirection(-1);
+    setActiveIdx((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  }, [images.length]);
+
+  const handleNext = useCallback((e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setSlideDirection(1);
     setActiveIdx((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-  };
+  }, [images.length]);
 
   const handleDotClick = (e: React.MouseEvent, idx: number) => {
     e.stopPropagation();
+    setSlideDirection(idx > activeIdx ? 1 : -1);
     setActiveIdx(idx);
+  };
+
+  const slideVariants: Variants = {
+    enter: (dir: number) => ({
+      x: shouldReduceMotion ? 0 : dir > 0 ? 32 : -32,
+      opacity: 0,
+      scale: shouldReduceMotion ? 1 : 0.985,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.15 : 0.32,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+    exit: (dir: number) => ({
+      x: shouldReduceMotion ? 0 : dir > 0 ? -32 : 32,
+      opacity: 0,
+      scale: shouldReduceMotion ? 1 : 0.985,
+      transition: {
+        duration: shouldReduceMotion ? 0.1 : 0.22,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    }),
   };
 
   return (
@@ -131,23 +169,49 @@ function ProjectScreenshotCarousel({
         </button>
       </div>
 
-      {/* Main Image Stage */}
-      <div
+      {/* Main Image Stage with Drag / Swipe and Smooth Slide Transition */}
+      <motion.div
         className="carousel-image-stage"
         onClick={() => onOpenLightbox(activeIdx)}
-        title="Click to view full-resolution screenshot"
+        title="Click to view full-resolution screenshot (Drag or swipe to browse)"
+        drag={images.length > 1 ? "x" : false}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={(_, info) => {
+          if (info.offset.x < -35 || info.velocity.x < -300) {
+            handleNext();
+          } else if (info.offset.x > 35 || info.velocity.x > 300) {
+            handlePrev();
+          }
+        }}
       >
-        <Image
-          key={currentUrl}
-          src={currentUrl}
-          alt={`${projectName} - ${meta.label} (${activeIdx + 1}/${images.length})`}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-          className="project-image"
-          priority={priority}
-        />
-        <div className="project-media-overlay" />
-      </div>
+        {/* Skeleton Shimmer Loading Placeholder */}
+        {!isLoaded && <div className="carousel-skeleton-shimmer" aria-hidden="true" />}
+
+        <AnimatePresence custom={slideDirection} mode="wait">
+          <motion.div
+            key={currentUrl}
+            custom={slideDirection}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="carousel-slide-motion-wrapper"
+          >
+            <Image
+              src={currentUrl}
+              alt={`${projectName} - ${meta.label} (${activeIdx + 1}/${images.length})`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+              className={`project-image ${meta.icon === "store" ? "project-image-contain" : "project-image-cover"}`}
+              priority={priority}
+              onLoad={() => setIsLoaded(true)}
+              style={{ opacity: isLoaded ? 1 : 0 }}
+            />
+            <div className="project-media-overlay" />
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
 
       {/* Multi-Screen Navigation Arrows */}
       {images.length > 1 && (
@@ -307,7 +371,7 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
                 <Globe size={15} aria-hidden="true" />
               )}
               <span>{project.category === "Mobile App" ? "Google Play Store" : "Verified Live System"}</span>
-              <ExternalLink size={13} aria-hidden="true" />
+              <ExternalLink size={13} className="btn-arrow-icon" aria-hidden="true" />
             </a>
           )}
 
@@ -318,8 +382,8 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
               rel="noopener noreferrer"
               className="proj-btn proj-btn-secondary"
             >
-              <ExternalLink size={14} aria-hidden="true" />
               <span>{project.secondaryUrl.label}</span>
+              <ExternalLink size={14} className="btn-arrow-icon" aria-hidden="true" />
             </a>
           )}
 
@@ -333,6 +397,7 @@ function ProjectCardContent({ project, index, total, layout = "card", onOpenLigh
             >
               <Github size={15} aria-hidden="true" />
               <span>Public GitHub</span>
+              <ExternalLink size={12} className="btn-arrow-icon" aria-hidden="true" />
             </a>
           )}
         </div>
@@ -506,7 +571,12 @@ export default function ProjectsSection() {
       <div className="section-container">
         {/* Section Header */}
         <div className="projects-header-row">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
             <p className="section-eyebrow">
               <span className="eyebrow-dot" aria-hidden="true" />
               Verified Production &amp; Commercial Systems
@@ -517,7 +587,7 @@ export default function ProjectsSection() {
             <p className="section-subtitle">
               Audited production platforms, enterprise ERPs, live streaming media engines, and high-concurrency microservices.
             </p>
-          </div>
+          </motion.div>
 
           {/* View Mode Toggle: Card Swapper vs Grid */}
           <div className="view-mode-toggle" role="group" aria-label="View mode toggle">
@@ -561,7 +631,14 @@ export default function ProjectsSection() {
                     setCurrentIndex(0);
                   }}
                 >
-                  {cat}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeCategoryPill"
+                      className="category-tab-active-indicator"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  )}
+                  <span className="category-tab-label">{cat}</span>
                 </button>
               );
             })}
@@ -661,7 +738,14 @@ export default function ProjectsSection() {
             </button>
           </div>
         ) : viewMode === "card" ? (
-          <div className="card-system-stage" onWheel={handleDeckWheel}>
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="card-system-stage"
+            onWheel={handleDeckWheel}
+          >
             {/* Quick Card Thumb Selector */}
             <div className="card-deck-selector-row" role="tablist" aria-label="Jump directly to project card">
               {filteredProjects.map((p, idx) => {
@@ -744,18 +828,31 @@ export default function ProjectsSection() {
                 <span>Buttons or Mouse Wheel to Swap Cards</span>
               </span>
             </div>
-          </div>
+          </motion.div>
         ) : (
           <div className="projects-grid-container">
             {filteredProjects.map((project, idx) => (
-              <ProjectCardContent
+              <motion.div
                 key={project.id}
-                project={project}
-                index={idx}
-                total={filteredProjects.length}
-                layout="grid"
-                onOpenLightbox={(payload) => setLightbox(payload)}
-              />
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  duration: 0.55,
+                  delay: Math.min(idx * 0.08, 0.4),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                layout
+                className="grid-card-motion-wrapper"
+              >
+                <ProjectCardContent
+                  project={project}
+                  index={idx}
+                  total={filteredProjects.length}
+                  layout="grid"
+                  onOpenLightbox={(payload) => setLightbox(payload)}
+                />
+              </motion.div>
             ))}
           </div>
         )}

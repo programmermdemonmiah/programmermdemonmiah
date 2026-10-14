@@ -1,159 +1,227 @@
 # MD. EMON MIAH
 ### Full Stack Mobile & Backend Developer
-**Flutter (GetX / Provider) · Go (Gin) · PHP (Laravel) · Python (Django) · Real-Time WebSockets**
+**contact.mdemonmiah@gmail.com** · **+8801405665854 / +8801568147387**  
+**[linkedin.com/in/MdEmonMiah](https://linkedin.com/in/MdEmonMiah)** · **[github.com/programmermdemonmiah](https://github.com/programmermdemonmiah)**
 
 ---
 
-### 📞 Contact & Profiles
-- **Phone:** [+8801405665854](tel:+8801405665854) / [+8801568147387](tel:+8801568147387)
-- **Email:** [contact.mdemonmiah@gmail.com](mailto:contact.mdemonmiah@gmail.com)
-- **Location:** Uttara, Dhaka, Bangladesh
-- **Portfolio:** [programmermdemonmiah.vercel.app](https://programmermdemonmiah.vercel.app)
-- **GitHub:** [github.com/programmermdemonmiah](https://github.com/programmermdemonmiah)
-- **LinkedIn:** [linkedin.com/in/MdEmonMiah](https://www.linkedin.com/in/MdEmonMiah)
+## Professional Summary
+Full Stack Engineer specializing in high performance Flutter applications and scalable backend systems. Proven experience in designing real time architectures using WebSocket, building fintech, healthcare, live streaming and e-commerce platforms. Strong focus on clean architecture, modular code and production ready system design.
 
 ---
 
-## 🎯 Executive Summary
-Senior Full Stack Engineer with proven track record architecting high-performance cross-platform Flutter applications and scalable backend microservices. Deep expertise designing low-latency real-time systems using WebSockets in Go (Gin), modular REST APIs in Laravel and Django, and complex enterprise ERPs. Specialist in Clean Architecture, reactive state management (GetX / Provider), payment gateway integrations (bKash, Nagad, Stripe, SSLCommerz), and high-throughput concurrent workflows with 99.9% uptime.
+## Professional Experience
+
+### **Senior Software Engineer (Mobile & Backend)** — N. I. Biz Soft
+*12/2023 – 05/2026 | Uttara-15, Dhaka*
+- Leading full stack system development (Flutter + Backend)
+- Designing scalable real time architectures (WebSocket based systems)
+- Backend development in Go (Gin), Laravel & Django
+- System design for fintech, e-commerce and live streaming platforms
+- API architecture design & performance optimization
+- Mentoring junior developers and reviewing code structure
+- Handling production level deployments and system stability
+
+### **Mid-Level Mobile & Backend Developer** — N. I. Biz Soft
+- Worked as Full Stack (Flutter + Backend) developer
+- Built scalable API integrations with backend systems
+- Implemented real time features using WebSocket (Go)
+- Payment gateway integration (bKash, Nagad, SSLCommerz)
+- Improved app performance & backend response time
+- Collaborated on system level architecture decisions
+
+### **App Developer** — N. I. Biz Soft
+- Flutter mobile application development (Android & iOS)
+- REST API integration and UI implementation
+- State management (GetX / Provider)
+- Bug fixing, feature implementation and app maintenance
+- Clean architecture basics (Service + Repository pattern)
 
 ---
 
-## 💼 Professional Experience
+## Education
 
-### **N. I. Biz Soft** — Uttara-15, Dhaka, Bangladesh
-*Dec 2023 – May 2026 (2.5+ Years Full-Time)*
-
-#### **Senior Software Engineer (Mobile & Backend)** *(May 2025 – May 2026)*
-- Spearheaded full-stack engineering across multi-platform Flutter apps and microservice backend systems.
-- Engineered scalable real-time architectures using WebSockets in Go and live video/audio pipelines (Zego Cloud).
-- Designed and optimized RESTful API architectures in Go (Gin), Laravel, and Django with connection pooling.
-- Led technical code reviews, guided clean architectural standards, and oversaw CI/CD production deployments.
-- Architected high-throughput concurrency models utilizing Go routines for live room streaming and viewer presence.
-
-#### **Mid-Level Mobile & Backend Developer** *(Apr 2024 – Apr 2025)*
-- Built and optimized full-stack systems bridging cross-platform mobile clients with relational database backends.
-- Integrated multi-channel payment gateways including bKash, Nagad, Stripe, and SSLCommerz with webhook verification.
-- Implemented real-time bi-directional messaging, order status feeds, and rider GPS location tracking.
-- Significantly reduced app cold-start latencies and improved SQL query indexing for large product catalogs.
-
-#### **App Developer** *(Dec 2023 – Mar 2024)*
-- Developed production-ready cross-platform mobile applications for Android & iOS using Flutter and Dart.
-- Implemented clean state management architectures utilizing GetX (Reactive/DI) and Provider patterns.
-- Integrated RESTful APIs using Dio and HTTP client with structured interceptors, error handling, and token refresh.
-- Built custom responsive UI layouts matching Figma prototypes with high visual fidelity and smooth 60fps animations.
+- **BSC in CSE**, Uttara University — *Running / Enrolled*
+- **Diploma in Engineering**, Sylhet Polytechnic Institute — *CGPA: 3.68 / 4.00*
+- **HSC**, M.A.H.K Bhashani Degree College — *GPA: 4.33 / 5.00*
+- **SSC**, P.T.M High School — *GPA: 4.33 / 5.00*
 
 ---
 
-## 🛠️ Technical Skills & Core Competencies
+## Technical Skills
 
-| Domain | Technologies & Frameworks |
-|---|---|
-| **Mobile App Development** | Flutter, Dart, Clean Architecture, MVC, MVVM, Dio, SQLite (Sqflite), SharedPreferences, 60fps Animations |
-| **State Management** | GetX (Advanced: Reactive State, Dependency Injection, Route Management), Provider, Riverpod |
-| **Backend Frameworks** | Go (Gin Framework, Concurrency, Goroutines), PHP (Laravel — MVC, Repository, Blade), Python (Django, Flask) |
-| **Databases & Storage** | PostgreSQL (PgSQL), MySQL (Relational Schema Design, Indexing & Query Tuning), SQLite (Sqflite), Firebase (Firestore, Realtime DB) |
-| **Real-Time & Media** | WebSockets, Socket.IO, Zego Cloud WebRTC (Audio & Video Streaming), Real-time Chat & Event Dispatching |
-| **Payments & Security** | bKash, Nagad, Stripe, PayPal, SSLCommerz, JWT, OAuth 2.0, OTP Authentication, Role-Based Access (RBAC) |
-| **DevOps & Tooling** | VS Code, Android Studio, Xcode, Git, GitHub Actions, Postman, Linux Terminal, Docker (Basics) |
+### Mobile App Development (Flutter)
+- Cross platform app development (Android & iOS)
+- Clean Architecture (Layered, Scalable, Maintainable)
+- MVC, MVVM design patterns
+- API Integration (REST, Dio, HTTP)
+- Performance optimization & reusable components
+
+### State Management (Flutter)
+- **GetX (Advanced):** Reactive state management, Dependency Injection, Route management
+- **Provider (Advanced):** Scalable state handling, App-wide state management
+- **Riverpod (Mid Level):** Scalable state handling, Big project and multi state handling
+
+### Local Storage (Flutter)
+- **SQLite (Sqflite):** Structured relational local database, Complex query handling, Data persistence with schema design
+- **SharedPreferences:** Key value storage, Lightweight data persistence (token, settings)
+
+### Backend Development
+- **Go (Golang) – Gin Framework:** REST API development, WebSocket (real time system), Middleware, routing, error handling, Concurrent system design
+- **PHP (Laravel):** MVC architecture, Repository architecture, REST API development, Authentication & authorization, ERP & E-commerce system, Blade, Ajax
+- **Python:** Django (backend & API & Template Based), Flask
+
+### Database Systems
+- **MySQL & PostgreSQL (PgSQL):** Relational database design, query optimization & indexing
+- **Firebase:** Firestore / Realtime Database
+
+### System Design & Integration
+- Real time systems (WebSocket, Socket.io)
+- Payment gateway integration: bKash, Nagad, Stripe, PayPal, SSLCommerz
+- OTP & token based authentication
+- API security & performance optimization
+
+### Tools & Environment
+VS Code, Android Studio, Xcode, Git, Postman, Docker (Basic)
 
 ---
 
-## 🚀 Key Commercial & Production Projects
+## Key Projects
 
-### 1. **Live Streaming Mobile Platform**
-- **Live App:** [Google Play Store](https://play.google.com/store/apps/details?id=com.swish.app)
-- **Platform:** Flutter Mobile App + Go (Golang) Microservice Backend
-- **Role:** Full Stack Engineer (Flutter + Go Microservices)
-- **Architecture:** Separate Go microservices (API Server + Core Backend), WebSocket real-time pipelines, and Goroutine concurrency.
-- **Key Achievements:**
-  - Engineered real-time audio and video live streaming with host approval room join/leave workflow.
-  - Integrated VIP instant-join privileges, virtual gift economy system, and live rankings with animated entries.
-  - Handled high-throughput viewer concurrency utilizing Go routines, event dispatchers, and stateful memory caches.
+### 1. **Live Streaming Platform**
+- **Live URL:** [Google Play Store](https://play.google.com/store/apps/details?id=com.swish.app)
+- **Platform:** Flutter App + Go Backend (Microservices Architecture)
+- **System Architecture:**
+  - Separate Go based microservices (API Server + Streaming Core Backend)
+  - WebSocket based real time communication system
+  - Scalable event driven architecture for live interactions
+- **Core Features:**
+  - Real time audio/video live streaming
+  - Live room join/leave system
+  - Host controlled join request approval system
+  - VIP instant join & premium access system
+  - Gift sending & virtual economy system
+  - Live ranking system with entry animations
+  - Viewer tracking in real time
+  - High performance concurrency handling (Go routines)
+- **Role:** Full Stack Engineer (Flutter + Go Microservice Backend)
 
 ---
 
-### 2. **LA’AM Enterprise Garments ERP System**
+### 2. **LA’AM ERP System, Enterprise Resource Planning System**
 - **Live System:** [LA'AM Portal](https://erpecom.deepverselab.com/login)
-- **Platform:** Web Platform (Laravel + MySQL) + WordPress API Pipeline
+- **Platform:** Web System + Backend
+- **Core Modules:**
+  - Employee Management System (Role based access control)
+  - Team based role & permission system
+  - Incentive system per employee & per product
+  - Courier integration system
+  - Auto courier status tracking system
+  - Shipping system (weight based calculation)
+  - Inventory management system
+  - Accounting module (income, expense, profit/loss)
+  - Wallet system for employees
+  - Reporting dashboard (full business analytics)
+- **Integration Systems:**
+  - WordPress plugin integration (order sync)
+  - WordPress order → direct ERP pipeline
+  - Real time order & inventory sync
 - **Role:** System Architect & Backend Developer
-- **Architecture:** Laravel MVC engine with direct WordPress order sync, inventory webhooks, and courier tracking pipelines.
-- **Key Achievements:**
-  - Multi-tier employee Role-Based Access Control (RBAC), team permissions, and incentive calculation rules.
-  - Courier auto-tracking with dynamic weight-based shipping calculation and real-time inventory ledger.
-  - Complete accounting module (income, expense, profit/loss balance sheets) and employee internal wallet system.
 
 ---
 
-### 3. **Xovalley — Multi Vendor E-Commerce Platform**
+### 3. **Xovalley – Multi Vendor E-commerce Platform**
 - **Live Web:** [xovalley.com](https://xovalley.com)
-- **Live App:** [Google Play Store](https://play.google.com/store/apps/details?id=com.xovalley.user_app)
-- **Platform:** Web (React.js) + 3 Flutter Mobile Apps + Laravel REST API
+- **Mobile App:** [Google Play Store](https://play.google.com/store/apps/details?id=com.xovalley.user_app)
+- **Platform:** Web + Mobile + Admin + Delivery System Backend
+  - Laravel (API + Core Business Logic)
+  - React.js (Web Frontend)
+  - Flutter (Customer App, Seller App, Delivery Man App)
+- **Features:**
+  - Multi vendor marketplace system
+  - Product, cart, order management
+  - Delivery tracking system
+  - Affiliate marketing system
+  - Commission & payout system
+  - Payment gateway integration
 - **Role:** Full Stack Engineer (Laravel + Flutter + System Design)
-- **Architecture:** Unified Laravel API backend powering customer, vendor, and rider Flutter apps with live delivery tracking.
-- **Key Achievements:**
-  - Multi-vendor marketplace cataloging, seller commissions, and automated vendor payout ledger.
-  - Customer App, Seller App, and Delivery Man App with live Google Maps rider GPS location updates.
-  - Integrated multi-channel payment gateway verification (bKash, Nagad, debit/credit cards) with webhook logs.
 
 ---
 
-### 4. **ARACO Healthcare Ecosystem**
+### 4. **ARACO Healthcare System, Healthcare Ecosystem**
 - **Live Web:** [araco.com.bd](https://araco.com.bd)
-- **Platform:** Flutter App (GetX) + Django Web Admin + Zego Cloud
+- **Platform:** Flutter App + Web System
+- **Backend:** Django + Template based Admin Panel
+- **Mobile App Features (Flutter + GetX):**
+  - Online pharmacy system (medicine order + prescription upload)
+  - Doctor appointment & telemedicine system
+  - Video/audio calling (Zego Cloud integration)
+  - Lab test booking system
+  - Caregiver booking system
+  - Health package subscription system
+- **Healthcare Workflow:**
+  - Patient → Doctor appointment → Video consultation → E-prescription
+  - Lab technician home collection system → digital report delivery
+  - Health package auto doctor assignment system
+- **Admin System:**
+  - Role based access control (RBAC)
+  - POS system
+  - Inventory management
+  - Invoice generation
+  - Staff & doctor management system
 - **Role:** Full Stack Engineer (Flutter + Django + System Design)
-- **Architecture:** GetX client state architecture connected to Zego Cloud WebRTC pipelines and Django administration backend.
-- **Key Achievements:**
-  - Online pharmacy with digital prescription upload, order fulfillment, and automatic customer dispatch.
-  - Doctor appointment scheduling with encrypted video/audio consultations powered by Zego Cloud WebRTC.
-  - Clinical lab test home sample collection booking, automated report delivery, and clinic admin POS billing.
 
 ---
 
-### 5. **Propeta — Real Estate Discovery Platform**
-- **Platform:** Flutter Mobile Application + Django REST API Backend
-- **Role:** Full Stack Engineer (Flutter + Django + System Design)
-- **Architecture:** Layered Service-Repository architecture with geocoded spatial indexing and local offline state caching.
-- **Key Achievements:**
-  - Multi-criteria spatial search & filtering (price brackets, geo-coordinates, property types, and verified amenities).
-  - Agent portfolio verification, in-app client inquiry routing, and high-resolution photo gallery viewer.
+### 5. **Propeta – Real Estate Platform**
+- **Platform:** Flutter App + API Backend
+- **Features:**
+  - Property listing system
+  - Property search & filtering
+  - Agent based listing system
+  - API driven architecture
+  - MVC based backend structure
+- **Role:** Mobile App Developer
 
 ---
 
-### 6. **CashMart — Digital Banking & Mobile Wallet**
-- **Platform:** Flutter Mobile Application + Django (Python) Backend
-- **Role:** Backend Engineer (Django API) & Mobile Developer
-- **Architecture:** Secure cryptographic ledger with multi-factor OTP validation and QR code transaction verification.
-- **Key Achievements:**
-  - Instant peer-to-peer balance transfers, QR code cashout at agent outlets, and exportable PDF statements.
-  - Tiered deposit rewards, profit-sharing calculation rules, and strict audit-trail security logging.
+### 6. **CashMart – Digital Banking + E-commerce System**
+- **Platform:** Flutter App
+- **Backend:** Django (Python)
+- **Core Banking Features:**
+  - Send money system
+  - Cashout via QR system
+  - Transaction history with export (PDF)
+  - OTP based authentication
+  - Wallet system
+- **E-commerce + Finance Hybrid:**
+  - Product purchase system
+  - Profit sharing system (purchase based earning logic)
+  - MLM style deposit & reward system
+  - Balance + commission tracking system
+- **Role:** Backend Engineer (Django API Development)
 
 ---
 
-## 🎓 Education & Academic Background
-
-| Degree / Certificate | Institution | Status / Grade | Year |
-|---|---|---|---|
-| **BSc in Computer Science & Engineering (CSE)** | Uttara University, Dhaka | Enrolled / In Progress | Running |
-| **Diploma in Engineering** | Sylhet Polytechnic Institute, Sylhet | Completed (CGPA: 3.68 / 4.00) | Graduated |
-| **Higher Secondary Certificate (HSC)** | M.A.H.K Bhashani Degree College | Completed (GPA: 4.33 / 5.00) | Graduated |
-| **Secondary School Certificate (SSC)** | P.T.M High School | Completed (GPA: 4.33 / 5.00) | Graduated |
+## Training
+- **Mobile Application Development (Flutter)**, Atova Technology *(08/2023 – 11/2023)*
 
 ---
 
-## 📜 Professional Training & Certifications
-
-- **Mobile Application Development (Flutter & Dart)** — Atova Technology *(Aug 2023 – Nov 2023)*
-  - Intensive hands-on training in Clean Architecture, reactive state management, API networking, and native platform integration.
+## Programming Languages
+Dart, Go, PHP, Python
 
 ---
 
-## 🌐 Languages & Core Strengths
+## Languages
+- **Bangla:** Native
+- **English:** Fluent
 
-- **Bangla:** Native Fluency
-- **English:** Professional Working Proficiency
-- **Core Strengths:**
-  - Full-Stack system architecture & high concurrency (Goroutines)
-  - Production Clean Architecture & maintainable modular codebases
-  - Low-latency WebSocket & WebRTC media streaming systems
-  - End-to-end payment gateway integrations with automated webhook verification
+---
+
+## Core Strengths
+- Full Stack System Development
+- Real time Application Engineering (WebSocket, Socket.io)
+- Clean & Scalable Architecture
+- API Design & Integration
+- Problem Solving & Performance Optimization
