@@ -200,3 +200,7 @@ h2 em{font-style:normal;color:#FF8790}
 .art-orange{background:radial-gradient(ellipse at 50% 110%,#651523,#291015 60%,#09090B)}
 .art-orange .project-number,.art-orange .project-art-label{color:#FFD4D8}
 @media(max-width:700px){.project-art{height:190px}}
+
+.project-catalog-links{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:28px;padding:18px 0;border-top:1px solid #302126}
+.project-catalog-links a{font-size:10px;font-weight:700;color:#FF8790}
+.project-catalog-links a:hover{color:#FFF0F1}
