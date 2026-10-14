@@ -7,8 +7,6 @@ import { motion } from "framer-motion";
 import { A11y, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import {
   ArrowUpRight,
   Code2,
