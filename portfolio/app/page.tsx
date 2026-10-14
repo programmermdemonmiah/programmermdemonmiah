@@ -358,8 +358,22 @@ export default function Home() {
   const seekingRef = useRef(false);
   const previousXRef = useRef<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [projectFilter, setProjectFilter] = useState("All");
+  const [projectSearch, setProjectSearch] = useState("");
   const [actionsVisible, setActionsVisible] = useState(false);
   const { displayed, done } = useTypewriter(heroMessage);
+  const projectFilters = ["All", "Mobile", "Web", "Commerce", "AI & Tools", "Realtime"];
+  const filteredProjects = projects.filter((project) => {
+    const searchable = `${project.name} ${project.category} ${project.summary} ${project.stack.join(" ")}`.toLowerCase();
+    if (projectSearch.trim() && !searchable.includes(projectSearch.trim().toLowerCase())) return false;
+    if (projectFilter === "All") return true;
+    if (projectFilter === "Mobile") return /flutter|mobile|dart|webview|customer app/.test(searchable);
+    if (projectFilter === "Web") return /web app|django|next\.js|react|html|css|php|website|web development|portfolio/.test(searchable);
+    if (projectFilter === "Commerce") return /commerce|e-commerce|shop|shopping|store|ecom|wholesale|fashion/.test(searchable);
+    if (projectFilter === "AI & Tools") return /ai|image|photo|utility|calculator|calorie|python/.test(searchable);
+    if (projectFilter === "Realtime") return /realtime|real-time|livekit|websocket|streaming|chat|messaging|socket/.test(searchable);
+    return true;
+  });
   useEffect(() => {
     const timer = setTimeout(() => setActionsVisible(true), 400);
     const video = videoRef.current;
@@ -454,7 +468,12 @@ export default function Home() {
     </section>
 
     <section className="work-section" id="work"><div className="container"><div className="section-head"><div><div className="section-label"><span>02</span><span className="label-line" /> SELECTED WORK</div><h2>Different domains.<br /><em>Thoughtful engineering.</em></h2></div><p>Explore production products, client work, and smaller experiments across mobile, web, ecommerce, AI utilities, and backend development.</p></div>
-      <div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}>
+      <div className="project-tools" aria-label="Filter projects">
+        <div className="project-filter-list">{projectFilters.map(filter => <button type="button" key={filter} className={"project-filter" + (projectFilter === filter ? " is-active" : "")} onClick={() => setProjectFilter(filter)} aria-pressed={projectFilter === filter}>{filter}</button>)}</div>
+        <label className="project-search"><span className="sr-only">Search projects</span><span aria-hidden="true">⌕</span><input type="search" value={projectSearch} onChange={event => setProjectSearch(event.target.value)} placeholder="Search projects or technology…" /></label>
+        <p className="project-results-count">Showing <strong>{filteredProjects.length}</strong> of {projects.length} projects</p>
+      </div>
+      <div className="projects-grid">{filteredProjects.map(project => <article className="project-card" key={project.number}>
         <a className={'project-art art-' + project.tone} href={project.liveUrl || "#contact"} target={project.liveUrl ? "_blank" : undefined} rel={project.liveUrl ? "noreferrer" : undefined} aria-label={project.liveUrl ? 'Open ' + project.name : project.name + ' — private project'}>
           {project.screenshot ? <img className="project-screenshot" src={project.screenshot} alt={project.name + ' live website screenshot'} loading="lazy" /> : <div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}
           <span className="project-number">{project.number} / {String(projects.length).padStart(2, "0")}</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
@@ -462,6 +481,7 @@ export default function Home() {
         <div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="project-links">{project.liveUrl ? <a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel}<Arrow /></a> : <span className="private-project-label">Private / no public demo</span>}</div>
         </div></article>)}</div>
+      {filteredProjects.length === 0 && <p className="no-project-results">No projects match that search. Try another name or technology.</p>}
       <div className="project-catalog-links"><a href="https://play.google.com/store/apps/dev?id=6275384212045783558" target="_blank" rel="noreferrer">Explore more DeepVerse Lab apps <Arrow /></a><a href="https://play.google.com/store/apps/developer?id=NIBIZ+SOFT" target="_blank" rel="noreferrer">Explore NIBIZ SOFT published apps <Arrow /></a></div>
       <p className="project-footnote">Live products link to their website or official store listing; additional public repositories link directly to source. Private client and internal projects are listed without fabricated demos.</p>
     </div></section>
