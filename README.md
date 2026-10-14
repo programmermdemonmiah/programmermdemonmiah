@@ -101,10 +101,14 @@ I enjoy taking a product from **idea → architecture → development → deploy
 ### 📊 GitHub Contributions
 
 <!-- CONTRIBUTION_STATS:START -->
-_Contribution statistics are being set up. No estimated or public-only stats are shown here._
+| Period | GitHub-counted commits | Pull requests | Issues | **Total contributions** |
+|---|---:|---:|---:|---:|
+| Last 365 days | _Pending first authenticated update_ | — | — | **Pending** |
+| Current calendar year | _Pending first authenticated update_ | — | — | **Pending** |
+| Previous calendar year | _Pending first authenticated update_ | — | — | **Pending** |
 <!-- CONTRIBUTION_STATS:END -->
 
-> **Accuracy note:** The summary above will be generated from GitHub's authenticated contribution data, so private contributions can be included without exposing private repository names or code.
+> **Private contributions are included** through GitHub's authenticated contribution data. Only aggregate counts are shown—no private repository names or code are exposed. The table updates automatically after the GH_TOKEN Actions secret is configured and the workflow runs.
 
 ### 🤝 Let's Connect
 
