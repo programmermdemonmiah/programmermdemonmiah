@@ -13,7 +13,7 @@
 
 ---
 
-## 00 — Personal Portfolio
+## Personal Portfolio
 
 Explore my portfolio website for an overview of my engineering focus, selected project areas, technical capabilities, and résumé.
 
