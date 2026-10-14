@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Mail, Github, Linkedin, ExternalLink, MapPin } from "lucide-react";
+import { ArrowDown, Mail, Github, Linkedin, ExternalLink, MapPin, Phone } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -20,7 +20,7 @@ export default function HeroSection() {
               <span className="status-dot-pulse" aria-hidden="true" />
               <span className="status-dot" aria-hidden="true" />
             </span>
-            <span className="status-text">Available for Senior Roles &amp; Contracts</span>
+            <span className="status-text">Available for Mobile &amp; Backend Engineering</span>
           </div>
 
           {/* Heading */}
@@ -30,26 +30,26 @@ export default function HeroSection() {
               MD. Emon Miah<span className="accent-dot">.</span>
             </h1>
             <p className="hero-role">
-              Senior Software Engineer <span className="role-divider">/</span> Full Stack Mobile &amp; Backend
+              Full Stack Mobile &amp; Backend Developer
             </p>
           </div>
 
-          {/* Professional Summary */}
+          {/* Professional Summary from CV */}
           <p className="hero-summary">
-            Specialized in building high-performance <strong>Flutter</strong> mobile apps, resilient{" "}
-            <strong>Go</strong> backend microservices, and modern <strong>Next.js</strong> platforms. Focused on
-            clean system architecture, real-time protocols, and engineering products that reliably scale in production.
+            Specializing in high-performance <strong>Flutter</strong> applications and scalable backend systems.
+            Proven experience designing real-time architectures using <strong>WebSocket</strong>, building fintech,
+            healthcare, live streaming, and e-commerce platforms with <strong>Go</strong>, <strong>Laravel</strong>, and <strong>Python</strong>.
           </p>
 
           {/* Core Stack Pills */}
           <div className="hero-stack-tags" aria-label="Core Engineering Technologies">
             <span className="stack-tag stack-tag-highlight">Flutter &amp; Dart</span>
-            <span className="stack-tag stack-tag-highlight">Go (Golang)</span>
-            <span className="stack-tag">Next.js &amp; React</span>
-            <span className="stack-tag">PHP &amp; Laravel</span>
-            <span className="stack-tag">PostgreSQL</span>
-            <span className="stack-tag">Docker</span>
-            <span className="stack-tag">Realtime / WebSockets</span>
+            <span className="stack-tag stack-tag-highlight">Go (Gin)</span>
+            <span className="stack-tag stack-tag-highlight">PHP (Laravel)</span>
+            <span className="stack-tag">Python &amp; Django</span>
+            <span className="stack-tag">WebSocket Real-time</span>
+            <span className="stack-tag">MySQL &amp; Firebase</span>
+            <span className="stack-tag">Payment Gateways</span>
           </div>
 
           {/* CTA Actions */}
@@ -63,6 +63,14 @@ export default function HeroSection() {
               <span>Contact Me</span>
             </a>
             <a
+              href="tel:+8801405665854"
+              className="btn-icon"
+              aria-label="Call +8801405665854"
+              title="Call +8801405665854"
+            >
+              <Phone size={17} aria-hidden="true" />
+            </a>
+            <a
               href="https://github.com/programmermdemonmiah"
               target="_blank"
               rel="noopener noreferrer"
@@ -73,7 +81,7 @@ export default function HeroSection() {
               <Github size={18} aria-hidden="true" />
             </a>
             <a
-              href="https://www.linkedin.com/in/mdemonmiah"
+              href="https://www.linkedin.com/in/MdEmonMiah"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-icon"
@@ -113,7 +121,7 @@ export default function HeroSection() {
             <div className="profile-avatar-wrapper">
               <img
                 src="https://github.com/programmermdemonmiah.png"
-                alt="MD. Emon Miah - Senior Software Engineer"
+                alt="MD. Emon Miah - Full Stack Mobile & Backend Developer"
                 className="profile-avatar-img"
                 width={380}
                 height={380}
@@ -124,12 +132,12 @@ export default function HeroSection() {
               {/* Bottom Card Bar */}
               <div className="profile-overlay-info">
                 <div>
-                  <span className="profile-badge-small">FULL-STACK &amp; MOBILE</span>
+                  <span className="profile-badge-small">FLUTTER · GO · LARAVEL</span>
                   <p className="profile-caption-name">MD. Emon Miah</p>
                 </div>
                 <div className="profile-location">
                   <MapPin size={13} aria-hidden="true" />
-                  <span>Bangladesh</span>
+                  <span>Uttara, Dhaka</span>
                 </div>
               </div>
             </div>
@@ -137,8 +145,8 @@ export default function HeroSection() {
             {/* Frame Footer Details */}
             <div className="profile-card-footer">
               <div className="profile-metric">
-                <span className="metric-label">CORE FOCUS</span>
-                <span className="metric-val">Mobile · Backend · Systems</span>
+                <span className="metric-label">CURRENT ROLE</span>
+                <span className="metric-val">Senior Software Engineer</span>
               </div>
               <a
                 href="https://github.com/programmermdemonmiah"

@@ -11,21 +11,30 @@ import {
   Check,
   Copy,
   MapPin,
+  Phone,
   Clock,
 } from "lucide-react";
 
 export default function ContactSection() {
-  const [copied, setCopied] = useState(false);
-  const email = "contact.mdemonmiah@gmail.com";
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
-  const handleCopyEmail = async () => {
+  const email = "contact.mdemonmiah@gmail.com";
+  const primaryPhone = "+8801405665854";
+  const secondaryPhone = "+8801568147387";
+
+  const handleCopy = async (text: string, type: "email" | "phone") => {
     try {
-      await navigator.clipboard.writeText(email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
+      await navigator.clipboard.writeText(text);
+      if (type === "email") {
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2200);
+      } else {
+        setCopiedPhone(true);
+        setTimeout(() => setCopiedPhone(false), 2200);
+      }
     } catch {
-      // Fallback if clipboard API is restricted
-      setCopied(false);
+      // Fallback
     }
   };
 
@@ -48,40 +57,40 @@ export default function ContactSection() {
                 Let&apos;s Connect
               </p>
               <h2 className="contact-headline">
-                Have an ambitious project? <br />
+                Have a project or opening? <br />
                 <span>Let&apos;s build what&apos;s next.</span>
               </h2>
               <p className="contact-desc">
-                I am actively considering senior software engineering opportunities, architectural consulting,
-                and high-impact mobile &amp; backend projects. Let&apos;s discuss how I can contribute to your team.
+                Full Stack Mobile &amp; Backend Engineer open for senior software engineering opportunities,
+                architectural consulting, and full-stack Flutter &amp; Go/Laravel projects. Reach out via email or phone directly.
               </p>
 
               <div className="contact-meta-pills">
                 <div className="contact-meta-item">
                   <MapPin size={14} className="meta-icon" aria-hidden="true" />
-                  <span>Based in Bangladesh (UTC+6)</span>
+                  <span>Uttara, Dhaka, Bangladesh (UTC+6)</span>
                 </div>
                 <div className="contact-meta-item">
                   <Clock size={14} className="meta-icon" aria-hidden="true" />
-                  <span>Available for Remote &amp; Hybrid roles</span>
+                  <span>Available for Full-time, Remote, and Contract Roles</span>
                 </div>
               </div>
             </div>
 
             {/* Right Action Channels */}
             <div className="contact-channels">
-              {/* Primary Email Box */}
+              {/* Direct Email Box */}
               <div className="channel-box email-channel-box">
                 <div className="channel-box-header">
-                  <span className="channel-box-label">DIRECT EMAIL</span>
+                  <span className="channel-box-label">PRIMARY EMAIL</span>
                   <button
                     type="button"
-                    onClick={handleCopyEmail}
+                    onClick={() => handleCopy(email, "email")}
                     className="copy-email-btn"
                     title="Copy email to clipboard"
                     aria-label="Copy email address"
                   >
-                    {copied ? (
+                    {copiedEmail ? (
                       <>
                         <Check size={13} className="text-red" aria-hidden="true" />
                         <span className="text-red">Copied!</span>
@@ -99,9 +108,45 @@ export default function ContactSection() {
                 </a>
                 <a href={`mailto:${email}`} className="btn-primary contact-send-btn">
                   <Mail size={16} aria-hidden="true" />
-                  <span>Send an Email</span>
+                  <span>Send Direct Email</span>
                   <ArrowUpRight size={15} aria-hidden="true" />
                 </a>
+              </div>
+
+              {/* Direct Phone / WhatsApp Box */}
+              <div className="channel-box">
+                <div className="channel-box-header">
+                  <span className="channel-box-label">PHONE &amp; WHATSAPP</span>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(primaryPhone, "phone")}
+                    className="copy-email-btn"
+                    title="Copy phone to clipboard"
+                    aria-label="Copy phone number"
+                  >
+                    {copiedPhone ? (
+                      <>
+                        <Check size={13} className="text-red" aria-hidden="true" />
+                        <span className="text-red">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={13} aria-hidden="true" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                <div className="contact-phone-numbers">
+                  <a href={`tel:${primaryPhone}`} className="contact-phone-link">
+                    <Phone size={14} aria-hidden="true" />
+                    <span>{primaryPhone}</span>
+                  </a>
+                  <span className="phone-sep">/</span>
+                  <a href={`tel:${secondaryPhone}`} className="contact-phone-link">
+                    <span>{secondaryPhone}</span>
+                  </a>
+                </div>
               </div>
 
               {/* Quick Links Row */}
@@ -120,7 +165,7 @@ export default function ContactSection() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/mdemonmiah"
+                  href="https://www.linkedin.com/in/MdEmonMiah"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="channel-link-card"
@@ -153,10 +198,18 @@ export default function ContactSection() {
         <div className="sub-footer">
           <div className="footer-brand">
             <a href="#top" className="brand" aria-label="Return to top">
-              <span className="brand-badge">EM</span>
+              <div className="brand-avatar-box">
+                <img
+                  src="https://github.com/programmermdemonmiah.png"
+                  alt="MD. Emon Miah"
+                  className="brand-avatar-img"
+                  width={38}
+                  height={38}
+                />
+              </div>
               <span className="brand-meta">
                 <span className="brand-name">MD. EMON MIAH</span>
-                <span className="brand-title">Software Engineer</span>
+                <span className="brand-title">Full Stack Mobile &amp; Backend Developer</span>
               </span>
             </a>
             <p className="footer-copyright">

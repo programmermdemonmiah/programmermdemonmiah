@@ -67,10 +67,18 @@ export default function Navbar() {
     <header className={`site-header ${scrolled ? "site-header-scrolled" : ""}`}>
       <div className="nav-container">
         <a className="brand" href="#top" aria-label="MD. Emon Miah - Home">
-          <span className="brand-badge">EM</span>
+          <div className="brand-avatar-box">
+            <img
+              src="https://github.com/programmermdemonmiah.png"
+              alt="MD. Emon Miah"
+              className="brand-avatar-img"
+              width={38}
+              height={38}
+            />
+          </div>
           <span className="brand-meta">
             <span className="brand-name">MD. EMON MIAH</span>
-            <span className="brand-title">Senior Software Engineer</span>
+            <span className="brand-title">Full Stack Mobile &amp; Backend</span>
           </span>
         </a>
 

@@ -7,57 +7,57 @@ import {
   Layers,
   Radio,
   Database,
-  Container,
+  CreditCard,
 } from "lucide-react";
 
 const EXPERTISE_AREAS = [
   {
     number: "01",
-    title: "Mobile App Development",
+    title: "Mobile App Development (Flutter)",
     icon: Smartphone,
     description:
-      "Crafting responsive cross-platform iOS and Android applications with Flutter and Dart. Utilizing scalable state architectures (Riverpod, GetX, Provider) with reliable Dio API client integration.",
-    skills: ["Flutter", "Dart", "Riverpod", "GetX", "Dio", "Offline Storage", "State Management"],
+      "Cross-platform iOS and Android application engineering with Flutter and Dart. Implementing Clean Architecture (Layered, Scalable, Maintainable), MVC/MVVM patterns, and optimized REST/Dio integrations.",
+    skills: ["Flutter", "Dart", "Clean Architecture", "MVC / MVVM", "Dio & HTTP", "Performance Tuning"],
   },
   {
     number: "02",
-    title: "Backend & API Systems",
-    icon: Server,
+    title: "Flutter State Management & Storage",
+    icon: Layers,
     description:
-      "Designing resilient RESTful microservices and backend architectures using Go (Gin, GORM) and PHP (Laravel). Implementing clean service boundaries, authentication, and high-throughput data pipelines.",
-    skills: ["Go (Golang)", "Gin", "GORM", "PHP", "Laravel", "REST APIs", "Microservices"],
+      "Advanced state handling with GetX (Reactive, DI, Route management), Provider (scalable app-wide state), and Riverpod. Relational offline persistence with SQLite (Sqflite) and SharedPreferences.",
+    skills: ["GetX (Advanced)", "Provider (Advanced)", "Riverpod", "SQLite (Sqflite)", "SharedPreferences"],
   },
   {
     number: "03",
-    title: "Modern Web & Frontend",
-    icon: Layers,
+    title: "Go (Golang) — Gin Framework",
+    icon: Server,
     description:
-      "Engineering fast, responsive web products, customer portals, and admin management dashboards using Next.js, React, and TypeScript. Focused on semantic HTML, strong typography, and maintainable styles.",
-    skills: ["Next.js", "React", "TypeScript", "App Router", "JavaScript", "Tailored CSS"],
+      "High-throughput RESTful services and concurrent system design with Go and Gin. Designing low-latency WebSocket real-time hubs, custom middleware, error handling pipelines, and Goroutine concurrency.",
+    skills: ["Go (Golang)", "Gin Framework", "WebSockets", "Concurrency & Goroutines", "REST APIs", "Middleware"],
   },
   {
     number: "04",
-    title: "Real-time & Live Streaming",
-    icon: Radio,
+    title: "PHP (Laravel) & Python (Django)",
+    icon: Database,
     description:
-      "Building low-latency real-time communications including live chat, viewer presence, notifications, WebSocket pipelines, and video streaming integration using LiveKit and WebRTC.",
-    skills: ["WebSocket", "Socket.IO", "LiveKit", "WebRTC", "Event Pipelines", "Push Notifications"],
+      "Robust backend engineering across PHP (Laravel MVC, Repository architecture, Blade, Ajax) and Python (Django REST APIs, template admin panels, Flask) for fintech, ERP, and commerce.",
+    skills: ["PHP (Laravel)", "Repository Pattern", "Python (Django)", "Django REST", "Flask", "ERP Systems"],
   },
   {
     number: "05",
-    title: "Databases & Caching",
-    icon: Database,
+    title: "Real-time & Live Streaming Systems",
+    icon: Radio,
     description:
-      "Architecting relational data schemas, indexing, and high-performance querying in PostgreSQL and MySQL, backed by Redis in-memory caching for session management and low response latencies.",
-    skills: ["PostgreSQL", "MySQL", "Redis", "SQLite", "Firebase", "Query Optimization"],
+      "Architecting scalable event-driven communication protocols using WebSocket and Socket.IO. Experience in live audio/video streaming, host-approved room joins, VIP access, and real-time viewer tracking.",
+    skills: ["WebSocket", "Socket.IO", "Live Streaming", "Event Pipelines", "Viewer Presence", "Live Chat"],
   },
   {
     number: "06",
-    title: "DevOps & Infrastructure",
-    icon: Container,
+    title: "System Design & Payment Gateways",
+    icon: CreditCard,
     description:
-      "Standardizing containerized delivery using Docker and Docker Compose. Configuring Linux environments, Nginx reverse proxies, Git version control, and GitHub Actions CI/CD workflows.",
-    skills: ["Docker", "Linux", "Nginx", "GitHub Actions", "CI/CD", "Git Workflows"],
+      "End-to-end integration of regional and international payment gateways (bKash, Nagad, SSLCommerz, Stripe, PayPal). Token and OTP-based authentication, API security, and database optimization.",
+    skills: ["bKash & Nagad", "SSLCommerz", "Stripe & PayPal", "OTP & JWT Auth", "MySQL Optimization", "Firebase"],
   },
 ];
 
@@ -75,7 +75,7 @@ export default function ExpertiseSection() {
             Technical <span>expertise.</span>
           </h2>
           <p className="section-subtitle">
-            Core engineering competencies across mobile platforms, backend systems, and web architecture.
+            Core engineering competencies across mobile development, Go and Laravel backends, real-time protocols, and system design.
           </p>
         </div>
 
