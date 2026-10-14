@@ -69,10 +69,10 @@ I enjoy taking a product from **idea → architecture → development → deploy
 **Real-Time & Streaming**
 
 <p align="left">
-  <img src="https://img.shields.io/badge/Socket.IO-0d1117?style=for-the-badge&logo=socketdotio&logoColor=white" alt="Socket.IO" />
-  <img src="https://img.shields.io/badge/WebRTC-0d1117?style=for-the-badge&logo=webrtc&logoColor=white" alt="WebRTC" />
-  <img src="https://img.shields.io/badge/WebSocket-0d1117?style=for-the-badge&logo=socketdotio&logoColor=white" alt="WebSocket" />
-  <img src="https://img.shields.io/badge/LiveKit-0d1117?style=for-the-badge&logo=livekit&logoColor=white" alt="LiveKit" />
+  <img src="assets/realtime/socketio.svg" width="48" height="48" alt="Socket.IO" />
+  <img src="assets/realtime/webrtc.svg" width="48" height="48" alt="WebRTC" />
+  <img src="assets/realtime/websocket.svg" width="48" height="48" alt="WebSocket" />
+  <img src="assets/realtime/livekit.svg" width="48" height="48" alt="LiveKit" />
 </p>
 
 **Additional:** REST API · JWT · Gin · GORM
