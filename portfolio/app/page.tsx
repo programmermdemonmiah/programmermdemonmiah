@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import TechBar from "./components/TechBar";
 import AboutSection from "./components/AboutSection";
@@ -9,7 +8,6 @@ import ContactSection from "./components/ContactSection";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main id="top">
         <HeroSection />
         <TechBar />

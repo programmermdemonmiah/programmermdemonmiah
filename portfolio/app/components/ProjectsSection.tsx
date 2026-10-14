@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import {
   Search,
@@ -589,28 +590,39 @@ export default function ProjectsSection() {
             </p>
           </motion.div>
 
-          {/* View Mode Toggle: Card Swapper vs Grid */}
-          <div className="view-mode-toggle" role="group" aria-label="View mode toggle">
-            <button
-              type="button"
-              className={`view-mode-btn ${viewMode === "card" ? "view-mode-btn-active" : ""}`}
-              onClick={() => setViewMode("card")}
-              title="Upper & Bottom Card Deck Swapper"
-              aria-pressed={viewMode === "card"}
+          {/* Header Actions: View Mode Toggle & All Projects Link */}
+          <div className="projects-header-actions">
+            <div className="view-mode-toggle" role="group" aria-label="View mode toggle">
+              <button
+                type="button"
+                className={`view-mode-btn ${viewMode === "card" ? "view-mode-btn-active" : ""}`}
+                onClick={() => setViewMode("card")}
+                title="Upper & Bottom Card Deck Swapper"
+                aria-pressed={viewMode === "card"}
+              >
+                <CreditCard size={14} aria-hidden="true" />
+                <span>Card Swapper Deck</span>
+              </button>
+              <button
+                type="button"
+                className={`view-mode-btn ${viewMode === "grid" ? "view-mode-btn-active" : ""}`}
+                onClick={() => setViewMode("grid")}
+                title="Grid View"
+                aria-pressed={viewMode === "grid"}
+              >
+                <LayoutGrid size={14} aria-hidden="true" />
+                <span>Grid View</span>
+              </button>
+            </div>
+
+            <Link
+              href="/projects"
+              className="btn-outline-sm all-projects-badge-btn"
+              title="Explore all verified projects on dedicated page"
             >
-              <CreditCard size={14} aria-hidden="true" />
-              <span>Card Swapper Deck</span>
-            </button>
-            <button
-              type="button"
-              className={`view-mode-btn ${viewMode === "grid" ? "view-mode-btn-active" : ""}`}
-              onClick={() => setViewMode("grid")}
-              title="Grid View"
-              aria-pressed={viewMode === "grid"}
-            >
-              <LayoutGrid size={14} aria-hidden="true" />
-              <span>Grid View</span>
-            </button>
+              <span>All Projects</span>
+              <ExternalLink size={13} aria-hidden="true" />
+            </Link>
           </div>
         </div>
 
@@ -857,12 +869,23 @@ export default function ProjectsSection() {
           </div>
         )}
 
-        {/* Audit Verification Footnote */}
-        <div className="projects-audit-footnote">
-          <CheckCircle2 size={16} className="audit-check-icon" aria-hidden="true" />
-          <span>
-            Strict Repository Audit Enforced: Displaying exclusively verified, live production systems with verified HTTP 200 endpoints. Unverified experiments, forks, and non-disclosed private repositories are omitted.
-          </span>
+        {/* Project Verification Footnote & All Projects CTA */}
+        <div className="projects-bottom-cta-row">
+          <div className="projects-audit-footnote">
+            <CheckCircle2 size={16} className="audit-check-icon" aria-hidden="true" />
+            <span>
+              Production Verification Standard: Displaying exclusively verified, live production projects with active endpoints. Drafts and non-public work are omitted.
+            </span>
+          </div>
+
+          <Link
+            href="/projects"
+            className="btn-primary-sm projects-all-link-btn"
+            title="Explore all verified production projects on dedicated page"
+          >
+            <span>Explore All Projects ({VERIFIED_PROJECTS.length})</span>
+            <ExternalLink size={14} aria-hidden="true" />
+          </Link>
         </div>
       </div>
 

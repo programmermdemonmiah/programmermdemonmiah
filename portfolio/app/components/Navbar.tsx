@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Menu, X, ArrowUpRight, FileDown } from "lucide-react";
 
 const NAV_ITEMS = [
-  { label: "About", href: "#about" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Expertise", href: "/#expertise" },
+  { label: "Projects", href: "/#projects" },
+  { label: "All Projects", href: "/projects" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -64,9 +66,9 @@ export default function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className={`site-header ${scrolled ? "site-header-scrolled" : ""}`}>
+    <header className={`site-header no-print ${scrolled ? "site-header-scrolled" : ""}`}>
       <div className="nav-container">
-        <a className="brand" href="#top" aria-label="MD. Emon Miah - Home">
+        <Link className="brand" href="/" aria-label="MD. Emon Miah - Home">
           <div className="brand-avatar-box">
             <img
               src="https://github.com/programmermdemonmiah.png"
@@ -80,7 +82,7 @@ export default function Navbar() {
             <span className="brand-name">MD. EMON MIAH</span>
             <span className="brand-title">Full Stack Mobile &amp; Backend</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="desktop-nav" aria-label="Main Navigation">
@@ -105,14 +107,14 @@ export default function Navbar() {
 
         {/* Right Actions */}
         <div className="nav-actions">
-          <a
+          <Link
             className="btn-outline-sm cv-btn"
             href="/cv"
             title="View Professional Curriculum Vitae"
           >
             <FileDown size={14} aria-hidden="true" />
             <span>CV</span>
-          </a>
+          </Link>
           <a className="btn-primary-sm" href="#contact">
             <span>Get in Touch</span>
             <ArrowUpRight size={14} aria-hidden="true" />

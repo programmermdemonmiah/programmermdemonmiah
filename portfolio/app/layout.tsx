@@ -55,6 +55,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+import Navbar from "./components/Navbar";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -66,7 +68,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
