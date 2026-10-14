@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title: "MD. Emon Miah — Software Engineer", description: "Flutter, Go, Next.js, Laravel, realtime systems, and full-stack product engineering.", images: ["https://github.com/programmermdemonmiah.png?size=640"] },
   robots: { index: true, follow: true }
 };
-export const viewport: Viewport = { themeColor: "#090b0a", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#09090B", width: "device-width", initialScale: 1 };
 export default function RootLayout({children}:{children:React.ReactNode}) {
   return <html lang="en"><body>{children}</body></html>;
 }
