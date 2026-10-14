@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Smartphone, Code2, Layers3, Radio, Database, Github, Linkedin, Mail, Menu, X, Search } from "lucide-react";
-const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/121760927?v=4";
 type PortfolioProject = {
   number: string;
   name: string;
@@ -308,27 +307,24 @@ const DEVELOPER_MODEL_URL = "https://raw.githubusercontent.com/programmermdemonm
 
 function DeveloperModel() {
   const mountRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
-
+    let cancelled = false;
+    let objectUrl: string | null = null;
     let viewer: HTMLElement | null = null;
     const attachViewer = () => {
-      if (!mount.isConnected || viewer) return;
+      if (cancelled || !mount.isConnected || !objectUrl || viewer) return;
       viewer = document.createElement("model-viewer");
-      viewer.setAttribute("src", DEVELOPER_MODEL_URL);
+      viewer.setAttribute("src", objectUrl);
       viewer.setAttribute("alt", "Interactive 3D web developer character");
       viewer.setAttribute("camera-controls", "");
-      // Correct the imported character's pitch so it stands upright instead of facing the floor.
       viewer.setAttribute("orientation", "90deg 0deg 0deg");
       viewer.setAttribute("interaction-prompt", "none");
       viewer.setAttribute("shadow-intensity", "1");
       viewer.setAttribute("exposure", "1.05");
       viewer.setAttribute("environment-image", "neutral");
-      // Let model-viewer frame the full character automatically; avoid a low or clipped camera target.
       viewer.setAttribute("camera-orbit", "0deg 75deg auto");
-      viewer.removeAttribute("camera-target");
       viewer.setAttribute("field-of-view", "30deg");
       viewer.setAttribute("loading", "eager");
       viewer.style.width = "100%";
@@ -338,35 +334,35 @@ function DeveloperModel() {
       viewer.style.pointerEvents = "auto";
       mount.replaceChildren(viewer);
     };
-
-    if (customElements.get("model-viewer")) {
-      attachViewer();
-    } else {
-      let script = document.querySelector<HTMLScriptElement>("script[data-developer-model-viewer]");
-      if (!script) {
-        script = document.createElement("script");
-        script.type = "module";
-        script.src = "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
-        script.dataset.developerModelViewer = "true";
-        document.head.appendChild(script);
+    const loadLocalModel = async () => {
+      try {
+        const response = await fetch("/models/web_developer_character.glb.b64");
+        if (!response.ok) throw new Error("Local model asset unavailable");
+        const encoded = (await response.text()).trim();
+        const binary = atob(encoded);
+        const bytes = new Uint8Array(binary.length);
+        for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+        objectUrl = URL.createObjectURL(new Blob([bytes], { type: "model/gltf-binary" }));
+        await import("@google/model-viewer");
+        attachViewer();
+      } catch {
+        if (!cancelled) mount.innerHTML = '<div class="model-local-fallback"><span>EM</span><small>SOFTWARE ENGINEER</small></div>';
       }
-      if (customElements.get("model-viewer")) attachViewer();
-      else script.addEventListener("load", attachViewer, { once: true });
-    }
-
+    };
+    void loadLocalModel();
     return () => {
+      cancelled = true;
       mount.replaceChildren();
       viewer = null;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, []);
-
   return <div ref={mountRef} aria-label="Interactive 3D developer character" style={{ position: "relative", zIndex: 2, width: "100%", height: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center", pointerEvents: "auto" }} />;
 }
-
 export default function Home(){
 const [menuOpen,setMenuOpen]=useState(false);const [portraitTilt,setPortraitTilt]=useState({x:0,y:0});const [projectFilter,setProjectFilter]=useState("All");const [projectSearch,setProjectSearch]=useState("");const projectFilters=["All","Mobile","Web","Commerce","AI & Tools","Realtime"];
 const filteredProjects=projects.filter(project=>{const searchable=(project.name+" "+project.category+" "+project.summary+" "+project.stack.join(" ")).toLowerCase();if(projectSearch.trim()&&!searchable.includes(projectSearch.trim().toLowerCase()))return false;if(projectFilter==="All")return true;if(projectFilter==="Mobile")return /flutter|mobile|dart|webview|customer app/.test(searchable);if(projectFilter==="Web")return /web app|django|next\.js|react|html|css|php|website|web development|portfolio|real estate/.test(searchable);if(projectFilter==="Commerce")return /commerce|e-commerce|shop|shopping|store|ecom|wholesale|fashion/.test(searchable);if(projectFilter==="AI & Tools")return /ai|image|photo|utility|calculator|calorie|python/.test(searchable);if(projectFilter==="Realtime")return /realtime|real-time|livekit|websocket|streaming|chat|messaging|socket/.test(searchable);return true});
-return <main className="portfolio-redesign"><section className="creator-hero" id="top"><nav className="creator-nav"><a href="#top" className="creator-wordmark"><span className="creator-mark"><img src={GITHUB_AVATAR} alt=""/></span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><div className="creator-nav-links"><a href="#about">About</a><a href="#services">Expertise</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div><ContactButton compact/><button className="creator-menu-toggle" aria-label="Toggle navigation" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X/>:<Menu/>}</button></nav>{menuOpen&&<nav className="creator-mobile-menu"><a onClick={()=>setMenuOpen(false)} href="#about">About</a><a onClick={()=>setMenuOpen(false)} href="#services">Expertise</a><a onClick={()=>setMenuOpen(false)} href="#projects">Projects</a><a onClick={()=>setMenuOpen(false)} href="#contact">Contact</a></nav>}<div className="creator-hero-main"><FadeIn className="creator-hero-kicker"><span className="creator-live-dot"/> AVAILABLE FOR SELECT PROJECTS <span>— 2026</span></FadeIn><div className="creator-heading-wrap"><FadeIn delay={.15} y={40}><h1 className="hero-heading">BUILD<br className="hero-mobile-break"/> WITH <span>INTENT.</span></h1></FadeIn></div><div className="creator-portrait" style={{transform:"translateX(-50%) perspective(1100px) rotateX("+portraitTilt.x+"deg) rotateY("+portraitTilt.y+"deg)"}} onPointerMove={event=>{if(event.pointerType==="touch")return;const rect=event.currentTarget.getBoundingClientRect();const x=(event.clientX-rect.left)/rect.width-.5;const y=(event.clientY-rect.top)/rect.height-.5;setPortraitTilt({x:-(y*8),y:x*10})}} onPointerLeave={()=>setPortraitTilt({x:0,y:0})}><div className="portrait-orbit portrait-orbit-one"/><div className="portrait-orbit portrait-orbit-two"/><div className="portrait-glow"/><div className="portrait-depth-ring portrait-depth-ring-one"/><div className="portrait-depth-ring portrait-depth-ring-two"/><DeveloperModel /></div><div className="creator-hero-bottom"><FadeIn delay={.35} className="creator-intro-copy">A SOFTWARE ENGINEER DRIVEN BY CRAFTING USEFUL, RELIABLE AND UNFORGETTABLE DIGITAL PRODUCTS.</FadeIn><FadeIn delay={.5}><ContactButton/></FadeIn></div><div className="creator-hero-index"><span>FLUTTER / GO / NEXT.JS / LARAVEL</span><a href="#inspiration">SCROLL TO EXPLORE ↓</a></div></div><div className="hero-background-grid"/></section>
+return <main className="portfolio-redesign"><section className="creator-hero" id="top"><nav className="creator-nav"><a href="#top" className="creator-wordmark"><span className="creator-mark creator-mark-initials" aria-hidden="true">EM</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><div className="creator-nav-links"><a href="#about">About</a><a href="#services">Expertise</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div><ContactButton compact/><button className="creator-menu-toggle" aria-label="Toggle navigation" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X/>:<Menu/>}</button></nav>{menuOpen&&<nav className="creator-mobile-menu"><a onClick={()=>setMenuOpen(false)} href="#about">About</a><a onClick={()=>setMenuOpen(false)} href="#services">Expertise</a><a onClick={()=>setMenuOpen(false)} href="#projects">Projects</a><a onClick={()=>setMenuOpen(false)} href="#contact">Contact</a></nav>}<div className="creator-hero-main"><FadeIn className="creator-hero-kicker"><span className="creator-live-dot"/> AVAILABLE FOR SELECT PROJECTS <span>— 2026</span></FadeIn><div className="creator-heading-wrap"><FadeIn delay={.15} y={40}><h1 className="hero-heading">BUILD<br className="hero-mobile-break"/> WITH <span>INTENT.</span></h1></FadeIn></div><div className="creator-portrait" style={{transform:"translateX(-50%) perspective(1100px) rotateX("+portraitTilt.x+"deg) rotateY("+portraitTilt.y+"deg)"}} onPointerMove={event=>{if(event.pointerType==="touch")return;const rect=event.currentTarget.getBoundingClientRect();const x=(event.clientX-rect.left)/rect.width-.5;const y=(event.clientY-rect.top)/rect.height-.5;setPortraitTilt({x:-(y*8),y:x*10})}} onPointerLeave={()=>setPortraitTilt({x:0,y:0})}><div className="portrait-orbit portrait-orbit-one"/><div className="portrait-orbit portrait-orbit-two"/><div className="portrait-glow"/><div className="portrait-depth-ring portrait-depth-ring-one"/><div className="portrait-depth-ring portrait-depth-ring-two"/><DeveloperModel /></div><div className="creator-hero-bottom"><FadeIn delay={.35} className="creator-intro-copy">A SOFTWARE ENGINEER DRIVEN BY CRAFTING USEFUL, RELIABLE AND UNFORGETTABLE DIGITAL PRODUCTS.</FadeIn><FadeIn delay={.5}><ContactButton/></FadeIn></div><div className="creator-hero-index"><span>FLUTTER / GO / NEXT.JS / LARAVEL</span><a href="#inspiration">SCROLL TO EXPLORE ↓</a></div></div><div className="hero-background-grid"/></section>
 
 <section className="creator-about" id="about"><div className="creator-about-content"><FadeIn><p className="creator-section-eyebrow">A LITTLE ABOUT THE ENGINEER</p><h2 className="hero-heading">ABOUT ME</h2></FadeIn><FadeIn delay={.15}><p className="animated-text">I build mobile applications, robust backend systems, full-stack products, and real-time experiences. I enjoy working with teams that care about thoughtful architecture, practical problem-solving, and products that make a real difference. Let’s build something meaningful together!</p></FadeIn><FadeIn delay={.25}><div className="about-socials"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={17}/> GitHub <ArrowUpRight size={15}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn <ArrowUpRight size={15}/></a></div></FadeIn></div></section>
 <section className="creator-services" id="services"><FadeIn><p className="services-eyebrow">WHAT I DO / END-TO-END ENGINEERING</p><h2>SERVICES<span>.</span></h2></FadeIn><div className="services-list">{services.map((service,i)=>{const Icon=service.icon;return <FadeIn key={service.number} delay={i*.08} className="service-row"><span className="service-number">{service.number}</span><div className="service-copy"><h3>{service.title}</h3><p>{service.description}</p></div><Icon className="service-icon" strokeWidth={1.5}/></FadeIn>})}</div></section>
