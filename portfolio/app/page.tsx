@@ -1,7 +1,21 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Smartphone, Code2, Layers3, Radio, Database, Github, Linkedin, Mail, Menu, X, Search } from "lucide-react";
+
+import { useState } from "react";
+import {
+  ArrowUpRight,
+  Code2,
+  Github,
+  Layers3,
+  Linkedin,
+  Mail,
+  Menu,
+  Radio,
+  Search,
+  Smartphone,
+  X,
+  Database,
+} from "lucide-react";
+
 type PortfolioProject = {
   number: string;
   name: string;
@@ -13,6 +27,7 @@ type PortfolioProject = {
   liveLabel?: string | null;
   screenshot?: string | null;
 };
+
 const projects: PortfolioProject[] = [
   {
     number: "01", name: "Photo Background Remover", category: "IMAGE UTILITY",
@@ -263,24 +278,296 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   }
 ];
-const services = [{number:"01",title:"Mobile Engineering",description:"Cross-platform Flutter applications with polished user experiences, dependable state management, and maintainable architecture.",icon:Smartphone},{number:"02",title:"Backend Systems",description:"Secure, scalable APIs and business logic using Go, Gin, GORM, PHP, and Laravel.",icon:Code2},{number:"03",title:"Full-Stack Products",description:"End-to-end product development across Next.js interfaces, APIs, databases, and admin dashboards.",icon:Layers3},{number:"04",title:"Realtime Experiences",description:"Live streaming, chat, presence, notifications, WebSocket events, and LiveKit integrations.",icon:Radio},{number:"05",title:"Data & Delivery",description:"Practical database design, Dockerized services, Linux hosting, CI/CD workflows, and production deployment.",icon:Database}];
-const featured = [
-  {number:"01",name:"DeepVerse Lab",type:"SOFTWARE & PRODUCTS",description:"Explore my own GitHub repository and the projects I maintain under the DeepVerse Lab name.",tags:["Software Engineering","GitHub","Product Development"],url:"https://github.com/programmermdemonmiah/deepverselab",images:["/projects/deepverselab.svg","/projects/deepverselab.svg","/projects/deepverselab.svg"]},
-  {number:"02",name:"Ecom Matrix",type:"E-COMMERCE",description:"A commerce project repository for a multi-vendor shopping experience.",tags:["E-commerce","Flutter","Mobile"],url:"https://github.com/programmermdemonmiah/ecom_matrix",images:["/projects/ecom-matrix.svg","/projects/ecom-matrix.svg","/projects/ecom-matrix.svg"]},
-  {number:"03",name:"Photo Background Remover",type:"PYTHON · IMAGE UTILITY",description:"A practical Python utility for removing image backgrounds and exploring image-processing workflows.",tags:["Python","Image Processing","Utility"],url:"https://github.com/programmermdemonmiah/photo_bg_remover",images:["/projects/photo-bg-remover.svg","/projects/photo-bg-remover.svg","/projects/photo-bg-remover.svg"]}
-];
-function ContactButton({compact=false}:{compact?:boolean}) { return <a className={"contact-button"+(compact?" compact":"")} href="mailto:contact.mdemonmiah@gmail.com">Contact Me <ArrowUpRight size={16}/></a>; }
-function FadeIn({children,delay=0,y=25,className=""}:{children:React.ReactNode;delay?:number;y?:number;className?:string}) { return <motion.div className={className} initial={{opacity:0,y:y}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"0px 0px -50px 0px"}} transition={{duration:.7,delay:delay,ease:[.25,.1,.25,1]}}>{children}</motion.div>; }
-function ProjectStackCard({project,index}:{project:typeof featured[number];index:number}){const ref=useRef<HTMLDivElement>(null);const {scrollYProgress}=useScroll({target:ref,offset:["start end","start start"]});const scale=useTransform(scrollYProgress,[0,1],[1,1-(featured.length-1-index)*.03]);return <div ref={ref} className="project-stack-item" style={{top:96+index*28}}><motion.article className="featured-card" style={{scale}}><div className="featured-card-heading"><span className="featured-number">{project.number}</span><div className="featured-meta"><span>{project.type}</span><h3>{project.name}</h3><p>{project.description}</p><div className="tag-list">{project.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div><a className="live-project-button" href={project.url} target="_blank" rel="noreferrer">View Project <ArrowUpRight size={15}/></a></div><div className="featured-image-grid"><div className="featured-image-column"><img src={project.images[0]} alt={project.name+" preview one"} loading="lazy"/><img src={project.images[1]} alt={project.name+" preview two"} loading="lazy"/></div><div className="featured-image-main"><img src={project.images[2]} alt={project.name+" preview"} loading="lazy"/></div></div></motion.article></div>}
-function DeveloperPortrait() { return <img className="developer-static-image" src="https://github.com/programmermdemonmiah.png?size=1000" alt="MD. Emon Miah GitHub profile photo" loading="eager" fetchPriority="high" />; }
-export default function Home(){
-const [menuOpen,setMenuOpen]=useState(false);const [projectFilter,setProjectFilter]=useState("All");const [projectSearch,setProjectSearch]=useState("");const projectFilters=["All","Mobile","Web","Commerce","AI & Tools","Realtime"];
-const filteredProjects=projects.filter(project=>{const searchable=(project.name+" "+project.category+" "+project.summary+" "+project.stack.join(" ")).toLowerCase();if(projectSearch.trim()&&!searchable.includes(projectSearch.trim().toLowerCase()))return false;if(projectFilter==="All")return true;if(projectFilter==="Mobile")return /flutter|mobile|dart|webview|customer app/.test(searchable);if(projectFilter==="Web")return /web app|django|next\.js|react|html|css|php|website|web development|portfolio|real estate/.test(searchable);if(projectFilter==="Commerce")return /commerce|e-commerce|shop|shopping|store|ecom|wholesale|fashion/.test(searchable);if(projectFilter==="AI & Tools")return /ai|image|photo|utility|calculator|calorie|python/.test(searchable);if(projectFilter==="Realtime")return /realtime|real-time|livekit|websocket|streaming|chat|messaging|socket/.test(searchable);return true});
-return <main className="portfolio-redesign"><section className="creator-hero" id="top"><nav className="creator-nav"><a href="#top" className="creator-wordmark"><span className="creator-mark creator-mark-initials" aria-hidden="true">EM</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><div className="creator-nav-links"><a href="#about">About</a><a href="#services">Expertise</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div><ContactButton compact/><button className="creator-menu-toggle" aria-label="Toggle navigation" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X/>:<Menu/>}</button></nav>{menuOpen&&<nav className="creator-mobile-menu"><a onClick={()=>setMenuOpen(false)} href="#about">About</a><a onClick={()=>setMenuOpen(false)} href="#services">Expertise</a><a onClick={()=>setMenuOpen(false)} href="#projects">Projects</a><a onClick={()=>setMenuOpen(false)} href="#contact">Contact</a></nav>}<div className="creator-hero-main"><FadeIn className="creator-hero-kicker"><span className="creator-live-dot"/> AVAILABLE FOR SELECT PROJECTS <span>— 2026</span></FadeIn><div className="creator-heading-wrap"><FadeIn delay={.15} y={40}><h1 className="hero-heading">BUILD<br className="hero-mobile-break"/> WITH <span>INTENT.</span></h1></FadeIn></div><div className="creator-portrait"><DeveloperPortrait /></div><div className="creator-hero-bottom"><FadeIn delay={.35} className="creator-intro-copy">A SOFTWARE ENGINEER DRIVEN BY CRAFTING USEFUL, RELIABLE AND UNFORGETTABLE DIGITAL PRODUCTS.</FadeIn><FadeIn delay={.5}><ContactButton/></FadeIn></div><div className="creator-hero-index"><span>FLUTTER / GO / NEXT.JS / LARAVEL</span><a href="#inspiration">SCROLL TO EXPLORE ↓</a></div></div><div className="hero-background-grid"/></section>
 
-<section className="creator-about" id="about"><div className="creator-about-content"><FadeIn><p className="creator-section-eyebrow">A LITTLE ABOUT THE ENGINEER</p><h2 className="hero-heading">ABOUT ME</h2></FadeIn><FadeIn delay={.15}><p className="animated-text">I build mobile applications, robust backend systems, full-stack products, and real-time experiences. I enjoy working with teams that care about thoughtful architecture, practical problem-solving, and products that make a real difference. Let’s build something meaningful together!</p></FadeIn><FadeIn delay={.25}><div className="about-socials"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={17}/> GitHub <ArrowUpRight size={15}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn <ArrowUpRight size={15}/></a></div></FadeIn></div></section>
-<section className="creator-services" id="services"><FadeIn><p className="services-eyebrow">WHAT I DO / END-TO-END ENGINEERING</p><h2>SERVICES<span>.</span></h2></FadeIn><div className="services-list">{services.map((service,i)=>{const Icon=service.icon;return <FadeIn key={service.number} delay={i*.08} className="service-row"><span className="service-number">{service.number}</span><div className="service-copy"><h3>{service.title}</h3><p>{service.description}</p></div><Icon className="service-icon" strokeWidth={1.5}/></FadeIn>})}</div></section>
-<section className="creator-projects" id="projects"><div className="featured-projects-heading"><FadeIn><p className="creator-section-eyebrow">SELECTED WORK / BUILT WITH PURPOSE</p><h2 className="hero-heading">PROJECTS<span>.</span></h2></FadeIn><p>A closer look at a few products across mobile, web, commerce, and realtime engineering.</p></div><div className="project-stack">{featured.map((project,index)=><ProjectStackCard key={project.number} project={project} index={index}/>)}</div>
-<div className="all-projects-wrap"><div className="all-projects-heading"><div><p className="creator-section-eyebrow">MORE WORK / OPEN SOURCE</p><h3>THE FULL COLLECTION<span>.</span></h3></div><p>Every card links to a repository owned by my GitHub account.</p></div><div className="project-tools" aria-label="Filter projects"><div className="project-filter-list">{projectFilters.map(filter=><button type="button" key={filter} className={"project-filter"+(projectFilter===filter?" is-active":"")} onClick={()=>setProjectFilter(filter)} aria-pressed={projectFilter===filter}>{filter}</button>)}</div><label className="project-search"><Search size={16} strokeWidth={1.8} aria-hidden="true"/><span className="sr-only">Search projects</span><input type="search" value={projectSearch} onChange={event=>setProjectSearch(event.target.value)} placeholder="Search project or technology…"/></label><p className="project-results-count">Showing <strong>{filteredProjects.length}</strong> of {projects.length} projects</p></div><div className="projects-grid">{filteredProjects.map(project=><article className="project-card" key={project.number}><a className={"project-art art-"+project.tone} href={project.liveUrl||"#contact"} target={project.liveUrl?"_blank":undefined} rel={project.liveUrl?"noreferrer":undefined} aria-label={project.liveUrl?"Open "+project.name:project.name+" — private project"}>{project.screenshot?<img className="project-screenshot" src={project.screenshot} alt={project.name+" preview"} loading="lazy"/>:<div className="project-art-fallback"><span className="project-preview-number">{project.number}</span><strong>{project.name}</strong><small>{project.stack.join(" · ")}</small></div>}<span className="project-number">{project.number} / {String(projects.length).padStart(2,"0")}</span><span className="project-art-label">{project.category}</span><span className="art-arrow"><ArrowUpRight size={18} strokeWidth={1.8}/></span></a><div className="project-details"><div className="project-title-row"><h4>{project.name}</h4><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag=><span key={tag}>{tag}</span>)}</div><div className="project-links">{project.liveUrl?<a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel||"View project"} <ArrowUpRight size={14}/></a>:<span className="private-project-label">Private / no public demo</span>}</div></div></article>)}</div>{filteredProjects.length===0&&<p className="no-project-results">No projects match that search. Try another name or technology.</p>}</div></section>
-<footer className="creator-footer" id="contact"><div className="footer-glow"/><div className="creator-footer-inner"><FadeIn><p className="creator-section-eyebrow">HAVE A PRODUCT IN MIND?</p><h2>LET’S BUILD<br/><span>SOMETHING USEFUL.</span></h2><p className="footer-description">From the first screen to production, let’s make the engineering count.</p><ContactButton/></FadeIn><div className="footer-bottom"><a href="#top" className="creator-wordmark"><span className="creator-mark creator-mark-initials" aria-hidden="true">EM</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><span>© 2026 MD. EMON MIAH</span><div><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={18}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={18}/></a><a href="mailto:contact.mdemonmiah@gmail.com"><Mail size={18}/></a></div></div></div></footer></main>;
+const services = [
+  {
+    number: "01",
+    title: "Mobile applications",
+    description:
+      "Flutter applications with clear user flows, maintainable state management, and a focus on everyday usability.",
+    icon: Smartphone,
+  },
+  {
+    number: "02",
+    title: "Backend development",
+    description:
+      "APIs and business logic built with Go, Gin, GORM, PHP, and Laravel.",
+    icon: Code2,
+  },
+  {
+    number: "03",
+    title: "Web applications",
+    description:
+      "Next.js products, internal dashboards, and full-stack features connected to real backend services.",
+    icon: Layers3,
+  },
+  {
+    number: "04",
+    title: "Realtime features",
+    description:
+      "Chat, presence, notifications, WebSocket events, and live-streaming integrations.",
+    icon: Radio,
+  },
+  {
+    number: "05",
+    title: "Delivery and infrastructure",
+    description:
+      "Database design, Docker, Linux deployment, and CI/CD for applications in production.",
+    icon: Database,
+  },
+];
+
+const projectFilters = ["All", "Mobile", "Web", "Commerce", "AI & Tools", "Realtime"];
+
+function ContactLink({ compact = false }: { compact?: boolean }) {
+  return (
+    <a className={compact ? "button button-compact" : "button"} href="mailto:contact.mdemonmiah@gmail.com">
+      Contact me <ArrowUpRight size={16} aria-hidden="true" />
+    </a>
+  );
+}
+
+function ProjectCard({ project }: { project: PortfolioProject }) {
+  return (
+    <article className="project-card">
+      <a
+        className={`project-art art-${project.tone}`}
+        href={project.liveUrl || "#contact"}
+        target={project.liveUrl ? "_blank" : undefined}
+        rel={project.liveUrl ? "noreferrer" : undefined}
+        aria-label={project.liveUrl ? `Open ${project.name} on GitHub` : project.name}
+      >
+        {project.screenshot ? (
+          <img src={project.screenshot} alt={`${project.name} preview`} loading="lazy" />
+        ) : (
+          <div className="project-art-fallback">
+            <span>{project.number}</span>
+            <strong>{project.name}</strong>
+            <small>{project.stack.join(" · ")}</small>
+          </div>
+        )}
+        <span className="project-category">{project.category}</span>
+        <ArrowUpRight className="project-arrow" size={20} aria-hidden="true" />
+      </a>
+
+      <div className="project-details">
+        <div className="project-title-row">
+          <h3>{project.name}</h3>
+          <span>{project.number}</span>
+        </div>
+        <p>{project.summary}</p>
+        <ul className="tag-list" aria-label="Technologies">
+          {project.stack.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <div className="project-links">
+          {project.liveUrl ? (
+            <a href={project.liveUrl} target="_blank" rel="noreferrer">
+              {project.liveLabel || "View repository"} <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          ) : (
+            <span>Private repository</span>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [search, setSearch] = useState("");
+
+  const visibleProjects = projects.filter((project) => {
+    const text = [
+      project.name,
+      project.category,
+      project.summary,
+      ...project.stack,
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    if (search.trim() && !text.includes(search.trim().toLowerCase())) {
+      return false;
+    }
+
+    if (activeFilter === "All") return true;
+    if (activeFilter === "Mobile") return /flutter|mobile|dart|webview/.test(text);
+    if (activeFilter === "Web") return /web|django|next\.js|react|html|css|php|website|portfolio/.test(text);
+    if (activeFilter === "Commerce") return /commerce|shop|shopping|store|ecom|wholesale|fashion/.test(text);
+    if (activeFilter === "AI & Tools") return /ai|image|photo|utility|calculator|python/.test(text);
+    if (activeFilter === "Realtime") return /realtime|real-time|livekit|websocket|streaming|chat|messaging/.test(text);
+    return true;
+  });
+
+  return (
+    <main>
+      <header className="site-header" id="top">
+        <nav className="navigation" aria-label="Main navigation">
+          <a className="brand" href="#top">
+            <span className="brand-mark">EM</span>
+            <span>
+              MD. EMON MIAH
+              <small>Software Engineer</small>
+            </span>
+          </a>
+
+          <div className={menuOpen ? "nav-links nav-links-open" : "nav-links"}>
+            <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+            <a href="#services" onClick={() => setMenuOpen(false)}>Expertise</a>
+            <a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          </div>
+
+          <ContactLink compact />
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
+        </nav>
+
+        <div className="hero">
+          <div className="hero-copy">
+            <p className="eyebrow"><span /> Software engineer · Bangladesh</p>
+            <h1>Building software<br />that <span>works.</span></h1>
+            <p className="hero-description">
+              I build mobile apps, backend services, and web products—from the first screen to deployment.
+            </p>
+            <div className="hero-actions">
+              <a className="button" href="#projects">View my work <ArrowUpRight size={16} /></a>
+              <a className="text-link" href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">
+                <Github size={17} /> GitHub profile
+              </a>
+            </div>
+            <ul className="tech-list" aria-label="Main technologies">
+              <li>Flutter</li><li>Go</li><li>Next.js</li><li>Laravel</li>
+            </ul>
+          </div>
+          <div className="hero-photo-wrap">
+            <img
+              className="hero-photo"
+              src="https://github.com/programmermdemonmiah.png?size=800"
+              alt="MD. Emon Miah"
+              fetchPriority="high"
+            />
+            <p className="photo-caption">MD. Emon Miah <span>· Developer</span></p>
+          </div>
+        </div>
+      </header>
+
+      <section className="about section" id="about">
+        <div className="section-heading">
+          <p className="eyebrow">A little about me</p>
+          <h2>Engineering with<br /><span>purpose.</span></h2>
+        </div>
+        <div className="about-copy">
+          <p>
+            I work across mobile, backend, and web development. My day-to-day work includes building Flutter apps, designing APIs, connecting services, and making sure the pieces work well together.
+          </p>
+          <p>
+            I value readable code, sensible architecture, and solutions that are practical to maintain after release.
+          </p>
+          <div className="social-links">
+            <a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={17} /> GitHub <ArrowUpRight size={14} /></a>
+            <a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={17} /> LinkedIn <ArrowUpRight size={14} /></a>
+          </div>
+        </div>
+      </section>
+
+      <section className="services section" id="services">
+        <div className="section-heading">
+          <p className="eyebrow">What I work on</p>
+          <h2>Areas of <span>expertise.</span></h2>
+        </div>
+        <div className="service-list">
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <article className="service-row" key={service.number}>
+                <span className="service-number">{service.number}</span>
+                <div>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                </div>
+                <Icon size={23} strokeWidth={1.7} aria-hidden="true" />
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="projects section" id="projects">
+        <div className="section-heading projects-heading">
+          <div>
+            <p className="eyebrow">Selected repositories</p>
+            <h2>Things I’ve <span>built.</span></h2>
+          </div>
+          <a className="text-link" href="https://github.com/programmermdemonmiah?tab=repositories" target="_blank" rel="noreferrer">
+            All GitHub repositories <ArrowUpRight size={16} />
+          </a>
+        </div>
+
+        <div className="project-tools">
+          <div className="project-filters" aria-label="Filter projects">
+            {projectFilters.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                className={activeFilter === filter ? "filter-button active" : "filter-button"}
+                onClick={() => setActiveFilter(filter)}
+                aria-pressed={activeFilter === filter}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+          <label className="project-search">
+            <Search size={17} aria-hidden="true" />
+            <span className="sr-only">Search projects</span>
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Search projects or technologies"
+            />
+          </label>
+          <p className="results-count">{visibleProjects.length} of {projects.length} repositories</p>
+        </div>
+
+        {visibleProjects.length ? (
+          <div className="projects-grid">
+            {visibleProjects.map((project) => <ProjectCard key={project.number} project={project} />)}
+          </div>
+        ) : (
+          <p className="empty-state">No matching repositories. Try a different search.</p>
+        )}
+      </section>
+
+      <footer className="site-footer" id="contact">
+        <div className="footer-main">
+          <p className="eyebrow">Have a project in mind?</p>
+          <h2>Let’s talk about<br /><span>what’s next.</span></h2>
+          <p>For work enquiries, reach me by email.</p>
+          <ContactLink />
+        </div>
+        <div className="footer-bottom">
+          <a className="brand" href="#top"><span className="brand-mark">EM</span><span>MD. EMON MIAH<small>Software Engineer</small></span></a>
+          <span>© {new Date().getFullYear()} MD. Emon Miah</span>
+          <div className="footer-socials">
+            <a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={18} /></a>
+            <a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>
+            <a href="mailto:contact.mdemonmiah@gmail.com" aria-label="Email"><Mail size={18} /></a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
 }
