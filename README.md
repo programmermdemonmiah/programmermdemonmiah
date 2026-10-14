@@ -100,15 +100,13 @@ I enjoy taking a product from **idea → architecture → development → deploy
 
 ### 📊 GitHub Contributions
 
-<!-- CONTRIBUTION_STATS:START -->
-| Period | GitHub-counted commits | Pull requests | Issues | **Total contributions** |
-|---|---:|---:|---:|---:|
-| Last 365 days | _Pending first authenticated update_ | — | — | **Pending** |
-| Current calendar year | _Pending first authenticated update_ | — | — | **Pending** |
-| Previous calendar year | _Pending first authenticated update_ | — | — | **Pending** |
-<!-- CONTRIBUTION_STATS:END -->
+<p align="left">
+  <a href="https://github.com/programmermdemonmiah?tab=overview">
+    <img src="https://img.shields.io/badge/View-GitHub%20Contribution%20Graph-2ea44f?style=for-the-badge&logo=github&logoColor=white" alt="View GitHub contribution graph" />
+  </a>
+</p>
 
-> **Private contributions are included** through GitHub's authenticated contribution data. Only aggregate counts are shown—no private repository names or code are exposed. The table updates automatically after the GH_TOKEN Actions secret is configured and the workflow runs.
+> **Privacy-first:** No personal access token is required in this repository. GitHub's contribution graph can include private contributions when you enable **Settings → Profile → Include private contributions**. Private repository names and code remain hidden. A complete raw commit count across all private repositories cannot be calculated from a GitHub-hosted workflow without granting it repository access; I won't display guessed numbers as facts.
 
 ### 🤝 Let's Connect
 
