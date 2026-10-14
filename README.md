@@ -22,84 +22,70 @@ My day-to-day toolkit centers on **Flutter, Go, Next.js, React, and Laravel/PHP*
 
 ## 02 — Engineering Toolkit
 
-<p><sub>Core technologies, grouped by the kind of systems I build. Icon rows wrap naturally on narrow screens.</sub></p>
-
-<details open>
-  <summary><strong>📱 Mobile Engineering</strong></summary>
-  <p>
-    <img src="https://skillicons.dev/icons?i=flutter&theme=dark" height="42" alt="Flutter" />
-    <img src="https://skillicons.dev/icons?i=dart&theme=dark" height="42" alt="Dart" />
-    <img src="https://skillicons.dev/icons?i=androidstudio&theme=dark" height="42" alt="Android Studio" />
-    <img src="https://skillicons.dev/icons?i=apple&theme=dark" height="42" alt="Apple platforms" />
-    <br />
-    <sub>Flutter · Dart · GetX · Riverpod · Provider</sub>
-  </p>
-</details>
-
-<details open>
-  <summary><strong>🌐 Web & Frontend</strong></summary>
-  <p>
-    <img src="https://skillicons.dev/icons?i=nextjs&theme=dark" height="42" alt="Next.js" />
-    <img src="https://skillicons.dev/icons?i=react&theme=dark" height="42" alt="React" />
-    <img src="https://skillicons.dev/icons?i=ts&theme=dark" height="42" alt="TypeScript" />
-    <img src="https://skillicons.dev/icons?i=js&theme=dark" height="42" alt="JavaScript" />
-    <img src="https://skillicons.dev/icons?i=html&theme=dark" height="42" alt="HTML" />
-    <img src="https://skillicons.dev/icons?i=css&theme=dark" height="42" alt="CSS" />
-    <br />
-    <sub>Next.js · React · TypeScript · Responsive UI</sub>
-  </p>
-</details>
-
-<details open>
-  <summary><strong>⚙️ Backend & APIs</strong></summary>
-  <p>
-    <img src="https://skillicons.dev/icons?i=go&theme=dark" height="42" alt="Go" />
-    <img src="https://skillicons.dev/icons?i=php&theme=dark" height="42" alt="PHP" />
-    <img src="https://skillicons.dev/icons?i=laravel&theme=dark" height="42" alt="Laravel" />
-    <br />
-    <sub>Go · Gin · GORM · Laravel · REST APIs · JWT</sub>
-  </p>
-</details>
-
-<details open>
-  <summary><strong>🗄️ Databases & Caching</strong></summary>
-  <p>
-    <img src="https://skillicons.dev/icons?i=postgres&theme=dark" height="42" alt="PostgreSQL" />
-    <img src="https://skillicons.dev/icons?i=mysql&theme=dark" height="42" alt="MySQL" />
-    <img src="https://skillicons.dev/icons?i=redis&theme=dark" height="42" alt="Redis" />
-    <img src="https://skillicons.dev/icons?i=sqlite&theme=dark" height="42" alt="SQLite" />
-    <img src="https://skillicons.dev/icons?i=firebase&theme=dark" height="42" alt="Firebase" />
-    <br />
-    <sub>Relational data · Caching · Data persistence</sub>
-  </p>
-</details>
-
-<details open>
-  <summary><strong>📡 Real-Time & Streaming</strong></summary>
-  <p>
-    <img src="assets/realtime/socketio.svg" width="42" height="42" alt="Socket.IO" />
-    <img src="assets/realtime/webrtc.svg" width="42" height="42" alt="WebRTC" />
-    <img src="assets/realtime/websocket.svg" width="42" height="42" alt="WebSocket" />
-    <img src="assets/realtime/livekit.svg" width="42" height="42" alt="LiveKit" />
-    <br />
-    <sub>WebSocket · Socket.IO · WebRTC · LiveKit</sub>
-  </p>
-</details>
-
-<details open>
-  <summary><strong>🚢 DevOps & Developer Tools</strong></summary>
-  <p>
-    <img src="https://skillicons.dev/icons?i=docker&theme=dark" height="42" alt="Docker" />
-    <img src="https://skillicons.dev/icons?i=linux&theme=dark" height="42" alt="Linux" />
-    <img src="https://skillicons.dev/icons?i=nginx&theme=dark" height="42" alt="Nginx" />
-    <img src="https://skillicons.dev/icons?i=githubactions&theme=dark" height="42" alt="GitHub Actions" />
-    <img src="https://skillicons.dev/icons?i=git&theme=dark" height="42" alt="Git" />
-    <img src="https://skillicons.dev/icons?i=github&theme=dark" height="42" alt="GitHub" />
-    <img src="https://skillicons.dev/icons?i=postman&theme=dark" height="42" alt="Postman" />
-    <br />
-    <sub>Docker · Linux · Nginx · CI/CD · GitHub Actions</sub>
-  </p>
-</details>
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📱 Mobile Engineering</h3>
+      <p>
+        <img src="https://skillicons.dev/icons?i=flutter,dart,androidstudio,apple&theme=dark" alt="Flutter, Dart, Android Studio, Apple" />
+      </p>
+      <sub>Flutter · Dart · GetX · Riverpod · Provider</sub>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🌐 Web & Frontend</h3>
+      <p>
+        <img src="https://skillicons.dev/icons?i=nextjs,react,ts,js,html,css&theme=dark" alt="Next.js, React, TypeScript, JavaScript, HTML, CSS" />
+      </p>
+      <sub>Next.js · React · TypeScript · Responsive UI</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>⚙️ Backend & APIs</h3>
+      <p>
+        <img src="https://skillicons.dev/icons?i=go,php,laravel&theme=dark" alt="Go, PHP, Laravel" />
+      </p>
+      <sub>Go · Gin · GORM · Laravel · REST APIs · JWT</sub>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🗄️ Data & Messaging</h3>
+      <p>
+        <img src="https://skillicons.dev/icons?i=postgres,mysql,redis,sqlite,firebase&theme=dark" alt="PostgreSQL, MySQL, Redis, SQLite, Firebase" />
+      </p>
+      <sub>Relational data · Caching · Realtime events</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📡 Real-Time & Streaming</h3>
+      <p>
+        <img src="assets/realtime/socketio.svg" width="44" height="44" alt="Socket.IO" />
+        <img src="assets/realtime/webrtc.svg" width="44" height="44" alt="WebRTC" />
+        <img src="assets/realtime/websocket.svg" width="44" height="44" alt="WebSocket" />
+        <img src="assets/realtime/livekit.svg" width="44" height="44" alt="LiveKit" />
+      </p>
+      <sub>WebSocket · Socket.IO · WebRTC · LiveKit</sub>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🚢 Delivery & Infrastructure</h3>
+      <p>
+        <img src="https://skillicons.dev/icons?i=docker,linux,nginx,githubactions,git,github,postman&theme=dark" alt="Docker, Linux, Nginx, GitHub Actions, Git, GitHub, Postman" />
+      </p>
+      <sub>Docker · Linux · Nginx · CI/CD · GitHub Actions</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">
+      <h3>🏗️ Microservices & System Architecture</h3>
+      <p>
+        <img src="https://img.shields.io/badge/MICROSERVICES-0d1117?style=for-the-badge&logo=go&logoColor=00ADD8" alt="Microservices" />
+        <img src="https://img.shields.io/badge/SERVICE--BASED%20DESIGN-0d1117?style=for-the-badge&logo=docker&logoColor=2496ED" alt="Service-based design" />
+        <img src="https://img.shields.io/badge/API--FIRST%20SYSTEMS-0d1117?style=for-the-badge&logo=fastapi&logoColor=3fb950" alt="API-first systems" />
+      </p>
+      <sub>Service boundaries · API-driven communication · Dockerized services · Scalable backend architecture</sub>
+    </td>
+  </tr>
+</table>
 
 ## 03 — Systems I Like Building
 
