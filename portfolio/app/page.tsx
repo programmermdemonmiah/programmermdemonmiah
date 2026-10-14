@@ -1,82 +1,68 @@
 const projects = [
-  { id: "01", title: "SportsBD", type: "SPORTS · MOBILE + PLATFORM", description: "A connected sports experience with Flutter apps, Go APIs, realtime communication, notifications, and a web-based administration panel.", stack: ["Flutter", "Riverpod", "Go", "Next.js", "WebSocket"], accent: "lime", mark: "SB", metric: "01 / PLATFORM" },
-  { id: "02", title: "Live Streaming", type: "REALTIME · LIVE VIDEO", description: "Live rooms and event-driven streaming workflows with host approval, VIP and moderator access, viewer presence, chat, and device security.", stack: ["Flutter", "Go", "LiveKit", "WebRTC", "WebSocket"], accent: "violet", mark: "LIVE", metric: "02 / REALTIME" },
-  { id: "03", title: "Commerce Platforms", type: "FULL STACK · CUSTOMER + ADMIN", description: "Customer and admin journeys covering authentication, guest-to-account cart and wishlist merging, support chat, and containerized services.", stack: ["Next.js", "Go", "Laravel", "PostgreSQL", "Docker"], accent: "blue", mark: "SHOP", metric: "03 / COMMERCE" },
-  { id: "04", title: "ERP & Business Systems", type: "BUSINESS SOFTWARE · API INTEGRATION", description: "Laravel-powered ERP and ecommerce workflows with structured business data, API integrations, and maintainable backend features.", stack: ["PHP", "Laravel", "MySQL", "REST APIs"], accent: "amber", mark: "ERP", metric: "04 / OPERATIONS" },
-  { id: "05", title: "Mobile Product Engineering", type: "FLUTTER · DOMAIN-DRIVEN FEATURES", description: "Customer, healthcare, finance, and service applications built around practical state management, clear navigation, and API-driven interfaces.", stack: ["Flutter", "Dio", "GetX", "Riverpod", "MVC"], accent: "lime", mark: "APP", metric: "05 / MOBILE" },
-  { id: "06", title: "Delivery & Infrastructure", type: "DEVOPS · PRODUCTION WORKFLOWS", description: "Dockerized services, Linux hosting, reverse proxies, CI/CD automation, and deployment workflows designed to be repeatable and maintainable.", stack: ["Docker", "Linux", "Nginx", "GitHub Actions", "CI/CD"], accent: "blue", mark: "OPS", metric: "06 / DELIVERY" }
+  { number: "01", name: "SportsBD", category: "SPORTS PLATFORM", summary: "A connected sports product spanning Flutter apps, Go APIs, realtime communication, notifications, and a Next.js administration experience.", stack: ["Flutter", "Riverpod", "Go", "Next.js", "WebSocket"], tone: "green" },
+  { number: "02", name: "Live Streaming", category: "REALTIME & VIDEO", summary: "Live rooms and streaming workflows with host approvals, VIP and moderator access, viewer presence, chat, and device-level account security.", stack: ["Flutter", "Go", "LiveKit", "WebRTC", "WebSocket"], tone: "purple" },
+  { number: "03", name: "Commerce Platforms", category: "FULL-STACK COMMERCE", summary: "Customer and admin journeys with authentication, guest-to-account cart and wishlist merging, support chat, and containerized services.", stack: ["Next.js", "Go", "Laravel", "PostgreSQL", "Docker"], tone: "blue" },
+  { number: "04", name: "ERP & Business Systems", category: "BUSINESS SOFTWARE", summary: "Business workflows and ecommerce capabilities built around structured data, API integrations, and maintainable backend features.", stack: ["PHP", "Laravel", "MySQL", "REST APIs"], tone: "orange" },
+  { number: "05", name: "Mobile Product Engineering", category: "MOBILE APPLICATIONS", summary: "Customer, healthcare, finance, and service applications with considered navigation, practical state management, and API-driven interfaces.", stack: ["Flutter", "Dart", "Dio", "GetX", "Riverpod"], tone: "green" },
+  { number: "06", name: "Delivery & Infrastructure", category: "DEVOPS & DELIVERY", summary: "Dockerized services, Linux hosting, reverse proxies, CI/CD automation, and repeatable deployment workflows.", stack: ["Docker", "Linux", "Nginx", "GitHub Actions"], tone: "blue" }
 ];
-const toolkit = [
-  { title: "Mobile", detail: "Native-feeling product experiences", tags: ["Flutter", "Dart", "GetX", "Riverpod", "Provider", "Dio"] },
-  { title: "Web", detail: "Responsive web apps and dashboards", tags: ["Next.js", "React", "TypeScript", "JavaScript", "HTML", "CSS"] },
-  { title: "Backend", detail: "APIs, domain logic, and services", tags: ["Go", "Gin", "GORM", "PHP", "Laravel", "REST APIs", "MVC"] },
-  { title: "Data", detail: "Persistence, caching, and app services", tags: ["PostgreSQL", "MySQL", "Redis", "SQLite", "Firebase"] },
-  { title: "Realtime", detail: "Live interactions and presence", tags: ["WebSocket", "Socket.IO", "WebRTC", "LiveKit", "Chat"] },
-  { title: "Architecture & DevOps", detail: "Reliable delivery and operations", tags: ["Microservices", "Docker", "Linux", "Nginx", "CI/CD", "GitHub Actions", "Git"] }
-];
-const strengths = [
-  ["01", "Product-minded engineering", "I consider the user journey as carefully as the implementation behind it."],
-  ["02", "End-to-end ownership", "From Flutter screens and web interfaces to APIs, data models, and deployment."],
-  ["03", "Realtime by design", "Presence, chat, notifications, and live interactions built around event-driven behavior."],
-  ["04", "Maintainable systems", "Clear boundaries, practical architecture, and code that teammates can extend."]
+const capabilities = [
+  { number: "01", title: "Mobile development", text: "Cross-platform applications with Flutter, maintainable state, and thoughtful user flows.", tags: "Flutter · Dart · GetX · Riverpod · Dio" },
+  { number: "02", title: "Backend engineering", text: "Well-structured APIs, business logic, authentication, and service integrations.", tags: "Go · Gin · GORM · PHP · Laravel" },
+  { number: "03", title: "Web applications", text: "Responsive product interfaces and operational dashboards built for real workflows.", tags: "Next.js · React · TypeScript" },
+  { number: "04", title: "Realtime systems", text: "Live communication features with event-driven updates and presence workflows.", tags: "WebSocket · WebRTC · LiveKit · Socket.IO" },
+  { number: "05", title: "Data & integration", text: "Persistence, caching, and data exchange chosen to fit the application.", tags: "PostgreSQL · MySQL · Redis · SQLite · Firebase" },
+  { number: "06", title: "Production delivery", text: "Repeatable builds, containerized services, and deployment automation.", tags: "Docker · Linux · Nginx · CI/CD · Git" }
 ];
 function Arrow() { return <span aria-hidden="true" className="arrow">↗</span>; }
 export default function Home() {
-  return <main id="home">
-    <nav className="nav shell" aria-label="Main navigation">
-      <a className="brand" href="#home" aria-label="Emon Miah home"><span className="brand-mark">e.</span><span>EMON MIAH<span className="brand-sub">SOFTWARE ENGINEER</span></span></a>
-      <div className="nav-links"><a href="#about">About</a><a href="#work">Work</a><a href="#expertise">Expertise</a><a href="#stack">Toolkit</a></div>
-      <a className="nav-contact" href="mailto:contact.mdemonmiah@gmail.com">Let’s talk <Arrow /></a>
-    </nav>
+  return <main id="top">
+    <header className="site-header">
+      <nav className="nav container" aria-label="Main navigation">
+        <a className="wordmark" href="#top" aria-label="MD Emon Miah home"><span className="wordmark-icon">em.</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a>
+        <div className="nav-links"><a href="#about">About</a><a href="#work">Selected work</a><a href="#capabilities">Expertise</a></div>
+        <a className="nav-cta" href="mailto:contact.mdemonmiah@gmail.com">Get in touch <Arrow /></a>
+      </nav>
+    </header>
 
-    <section className="hero shell">
-      <div className="hero-copy">
-        <p className="eyebrow"><span className="status-dot" /> SENIOR SOFTWARE ENGINEER <span className="eyebrow-sep">/</span> BANGLADESH</p>
-        <h1>Thoughtful code.<br />Products that <em>matter.</em></h1>
-        <p className="hero-intro">I’m MD. Emon Miah. I build mobile apps, backend platforms, and full-stack products — connecting polished user experiences to dependable systems behind the scenes.</p>
-        <div className="hero-stack"><span>Flutter</span><i /> <span>Go</span><i /> <span>Next.js</span><i /> <span>Laravel</span><i /> <span>Realtime</span></div>
-        <div className="hero-actions"><a className="button button-primary" href="#work">Explore selected work <Arrow /></a><a className="button button-quiet" href="/cv.pdf" target="_blank" rel="noreferrer">View CV <Arrow /></a><a className="text-link" href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub profile <Arrow /></a></div>
-        <div className="hero-stats"><div><strong>Mobile</strong><span>Flutter products</span></div><div><strong>Backend</strong><span>Go · Laravel</span></div><div><strong>Full stack</strong><span>Web · Realtime · DevOps</span></div></div>
+    <section className="hero container">
+      <div className="hero-content">
+        <p className="eyebrow"><span className="availability-dot" /> SENIOR SOFTWARE ENGINEER <span className="eyebrow-divider">/</span> BANGLADESH</p>
+        <h1>Building useful products.<br /><span>Engineering what’s behind them.</span></h1>
+        <p className="hero-description">I’m MD. Emon Miah — a software engineer working across mobile, backend, and full-stack development. I turn complex requirements into dependable products, from the first interface to the services that power it.</p>
+        <div className="hero-actions"><a className="button button-primary" href="#work">Explore my work <Arrow /></a><a className="button button-secondary" href="/cv.pdf" target="_blank" rel="noreferrer">View résumé <span className="button-icon">↓</span></a></div>
+        <div className="hero-specialties"><span>Flutter</span><i /> <span>Go</span><i /> <span>Next.js</span><i /> <span>Laravel</span><i /> <span>Realtime systems</span></div>
       </div>
-      <div className="hero-visual">
-        <div className="visual-caption caption-top"><span>INDEPENDENT THINKING</span><b>01 — 06</b></div>
-        <div className="portrait-frame"><div className="portrait-glow" /><div className="portrait-outline" /><img className="portrait" src="https://github.com/programmermdemonmiah.png?size=800" alt="MD. Emon Miah GitHub profile photo" referrerPolicy="no-referrer" /><span className="portrait-index">EM / 2026</span></div>
-        <div className="floating-card card-code"><span className="mini-icon">{'{ }'}</span><span><b>Engineering</b><small>Mobile to backend</small></span><span className="tiny-arrow">↗</span></div>
-        <div className="floating-card card-live"><span className="live-pulse" /><span><b>Realtime systems</b><small>Connected experiences</small></span></div>
-        <div className="visual-caption caption-bottom"><span>BUILD · SHIP · IMPROVE</span><span>AVAILABLE FOR THE RIGHT CHALLENGE ↗</span></div>
-      </div>
-      <div className="hero-bottom-note"><span>01 / INTRODUCTION</span><a href="#about">SCROLL TO DISCOVER <span>↓</span></a></div>
+      <aside className="hero-profile" aria-label="Profile">
+        <div className="profile-topline"><span>PROFILE / 2026</span><span>01 — 06</span></div>
+        <div className="profile-photo-wrap"><div className="photo-backdrop" /><img src="https://github.com/programmermdemonmiah.png?size=640" alt="MD. Emon Miah" className="profile-photo" referrerPolicy="no-referrer" /></div>
+        <div className="profile-caption"><div><strong>MD. Emon Miah</strong><span>Mobile · Backend · Full stack</span></div><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer" aria-label="Open GitHub profile"><Arrow /></a></div>
+        <div className="profile-rule" />
+        <div className="profile-facts"><div><span>CORE FOCUS</span><strong>Product engineering</strong></div><div><span>FROM</span><strong>Dhaka, Bangladesh</strong></div></div>
+      </aside>
+      <div className="hero-index"><span>01 / INTRODUCTION</span><a href="#about">SCROLL TO EXPLORE ↓</a></div>
     </section>
 
-    <div className="marquee" aria-label="Areas of engineering"><div>{["MOBILE ENGINEERING", "BACKEND SYSTEMS", "REALTIME PRODUCTS", "FULL-STACK DELIVERY", "MICROSERVICES", "MOBILE ENGINEERING", "BACKEND SYSTEMS"].map((item, i) => <span key={i}>{item}<b>✳</b></span>)}</div></div>
+    <section className="intro-strip"><div className="container intro-strip-inner"><span>ENGINEERING ACROSS THE STACK</span><p>Mobile applications <b>·</b> Backend systems <b>·</b> Web platforms <b>·</b> Realtime experiences</p></div></section>
 
-    <section className="section shell about-section" id="about">
-      <div className="section-kicker"><span>02</span><i /> A LITTLE ABOUT ME</div>
-      <div className="about-layout"><h2>Bridging product<br />thinking with <em>engineering.</em></h2><div className="about-copy"><p>I work across the product stack: Flutter applications, Go and Laravel APIs, Next.js experiences, admin panels, and realtime systems. I care about how a feature feels to a user, how a service behaves under pressure, and how easily another developer can maintain it.</p><p>My work spans ecommerce, ERP, healthcare and finance apps, live streaming, chat, notifications, role-based administration, and Dockerized deployments. I aim for practical architecture, clear service boundaries, and reliable delivery.</p><div className="social-links"><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Download CV <Arrow /></a></div></div></div>
+    <section className="section container about-section" id="about">
+      <div className="section-label"><span>01</span><span className="label-line" /> ABOUT</div>
+      <div className="about-grid"><h2>Good software is more than code. <em>It’s how the pieces work together.</em></h2><div className="about-copy"><p>I work across the product stack: Flutter applications, Go and Laravel APIs, Next.js interfaces, administration panels, and realtime features. I care about the experience people use and the engineering decisions that keep it reliable.</p><p>My experience spans ecommerce, ERP, healthcare and finance applications, live streaming, chat, notifications, role-based administration, and Dockerized deployments. I value practical architecture, clear service boundaries, and maintainable code.</p><div className="social-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Download résumé <Arrow /></a></div></div></div>
     </section>
 
-    <section className="work-section" id="work"><div className="shell">
-      <div className="section-heading"><div><div className="section-kicker"><span>03</span><i /> SELECTED WORK</div><h2>Different challenges.<br /><em>One thoughtful approach.</em></h2></div><p>From user-facing mobile apps to the systems and tools that keep products running.</p></div>
-      <div className="project-grid">{projects.map(project => <article className={'project-card ' + project.accent} key={project.id}>
-        <div className="project-visual"><div className="project-visual-top"><span>{project.metric}</span><span>↗</span></div><div className="project-symbol">{project.mark}</div><div className="visual-lines"><i /><i /><i /></div><div className="visual-orbit orbit-one" /><div className="visual-orbit orbit-two" /><span className="visual-corner">{project.id}</span></div>
-        <div className="project-content"><p className="project-type">{project.type}</p><h3>{project.title}</h3><p className="project-description">{project.description}</p><div className="project-tags">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div></div>
-      </article>)}</div>
-      <p className="work-note">These summaries describe engineering areas and product work. Detailed public case studies can be added as they become available.</p>
+    <section className="work-section" id="work"><div className="container"><div className="section-head"><div><div className="section-label"><span>02</span><span className="label-line" /> SELECTED WORK</div><h2>Different domains.<br /><em>Thoughtful engineering.</em></h2></div><p>A selection of product areas and systems I’ve worked across, from customer-facing applications to backend infrastructure.</p></div>
+      <div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}><div className={'project-art art-' + project.tone}><span className="project-number">{project.number} / 06</span><span className="project-art-label">{project.category}</span><div className="art-shape"><span>{project.number}</span></div><span className="art-arrow">↗</span></div><div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div>
+      <p className="project-footnote">Project descriptions summarize areas of engineering work. Specific client details and private implementation code are not published here.</p>
     </div></section>
 
-    <section className="section shell expertise-section" id="expertise">
-      <div className="section-heading"><div><div className="section-kicker"><span>04</span><i /> HOW I WORK</div><h2>Beyond writing<br />code.</h2></div><p>Strong products need more than features. They need clear decisions, reliable systems, and care for the details.</p></div>
-      <div className="strength-grid">{strengths.map(item => <article key={item[0]}><span className="strength-number">{item[0]}</span><span className="strength-arrow">↗</span><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div>
-      <div className="engineering-band"><span className="band-icon">✳</span><div><b>From interface to infrastructure</b><p>API-first thinking · Clear service boundaries · Secure workflows · Production-minded delivery</p></div><span className="band-label">ENGINEERING PRINCIPLES</span></div>
+    <section className="section container capability-section" id="capabilities"><div className="section-head"><div><div className="section-label"><span>03</span><span className="label-line" /> EXPERTISE</div><h2>From first screen<br />to <em>production.</em></h2></div><p>The right tools matter. So do clear thinking, maintainable architecture, and attention to the people using the product.</p></div>
+      <div className="capability-grid">{capabilities.map(item => <article className="capability-card" key={item.number}><span className="cap-number">{item.number}</span><h3>{item.title}</h3><p>{item.text}</p><div className="cap-tags">{item.tags}</div></article>)}</div>
     </section>
 
-    <section className="toolkit-section" id="stack"><div className="shell">
-      <div className="section-heading"><div><div className="section-kicker"><span>05</span><i /> ENGINEERING TOOLKIT</div><h2>The tools behind<br />the <em>work.</em></h2></div><p>A practical technology toolkit for mobile, web, backend, data, and connected experiences.</p></div>
-      <div className="toolkit-grid">{toolkit.map((item, i) => <article className="toolkit-card" key={item.title}><div className="toolkit-card-head"><span>0{i + 1}</span><h3>{item.title}</h3><b>↗</b></div><p>{item.detail}</p><div className="tool-tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></article>)}</div>
-    </div></section>
+    <section className="approach-section"><div className="container approach-grid"><div><div className="section-label"><span>04</span><span className="label-line" /> APPROACH</div><h2>Build with clarity.<br /><em>Ship with care.</em></h2></div><div className="approach-list"><div><span>01</span><p><strong>Understand the problem</strong><small>Start with the product goal and real user needs.</small></p></div><div><span>02</span><p><strong>Design the system</strong><small>Choose clear boundaries and practical architecture.</small></p></div><div><span>03</span><p><strong>Build and verify</strong><small>Keep implementation understandable and testable.</small></p></div><div><span>04</span><p><strong>Deliver responsibly</strong><small>Make deployment and maintenance part of the work.</small></p></div></div></div></section>
 
-    <section className="contact-section"><div className="shell contact-inner"><div className="section-kicker"><span>06</span><i /> HAVE A PROJECT IN MIND?</div><h2>Let’s make something<br /><em>worth using.</em></h2><div className="contact-bottom"><p>Have a product idea, an engineering challenge, or a team that needs thoughtful execution? I’d love to hear what you’re building.</p><a className="button button-dark" href="mailto:contact.mdemonmiah@gmail.com">Start a conversation <Arrow /></a></div><span className="contact-watermark">EMON MIAH®</span></div></section>
+    <section className="contact-section" id="contact"><div className="container contact-inner"><div className="section-label"><span>05</span><span className="label-line" /> CONTACT</div><div className="contact-content"><h2>Have something<br />worth <em>building?</em></h2><div><p>If you’re building a product, improving a backend, or bringing a complex application to life, let’s talk about the engineering behind it.</p><a className="button button-light" href="mailto:contact.mdemonmiah@gmail.com">Start a conversation <Arrow /></a></div></div><div className="contact-meta"><span>MD. EMON MIAH · SOFTWARE ENGINEER</span><span>FLUTTER / GO / NEXT.JS / LARAVEL</span></div></div></section>
 
-    <footer className="footer shell"><a className="brand footer-brand" href="#home"><span className="brand-mark">e.</span><span>EMON MIAH<span className="brand-sub">SOFTWARE ENGINEER</span></span></a><span className="footer-note">Independent thinking. Intentional engineering.</span><div className="footer-links"><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">CV ↗</a><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="mailto:contact.mdemonmiah@gmail.com">Email ↗</a></div><span className="copyright">© 2026 MD. EMON MIAH</span></footer>
+    <footer className="footer"><div className="container footer-inner"><a className="wordmark footer-wordmark" href="#top"><span className="wordmark-icon">em.</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><p>Thoughtful engineering. Useful products.</p><div className="footer-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="mailto:contact.mdemonmiah@gmail.com">Email <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Résumé ↓</a></div><span className="copyright">© 2026 MD. EMON MIAH</span></div></footer>
   </main>;
 }
