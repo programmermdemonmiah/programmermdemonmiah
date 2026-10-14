@@ -104,7 +104,7 @@ I enjoy taking a product from **idea → architecture → development → deploy
 
 <p align="center">
   <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://ghchart.rshah.org/0e4429/programmermdemonmiah" alt="GitHub contribution activity heatmap for programmermdemonmiah" width="100%" />
+    <img src="https://ghchart.rshah.org/26a641/programmermdemonmiah" alt="GitHub contribution activity heatmap for programmermdemonmiah" width="100%" />
   </a>
 </p>
 
