@@ -20,6 +20,10 @@ import {
   Smartphone,
   Globe,
   Layers,
+  ShoppingBag,
+  Lock,
+  Server,
+  Code2,
   CheckCircle2,
   Maximize2,
   X,
@@ -57,10 +61,73 @@ function getScreenshotMeta(url: string, category: string) {
   return { label: "Live System Capture", icon: "desktop" as const };
 }
 
+function getHostname(url?: string): string {
+  if (!url) return "production-verified.system";
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url.replace(/^https?:\/\//, "").split("/")[0] || "production-verified.system";
+  }
+}
+
+function getCategoryTheme(category: string) {
+  switch (category) {
+    case "Mobile App":
+      return {
+        key: "mobile",
+        className: "card-theme-mobile",
+        accent: "#10B981",
+        border: "rgba(16, 185, 129, 0.4)",
+        badgeBg: "rgba(16, 185, 129, 0.14)",
+        badgeText: "#34D399",
+        badgeBorder: "rgba(16, 185, 129, 0.32)",
+        typeLabel: "Native Mobile App",
+        icon: Smartphone,
+      };
+    case "Enterprise SaaS":
+    case "Enterprise":
+      return {
+        key: "saas",
+        className: "card-theme-saas",
+        accent: "#A855F7",
+        border: "rgba(168, 85, 247, 0.4)",
+        badgeBg: "rgba(168, 85, 247, 0.14)",
+        badgeText: "#C084FC",
+        badgeBorder: "rgba(168, 85, 247, 0.32)",
+        typeLabel: "Enterprise Platform",
+        icon: Server,
+      };
+    case "E-Commerce":
+      return {
+        key: "ecom",
+        className: "card-theme-ecom",
+        accent: "#F59E0B",
+        border: "rgba(245, 158, 11, 0.4)",
+        badgeBg: "rgba(245, 158, 11, 0.14)",
+        badgeText: "#FBBF24",
+        badgeBorder: "rgba(245, 158, 11, 0.32)",
+        typeLabel: "Commerce Ecosystem",
+        icon: ShoppingBag,
+      };
+    default:
+      return {
+        key: "web",
+        className: "card-theme-web",
+        accent: "#38BDF8",
+        border: "rgba(56, 189, 248, 0.4)",
+        badgeBg: "rgba(56, 189, 248, 0.14)",
+        badgeText: "#38BDF8",
+        badgeBorder: "rgba(56, 189, 248, 0.32)",
+        typeLabel: "Full Stack Architecture",
+        icon: Code2,
+      };
+  }
+}
+
 /**
  * Vertical Swiper Project Card Component
- * Uses a side-by-side executive layout on desktop and stacked on mobile,
- * designed specifically for smooth bottom-to-top swiping.
+ * Uses a rhythmic alternating layout on desktop and stacked on mobile,
+ * designed with tailored device frames and distinct category palettes.
  */
 function VerticalSwiperCard({
   project,
@@ -82,9 +149,16 @@ function VerticalSwiperCard({
 
   const currentUrl = images[selectedScreenIdx] || images[0] || project.image;
   const meta = getScreenshotMeta(currentUrl, project.category);
+  const theme = getCategoryTheme(project.category);
+  const CategoryIcon = theme.icon;
+  const isAlternate = index % 2 === 1;
 
   return (
-    <div className="vertical-swiper-project-card">
+    <div
+      className={`vertical-swiper-project-card ${theme.className} ${
+        isAlternate ? "vertical-swiper-card-reverse" : ""
+      }`}
+    >
       {/* Left Column: Media & Verified Screenshots */}
       <div className="vertical-card-media-col">
         <div
@@ -102,6 +176,28 @@ function VerticalSwiperCard({
         >
           {/* Skeleton Shimmer */}
           {!isLoaded && <div className="vertical-skeleton-shimmer" aria-hidden="true" />}
+
+          {/* Authentic Device Frame Mockup Header */}
+          {project.category === "Mobile App" ? (
+            <div className="mobile-phone-frame-bezel">
+              <div className="mobile-phone-notch-bar">
+                <span className="mobile-speaker-pill" />
+                <span className="mobile-lens-dot" />
+              </div>
+            </div>
+          ) : (
+            <div className="browser-window-header">
+              <div className="browser-window-dots">
+                <span className="browser-dot dot-close" />
+                <span className="browser-dot dot-min" />
+                <span className="browser-dot dot-max" />
+              </div>
+              <div className="browser-url-pill">
+                <Lock size={10} className="browser-lock-icon" aria-hidden="true" />
+                <span>{getHostname(project.liveUrl)}</span>
+              </div>
+            </div>
+          )}
 
           {/* Top Badges */}
           <div className="vertical-media-top-badges">
@@ -197,10 +293,20 @@ function VerticalSwiperCard({
       <div className="vertical-card-info-col">
         {/* Category & Status */}
         <div className="vertical-info-meta-row">
-          <span className="vertical-category-badge">{project.category}</span>
-          <span className="vertical-verified-badge">
-            <CheckCircle2 size={12} aria-hidden="true" />
-            <span>Verified Production System</span>
+          <span
+            className="vertical-category-badge"
+            style={{
+              borderColor: theme.badgeBorder,
+              color: theme.badgeText,
+              backgroundColor: theme.badgeBg,
+            }}
+          >
+            <CategoryIcon size={12} className="inline-category-icon" aria-hidden="true" />
+            <span>{project.category}</span>
+          </span>
+          <span className="vertical-verified-badge" style={{ borderColor: theme.badgeBorder }}>
+            <CheckCircle2 size={12} aria-hidden="true" style={{ color: theme.accent }} />
+            <span>{theme.typeLabel}</span>
           </span>
         </div>
 
@@ -215,8 +321,10 @@ function VerticalSwiperCard({
 
         {/* Architecture & Infrastructure Box */}
         {project.architecture && (
-          <div className="vertical-arch-box">
-            <span className="arch-label">Architecture:</span>
+          <div className="vertical-arch-box" style={{ borderLeftColor: theme.accent }}>
+            <span className="arch-label" style={{ color: theme.badgeText }}>
+              Architecture:
+            </span>
             <p className="arch-text">{project.architecture}</p>
           </div>
         )}
@@ -235,7 +343,9 @@ function VerticalSwiperCard({
           <div className="vertical-metrics-grid">
             {project.metrics.map((m) => (
               <div key={m.label} className="vertical-metric-box">
-                <span className="metric-val">{m.value}</span>
+                <span className="metric-val" style={{ color: theme.badgeText }}>
+                  {m.value}
+                </span>
                 <span className="metric-lbl">{m.label}</span>
               </div>
             ))}
@@ -251,11 +361,19 @@ function VerticalSwiperCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="vertical-action-btn-primary"
+                style={{
+                  background: `linear-gradient(135deg, ${theme.accent} 0%, #991B1B 100%)`,
+                  borderColor: theme.accent,
+                }}
                 title={`Visit live production for ${project.name}`}
               >
                 <span>
                   {project.category === "Mobile App"
-                    ? "Google Play Store"
+                    ? project.liveUrl.includes("play.google")
+                      ? "Google Play Store"
+                      : "Mobile App Repository"
+                    : project.liveUrl.includes("github.com")
+                    ? "GitHub Repository"
                     : "Verified Live System"}
                 </span>
                 <ExternalLink size={13} aria-hidden="true" />

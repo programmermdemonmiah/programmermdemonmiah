@@ -18,8 +18,73 @@ import {
   ShoppingBag,
   Activity,
   Globe,
+  Lock,
+  Code2,
 } from "lucide-react";
 import { VERIFIED_PROJECTS } from "../data/projectRegistry";
+
+function getHostname(url?: string): string {
+  if (!url) return "production-verified.system";
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url.replace(/^https?:\/\//, "").split("/")[0] || "production-verified.system";
+  }
+}
+
+function getCategoryTheme(category: string) {
+  switch (category) {
+    case "Mobile App":
+      return {
+        key: "mobile",
+        className: "card-theme-mobile",
+        accent: "#10B981",
+        border: "rgba(16, 185, 129, 0.4)",
+        badgeBg: "rgba(16, 185, 129, 0.14)",
+        badgeText: "#34D399",
+        badgeBorder: "rgba(16, 185, 129, 0.32)",
+        typeLabel: "Native Mobile App",
+        icon: Smartphone,
+      };
+    case "Enterprise SaaS":
+    case "Enterprise":
+      return {
+        key: "saas",
+        className: "card-theme-saas",
+        accent: "#A855F7",
+        border: "rgba(168, 85, 247, 0.4)",
+        badgeBg: "rgba(168, 85, 247, 0.14)",
+        badgeText: "#C084FC",
+        badgeBorder: "rgba(168, 85, 247, 0.32)",
+        typeLabel: "Enterprise Platform",
+        icon: Server,
+      };
+    case "E-Commerce":
+      return {
+        key: "ecom",
+        className: "card-theme-ecom",
+        accent: "#F59E0B",
+        border: "rgba(245, 158, 11, 0.4)",
+        badgeBg: "rgba(245, 158, 11, 0.14)",
+        badgeText: "#FBBF24",
+        badgeBorder: "rgba(245, 158, 11, 0.32)",
+        typeLabel: "Commerce Ecosystem",
+        icon: ShoppingBag,
+      };
+    default:
+      return {
+        key: "web",
+        className: "card-theme-web",
+        accent: "#38BDF8",
+        border: "rgba(56, 189, 248, 0.4)",
+        badgeBg: "rgba(56, 189, 248, 0.14)",
+        badgeText: "#38BDF8",
+        badgeBorder: "rgba(56, 189, 248, 0.32)",
+        typeLabel: "Full Stack Architecture",
+        icon: Code2,
+      };
+  }
+}
 
 const CATEGORIES = [
   "All",
@@ -206,41 +271,75 @@ export default function AllProjectsPage() {
           </div>
         ) : (
           <div className="all-projects-grid">
-            {filteredProjects.map((project, idx) => (
-              <motion.article
-                key={project.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{
-                  duration: 0.48,
-                  delay: Math.min((idx % 3) * 0.08, 0.25),
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="all-project-card"
-              >
-                {/* Visual Media Header */}
-                <div className="all-project-media">
-                  <Image
-                    src={project.image}
-                    alt={`${project.name} preview`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="all-project-img"
-                    priority={idx < 2}
-                  />
-                  <div className="all-project-media-overlay" />
+            {filteredProjects.map((project, idx) => {
+              const theme = getCategoryTheme(project.category);
+              const CategoryIcon = theme.icon;
+              return (
+                <motion.article
+                  key={project.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{
+                    duration: 0.48,
+                    delay: Math.min((idx % 3) * 0.08, 0.25),
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className={`all-project-card ${theme.className}`}
+                  style={{ borderColor: theme.border }}
+                >
+                  {/* Visual Media Header */}
+                  <div className="all-project-media">
+                    {/* Device Mockup Top Bar */}
+                    {project.category === "Mobile App" ? (
+                      <div className="mobile-phone-frame-bezel">
+                        <div className="mobile-phone-notch-bar">
+                          <span className="mobile-speaker-pill" />
+                          <span className="mobile-lens-dot" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="browser-window-header">
+                        <div className="browser-window-dots">
+                          <span className="browser-dot dot-close" />
+                          <span className="browser-dot dot-min" />
+                          <span className="browser-dot dot-max" />
+                        </div>
+                        <div className="browser-url-pill">
+                          <Lock size={10} className="browser-lock-icon" aria-hidden="true" />
+                          <span>{getHostname(project.liveUrl)}</span>
+                        </div>
+                      </div>
+                    )}
 
-                  {/* Status & Category Pills */}
-                  <div className="all-project-media-badges">
-                    <span className="project-status-pill status-pill-live">
-                      <span className="status-dot" aria-hidden="true" />
-                      {project.status}
-                    </span>
-                    <span className="project-category-pill">
-                      {project.category}
-                    </span>
-                  </div>
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} preview`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="all-project-img"
+                      priority={idx < 2}
+                    />
+                    <div className="all-project-media-overlay" />
+
+                    {/* Status & Category Pills */}
+                    <div className="all-project-media-badges">
+                      <span className="project-status-pill status-pill-live">
+                        <span className="status-dot" aria-hidden="true" />
+                        {project.status}
+                      </span>
+                      <span
+                        className="project-category-pill"
+                        style={{
+                          backgroundColor: theme.badgeBg,
+                          color: theme.badgeText,
+                          borderColor: theme.badgeBorder,
+                        }}
+                      >
+                        <CategoryIcon size={12} className="inline-category-icon" aria-hidden="true" />
+                        {project.category}
+                      </span>
+                    </div>
 
                   {/* Lightbox trigger */}
                   <button
@@ -329,11 +428,19 @@ export default function AllProjectsPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary-sm"
+                        style={{
+                          background: `linear-gradient(135deg, ${theme.accent} 0%, #991B1B 100%)`,
+                          borderColor: theme.accent,
+                        }}
                         title={`Open live project for ${project.name}`}
                       >
                         <span>
-                          {project.packageId
-                            ? "Open on Google Play"
+                          {project.category === "Mobile App"
+                            ? project.packageId
+                              ? "Open on Google Play"
+                              : "Mobile App Repository"
+                            : project.liveUrl.includes("github.com")
+                            ? "GitHub Repository"
                             : "Launch Live System"}
                         </span>
                         <ExternalLink size={14} aria-hidden="true" />
@@ -355,9 +462,10 @@ export default function AllProjectsPage() {
                   </footer>
                 </div>
               </motion.article>
-            ))}
-          </div>
-        )}
+            );
+          })}
+        </div>
+      )}
 
         {/* Verification Guarantee Footnote */}
         <div className="all-projects-audit-notice">
