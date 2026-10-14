@@ -1,139 +1,152 @@
-# 👋 Hi, I'm MD. Emon Miah
+<div align="center">
 
-### Senior Software Engineer · Full-Stack Mobile & Backend Developer
+# MD. Emon Miah
 
-<p align="left">
-  <a href="https://github.com/programmermdemonmiah">
-    <img src="https://img.shields.io/badge/GitHub-programmermdemonmiah-181717?style=for-the-badge&logo=github&logoColor=white" />
-  </a>
-  <a href="https://www.linkedin.com/in/mdemonmiah">
-    <img src="https://img.shields.io/badge/LinkedIn-Md.%20Emon%20Miah-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
-  </a>
-  <a href="mailto:contact.mdemonmiah@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge&logo=gmail&logoColor=white" />
-  </a>
+### Senior Software Engineer · Mobile, Web & Backend
+
+Building reliable products with **Flutter, Go, Next.js, and Laravel** — from polished user experiences to scalable APIs and real-time systems.
+
+<p>
+  <a href="https://github.com/programmermdemonmiah"><img src="https://img.shields.io/badge/GitHub-0d1117?style=flat-square&logo=github&logoColor=c9d1d9" alt="GitHub" /></a>
+  <a href="https://www.linkedin.com/in/mdemonmiah"><img src="https://img.shields.io/badge/LinkedIn-0d1117?style=flat-square&logo=linkedin&logoColor=0A66C2" alt="LinkedIn" /></a>
+  <a href="mailto:contact.mdemonmiah@gmail.com"><img src="https://img.shields.io/badge/Email-0d1117?style=flat-square&logo=gmail&logoColor=ea4335" alt="Email" /></a>
+  <img src="https://img.shields.io/badge/Location-Dhaka%2C%20Bangladesh-0d1117?style=flat-square&logo=googlemaps&logoColor=3fb950" alt="Dhaka, Bangladesh" />
 </p>
+
+</div>
 
 ---
 
-## 🚀 About Me
+## About
 
-I'm a **Senior Software Engineer** focused on building scalable, production-ready applications across **mobile, web, backend, and real-time systems**.
+I’m a software engineer focused on delivering **production-ready mobile apps, full-stack web platforms, backend services, and real-time experiences**.
 
-My primary expertise is in **Flutter, Go, Next.js, React, Laravel/PHP**, with a strong focus on API architecture, real-time communication, system design, and scalable backend services.
+I care about more than getting features to work: I aim for clear architecture, maintainable code, secure APIs, thoughtful UX, and deployments that are dependable in production.
 
-I enjoy taking a product from **idea → architecture → development → deployment → production**, while keeping the codebase maintainable, secure, and scalable.
+- **Mobile:** Cross-platform applications with Flutter and Dart
+- **Web:** Full-stack applications and admin dashboards with Next.js and React
+- **Backend:** API design and services with Go and Laravel/PHP
+- **Real-time:** WebSockets, live communication, chat, and streaming integrations
+- **Delivery:** Dockerized services, CI/CD workflows, and production infrastructure
 
-### 🛠️ Tech Stack
+## Technology
 
-**Mobile Development**
+### Mobile Development
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=flutter" width="48" height="48" alt="Flutter" />
-  <img src="https://skillicons.dev/icons?i=dart" width="48" height="48" alt="Dart" />
-  <img src="https://skillicons.dev/icons?i=androidstudio" width="48" height="48" alt="Android Studio" />
-  <img src="https://skillicons.dev/icons?i=apple" width="48" height="48" alt="Apple" />
+<p>
+  <img src="https://skillicons.dev/icons?i=flutter" width="44" height="44" alt="Flutter" />
+  <img src="https://skillicons.dev/icons?i=dart" width="44" height="44" alt="Dart" />
+  <img src="https://skillicons.dev/icons?i=androidstudio" width="44" height="44" alt="Android Studio" />
+  <img src="https://skillicons.dev/icons?i=apple" width="44" height="44" alt="Apple platforms" />
 </p>
 
-**State Management:** GetX · Riverpod · Provider
+<sub>State management: GetX · Riverpod · Provider</sub>
 
-**Frontend & Web**
+### Frontend & Web
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=nextjs" width="48" height="48" alt="Next.js" />
-  <img src="https://skillicons.dev/icons?i=react" width="48" height="48" alt="React" />
-  <img src="https://skillicons.dev/icons?i=ts" width="48" height="48" alt="TypeScript" />
-  <img src="https://skillicons.dev/icons?i=js" width="48" height="48" alt="JavaScript" />
-  <img src="https://skillicons.dev/icons?i=html" width="48" height="48" alt="HTML5" />
-  <img src="https://skillicons.dev/icons?i=css" width="48" height="48" alt="CSS3" />
+<p>
+  <img src="https://skillicons.dev/icons?i=nextjs" width="44" height="44" alt="Next.js" />
+  <img src="https://skillicons.dev/icons?i=react" width="44" height="44" alt="React" />
+  <img src="https://skillicons.dev/icons?i=ts" width="44" height="44" alt="TypeScript" />
+  <img src="https://skillicons.dev/icons?i=js" width="44" height="44" alt="JavaScript" />
+  <img src="https://skillicons.dev/icons?i=html" width="44" height="44" alt="HTML5" />
+  <img src="https://skillicons.dev/icons?i=css" width="44" height="44" alt="CSS3" />
 </p>
 
-**Backend & APIs**
+### Backend & APIs
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=go" width="48" height="48" alt="Go" />
-  <img src="https://skillicons.dev/icons?i=php" width="48" height="48" alt="PHP" />
-  <img src="https://skillicons.dev/icons?i=laravel" width="48" height="48" alt="Laravel" />
+<p>
+  <img src="https://skillicons.dev/icons?i=go" width="44" height="44" alt="Go" />
+  <img src="https://skillicons.dev/icons?i=php" width="44" height="44" alt="PHP" />
+  <img src="https://skillicons.dev/icons?i=laravel" width="44" height="44" alt="Laravel" />
 </p>
 
-**Databases & Storage**
+<sub>REST APIs · JWT · Gin · GORM</sub>
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=postgres" width="48" height="48" alt="PostgreSQL" />
-  <img src="https://skillicons.dev/icons?i=mysql" width="48" height="48" alt="MySQL" />
-  <img src="https://skillicons.dev/icons?i=redis" width="48" height="48" alt="Redis" />
-  <img src="https://skillicons.dev/icons?i=sqlite" width="48" height="48" alt="SQLite" />
-  <img src="https://skillicons.dev/icons?i=firebase" width="48" height="48" alt="Firebase" />
+### Data & Infrastructure
+
+<p>
+  <img src="https://skillicons.dev/icons?i=postgres" width="44" height="44" alt="PostgreSQL" />
+  <img src="https://skillicons.dev/icons?i=mysql" width="44" height="44" alt="MySQL" />
+  <img src="https://skillicons.dev/icons?i=redis" width="44" height="44" alt="Redis" />
+  <img src="https://skillicons.dev/icons?i=sqlite" width="44" height="44" alt="SQLite" />
+  <img src="https://skillicons.dev/icons?i=firebase" width="44" height="44" alt="Firebase" />
+  <img src="https://skillicons.dev/icons?i=docker" width="44" height="44" alt="Docker" />
+  <img src="https://skillicons.dev/icons?i=linux" width="44" height="44" alt="Linux" />
+  <img src="https://skillicons.dev/icons?i=nginx" width="44" height="44" alt="Nginx" />
+  <img src="https://skillicons.dev/icons?i=githubactions" width="44" height="44" alt="GitHub Actions" />
+  <img src="https://skillicons.dev/icons?i=git" width="44" height="44" alt="Git" />
+  <img src="https://skillicons.dev/icons?i=github" width="44" height="44" alt="GitHub" />
+  <img src="https://skillicons.dev/icons?i=postman" width="44" height="44" alt="Postman" />
+  <img src="https://skillicons.dev/icons?i=vscode" width="44" height="44" alt="VS Code" />
 </p>
 
-**Real-Time & Streaming**
+### Real-Time & Streaming
 
-<p align="left">
-  <img src="assets/realtime/socketio.svg" width="48" height="48" alt="Socket.IO" />
-  <img src="assets/realtime/webrtc.svg" width="48" height="48" alt="WebRTC" />
-  <img src="assets/realtime/websocket.svg" width="48" height="48" alt="WebSocket" />
-  <img src="assets/realtime/livekit.svg" width="48" height="48" alt="LiveKit" />
+<p>
+  <img src="assets/realtime/socketio.svg" width="44" height="44" alt="Socket.IO" />
+  <img src="assets/realtime/webrtc.svg" width="44" height="44" alt="WebRTC" />
+  <img src="assets/realtime/websocket.svg" width="44" height="44" alt="WebSocket" />
+  <img src="assets/realtime/livekit.svg" width="44" height="44" alt="LiveKit" />
 </p>
 
-**Additional:** REST API · JWT · Gin · GORM
+## What I Build
 
-**DevOps & Tools**
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>📱 Mobile Products</strong><br />
+      Cross-platform Android, iOS, and web experiences with maintainable app architecture.
+    </td>
+    <td width="50%" valign="top">
+      <strong>🌐 Full-Stack Platforms</strong><br />
+      Web applications, dashboards, e-commerce, ERP, and business management systems.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>⚙️ Backend Systems</strong><br />
+      Scalable APIs, authentication, authorization, and secure device/session handling.
+    </td>
+    <td width="50%" valign="top">
+      <strong>🎥 Real-Time Experiences</strong><br />
+      Live streaming, real-time chat, WebSocket communication, and streaming integrations.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>🚀 Deployment & Delivery</strong><br />
+      Dockerized services, CI/CD, Linux servers, and production deployment workflows.
+    </td>
+    <td width="50%" valign="top">
+      <strong>🧩 Engineering Quality</strong><br />
+      Clear separation of concerns, maintainable codebases, and practical system design.
+    </td>
+  </tr>
+</table>
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=docker" width="48" height="48" alt="Docker" />
-  <img src="https://skillicons.dev/icons?i=linux" width="48" height="48" alt="Linux" />
-  <img src="https://skillicons.dev/icons?i=nginx" width="48" height="48" alt="Nginx" />
-  <img src="https://skillicons.dev/icons?i=githubactions" width="48" height="48" alt="GitHub Actions" />
-  <img src="https://skillicons.dev/icons?i=git" width="48" height="48" alt="Git" />
-  <img src="https://skillicons.dev/icons?i=github" width="48" height="48" alt="GitHub" />
-  <img src="https://skillicons.dev/icons?i=postman" width="48" height="48" alt="Postman" />
-  <img src="https://skillicons.dev/icons?i=vscode" width="48" height="48" alt="VS Code" />
-</p>
+## GitHub Activity
 
-### 🚀 What I Build
+<div align="center">
 
-- 📱 Cross-platform mobile applications for Android, iOS & Web
-- 🌐 Full-stack web applications and admin dashboards
-- ⚙️ Scalable Go and Laravel backend services
-- 🎥 Live streaming, real-time chat and communication systems
-- 🛒 E-commerce, ERP and business management platforms
-- 🔐 Authentication, authorization and device/session security
-- 🐳 Dockerized services, CI/CD and production infrastructure
+<a href="https://github.com/programmermdemonmiah?tab=overview">
+  <img src="https://ghchart.rshah.org/26a641/programmermdemonmiah" alt="GitHub contribution activity heatmap" width="100%" />
+</a>
 
-### 📊 GitHub Activity
+<sub><a href="https://github.com/programmermdemonmiah?tab=overview">Explore my GitHub profile and contributions →</a></sub>
 
-<p align="center">
-  <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://ghchart.rshah.org/26a641/programmermdemonmiah" alt="GitHub contribution activity heatmap for programmermdemonmiah" width="100%" />
-  </a>
-</p>
+</div>
 
-<p align="center">
-  <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://img.shields.io/badge/GITHUB%20ACTIVITY-View%20Profile-0d1117?style=for-the-badge&logo=github&logoColor=c9d1d9" alt="View GitHub activity" />
-  </a>
-</p>
-
-> GitHub-style dark palette: background `#0d1117`, border `#30363d`, text `#c9d1d9`, and deep green contribution cells. Private repository names and code remain hidden.
-
-### 🤝 Let's Connect
-
-<p align="left">
-  <a href="https://github.com/programmermdemonmiah">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-  <a href="https://www.linkedin.com/in/mdemonmiah">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  <a href="mailto:contact.mdemonmiah@gmail.com">
-    <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-  </a>
-</p>
-
-📍 Dhaka, Bangladesh
+> The contribution chart is provided by an external service. To show private contributions on your GitHub profile, enable **Include private contributions** in your profile settings. Private repository names and code remain private.
 
 ---
 
-<p align="center">
-  <b>Turning ideas into reliable, scalable software. 🚀</b>
-</p>
+<div align="center">
+
+### Let’s build something useful.
+
+**Turning ideas into reliable, scalable software.**
+
+<a href="mailto:contact.mdemonmiah@gmail.com">Get in touch</a> · <a href="https://www.linkedin.com/in/mdemonmiah">LinkedIn</a> · <a href="https://github.com/programmermdemonmiah">GitHub</a>
+
+</div>
