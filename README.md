@@ -98,15 +98,23 @@ I enjoy taking a product from **idea → architecture → development → deploy
 - 🔐 Authentication, authorization and device/session security
 - 🐳 Dockerized services, CI/CD and production infrastructure
 
-### 📊 GitHub Contributions
+### 📊 GitHub Activity
 
-<p align="left">
-  <a href="https://github.com/programmermdemonmiah?tab=overview">
-    <img src="https://img.shields.io/badge/View-GitHub%20Contribution%20Graph-2ea44f?style=for-the-badge&logo=github&logoColor=white" alt="View GitHub contribution graph" />
+<p align="center">
+  <a href="https://github.com/programmermdemonmiah">
+    <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=programmermdemonmiah&bg_color=0d1117&color=c9d1d9&line=58a6ff&point=bc8cff&area=true&area_color=1f6feb&hide_border=true&custom_title=Contribution%20Activity" alt="GitHub contribution activity graph" />
   </a>
 </p>
 
-> **Privacy-first:** No personal access token is required in this repository. GitHub's contribution graph can include private contributions when you enable **Settings → Profile → Include private contributions**. Private repository names and code remain hidden. A complete raw commit count across all private repositories cannot be calculated from a GitHub-hosted workflow without granting it repository access; I won't display guessed numbers as facts.
+<p align="center">
+  <a href="https://github.com/programmermdemonmiah?tab=overview">
+    <img src="https://img.shields.io/badge/PROFILE-GitHub-161b22?style=for-the-badge&logo=github&logoColor=white" alt="GitHub profile" />
+  </a>
+  <img src="https://img.shields.io/badge/UPDATES-Automatic-238636?style=for-the-badge&logo=githubactions&logoColor=white" alt="Automatically updated activity graph" />
+  <img src="https://img.shields.io/badge/PRIVACY-First-8957e5?style=for-the-badge&logo=github&logoColor=white" alt="Privacy first" />
+</p>
+
+> **Private by design:** No personal access token, local script, or private-repository permission is needed for this README. To show private activity in GitHub's own contribution graph, enable **GitHub → Settings → Profile → Include private contributions**. This keeps private repository names and code hidden. The embedded activity graph is an automatically generated visualization; it is not a guaranteed raw commit total across every private repository.
 
 ### 🤝 Let's Connect
 
