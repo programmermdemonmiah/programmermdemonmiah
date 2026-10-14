@@ -28,9 +28,11 @@ import {
   Maximize2,
   X,
   ArrowDownUp,
+  ShieldCheck,
 } from "lucide-react";
 
 import { VERIFIED_PROJECTS, type VerifiedProject } from "@/app/data/projectRegistry";
+import ProjectDetailsModal from "./ProjectDetailsModal";
 
 const CATEGORIES = ["All", "Mobile App", "Enterprise SaaS", "E-Commerce", "Full Stack Web"] as const;
 
@@ -134,21 +136,24 @@ function VerticalSwiperCard({
   index,
   total,
   onOpenLightbox,
+  onOpenDetails,
 }: {
   project: VerifiedProject;
   index: number;
   total: number;
   onOpenLightbox: (payload: LightboxPayload) => void;
+  onOpenDetails: (project: VerifiedProject) => void;
 }) {
   const [selectedScreenIdx, setSelectedScreenIdx] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const images = project.screenshots && project.screenshots.length > 0
-    ? project.screenshots
-    : [project.image];
+  const hasRealScreenshots = Boolean(
+    project.image && project.screenshots && project.screenshots.length > 0 && project.screenshots[0]
+  );
 
-  const currentUrl = images[selectedScreenIdx] || images[0] || project.image;
-  const meta = getScreenshotMeta(currentUrl, project.category);
+  const images = hasRealScreenshots ? project.screenshots : [];
+  const currentUrl = hasRealScreenshots ? (images[selectedScreenIdx] || images[0] || project.image) : "";
+  const meta = hasRealScreenshots ? getScreenshotMeta(currentUrl, project.category) : { label: "In Active Development", icon: "desktop" as const };
   const theme = getCategoryTheme(project.category);
   const CategoryIcon = theme.icon;
   const isAlternate = index % 2 === 1;
@@ -159,134 +164,178 @@ function VerticalSwiperCard({
         isAlternate ? "vertical-swiper-card-reverse" : ""
       }`}
     >
-      {/* Left Column: Media & Verified Screenshots */}
+      {/* Left Column: Media & Verified Screenshots OR Authentic In-Development Preview */}
       <div className="vertical-card-media-col">
-        <div
-          className="vertical-card-media-frame"
-          onClick={() =>
-            onOpenLightbox({
-              images,
-              index: selectedScreenIdx,
-              projectName: project.name,
-              category: project.category,
-              liveUrl: project.liveUrl,
-            })
-          }
-          title="Click to view full-resolution screenshot"
-        >
-          {/* Skeleton Shimmer */}
-          {!isLoaded && <div className="vertical-skeleton-shimmer" aria-hidden="true" />}
+        {hasRealScreenshots ? (
+          <div
+            className="vertical-card-media-frame"
+            onClick={() =>
+              onOpenLightbox({
+                images,
+                index: selectedScreenIdx,
+                projectName: project.name,
+                category: project.category,
+                liveUrl: project.liveUrl,
+              })
+            }
+            title="Click to view full-resolution screenshot"
+          >
+            {/* Skeleton Shimmer */}
+            {!isLoaded && <div className="vertical-skeleton-shimmer" aria-hidden="true" />}
 
-          {/* Authentic Device Frame Mockup Header */}
-          {project.category === "Mobile App" ? (
-            <div className="mobile-phone-frame-bezel">
-              <div className="mobile-phone-notch-bar">
-                <span className="mobile-speaker-pill" />
-                <span className="mobile-lens-dot" />
+            {/* Authentic Device Frame Mockup Header */}
+            {project.category === "Mobile App" ? (
+              <div className="mobile-phone-frame-bezel">
+                <div className="mobile-phone-notch-bar">
+                  <span className="mobile-speaker-pill" />
+                  <span className="mobile-lens-dot" />
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="browser-window-header">
-              <div className="browser-window-dots">
-                <span className="browser-dot dot-close" />
-                <span className="browser-dot dot-min" />
-                <span className="browser-dot dot-max" />
-              </div>
-              <div className="browser-url-pill">
-                <Lock size={10} className="browser-lock-icon" aria-hidden="true" />
-                <span>{getHostname(project.liveUrl)}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Top Badges */}
-          <div className="vertical-media-top-badges">
-            <div className="vertical-top-left-group">
-              <span className="vertical-index-pill">
-                #{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-              </span>
-              <span className="vertical-status-pill">
-                <span className="status-live-dot" aria-hidden="true" />
-                <span>{project.status}</span>
-              </span>
-            </div>
-
-            <button
-              type="button"
-              className="vertical-zoom-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                onOpenLightbox({
-                  images,
-                  index: selectedScreenIdx,
-                  projectName: project.name,
-                  category: project.category,
-                  liveUrl: project.liveUrl,
-                });
-              }}
-              title="Inspect Full-Resolution Screenshot"
-              aria-label="Inspect Full-Resolution Screenshot"
-            >
-              <Maximize2 size={13} aria-hidden="true" />
-            </button>
-          </div>
-
-          {/* Main Screenshot Image */}
-          <Image
-            src={currentUrl}
-            alt={`${project.name} - ${meta.label}`}
-            fill
-            sizes="(max-width: 900px) 100vw, 50vw"
-            className={`vertical-project-image ${
-              meta.icon === "store" ? "vertical-project-image-contain" : "vertical-project-image-cover"
-            }`}
-            priority={index === 0}
-            draggable={false}
-            onLoad={() => setIsLoaded(true)}
-            style={{ opacity: isLoaded ? 1 : 0 }}
-          />
-          <div className="vertical-media-overlay" />
-
-          {/* Bottom Bar: Source Tag & Multi-Screen Thumbnails */}
-          <div className="vertical-media-bottom-bar">
-            <span className="vertical-source-badge">
-              {meta.icon === "store" ? (
-                <Smartphone size={11} aria-hidden="true" />
-              ) : (
-                <Globe size={11} aria-hidden="true" />
-              )}
-              <span>{meta.label}</span>
-            </span>
-
-            {images.length > 1 && (
-              <div
-                className="vertical-thumb-dots"
-                onClick={(e) => e.stopPropagation()}
-                role="tablist"
-                aria-label="Screenshot thumbnails"
-              >
-                {images.slice(0, 6).map((img, dotIdx) => (
-                  <button
-                    key={img + dotIdx}
-                    type="button"
-                    role="tab"
-                    aria-selected={dotIdx === selectedScreenIdx}
-                    className={`vertical-thumb-dot ${dotIdx === selectedScreenIdx ? "active" : ""}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedScreenIdx(dotIdx);
-                    }}
-                    title={`View screen ${dotIdx + 1} of ${images.length}`}
-                    aria-label={`View screen ${dotIdx + 1} of ${images.length}`}
-                  />
-                ))}
-                {images.length > 6 && (
-                  <span className="vertical-thumb-more">+{images.length - 6}</span>
-                )}
+            ) : (
+              <div className="browser-window-header">
+                <div className="browser-window-dots">
+                  <span className="browser-dot dot-close" />
+                  <span className="browser-dot dot-min" />
+                  <span className="browser-dot dot-max" />
+                </div>
+                <div className="browser-url-pill">
+                  <Lock size={10} className="browser-lock-icon" aria-hidden="true" />
+                  <span>{getHostname(project.liveUrl)}</span>
+                </div>
               </div>
             )}
+
+            {/* Top Badges */}
+            <div className="vertical-media-top-badges">
+              <div className="vertical-top-left-group">
+                <span className="vertical-index-pill">
+                  #{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                </span>
+                <span className="vertical-status-pill">
+                  <span className="status-live-dot" aria-hidden="true" />
+                  <span>{project.status}</span>
+                </span>
+              </div>
+
+              <button
+                type="button"
+                className="vertical-zoom-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenLightbox({
+                    images,
+                    index: selectedScreenIdx,
+                    projectName: project.name,
+                    category: project.category,
+                    liveUrl: project.liveUrl,
+                  });
+                }}
+                title="Inspect Full-Resolution Screenshot"
+                aria-label="Inspect Full-Resolution Screenshot"
+              >
+                <Maximize2 size={13} aria-hidden="true" />
+              </button>
+            </div>
+
+            {/* Main Screenshot Image */}
+            <Image
+              src={currentUrl}
+              alt={`${project.name} - ${meta.label}`}
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              className={`vertical-project-image ${
+                meta.icon === "store" ? "vertical-project-image-contain" : "vertical-project-image-cover"
+              }`}
+              priority={index === 0}
+              draggable={false}
+              onLoad={() => setIsLoaded(true)}
+              style={{ opacity: isLoaded ? 1 : 0 }}
+            />
+            <div className="vertical-media-overlay" />
+
+            {/* Bottom Bar: Source Tag & Multi-Screen Thumbnails */}
+            <div className="vertical-media-bottom-bar">
+              <span className="vertical-source-badge">
+                {meta.icon === "store" ? (
+                  <Smartphone size={11} aria-hidden="true" />
+                ) : (
+                  <Globe size={11} aria-hidden="true" />
+                )}
+                <span>{meta.label}</span>
+              </span>
+
+              {images.length > 1 && (
+                <div
+                  className="vertical-thumb-dots"
+                  onClick={(e) => e.stopPropagation()}
+                  role="tablist"
+                  aria-label="Screenshot thumbnails"
+                >
+                  {images.slice(0, 6).map((img, dotIdx) => (
+                    <button
+                      key={img + dotIdx}
+                      type="button"
+                      role="tab"
+                      aria-selected={dotIdx === selectedScreenIdx}
+                      className={`vertical-thumb-dot ${dotIdx === selectedScreenIdx ? "active" : ""}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedScreenIdx(dotIdx);
+                      }}
+                      title={`View screen ${dotIdx + 1} of ${images.length}`}
+                      aria-label={`View screen ${dotIdx + 1} of ${images.length}`}
+                    />
+                  ))}
+                  {images.length > 6 && (
+                    <span className="vertical-thumb-more">+{images.length - 6}</span>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div
+            className="vertical-card-media-frame"
+            onClick={() => onOpenDetails(project)}
+            title="Click to view full architecture specifications"
+          >
+            <div className="vertical-preview-unavailable-stage">
+              <div className="unavailable-stage-bg-grid" />
+              <div className="vertical-media-top-badges">
+                <div className="vertical-top-left-group">
+                  <span className="vertical-index-pill">
+                    #{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                  </span>
+                  <span className="vertical-status-pill">
+                    <span className="status-live-dot" aria-hidden="true" />
+                    <span>{project.status}</span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="unavailable-stage-center">
+                <div
+                  className="unavailable-stage-icon-wrap"
+                  style={{ borderColor: theme.border, color: theme.accent }}
+                >
+                  <CategoryIcon size={30} aria-hidden="true" />
+                </div>
+                <span className="unavailable-stage-badge">
+                  {project.status === "In Development"
+                    ? "In Active Development"
+                    : "Completed System"}
+                </span>
+                <h4 className="unavailable-stage-title">{project.name}</h4>
+                <p className="unavailable-stage-arch">{project.architecture}</p>
+              </div>
+
+              <div className="unavailable-stage-footer">
+                <ShieldCheck size={13} style={{ color: theme.accent }} aria-hidden="true" />
+                <span>Verified Codebase &bull; Click to View Technical Specifications</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Right Column: Project Information & Actions */}
@@ -355,6 +404,16 @@ function VerticalSwiperCard({
         {/* Actions Row */}
         <div className="vertical-card-actions">
           <div className="vertical-actions-left">
+            <button
+              type="button"
+              className="vertical-specs-modal-btn"
+              onClick={() => onOpenDetails(project)}
+              title="View full project specifications & system architecture"
+            >
+              <Code2 size={13} aria-hidden="true" />
+              <span>View Specs</span>
+            </button>
+
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
@@ -365,16 +424,12 @@ function VerticalSwiperCard({
                   background: `linear-gradient(135deg, ${theme.accent} 0%, #991B1B 100%)`,
                   borderColor: theme.accent,
                 }}
-                title={`Visit live production for ${project.name}`}
+                title={`Visit verified live deployment for ${project.name}`}
               >
                 <span>
-                  {project.category === "Mobile App"
-                    ? project.liveUrl.includes("play.google")
-                      ? "Google Play Store"
-                      : "Mobile App Repository"
-                    : project.liveUrl.includes("github.com")
-                    ? "GitHub Repository"
-                    : "Verified Live System"}
+                  {project.packageId
+                    ? "Google Play Store"
+                    : "Launch Live System"}
                 </span>
                 <ExternalLink size={13} aria-hidden="true" />
               </a>
@@ -413,6 +468,7 @@ export default function ProjectsSection() {
   const [isBeginning, setIsBeginning] = useState<boolean>(true);
   const [isEnd, setIsEnd] = useState<boolean>(false);
   const [lightbox, setLightbox] = useState<LightboxPayload | null>(null);
+  const [selectedProjectForModal, setSelectedProjectForModal] = useState<VerifiedProject | null>(null);
 
   // Filter projects by active category and search query
   const filteredProjects = useMemo(() => {
@@ -651,6 +707,7 @@ export default function ProjectsSection() {
                       index={idx}
                       total={filteredProjects.length}
                       onOpenLightbox={(payload) => setLightbox(payload)}
+                      onOpenDetails={(p) => setSelectedProjectForModal(p)}
                     />
                   </div>
                 </SwiperSlide>
@@ -768,6 +825,13 @@ export default function ProjectsSection() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Dedicated Detailed Project Specifications & Architecture Modal */}
+      <ProjectDetailsModal
+        project={selectedProjectForModal}
+        onClose={() => setSelectedProjectForModal(null)}
+        onOpenLightbox={(payload) => setLightbox(payload)}
+      />
     </section>
   );
 }

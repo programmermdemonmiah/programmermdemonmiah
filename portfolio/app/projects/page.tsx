@@ -20,8 +20,10 @@ import {
   Globe,
   Lock,
   Code2,
+  ShieldCheck,
 } from "lucide-react";
-import { VERIFIED_PROJECTS } from "../data/projectRegistry";
+import { VERIFIED_PROJECTS, type VerifiedProject } from "../data/projectRegistry";
+import ProjectDetailsModal from "../components/ProjectDetailsModal";
 
 function getHostname(url?: string): string {
   if (!url) return "production-verified.system";
@@ -102,6 +104,7 @@ export default function AllProjectsPage() {
     title: string;
     alt: string;
   } | null>(null);
+  const [selectedProjectForModal, setSelectedProjectForModal] = useState<VerifiedProject | null>(null);
 
   // Filter projects by active category and search term
   const filteredProjects = useMemo(() => {
@@ -288,76 +291,128 @@ export default function AllProjectsPage() {
                   className={`all-project-card ${theme.className}`}
                   style={{ borderColor: theme.border }}
                 >
-                  {/* Visual Media Header */}
-                  <div className="all-project-media">
-                    {/* Device Mockup Top Bar */}
-                    {project.category === "Mobile App" ? (
-                      <div className="mobile-phone-frame-bezel">
-                        <div className="mobile-phone-notch-bar">
-                          <span className="mobile-speaker-pill" />
-                          <span className="mobile-lens-dot" />
+                  {/* Visual Media Header OR In-Development Architecture State */}
+                  {Boolean(project.image && project.screenshots && project.screenshots.length > 0 && project.screenshots[0]) ? (
+                    <div className="all-project-media">
+                      {/* Device Mockup Top Bar */}
+                      {project.category === "Mobile App" ? (
+                        <div className="mobile-phone-frame-bezel">
+                          <div className="mobile-phone-notch-bar">
+                            <span className="mobile-speaker-pill" />
+                            <span className="mobile-lens-dot" />
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="browser-window-header">
-                        <div className="browser-window-dots">
-                          <span className="browser-dot dot-close" />
-                          <span className="browser-dot dot-min" />
-                          <span className="browser-dot dot-max" />
+                      ) : (
+                        <div className="browser-window-header">
+                          <div className="browser-window-dots">
+                            <span className="browser-dot dot-close" />
+                            <span className="browser-dot dot-min" />
+                            <span className="browser-dot dot-max" />
+                          </div>
+                          <div className="browser-url-pill">
+                            <Lock size={10} className="browser-lock-icon" aria-hidden="true" />
+                            <span>{getHostname(project.liveUrl)}</span>
+                          </div>
                         </div>
-                        <div className="browser-url-pill">
-                          <Lock size={10} className="browser-lock-icon" aria-hidden="true" />
-                          <span>{getHostname(project.liveUrl)}</span>
-                        </div>
-                      </div>
-                    )}
+                      )}
 
-                    <Image
-                      src={project.image}
-                      alt={`${project.name} preview`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="all-project-img"
-                      priority={idx < 2}
-                    />
-                    <div className="all-project-media-overlay" />
+                      <Image
+                        src={project.image}
+                        alt={`${project.name} preview`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="all-project-img"
+                        priority={idx < 2}
+                      />
+                      <div className="all-project-media-overlay" />
 
-                    {/* Status & Category Pills */}
-                    <div className="all-project-media-badges">
-                      <span className="project-status-pill status-pill-live">
-                        <span className="status-dot" aria-hidden="true" />
-                        {project.status}
-                      </span>
-                      <span
-                        className="project-category-pill"
-                        style={{
-                          backgroundColor: theme.badgeBg,
-                          color: theme.badgeText,
-                          borderColor: theme.badgeBorder,
-                        }}
+                      {/* Status & Category Pills */}
+                      <div className="all-project-media-badges">
+                        <span className="project-status-pill status-pill-live">
+                          <span className="status-dot" aria-hidden="true" />
+                          {project.status}
+                        </span>
+                        <span
+                          className="project-category-pill"
+                          style={{
+                            backgroundColor: theme.badgeBg,
+                            color: theme.badgeText,
+                            borderColor: theme.badgeBorder,
+                          }}
+                        >
+                          <CategoryIcon size={12} className="inline-category-icon" aria-hidden="true" />
+                          {project.category}
+                        </span>
+                      </div>
+
+                      {/* Lightbox trigger */}
+                      <button
+                        type="button"
+                        className="media-zoom-btn"
+                        onClick={() =>
+                          setLightbox({
+                            url: project.image,
+                            title: project.name,
+                            alt: `${project.name} full preview`,
+                          })
+                        }
+                        title="View Full Resolution Screenshot"
+                        aria-label={`Enlarge screenshot for ${project.name}`}
                       >
-                        <CategoryIcon size={12} className="inline-category-icon" aria-hidden="true" />
-                        {project.category}
-                      </span>
+                        <Maximize2 size={15} aria-hidden="true" />
+                      </button>
                     </div>
+                  ) : (
+                    <div
+                      className="all-project-media"
+                      onClick={() => setSelectedProjectForModal(project)}
+                      style={{ cursor: "pointer" }}
+                      title="Click to view full architecture specifications"
+                    >
+                      <div className="grid-preview-unavailable-stage">
+                        <div className="unavailable-stage-bg-grid" />
+                        <div className="all-project-media-badges">
+                          <span className="project-status-pill status-pill-live">
+                            <span className="status-dot" aria-hidden="true" />
+                            {project.status}
+                          </span>
+                          <span
+                            className="project-category-pill"
+                            style={{
+                              backgroundColor: theme.badgeBg,
+                              color: theme.badgeText,
+                              borderColor: theme.badgeBorder,
+                            }}
+                          >
+                            <CategoryIcon size={12} className="inline-category-icon" aria-hidden="true" />
+                            {project.category}
+                          </span>
+                        </div>
 
-                  {/* Lightbox trigger */}
-                  <button
-                    type="button"
-                    className="media-zoom-btn"
-                    onClick={() =>
-                      setLightbox({
-                        url: project.image,
-                        title: project.name,
-                        alt: `${project.name} full preview`,
-                      })
-                    }
-                    title="View Full Resolution Screenshot"
-                    aria-label={`Enlarge screenshot for ${project.name}`}
-                  >
-                    <Maximize2 size={15} aria-hidden="true" />
-                  </button>
-                </div>
+                        <div className="unavailable-stage-center">
+                          <div
+                            className="unavailable-stage-icon-wrap"
+                            style={{ borderColor: theme.border, color: theme.accent }}
+                          >
+                            <CategoryIcon size={28} aria-hidden="true" />
+                          </div>
+                          <span className="unavailable-stage-badge">
+                            {project.status === "In Development"
+                              ? "In Active Development"
+                              : "Completed System"}
+                          </span>
+                          <h4 className="unavailable-stage-title" style={{ fontSize: "0.98rem" }}>
+                            {project.name}
+                          </h4>
+                        </div>
+
+                        <div className="unavailable-stage-footer">
+                          <ShieldCheck size={12} style={{ color: theme.accent }} aria-hidden="true" />
+                          <span>Verified Codebase &bull; Click to View Specs</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                 {/* Card Body */}
                 <div className="all-project-body">
@@ -422,6 +477,16 @@ export default function AllProjectsPage() {
 
                   {/* Card Actions Footer */}
                   <footer className="all-project-footer">
+                    <button
+                      type="button"
+                      className="all-project-specs-btn"
+                      onClick={() => setSelectedProjectForModal(project)}
+                      title="View full technical specifications & system design"
+                    >
+                      <Code2 size={13} aria-hidden="true" />
+                      <span>View Specs</span>
+                    </button>
+
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
@@ -435,12 +500,8 @@ export default function AllProjectsPage() {
                         title={`Open live project for ${project.name}`}
                       >
                         <span>
-                          {project.category === "Mobile App"
-                            ? project.packageId
-                              ? "Open on Google Play"
-                              : "Mobile App Repository"
-                            : project.liveUrl.includes("github.com")
-                            ? "GitHub Repository"
+                          {project.packageId
+                            ? "Open on Google Play"
                             : "Launch Live System"}
                         </span>
                         <ExternalLink size={14} aria-hidden="true" />
@@ -520,6 +581,19 @@ export default function AllProjectsPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Dedicated Project Details Modal */}
+      <ProjectDetailsModal
+        project={selectedProjectForModal}
+        onClose={() => setSelectedProjectForModal(null)}
+        onOpenLightbox={(payload) =>
+          setLightbox({
+            url: payload.images[payload.index] || payload.images[0],
+            title: payload.projectName,
+            alt: `${payload.projectName} screenshot`,
+          })
+        }
+      />
 
       {/* Page Footer */}
       <footer className="all-projects-footer no-print">

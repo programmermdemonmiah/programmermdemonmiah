@@ -131,9 +131,9 @@ export interface VerifiedProject {
   id: string;
   name: string;
   tagline: string;
-  category: "Mobile App" | "Enterprise SaaS" | "E-Commerce" | "Healthcare" | "Full Stack Web";
-  status: "Live Production" | "Live Application" | "Live Web System";
-  statusType: "production" | "live";
+  category: "Mobile App" | "Enterprise SaaS" | "Enterprise" | "E-Commerce" | "Healthcare" | "Full Stack Web" | (string & {});
+  status: "Live Production" | "Live Application" | "Live Web System" | "In Development" | "Completed System" | (string & {});
+  statusType: "production" | "live" | "development" | "completed" | (string & {});
   description: string;
   architecture: string;
   stack: string[];

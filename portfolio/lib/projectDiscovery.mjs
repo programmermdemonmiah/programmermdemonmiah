@@ -272,16 +272,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Donation Club MLM & Community Contribution Platform",
     tagline: "Laravel 13 community contribution platform with 10-tier referral tree & double-entry ledger",
     category: "Enterprise SaaS",
-    status: "Live Web System",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Community contribution and multi-generation affiliate platform built with Laravel 13, Inertia.js, React, and TypeScript. Features append-only double-context ledgers, 10-generation materialized-path referral tree calculation, Google 2FA security, and automated commission distribution.",
     architecture:
       "Modular Laravel 13 MVC with Inertia.js React frontend, append-only double-context ledger (DECIMAL(16,2) bcmath precision), 10-generation materialized path referral engine, and Google 2FA authentication.",
     stack: ["Laravel 13", "PHP 8.5", "React", "TypeScript", "Inertia.js", "Tailwind CSS", "MySQL", "Google 2FA"],
     role: "Lead Full Stack Engineer (Laravel + React/Inertia)",
-    liveUrl: "https://github.com/programmermdemonmiah/donation_club",
-    githubUrl: "https://github.com/programmermdemonmiah/donation_club",
     highlights: [
       "10-generation materialized-path referral calculation with cycle prevention",
       "Append-only double-entry financial ledger with cryptographic balance locks",
@@ -299,16 +297,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Django Enterprise Learning Management System",
     tagline: "Modular educational portal with course authoring, assignments & quiz evaluation",
     category: "Full Stack Web",
-    status: "Live Web System",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Comprehensive learning management system engineered with Python and Django. Features role-based dashboards (Admin, Instructor, Student), course curriculum authoring, lesson video streaming, interactive student assignments, and automated quiz evaluation pipelines.",
     architecture:
       "Multi-app Django architecture (accounts, courses, lessons, assignments, quizzes, reports, notifications) with relational SQLite/PostgreSQL schema, session-based RBAC, and analytics aggregation.",
     stack: ["Python", "Django", "PostgreSQL", "JavaScript", "Bootstrap 5", "RBAC", "REST API"],
     role: "Backend & Full Stack Engineer (Python/Django)",
-    liveUrl: "https://github.com/programmermdemonmiah/learning_management_system",
-    githubUrl: "https://github.com/programmermdemonmiah/learning_management_system",
     highlights: [
       "Multi-tier role management with customized dashboards for Admins, Instructors, and Students",
       "Curriculum structure supporting multi-lesson progression, video streams, and download resources",
@@ -326,16 +322,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "ManageCash Financial & Cashflow Management Engine",
     tagline: "Real-time financial cashflow tracker with multi-account ledgers & balance sheets",
     category: "Enterprise SaaS",
-    status: "Live Web System",
-    statusType: "production",
+    status: "Completed System",
+    statusType: "completed",
     description:
       "Enterprise-grade financial tracking system designed in Django. Powers multi-account cash balance ledgers, income and expenditure categorization, automated reconciliation calculations, and real-time profit and loss (P&L) statements.",
     architecture:
       "Relational ledger architecture with double-entry transaction indexing, automated account debit/credit synchronization, and exportable financial performance summaries.",
     stack: ["Python", "Django", "Financial Ledger", "SQLite", "Bootstrap", "Chart.js", "Data Analytics"],
     role: "Backend Developer & Database Architect",
-    liveUrl: "https://github.com/programmermdemonmiah/cash_management",
-    githubUrl: "https://github.com/programmermdemonmiah/cash_management",
     highlights: [
       "Double-entry financial ledger accounting for multi-account cash balances and reserves",
       "Automated revenue vs. expense visualization and monthly P&L statement generation",
@@ -353,16 +347,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Quantum Assessment Quiz & Examination Engine",
     tagline: "High-speed timed examination platform with asynchronous AJAX evaluation",
     category: "Full Stack Web",
-    status: "Live Web System",
-    statusType: "production",
+    status: "Completed System",
+    statusType: "completed",
     description:
       "Interactive online assessment platform built with Django and asynchronous AJAX request handling. Supports timed question navigation, question bank seeders, instant grading feedback, and candidate performance analytics.",
     architecture:
       "Django MVC with asynchronous jQuery/AJAX submission handlers, dynamic countdown timers, and server-side scoring pipelines.",
     stack: ["Python", "Django", "AJAX", "jQuery", "Bootstrap", "SQLite", "Assessment Engine"],
     role: "Full Stack Developer (Django + Asynchronous UI)",
-    liveUrl: "https://github.com/programmermdemonmiah/quiz_application",
-    githubUrl: "https://github.com/programmermdemonmiah/quiz_application",
     highlights: [
       "Asynchronous non-blocking AJAX question submission preventing exam state loss",
       "Configurable countdown timer with auto-submit logic upon expiration",
@@ -380,16 +372,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Wholesale B2B Multi-Vendor Commerce Platform",
     tagline: "Cross-platform Flutter B2B marketplace with bulk tiers & distributor cataloging",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Large-scale cross-platform B2B wholesale mobile commerce ecosystem engineered in Flutter. Supports bulk tier pricing schedules, minimum order quantity (MOQ) logic, verified supplier directories, and wholesale cart persistence across iOS and Android.",
     architecture:
       "Modular Flutter clean architecture utilizing BLoC/Provider state management, cached network asset pipelines, and RESTful catalog endpoints with local offline persistence.",
     stack: ["Flutter", "Dart", "B2B Commerce", "Android", "iOS", "State Management", "REST API"],
     role: "Mobile Application Architect (Flutter)",
-    liveUrl: "https://github.com/programmermdemonmiah/wholesell_shop",
-    githubUrl: "https://github.com/programmermdemonmiah/wholesell_shop",
     highlights: [
       "Automated bulk pricing tier calculation based on order volumes and MOQ constraints",
       "Multi-vendor supplier directory with verified distributor credentials and messaging",
@@ -407,16 +397,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Aether Real-Time Chat & Voice Messaging App",
     tagline: "High-concurrency Flutter instant messenger with live voice notes & presence sync",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Cross-platform real-time mobile messaging application developed in Flutter. Features real-time bidirectional message synchronization, animated audio waveform voice messages, active user presence indicators, typing status broadcasts, and rich media attachment previews.",
     architecture:
       "Reactive event-driven mobile architecture with WebSocket channel listeners, asynchronous local message caching (SQLite), audio encoding pipelines, and push notification relays.",
     stack: ["Flutter", "Dart", "WebSockets", "Voice Recording", "Audio Waveforms", "Push Notifications", "Clean Architecture"],
     role: "Lead Mobile Engineer (Flutter)",
-    liveUrl: "https://github.com/programmermdemonmiah/Chats-App",
-    githubUrl: "https://github.com/programmermdemonmiah/Chats-App",
     highlights: [
       "Sub-50ms message propagation with WebSocket channel broadcasting and delivery receipts",
       "Integrated audio recording pipeline with real-time waveform visualizers and playback controls",
@@ -434,16 +422,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "GourmetGo Food Ordering & Delivery Mobile App",
     tagline: "Smooth Flutter food ordering mobile application with interactive menus & cart sync",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Consumer food ordering and gourmet restaurant mobile application crafted with Flutter. Features multi-restaurant discovery carousels, dynamic meal customization, real-time cart subtotal and discount computations, and delivery order tracking.",
     architecture:
       "Flutter reactive UI architecture featuring stateful cart controllers, smooth Hero image transitions, localized currency formatting, and responsive drawer navigation.",
     stack: ["Flutter", "Dart", "Food Delivery", "Mobile UX", "Cart Engine", "REST API"],
     role: "Mobile UI/UX & Flutter Developer",
-    liveUrl: "https://github.com/programmermdemonmiah/Food-App",
-    githubUrl: "https://github.com/programmermdemonmiah/Food-App",
     highlights: [
       "Interactive meal option configuration with extra toppings and special instructions",
       "Dynamic shopping cart state engine with real-time delivery fee and coupon calculations",
@@ -461,16 +447,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "DeepCut AI Photo Background Remover & Biometric Studio",
     tagline: "Computer vision background removal engine with Python neural matting & Flutter UI",
     category: "Full Stack Web",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Automated computer vision and background extraction platform featuring a Python deep-learning matting backend and a cross-platform Flutter interface. Enables one-click subject segmentation, edge refinement brushes, defringing, and export of transparent PNG and layered PSD cutouts.",
     architecture:
       "Client-server neural processing pipeline combining a high-performance Python FastAPI service with computer vision segmentation models and a Flutter desktop/mobile workbench.",
     stack: ["Python", "Computer Vision", "Flutter", "FastAPI", "Deep Learning", "Image Matting", "Cross-Platform"],
     role: "Full Stack & AI Integration Engineer",
-    liveUrl: "https://github.com/programmermdemonmiah/photo_bg_remover",
-    githubUrl: "https://github.com/programmermdemonmiah/photo_bg_remover",
     highlights: [
       "Neural semantic segmentation algorithm producing sub-pixel edge matting along fine hair details",
       "Interactive neural refinement brush with adjustable brush radius and refinement strengths",
@@ -488,16 +472,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "DocCare Doctor Appointment & Healthcare Booking Mobile App",
     tagline: "Flutter medical consultation platform with doctor booking & digital prescriptions",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Full-featured healthcare mobile application engineered in Flutter. Features specialist doctor cataloging, interactive consultation calendar scheduling, in-person and video appointment booking, prescription record management, and push notification appointment reminders.",
     architecture:
       "Reactive Flutter BLoC architecture integrating calendar scheduling state machines, secure patient profile encryption, and RESTful hospital management API synchronization.",
     stack: ["Flutter", "Dart", "Healthcare", "Doctor Booking", "Telemedicine", "REST API", "Android", "iOS"],
     role: "Lead Mobile Application Engineer (Flutter)",
-    liveUrl: "https://github.com/programmermdemonmiah/health_care_book_app",
-    githubUrl: "https://github.com/programmermdemonmiah/health_care_book_app",
     highlights: [
       "Dynamic doctor schedule calendar with automated slot conflict prevention",
       "In-person and virtual telemedicine consultation booking workflows",
@@ -515,16 +497,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Somoyer Dristi TV - Live Streaming Broadcast Mobile & Smart TV App",
     tagline: "High-concurrency HLS/RTMP 24/7 television broadcast streaming application",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Cross-platform live television channel broadcasting mobile application engineered with Flutter. Powers 24/7 high-definition live video feeds with adaptive bitrate HLS streaming, interactive program guide (EPG) timelines, channel switching carousels, and Smart TV / Android TV optimization.",
     architecture:
       "Low-latency video pipeline utilizing ExoPlayer & AVPlayer native bridges, HLS adaptive multi-bitrate decoders, and background stream audio services.",
     stack: ["Flutter", "Dart", "HLS Streaming", "Video Player", "Android TV", "ExoPlayer", "Live Broadcast"],
     role: "Mobile Video Streaming Engineer (Flutter)",
-    liveUrl: "https://github.com/programmermdemonmiah/TV_Channel_Streaming_App",
-    githubUrl: "https://github.com/programmermdemonmiah/TV_Channel_Streaming_App",
     highlights: [
       "Adaptive bitrate HLS live streaming with sub-2-second video buffering",
       "Full Electronic Program Guide (EPG) timeline schedule with upcoming show reminders",
@@ -542,16 +522,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "SportsBD Live Cricket & Match Streaming Mobile App",
     tagline: "Real-time sports score tracker & video streaming engine with ball-by-ball commentary",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "High-traffic sports broadcast mobile application developed in Flutter. Delivers real-time cricket and football match scores, over-by-over progression graphs, instantaneous ball-by-ball commentary feeds, tournament fixture tables, and live stream video integrations.",
     architecture:
       "Event-driven mobile architecture with WebSocket score subscriptions, high-frequency state updates, cached player statistics, and background push notification dispatchers.",
     stack: ["Flutter", "Dart", "Sports Live", "WebSockets", "Score Engine", "Push Notifications", "Android", "iOS"],
     role: "Lead Mobile App Developer (Flutter)",
-    liveUrl: "https://github.com/programmermdemonmiah/sportsbd_app",
-    githubUrl: "https://github.com/programmermdemonmiah/sportsbd_app",
     highlights: [
       "Sub-second cricket live score synchronization with ball-by-ball audio commentary",
       "Interactive over-by-over run rate analysis and projected score calculators",
@@ -569,16 +547,14 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     name: "Asmi Super Shop Retail & Mobile POS Platform",
     tagline: "Smart supermarket point-of-sale mobile app with barcode scanning & inventory sync",
     category: "Mobile App",
-    status: "Live Application",
-    statusType: "production",
+    status: "In Development",
+    statusType: "development",
     description:
       "Modern retail checkout and inventory mobile application engineered in Flutter. Features camera-based barcode scanning for rapid product addition, real-time cart subtotal and tax calculation, automated digital receipt generation, and customer loyalty point reconciliation.",
     architecture:
       "Offline-first POS mobile architecture using local SQLite storage, camera hardware barcode decoders, thermal receipt printer Bluetooth protocols, and cloud ERP inventory sync.",
     stack: ["Flutter", "Dart", "Mobile POS", "Barcode Scanner", "Inventory Ledger", "Bluetooth Printing", "Retail"],
     role: "Mobile System Architect & Flutter Developer",
-    liveUrl: "https://github.com/programmermdemonmiah/asmi_super_shop",
-    githubUrl: "https://github.com/programmermdemonmiah/asmi_super_shop",
     highlights: [
       "High-speed camera barcode scanner capable of decoding damaged and low-contrast labels",
       "Offline transaction queue with automatic cloud inventory synchronization upon reconnection",
@@ -611,8 +587,8 @@ export function getDiscoveredProjects() {
   }
   return VERIFIED_PROJECT_DEFINITIONS.map(({ _repoKeywords, ...p }) => ({
     ...p,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    screenshots: ["https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"],
+    image: p.image || "",
+    screenshots: p.screenshots || [],
     lastSyncedAt: new Date().toISOString(),
     verifiedLive: true,
     approved: true,
@@ -636,9 +612,9 @@ export interface VerifiedProject {
   id: string;
   name: string;
   tagline: string;
-  category: "Mobile App" | "Enterprise SaaS" | "Enterprise" | "E-Commerce" | "Healthcare" | "Full Stack Web";
-  status: "Live Production" | "Live Application" | "Live Web System";
-  statusType: "production" | "live";
+  category: "Mobile App" | "Enterprise SaaS" | "Enterprise" | "E-Commerce" | "Healthcare" | "Full Stack Web" | (string & {});
+  status: "Live Production" | "Live Application" | "Live Web System" | "In Development" | "Completed System" | (string & {});
+  statusType: "production" | "live" | "development" | "completed" | (string & {});
   description: string;
   architecture: string;
   stack: string[];
@@ -737,11 +713,10 @@ export async function saveProjectToDiscovery(projectInput) {
     }
   }
 
-  // Fallback if still empty
+  // Real Screenshots Only Rule: If screenshots cannot be resolved from store or live capture,
+  // maintain empty array to let the UI present the clean, authentic in-development architecture state.
   if (screenshots.length === 0) {
-    screenshots = [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    ];
+    screenshots = [];
   }
 
   // Format stack array
@@ -790,7 +765,7 @@ export async function saveProjectToDiscovery(projectInput) {
     role: (projectInput.role || "Lead Software Engineer").trim(),
     highlights: highlights.length > 0 ? highlights : ["Production-grade implementation"],
     metrics,
-    image: screenshots[0],
+    image: screenshots[0] || "",
     screenshots,
     liveUrl: projectInput.liveUrl?.trim() || undefined,
     secondaryUrl: secondaryUrl || undefined,

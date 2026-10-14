@@ -187,8 +187,20 @@ async function runAllTests() {
       assert.ok(!p.name.includes("_") && !p.name.includes("/"), `${p.id} title must not look like a raw repo name`);
       assert.ok(p.description && p.description.length > 20, `${p.id} must have a descriptive summary`);
       assert.ok(Array.isArray(p.stack) && p.stack.length > 0, `${p.id} must specify technology stack`);
-      assert.ok(Array.isArray(p.screenshots) && p.screenshots.length > 0, `${p.id} must have at least 1 verified screenshot`);
-      assert.equal(p.verifiedLive, true, `${p.id} must be verified live`);
+      assert.ok(Array.isArray(p.screenshots), `${p.id} must have a valid screenshots array`);
+
+      // Real Screenshots Only Rule: Live deployed projects must have real screenshots,
+      // while projects in active development legitimately show the clean architecture preview state.
+      if (p.status.includes("Live")) {
+        assert.ok(p.screenshots.length > 0, `${p.id} marked Live must have authentic screenshots`);
+      }
+
+      // Rule 3: Never expose private repository URLs in liveUrl
+      if (p.liveUrl) {
+        assert.doesNotMatch(p.liveUrl, /github\.com\/programmermdemonmiah/, `${p.id} liveUrl must not point to private repo`);
+      }
+
+      assert.equal(p.verifiedLive, true, `${p.id} must be verified in registry`);
     }
   });
 

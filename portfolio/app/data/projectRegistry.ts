@@ -10,9 +10,9 @@ export interface VerifiedProject {
   id: string;
   name: string;
   tagline: string;
-  category: "Mobile App" | "Enterprise SaaS" | "Enterprise" | "E-Commerce" | "Healthcare" | "Full Stack Web";
-  status: "Live Production" | "Live Application" | "Live Web System";
-  statusType: "production" | "live";
+  category: "Mobile App" | "Enterprise SaaS" | "Enterprise" | "E-Commerce" | "Healthcare" | "Full Stack Web" | (string & {});
+  status: "Live Production" | "Live Application" | "Live Web System" | "In Development" | "Completed System" | (string & {});
+  statusType: "production" | "live" | "development" | "completed" | (string & {});
   description: string;
   architecture: string;
   stack: string[];
@@ -43,8 +43,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "SportsBD Live Cricket & Match Streaming Mobile App",
     "tagline": "Real-time sports score tracker & video streaming engine with ball-by-ball commentary",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "High-traffic sports broadcast mobile application developed in Flutter. Delivers real-time cricket and football match scores, over-by-over progression graphs, instantaneous ball-by-ball commentary feeds, tournament fixture tables, and live stream video integrations.",
     "architecture": "Event-driven mobile architecture with WebSocket score subscriptions, high-frequency state updates, cached player statistics, and background push notification dispatchers.",
     "stack": [
@@ -77,12 +77,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Flutter Mobile"
       }
     ],
-    "image": "/screenshots/sportsbd-live-streaming.jpg",
-    "screenshots": [
-      "/screenshots/sportsbd-live-streaming.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/sportsbd_app",
-    "githubUrl": "https://github.com/programmermdemonmiah/sportsbd_app",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:23:07.819Z",
     "verifiedLive": true,
     "approved": true,
@@ -93,8 +89,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Asmi Super Shop Retail & Mobile POS Platform",
     "tagline": "Smart supermarket point-of-sale mobile app with barcode scanning & inventory sync",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Modern retail checkout and inventory mobile application engineered in Flutter. Features camera-based barcode scanning for rapid product addition, real-time cart subtotal and tax calculation, automated digital receipt generation, and customer loyalty point reconciliation.",
     "architecture": "Offline-first POS mobile architecture using local SQLite storage, camera hardware barcode decoders, thermal receipt printer Bluetooth protocols, and cloud ERP inventory sync.",
     "stack": [
@@ -126,12 +122,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Flutter iOS & Android"
       }
     ],
-    "image": "/screenshots/asmi-supershop-pos.jpg",
-    "screenshots": [
-      "/screenshots/asmi-supershop-pos.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/asmi_super_shop",
-    "githubUrl": "https://github.com/programmermdemonmiah/asmi_super_shop",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:23:07.819Z",
     "verifiedLive": true,
     "approved": true,
@@ -142,8 +134,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Somoyer Dristi TV - Live Streaming Broadcast Mobile & Smart TV App",
     "tagline": "High-concurrency HLS/RTMP 24/7 television broadcast streaming application",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Cross-platform live television channel broadcasting mobile application engineered with Flutter. Powers 24/7 high-definition live video feeds with adaptive bitrate HLS streaming, interactive program guide (EPG) timelines, channel switching carousels, and Smart TV / Android TV optimization.",
     "architecture": "Low-latency video pipeline utilizing ExoPlayer & AVPlayer native bridges, HLS adaptive multi-bitrate decoders, and background stream audio services.",
     "stack": [
@@ -175,12 +167,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Mobile & Smart TV"
       }
     ],
-    "image": "/screenshots/somoyer-dristi-tv.jpg",
-    "screenshots": [
-      "/screenshots/somoyer-dristi-tv.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/TV_Channel_Streaming_App",
-    "githubUrl": "https://github.com/programmermdemonmiah/TV_Channel_Streaming_App",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:23:07.818Z",
     "verifiedLive": true,
     "approved": true,
@@ -191,8 +179,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "DocCare Doctor Appointment & Healthcare Booking Mobile App",
     "tagline": "Flutter medical consultation platform with doctor booking & digital prescriptions",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Full-featured healthcare mobile application engineered in Flutter. Features specialist doctor cataloging, interactive consultation calendar scheduling, in-person and video appointment booking, prescription record management, and push notification appointment reminders.",
     "architecture": "Reactive Flutter BLoC architecture integrating calendar scheduling state machines, secure patient profile encryption, and RESTful hospital management API synchronization.",
     "stack": [
@@ -225,12 +213,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Clean BLoC"
       }
     ],
-    "image": "/screenshots/doccare-health-booking.jpg",
-    "screenshots": [
-      "/screenshots/doccare-health-booking.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/health_care_book_app",
-    "githubUrl": "https://github.com/programmermdemonmiah/health_care_book_app",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:23:07.810Z",
     "verifiedLive": true,
     "approved": true,
@@ -241,8 +225,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "DeepCut AI Photo Background Remover & Biometric Studio",
     "tagline": "Computer vision background removal engine with Python neural matting & Flutter UI",
     "category": "Full Stack Web",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Automated computer vision and background extraction platform featuring a Python deep-learning matting backend and a cross-platform Flutter interface. Enables one-click subject segmentation, edge refinement brushes, defringing, and export of transparent PNG and layered PSD cutouts.",
     "architecture": "Client-server neural processing pipeline combining a high-performance Python FastAPI service with computer vision segmentation models and a Flutter desktop/mobile workbench.",
     "stack": [
@@ -274,12 +258,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Transparent PNG & PSD"
       }
     ],
-    "image": "/screenshots/ai-background-remover.jpg",
-    "screenshots": [
-      "/screenshots/ai-background-remover.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/photo_bg_remover",
-    "githubUrl": "https://github.com/programmermdemonmiah/photo_bg_remover",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:18:21.838Z",
     "verifiedLive": true,
     "approved": true,
@@ -290,8 +270,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "GourmetGo Food Ordering & Delivery Mobile App",
     "tagline": "Smooth Flutter food ordering mobile application with interactive menus & cart sync",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Consumer food ordering and gourmet restaurant mobile application crafted with Flutter. Features multi-restaurant discovery carousels, dynamic meal customization, real-time cart subtotal and discount computations, and delivery order tracking.",
     "architecture": "Flutter reactive UI architecture featuring stateful cart controllers, smooth Hero image transitions, localized currency formatting, and responsive drawer navigation.",
     "stack": [
@@ -322,12 +302,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Flutter Mobile"
       }
     ],
-    "image": "/screenshots/food-delivery-mobile.jpg",
-    "screenshots": [
-      "/screenshots/food-delivery-mobile.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/Food-App",
-    "githubUrl": "https://github.com/programmermdemonmiah/Food-App",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:18:21.837Z",
     "verifiedLive": true,
     "approved": true,
@@ -338,8 +314,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Aether Real-Time Chat & Voice Messaging App",
     "tagline": "High-concurrency Flutter instant messenger with live voice notes & presence sync",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Cross-platform real-time mobile messaging application developed in Flutter. Features real-time bidirectional message synchronization, animated audio waveform voice messages, active user presence indicators, typing status broadcasts, and rich media attachment previews.",
     "architecture": "Reactive event-driven mobile architecture with WebSocket channel listeners, asynchronous local message caching (SQLite), audio encoding pipelines, and push notification relays.",
     "stack": [
@@ -371,12 +347,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Flutter iOS & Android"
       }
     ],
-    "image": "/screenshots/chats-messenger-mobile.jpg",
-    "screenshots": [
-      "/screenshots/chats-messenger-mobile.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/Chats-App",
-    "githubUrl": "https://github.com/programmermdemonmiah/Chats-App",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:18:21.836Z",
     "verifiedLive": true,
     "approved": true,
@@ -387,8 +359,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Wholesale B2B Multi-Vendor Commerce Platform",
     "tagline": "Cross-platform Flutter B2B marketplace with bulk tiers & distributor cataloging",
     "category": "Mobile App",
-    "status": "Live Application",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Large-scale cross-platform B2B wholesale mobile commerce ecosystem engineered in Flutter. Supports bulk tier pricing schedules, minimum order quantity (MOQ) logic, verified supplier directories, and wholesale cart persistence across iOS and Android.",
     "architecture": "Modular Flutter clean architecture utilizing BLoC/Provider state management, cached network asset pipelines, and RESTful catalog endpoints with local offline persistence.",
     "stack": [
@@ -420,12 +392,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Clean Architecture"
       }
     ],
-    "image": "/screenshots/wholesell-shop-mobile.jpg",
-    "screenshots": [
-      "/screenshots/wholesell-shop-mobile.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/wholesell_shop",
-    "githubUrl": "https://github.com/programmermdemonmiah/wholesell_shop",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:18:21.827Z",
     "verifiedLive": true,
     "approved": true,
@@ -436,8 +404,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Quantum Assessment Quiz & Examination Engine",
     "tagline": "High-speed timed examination platform with asynchronous AJAX evaluation",
     "category": "Full Stack Web",
-    "status": "Live Web System",
-    "statusType": "production",
+    "status": "Completed System",
+    "statusType": "completed",
     "description": "Interactive online assessment platform built with Django and asynchronous AJAX request handling. Supports timed question navigation, question bank seeders, instant grading feedback, and candidate performance analytics.",
     "architecture": "Django MVC with asynchronous jQuery/AJAX submission handlers, dynamic countdown timers, and server-side scoring pipelines.",
     "stack": [
@@ -469,13 +437,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Python Django"
       }
     ],
-    "image": "/screenshots/quiz-assessment-platform.jpg",
-    "screenshots": [
-      "/screenshots/quiz-assessment-platform.jpg",
-      "/screenshots/quiz-app-preview.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/quiz_application",
-    "githubUrl": "https://github.com/programmermdemonmiah/quiz_application",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:13:25.741Z",
     "verifiedLive": true,
     "approved": true,
@@ -486,8 +449,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "ManageCash Financial & Cashflow Management Engine",
     "tagline": "Real-time financial cashflow tracker with multi-account ledgers & balance sheets",
     "category": "Enterprise SaaS",
-    "status": "Live Web System",
-    "statusType": "production",
+    "status": "Completed System",
+    "statusType": "completed",
     "description": "Enterprise-grade financial tracking system designed in Django. Powers multi-account cash balance ledgers, income and expenditure categorization, automated reconciliation calculations, and real-time profit and loss (P&L) statements.",
     "architecture": "Relational ledger architecture with double-entry transaction indexing, automated account debit/credit synchronization, and exportable financial performance summaries.",
     "stack": [
@@ -519,12 +482,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Python Django"
       }
     ],
-    "image": "/screenshots/managecash-dashboard.jpg",
-    "screenshots": [
-      "/screenshots/managecash-dashboard.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/cash_management",
-    "githubUrl": "https://github.com/programmermdemonmiah/cash_management",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:13:25.740Z",
     "verifiedLive": true,
     "approved": true,
@@ -535,8 +494,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Django Enterprise Learning Management System",
     "tagline": "Modular educational portal with course authoring, assignments & quiz evaluation",
     "category": "Full Stack Web",
-    "status": "Live Web System",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Comprehensive learning management system engineered with Python and Django. Features role-based dashboards (Admin, Instructor, Student), course curriculum authoring, lesson video streaming, interactive student assignments, and automated quiz evaluation pipelines.",
     "architecture": "Multi-app Django architecture (accounts, courses, lessons, assignments, quizzes, reports, notifications) with relational SQLite/PostgreSQL schema, session-based RBAC, and analytics aggregation.",
     "stack": [
@@ -568,12 +527,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
         "value": "Automated"
       }
     ],
-    "image": "/screenshots/django-lms-dashboard.jpg",
-    "screenshots": [
-      "/screenshots/django-lms-dashboard.jpg"
-    ],
-    "liveUrl": "https://github.com/programmermdemonmiah/learning_management_system",
-    "githubUrl": "https://github.com/programmermdemonmiah/learning_management_system",
+    "image": "",
+    "screenshots": [],
     "lastSyncedAt": "2026-10-14T20:13:25.740Z",
     "verifiedLive": true,
     "approved": true,
@@ -584,8 +539,8 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
     "name": "Donation Club MLM & Community Contribution Platform",
     "tagline": "Laravel 13 community contribution platform with 10-tier referral tree & double-entry ledger",
     "category": "Enterprise SaaS",
-    "status": "Live Web System",
-    "statusType": "production",
+    "status": "In Development",
+    "statusType": "development",
     "description": "Community contribution and multi-generation affiliate platform built with Laravel 13, Inertia.js, React, and TypeScript. Features append-only double-context ledgers, 10-generation materialized-path referral tree calculation, Google 2FA security, and automated commission distribution.",
     "architecture": "Modular Laravel 13 MVC with Inertia.js React frontend, append-only double-context ledger (DECIMAL(16,2) bcmath precision), 10-generation materialized path referral engine, and Google 2FA authentication.",
     "stack": [
@@ -624,8 +579,6 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
       "/screenshots/donation-club-hero-2.png",
       "/screenshots/donation-club-hero-3.png"
     ],
-    "liveUrl": "https://github.com/programmermdemonmiah/donation_club",
-    "githubUrl": "https://github.com/programmermdemonmiah/donation_club",
     "lastSyncedAt": "2026-10-14T20:13:25.713Z",
     "verifiedLive": true,
     "approved": true,
