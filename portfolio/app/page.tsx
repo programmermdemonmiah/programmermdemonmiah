@@ -353,14 +353,16 @@ function DeveloperModel() {
       viewer.setAttribute("src", DEVELOPER_MODEL_URL);
       viewer.setAttribute("alt", "Interactive 3D web developer character");
       viewer.setAttribute("camera-controls", "");
-      viewer.setAttribute("orientation", "0deg 0deg 0deg");
+      // Correct the imported character's pitch so it stands upright instead of facing the floor.
+      viewer.setAttribute("orientation", "90deg 0deg 0deg");
       viewer.setAttribute("interaction-prompt", "none");
       viewer.setAttribute("shadow-intensity", "1");
       viewer.setAttribute("exposure", "1.05");
       viewer.setAttribute("environment-image", "neutral");
-      viewer.setAttribute("camera-orbit", "0deg 78deg 2.4m");
-      viewer.setAttribute("camera-target", "0m 1.05m 0m");
-      viewer.setAttribute("field-of-view", "26deg");
+      // Let model-viewer frame the full character automatically; avoid a low or clipped camera target.
+      viewer.setAttribute("camera-orbit", "0deg 75deg auto");
+      viewer.removeAttribute("camera-target");
+      viewer.setAttribute("field-of-view", "30deg");
       viewer.setAttribute("loading", "eager");
       viewer.style.width = "100%";
       viewer.style.height = "100%";
