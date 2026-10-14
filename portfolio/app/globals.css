@@ -1123,3 +1123,77 @@ main{overflow-x:clip;background:#0c0c0c}
     transform: translateY(0);
   }
 }
+
+
+/* Hero composition: 3D model in the background, copy centered on the left foreground. */
+@media (min-width: 901px) {
+  .hero {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    min-height: min(790px, calc(100svh - 90px)) !important;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-copy {
+    position: relative !important;
+    z-index: 3 !important;
+    width: min(62%, 760px) !important;
+    max-width: 760px !important;
+    align-self: center !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .hero-model-wrap {
+    position: absolute !important;
+    z-index: 1 !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    justify-self: stretch !important;
+    margin: 0 !important;
+    pointer-events: none;
+    opacity: .72;
+  }
+
+  .hero-model-frame {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: radial-gradient(ellipse at 72% 48%, rgba(229,57,53,.16), transparent 42%), linear-gradient(90deg, #0c0c0c 0%, rgba(12,12,12,.88) 34%, rgba(12,12,12,.2) 100%) !important;
+  }
+
+  .hero-model-frame model-viewer {
+    z-index: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+  }
+
+  .hero-model-wrap {
+    position: relative;
+    z-index: 1;
+  }
+}
