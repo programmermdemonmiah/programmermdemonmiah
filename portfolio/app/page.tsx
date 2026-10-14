@@ -497,7 +497,7 @@ export default function Home() {
           >
             {menuOpen ? <X size={21} /> : <Menu size={21} />}
           </button>
-        </nav>
+        </motion.nav>
 
         <div className="hero">
           <motion.div className="hero-copy" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}>
