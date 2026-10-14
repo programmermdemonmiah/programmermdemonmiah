@@ -1,4 +1,4 @@
-const fs = require("node:fs");
+import fs from "node:fs";
 
 const token = process.env.GH_TOKEN;
 const username = "programmermdemonmiah";
@@ -20,7 +20,6 @@ async function getContributions(from, to) {
           totalCommitContributions
           totalIssueContributions
           totalPullRequestContributions
-          totalRepositoryContributions
           contributionCalendar {
             totalContributions
           }
