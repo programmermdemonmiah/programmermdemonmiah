@@ -353,14 +353,14 @@ function DeveloperModel() {
       viewer.setAttribute("src", DEVELOPER_MODEL_URL);
       viewer.setAttribute("alt", "Interactive 3D web developer character");
       viewer.setAttribute("camera-controls", "");
-      viewer.setAttribute("auto-rotate", "");
-      viewer.setAttribute("rotation-per-second", "16deg");
+      viewer.setAttribute("orientation", "0deg 0deg 0deg");
       viewer.setAttribute("interaction-prompt", "none");
       viewer.setAttribute("shadow-intensity", "1");
       viewer.setAttribute("exposure", "1.05");
       viewer.setAttribute("environment-image", "neutral");
-      viewer.setAttribute("camera-orbit", "0deg 75deg 2.8m");
-      viewer.setAttribute("field-of-view", "30deg");
+      viewer.setAttribute("camera-orbit", "0deg 78deg 2.4m");
+      viewer.setAttribute("camera-target", "0m 1.05m 0m");
+      viewer.setAttribute("field-of-view", "26deg");
       viewer.setAttribute("loading", "eager");
       viewer.style.width = "100%";
       viewer.style.height = "100%";
