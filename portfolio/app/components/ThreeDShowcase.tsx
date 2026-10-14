@@ -1,154 +1,130 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, Float, Stars, useGLTF } from "@react-three/drei";
-import { motion, useReducedMotion } from "framer-motion";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import * as THREE from "three";
-
-const MODEL_URL = "https://raw.githubusercontent.com/programmermdemonmiah/programmermdemonmiah/main/assets/tripo_pbr_model_47f48f2a-77c7-4a1c-8e45-7bf8597d942a_meshopt.glb";
-
-function Model() {
-  const { scene } = useGLTF(MODEL_URL);
-  const group = useRef<THREE.Group>(null);
-  const cloned = useMemo(() => scene.clone(true), [scene]);
-  const layout = useMemo(() => {
-    const box = new THREE.Box3().setFromObject(cloned);
-    const size = box.getSize(new THREE.Vector3());
-    const center = box.getCenter(new THREE.Vector3());
-    const maxSize = Math.max(size.x, size.y, size.z, 0.001);
-    return { center, scale: 4.25 / maxSize };
-  }, [cloned]);
-
-  useEffect(() => {
-    cloned.traverse((object) => {
-      if (!(object instanceof THREE.Mesh)) return;
-      object.castShadow = true;
-      object.receiveShadow = true;
-      if (object.material instanceof THREE.MeshStandardMaterial) {
-        object.material.envMapIntensity = 2.1;
-        object.material.roughness = Math.min(object.material.roughness || 0.5, 0.46);
-        object.material.metalness = Math.max(object.material.metalness, 0.12);
-      }
-    });
-  }, [cloned]);
-
-  useFrame((state, delta) => {
-    if (!group.current) return;
-    const t = state.clock.elapsedTime;
-    // Pointer movement must not affect the model's apparent size or orientation.
-    // Keep a slow, predictable rotation for a calm background animation.
-    const targetY = t * 0.035;
-    const targetX = 0;
-
-    group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 2.4, delta);
-    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 2.4, delta);
-    group.current.position.x = THREE.MathUtils.damp(group.current.position.x, 1.58, 2.4, delta);
-    group.current.position.y = THREE.MathUtils.damp(group.current.position.y, Math.sin(t * 0.42) * 0.045, 2.5, delta);
-  });
-
-  return <group ref={group} scale={layout.scale}><primitive object={cloned} position={[-layout.center.x, -layout.center.y, -layout.center.z]} /></group>;
-}
-
-function CameraRig() {
-  const { camera } = useThree();
-  useEffect(() => {
-    // Fixed camera: no pointer tracking, dolly, or zoom.
-    camera.position.set(0, 0, 6.8);
-    camera.lookAt(0, 0, 0);
-    camera.updateProjectionMatrix();
-  }, [camera]);
-  return null;
-}
-
-function SceneDecor() {
-  const ringA = useRef<THREE.Mesh>(null);
-  const ringB = useRef<THREE.Mesh>(null);
-  const ringC = useRef<THREE.Mesh>(null);
-
-  useFrame((state, delta) => {
-    const t = state.clock.elapsedTime;
-    if (ringA.current) {
-      ringA.current.rotation.z += delta * 0.11;
-      ringA.current.rotation.y += delta * 0.035;
-      ringA.current.position.y = Math.sin(t * 0.4) * 0.035;
-    }
-    if (ringB.current) ringB.current.rotation.z -= delta * 0.065;
-    if (ringC.current) ringC.current.rotation.x += delta * 0.045;
-  });
-
-  return <>
-    <mesh ref={ringA} rotation={[Math.PI / 2.2, 0.18, 0]}><torusGeometry args={[2.55, 0.012, 14, 180]} /><meshBasicMaterial color="#e53935" transparent opacity={0.4} /></mesh>
-    <mesh ref={ringB} rotation={[Math.PI / 2.75, -0.45, 0.2]}><torusGeometry args={[3.05, 0.007, 10, 180]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.09} /></mesh>
-    <mesh ref={ringC} rotation={[0.6, Math.PI / 2.5, 0]}><torusGeometry args={[3.45, 0.005, 10, 180]} /><meshBasicMaterial color="#e53935" transparent opacity={0.13} /></mesh>
-    <Float speed={0.75} rotationIntensity={0.7} floatIntensity={0.7}><mesh position={[-2.45, 1.35, 0.4]}><icosahedronGeometry args={[0.13, 1]} /><meshStandardMaterial color="#e53935" emissive="#e53935" emissiveIntensity={0.65} metalness={0.8} roughness={0.22} /></mesh></Float>
-    <Float speed={0.8} rotationIntensity={0.65} floatIntensity={0.75}><mesh position={[2.45, 1.0, 0.45]}><octahedronGeometry args={[0.12, 0]} /><meshStandardMaterial color="#f5f5f5" metalness={0.9} roughness={0.18} /></mesh></Float>
-    <Float speed={0.85} rotationIntensity={0.65} floatIntensity={0.7}><mesh position={[2.15, -1.55, 0.5]}><boxGeometry args={[0.17, 0.17, 0.17]} /><meshStandardMaterial color="#e53935" emissive="#e53935" emissiveIntensity={0.6} metalness={0.7} roughness={0.24} /></mesh></Float>
-  </>;
-}
-
-function Loading() { return <div className="three-d-loading">LOADING 3D EXPERIENCE <span>●</span></div>; }
+import { motion } from "framer-motion";
+import { ArrowUpRight, Github, Linkedin, Mail, Code2 } from "lucide-react";
 
 export default function ThreeDShowcase() {
-  const [ready, setReady] = useState(false);
-  const reducedMotion = useReducedMotion();
+  return (
+    <section className="profile-hero" aria-label="MD. Emon Miah portfolio introduction">
+      <div className="profile-hero-noise" aria-hidden="true" />
+      <div className="profile-hero-grid" aria-hidden="true" />
+      <div className="profile-hero-glow" aria-hidden="true" />
+      <div className="profile-hero-inner">
+        <motion.div
+          className="profile-hero-copy"
+          initial={{ opacity: 0, x: -22 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="profile-hero-kicker"><span /> SOFTWARE ENGINEER <i /> BANGLADESH</div>
+          <p className="profile-hero-index">MD. EMON MIAH / PORTFOLIO</p>
+          <h1>Building digital<br />products that <span>work.</span></h1>
+          <p className="profile-hero-description">
+            I build polished Flutter apps, reliable Go backends, and modern Next.js experiences — from idea to production.
+          </p>
+          <div className="profile-hero-tags">
+            <span><Code2 size={14} /> Flutter</span><span>Go</span><span>Next.js</span><span>Laravel</span>
+          </div>
+          <div className="profile-hero-actions">
+            <a className="profile-hero-primary" href="#projects">Explore projects <ArrowUpRight size={17} /></a>
+            <a className="profile-hero-secondary" href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={17} /> GitHub profile</a>
+          </div>
+          <div className="profile-hero-socials">
+            <a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17} /></a>
+            <a href="https://www.linkedin.com/in/MdEmonMiah" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17} /></a>
+            <a href="#contact" aria-label="Contact"><Mail size={17} /></a>
+            <span className="profile-hero-social-line" />
+            <span>AVAILABLE FOR MEANINGFUL WORK</span>
+          </div>
+        </motion.div>
 
-  return <section className="three-d-showcase" aria-label="MD. Emon Miah interactive 3D hero">
-    <div className="three-d-background" aria-hidden="true" />
-    <div className="three-d-grid" aria-hidden="true" />
-    <div className="three-d-glow" aria-hidden="true" />
+        <motion.div
+          className="profile-hero-visual"
+          initial={{ opacity: 0, scale: .96, x: 18 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: .85, delay: .12, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="profile-hero-orbit profile-hero-orbit-one" aria-hidden="true" />
+          <div className="profile-hero-orbit profile-hero-orbit-two" aria-hidden="true" />
+          <div className="profile-hero-image-frame">
+            <div className="profile-hero-image-top"><span>PROFILE / 01</span><span className="profile-hero-live"><i /> ONLINE</span></div>
+            <img
+              src="https://github.com/programmermdemonmiah.png"
+              alt="MD. Emon Miah GitHub profile"
+              className="profile-hero-avatar"
+              fetchPriority="high"
+            />
+            <div className="profile-hero-image-bottom"><div><small>ENGINEERING</small><strong>Built with purpose.</strong></div><span>EM<span className="profile-hero-mark-dot">.</span></span></div>
+          </div>
+          <div className="profile-hero-floating profile-hero-floating-top"><span className="profile-hero-floating-dot" /> MOBILE <b>+</b> BACKEND</div>
+          <div className="profile-hero-floating profile-hero-floating-bottom"><span>GO</span><i /> FLUTTER <i /> NEXT.JS</div>
+          <div className="profile-hero-visual-caption">CRAFTING SOFTWARE THAT MOVES PEOPLE FORWARD</div>
+        </motion.div>
+      </div>
+      <div className="profile-hero-bottom"><span>01 / INTRODUCTION</span><span className="profile-hero-bottom-rule" /><a href="#about">SCROLL TO EXPLORE ↓</a></div>
 
-    <div className="three-d-stage" aria-hidden="true">
-      {!ready && <Loading />}
-      <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0, 6.8], fov: 43 }} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }} onCreated={() => setReady(true)}>
-        <Suspense fallback={null}>
-          <ambientLight intensity={0.58} />
-          <hemisphereLight intensity={0.8} color="#ffffff" groundColor="#160707" />
-          <spotLight position={[4, 5, 5]} angle={0.5} penumbra={1} intensity={18} color="#ffffff" />
-          <pointLight position={[-4, 1, 2]} intensity={10} color="#e53935" />
-          <pointLight position={[3, -2, 2]} intensity={5} color="#ff7772" />
-          <Environment preset="city" environmentIntensity={0.9} />
-          <Stars radius={13} depth={6} count={reducedMotion ? 180 : 700} factor={1.45} saturation={0} fade speed={reducedMotion ? 0 : 0.18} />
-          <SceneDecor />
-          <Model />
-          <CameraRig />
-        </Suspense>
-      </Canvas>
-    </div>
-
-    <div className="three-d-vignette" aria-hidden="true" />
-
-    <div className="three-d-topline"><span><i /> SOFTWARE ENGINEER · BANGLADESH</span><span>INTERACTIVE 3D PORTFOLIO</span></div>
-
-    <motion.div className="three-d-copy" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}>
-      <span className="three-d-index">MD. EMON MIAH / 01</span>
-      <h1>Building software<br />that <strong>works.</strong></h1>
-      <p>Flutter apps, Go backends, and Next.js products—designed, engineered, and shipped from one place.</p>
-      <div className="three-d-actions"><a className="three-d-button" href="#projects">Explore projects <span>↗</span></a><a className="three-d-link" href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub ↗</a></div>
-    </motion.div>
-
-    <motion.div className="three-d-hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.05, duration: 0.8 }}><span>3D · SLOW MOTION</span><span>SCROLL ↓</span></motion.div>
-    <div className="three-d-bottomline"><span>01</span><span className="three-d-line" /><span>FULL-SCREEN 3D EXPERIENCE</span></div>
-
-    <style jsx>{`
-      .three-d-showcase{position:relative;min-height:calc(100vh - 82px);height:max(720px,calc(100vh - 82px));overflow:hidden;isolation:isolate;background:#0c0c0c;border-bottom:1px solid #292929}
-      .three-d-background{position:absolute;inset:0;z-index:-3;background:radial-gradient(circle at 67% 50%,#260d0d 0%,#130b0b 30%,#0c0c0c 68%,#080808 100%)}
-      .three-d-grid{position:absolute;inset:-20%;z-index:-2;opacity:.14;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:78px 78px;transform:perspective(700px) rotateX(58deg) scale(1.5);transform-origin:center bottom;mask-image:linear-gradient(to top,black,transparent 68%)}
-      .three-d-glow{position:absolute;z-index:0;width:min(820px,74vw);height:min(820px,74vw);left:72%;top:52%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(229,57,53,.22),rgba(229,57,53,.055) 42%,transparent 72%);filter:blur(24px);pointer-events:none}
-
-      /* The 3D canvas is a true background layer. It stays behind every hero text/control layer. */
-      .three-d-stage{position:absolute;z-index:1;inset:0;pointer-events:none}
-      .three-d-stage :global(canvas){position:absolute!important;inset:0;width:100%!important;height:100%!important;display:block}
-      .three-d-vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(12,12,12,.93) 0%,rgba(12,12,12,.68) 25%,rgba(12,12,12,.12) 54%,rgba(12,12,12,.24) 100%),radial-gradient(circle at 68% 50%,transparent 0%,transparent 43%,rgba(0,0,0,.48) 100%)}
-
-      .three-d-topline,.three-d-bottomline{position:absolute;z-index:8;left:30px;right:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#777;font:600 10px/1.2 Arial,sans-serif;letter-spacing:.16em}.three-d-topline{top:24px}.three-d-topline span:first-child{color:#ddd}.three-d-topline i{display:inline-block;width:6px;height:6px;margin-right:8px;border-radius:50%;background:#e53935;box-shadow:0 0 15px rgba(229,57,53,.9)}.three-d-bottomline{bottom:22px}.three-d-line{height:1px;flex:1;max-width:420px;background:#303030}
-      .three-d-copy{position:absolute;z-index:7;left:7.5%;top:0;bottom:0;width:min(560px,43%);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0;text-align:left;transform:none;pointer-events:none}.three-d-index{color:#e53935;font:700 10px/1 Arial,sans-serif;letter-spacing:.18em}.three-d-copy h1{max-width:560px;margin:18px 0 20px;color:#f7f7f7;font:600 clamp(54px,6.2vw,94px)/.9 Kanit,Arial,sans-serif;letter-spacing:-.07em;text-shadow:0 12px 35px rgba(0,0,0,.55)}.three-d-copy h1 strong{color:#e53935;font-weight:650}.three-d-copy p{max-width:430px;margin:0;color:#b7b7b7;font:400 14px/1.75 Arial,sans-serif}.three-d-actions{display:flex;align-items:center;justify-content:flex-start;gap:22px;margin-top:27px;pointer-events:auto}.three-d-button{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border:1px solid #e53935;border-radius:5px;background:#e53935;color:#fff;font:600 12px/1 Arial,sans-serif;transition:transform .25s ease,background .25s ease}.three-d-button:hover{transform:translateY(-2px);background:#c62828}.three-d-link{color:#ddd;font:500 12px/1 Arial,sans-serif}.three-d-link:hover{color:#e53935}.three-d-hint{position:absolute;z-index:7;right:5.5%;bottom:17%;display:flex;flex-direction:column;gap:8px;color:#777;font:600 9px/1 Arial,sans-serif;letter-spacing:.15em;text-align:right}.three-d-loading{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);color:#777;font:600 10px/1 Arial,sans-serif;letter-spacing:.18em;white-space:nowrap}.three-d-loading span{color:#e53935;animation:blink 1s steps(2,end) infinite}@keyframes blink{50%{opacity:.15}}
-
-      @media(max-width:900px){.three-d-copy{left:5%;width:47%;padding:0}.three-d-copy h1{font-size:58px}.three-d-hint{right:5%;bottom:14%}.three-d-glow{left:67%}}
-      @media(max-width:700px){.three-d-showcase{height:760px;min-height:760px}.three-d-topline,.three-d-bottomline{left:18px;right:18px}.three-d-topline span:last-child{display:none}.three-d-copy{left:22px;right:22px;top:0;bottom:0;width:auto;display:flex;align-items:flex-start;justify-content:center;padding:84px 0 44px;text-align:left;transform:none}.three-d-copy h1{margin:11px 0 12px;font-size:43px}.three-d-copy p{max-width:310px;margin-left:0;margin-right:0;font-size:12px;line-height:1.6}.three-d-actions{margin-top:18px;justify-content:flex-start}.three-d-hint{right:20px;bottom:62px;font-size:8px}.three-d-glow{left:78%;top:58%;width:560px;height:560px}.three-d-bottomline{bottom:18px}.three-d-line{max-width:100px}.three-d-vignette{background:linear-gradient(90deg,rgba(12,12,12,.82) 0%,rgba(12,12,12,.58) 42%,rgba(12,12,12,.1) 100%),linear-gradient(180deg,rgba(12,12,12,.48) 0%,transparent 45%,rgba(12,12,12,.45) 100%)}}
-      @media(prefers-reduced-motion:reduce){.three-d-showcase{height:auto;min-height:700px}}
-    `}</style>
-  </section>;
+      <style jsx>{`
+        .profile-hero{position:relative;isolation:isolate;min-height:clamp(660px,calc(100svh - 82px),900px);overflow:hidden;background:#0c0c0c;color:#f7f7f7;border-bottom:1px solid #292929}
+        .profile-hero-noise{position:absolute;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(ellipse at 78% 48%,rgba(229,57,53,.17),transparent 34%),radial-gradient(ellipse at 0% 100%,rgba(229,57,53,.07),transparent 38%),#0c0c0c}
+        .profile-hero-grid{position:absolute;inset:0;z-index:-2;opacity:.16;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(90deg,black,transparent 95%)}
+        .profile-hero-glow{position:absolute;z-index:-1;right:6%;top:12%;width:min(650px,55vw);aspect-ratio:1;border-radius:50%;background:rgba(229,57,53,.09);filter:blur(85px);pointer-events:none}
+        .profile-hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);align-items:center;gap:clamp(30px,5vw,86px);width:min(1320px,100%);min-height:inherit;margin:0 auto;padding:74px clamp(24px,6vw,88px) 94px}
+        .profile-hero-copy{position:relative;z-index:4;align-self:center;max-width:700px}
+        .profile-hero-kicker{display:flex;align-items:center;gap:10px;color:#ddd;font-size:10px;letter-spacing:.19em;font-weight:650}
+        .profile-hero-kicker>span{width:7px;height:7px;border-radius:50%;background:#e53935;box-shadow:0 0 15px rgba(229,57,53,.75)}
+        .profile-hero-kicker i{height:1px;width:28px;background:#e53935}
+        .profile-hero-index{margin:37px 0 15px;color:#e53935;font-size:11px;font-weight:700;letter-spacing:.18em}
+        .profile-hero-copy h1{margin:0;font-size:clamp(48px,6.2vw,92px);font-weight:850;line-height:.96;letter-spacing:-.075em}
+        .profile-hero-copy h1 span{color:#e53935}
+        .profile-hero-description{max-width:520px;margin:27px 0 0;color:#b8b8b8;font-size:clamp(14px,1.2vw,17px);line-height:1.85;font-weight:350}
+        .profile-hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:23px}
+        .profile-hero-tags span{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid #303030;border-radius:4px;background:rgba(255,255,255,.025);color:#dedede;font-size:11px}
+        .profile-hero-tags span:first-child svg{color:#e53935}
+        .profile-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:29px}
+        .profile-hero-primary,.profile-hero-secondary{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:47px;padding:0 17px;border-radius:4px;font-size:12px;font-weight:700;text-decoration:none;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+        .profile-hero-primary{background:#e53935;color:white;border:1px solid #e53935;box-shadow:0 8px 28px rgba(229,57,53,.17)}
+        .profile-hero-primary:hover{transform:translateY(-2px);background:#f04741}
+        .profile-hero-secondary{border:1px solid #393939;color:#f2f2f2;background:#121212}
+        .profile-hero-secondary:hover{transform:translateY(-2px);border-color:#e53935}
+        .profile-hero-socials{display:flex;align-items:center;gap:13px;margin-top:38px;color:#777}
+        .profile-hero-socials a{display:grid;place-items:center;width:32px;height:32px;border:1px solid #303030;border-radius:50%;color:#ccc;transition:color .2s,border-color .2s}
+        .profile-hero-socials a:hover{color:#fff;border-color:#e53935}
+        .profile-hero-social-line{width:35px;height:1px;margin-left:4px;background:#444}
+        .profile-hero-socials>span:last-child{font-size:8px;letter-spacing:.12em}
+        .profile-hero-visual{position:relative;z-index:1;display:grid;place-items:center;min-width:0;min-height:480px}
+        .profile-hero-orbit{position:absolute;aspect-ratio:1;border:1px solid rgba(229,57,53,.22);border-radius:50%;pointer-events:none}
+        .profile-hero-orbit-one{width:min(94%,510px);transform:rotate(-18deg) scaleY(.83)}
+        .profile-hero-orbit-two{width:min(78%,420px);border-color:rgba(255,255,255,.12);transform:rotate(28deg) scaleY(.83)}
+        .profile-hero-image-frame{position:relative;width:min(82%,390px);padding:12px;border:1px solid rgba(229,57,53,.48);border-radius:8px;background:linear-gradient(145deg,rgba(31,31,31,.98),rgba(12,12,12,.96));box-shadow:0 28px 90px rgba(0,0,0,.52),0 0 65px rgba(229,57,53,.1);transform:rotate(2deg)}
+        .profile-hero-image-frame:before{content:"";position:absolute;inset:-6px;border:1px solid rgba(255,255,255,.08);border-radius:10px;pointer-events:none}
+        .profile-hero-image-top,.profile-hero-image-bottom{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .profile-hero-image-top{padding:4px 3px 12px;color:#777;font-size:8px;letter-spacing:.15em}
+        .profile-hero-live{display:flex;align-items:center;gap:6px;color:#aaa}
+        .profile-hero-live i{width:5px;height:5px;border-radius:50%;background:#e53935}
+        .profile-hero-avatar{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:4px;filter:grayscale(100%);background:#171717}
+        .profile-hero-image-bottom{padding:15px 3px 3px}
+        .profile-hero-image-bottom div{display:grid;gap:4px}
+        .profile-hero-image-bottom small{color:#e53935;font-size:8px;letter-spacing:.17em}
+        .profile-hero-image-bottom strong{font-size:14px;font-weight:650}
+        .profile-hero-image-bottom>span{font-size:24px;font-weight:850;letter-spacing:-.08em}
+        .profile-hero-mark-dot{color:#e53935}
+        .profile-hero-floating{position:absolute;z-index:3;display:flex;align-items:center;gap:8px;padding:11px 13px;border:1px solid #353535;border-radius:4px;background:rgba(16,16,16,.92);box-shadow:0 12px 32px rgba(0,0,0,.28);color:#ccc;font-size:8px;letter-spacing:.13em;backdrop-filter:blur(10px)}
+        .profile-hero-floating-top{top:14%;right:0}
+        .profile-hero-floating-top b{color:#e53935;font-size:15px}
+        .profile-hero-floating-dot{width:6px;height:6px;border-radius:50%;background:#e53935}
+        .profile-hero-floating-bottom{bottom:13%;left:0}
+        .profile-hero-floating-bottom>span{color:#e53935;font-weight:800}
+        .profile-hero-floating-bottom i{width:3px;height:3px;border-radius:50%;background:#e53935}
+        .profile-hero-visual-caption{position:absolute;right:0;bottom:4%;color:#686868;font-size:8px;letter-spacing:.17em;text-align:right}
+        .profile-hero-bottom{position:absolute;z-index:4;right:clamp(24px,6vw,88px);bottom:24px;left:clamp(24px,6vw,88px);display:flex;align-items:center;gap:15px;color:#666;font-size:8px;letter-spacing:.14em}
+        .profile-hero-bottom-rule{flex:1;height:1px;background:linear-gradient(90deg,#444,transparent)}
+        .profile-hero-bottom a{color:#aaa;text-decoration:none}
+        .profile-hero-bottom a:hover{color:#e53935}
+        @media(max-width:900px){.profile-hero{min-height:0}.profile-hero-inner{grid-template-columns:minmax(0,1fr) minmax(260px,.8fr);gap:22px;padding:60px 28px 88px}.profile-hero-copy h1{font-size:clamp(46px,6.8vw,70px)}.profile-hero-visual{min-height:380px}.profile-hero-image-frame{width:min(88%,340px)}.profile-hero-floating-top{right:-2%}.profile-hero-floating-bottom{left:-3%}}
+        @media(max-width:680px){.profile-hero-inner{grid-template-columns:1fr;gap:22px;padding:55px 22px 84px}.profile-hero-copy h1{font-size:clamp(47px,12vw,70px)}.profile-hero-index{margin-top:28px}.profile-hero-description{margin-top:20px}.profile-hero-socials{margin-top:28px}.profile-hero-visual{min-height:330px;margin-top:8px}.profile-hero-image-frame{width:min(72%,280px)}.profile-hero-floating-top{top:9%;right:4%}.profile-hero-floating-bottom{bottom:9%;left:4%}.profile-hero-visual-caption{right:2%;bottom:0;font-size:7px}.profile-hero-bottom{bottom:18px;gap:9px;font-size:7px}.profile-hero-bottom-rule{min-width:20px}}
+        @media(max-width:390px){.profile-hero-inner{padding-right:17px;padding-left:17px}.profile-hero-copy h1{font-size:45px}.profile-hero-image-frame{width:76%}.profile-hero-socials>span:last-child{font-size:7px}.profile-hero-actions{gap:8px}.profile-hero-primary,.profile-hero-secondary{padding:0 12px}}
+        @media(prefers-reduced-motion:reduce){.profile-hero-primary,.profile-hero-secondary,.profile-hero-socials a{transition:none!important}}
+      `}</style>
+    </section>
+  );
 }
-
-useGLTF.preload(MODEL_URL);
