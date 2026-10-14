@@ -1,9 +1,8 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight, Smartphone, Code2, Layers3, Radio, Database, Github, Linkedin, Mail, Menu, X } from "lucide-react";
 const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/121760927?v=4";
-
 const projects = [
   {
     number: "01", name: "SportsBD", category: "SPORTS PLATFORM",
@@ -320,180 +319,21 @@ const projects = [
     liveLabel: "View source on GitHub", screenshot: null
   }
 ];
-const capabilities = [
-  { number: "01", title: "Mobile development", text: "Cross-platform applications with Flutter, maintainable state, and thoughtful user flows.", tags: "Flutter · Dart · GetX · Riverpod · Dio" },
-  { number: "02", title: "Backend engineering", text: "Well-structured APIs, business logic, authentication, and service integrations.", tags: "Go · Gin · GORM · PHP · Laravel" },
-  { number: "03", title: "Web applications", text: "Responsive product interfaces and operational dashboards built for real workflows.", tags: "Next.js · React · TypeScript" },
-  { number: "04", title: "Realtime systems", text: "Live communication features with event-driven updates and presence workflows.", tags: "WebSocket · WebRTC · LiveKit · Socket.IO" },
-  { number: "05", title: "Data & integration", text: "Persistence, caching, and data exchange chosen to fit the application.", tags: "PostgreSQL · MySQL · Redis · SQLite · Firebase" },
-  { number: "06", title: "Production delivery", text: "Repeatable builds, containerized services, and deployment automation.", tags: "Docker · Linux · Nginx · CI/CD · Git" }
-];
-
-const heroMessage = "I build polished mobile apps, dependable backends, and real-time products. Let’s make something useful.";
-function useTypewriter(text: string, speed = 34, startDelay = 650) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    let index = 0;
-    let interval: ReturnType<typeof setInterval> | undefined;
-    const timeout = setTimeout(() => {
-      interval = setInterval(() => {
-        index += 1;
-        setDisplayed(text.slice(0, index));
-        if (index >= text.length) {
-          if (interval) clearInterval(interval);
-          setDone(true);
-        }
-      }, speed);
-    }, startDelay);
-    return () => { clearTimeout(timeout); if (interval) clearInterval(interval); };
-  }, [text, speed, startDelay]);
-  return { displayed, done };
-}
-
-function Arrow() { return <span aria-hidden="true" className="arrow">↗</span>; }
-export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const targetTimeRef = useRef(0);
-  const seekingRef = useRef(false);
-  const previousXRef = useRef<number | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [projectFilter, setProjectFilter] = useState("All");
-  const [projectSearch, setProjectSearch] = useState("");
-  const [actionsVisible, setActionsVisible] = useState(false);
-  const { displayed, done } = useTypewriter(heroMessage);
-  const projectFilters = ["All", "Mobile", "Web", "Commerce", "AI & Tools", "Realtime"];
-  const filteredProjects = projects.filter((project) => {
-    const searchable = `${project.name} ${project.category} ${project.summary} ${project.stack.join(" ")}`.toLowerCase();
-    if (projectSearch.trim() && !searchable.includes(projectSearch.trim().toLowerCase())) return false;
-    if (projectFilter === "All") return true;
-    if (projectFilter === "Mobile") return /flutter|mobile|dart|webview|customer app/.test(searchable);
-    if (projectFilter === "Web") return /web app|django|next\.js|react|html|css|php|website|web development|portfolio/.test(searchable);
-    if (projectFilter === "Commerce") return /commerce|e-commerce|shop|shopping|store|ecom|wholesale|fashion/.test(searchable);
-    if (projectFilter === "AI & Tools") return /ai|image|photo|utility|calculator|calorie|python/.test(searchable);
-    if (projectFilter === "Realtime") return /realtime|real-time|livekit|websocket|streaming|chat|messaging|socket/.test(searchable);
-    return true;
-  });
-  useEffect(() => {
-    const timer = setTimeout(() => setActionsVisible(true), 400);
-    const video = videoRef.current;
-    if (!video) return () => clearTimeout(timer);
-    const seekToTarget = () => {
-      if (!video || video.seeking || seekingRef.current || !Number.isFinite(video.duration) || video.duration <= 0) return;
-      if (Math.abs(video.currentTime - targetTimeRef.current) < 0.025) return;
-      seekingRef.current = true;
-      video.currentTime = targetTimeRef.current;
-    };
-    const onSeeked = () => {
-      seekingRef.current = false;
-      if (Math.abs(video.currentTime - targetTimeRef.current) > 0.04) seekToTarget();
-    };
-    const onMouseMove = (event: MouseEvent) => {
-      if (previousXRef.current === null) { previousXRef.current = event.clientX; return; }
-      const delta = event.clientX - previousXRef.current;
-      previousXRef.current = event.clientX;
-      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
-      targetTimeRef.current = Math.max(0, Math.min(video.duration, targetTimeRef.current + (delta / window.innerWidth) * 0.8 * video.duration));
-      seekToTarget();
-    };
-    const onLoaded = () => { targetTimeRef.current = Math.min(video.currentTime || 0, video.duration || 0); };
-    video.addEventListener("seeked", onSeeked);
-    video.addEventListener("loadedmetadata", onLoaded);
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-    return () => {
-      clearTimeout(timer);
-      video.removeEventListener("seeked", onSeeked);
-      video.removeEventListener("loadedmetadata", onLoaded);
-      window.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText("contact.mdemonmiah@gmail.com");
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 1600);
-    } catch { window.location.href = "mailto:contact.mdemonmiah@gmail.com"; }
-  };
-  const [emailCopied, setEmailCopied] = useState(false);
-  const closeMenu = () => setMenuOpen(false);
-  return <main id="top">
-    <section className="hero-video-stage" aria-label="Interactive portfolio introduction">
-      <video ref={videoRef} className="hero-background-video" muted playsInline preload="auto" aria-hidden="true">
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4" type="video/mp4" />
-      </video>
-      <div className="hero-video-shade" />
-    </section>
-    <header className="site-header">
-      <nav className="nav container" aria-label="Main navigation">
-        <a className="wordmark" href="#top" aria-label="MD Emon Miah home"><img className="wordmark-avatar" src={GITHUB_AVATAR} alt="" /><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a>
-        <div className="nav-links"><a href="#work">Projects</a><span>,</span><a href="#capabilities">Expertise</a><span>,</span><a href="#about">About</a><span>,</span><a href="#contact">Contact</a></div>
-        <a className="nav-cta" href="mailto:contact.mdemonmiah@gmail.com">Get in touch <Arrow /></a>
-        <button className={'mobile-menu-toggle' + (menuOpen ? ' is-open' : '')} type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
-      </nav>
-    </header>
-    <div className={'mobile-menu-overlay' + (menuOpen ? ' is-open' : '')} aria-hidden={!menuOpen}>
-      <nav aria-label="Mobile navigation"><a onClick={closeMenu} href="#work">Projects</a><a onClick={closeMenu} href="#capabilities">Expertise</a><a onClick={closeMenu} href="#about">About</a><a onClick={closeMenu} href="#contact">Contact</a><a className="mobile-contact-link" onClick={closeMenu} href="mailto:contact.mdemonmiah@gmail.com">Get in touch ↗</a></nav>
-    </div>
-
-    <section className="hero container">
-      <div className="hero-content">
-        <p className="eyebrow"><span className="availability-dot" /> MD. EMON MIAH <span className="eyebrow-divider">/</span> SOFTWARE ENGINEER</p>
-        <div className="hero-blurred-intro" aria-hidden="true">Hey there, I’m Emon.<br />Mobile, backend &amp; full-stack engineer.</div>
-        <h1>Thoughtful software.<br /><span>Built to work in the real world.</span></h1>
-        <p className="hero-description typewriter-copy">{displayed}{!done && <span className="typing-cursor" aria-hidden="true" />}</p>
-        <div className={'hero-actions hero-pill-actions' + (actionsVisible ? ' is-visible' : '')}>
-          <a className="button button-primary" href="#work">Explore my projects <Arrow /></a>
-          <a className="button button-light-pill" href="mailto:contact.mdemonmiah@gmail.com?subject=Project%20inquiry">Discuss a project</a>
-          <a className="button button-light-pill" href="#about">About my work</a>
-          <a className="button button-light-pill" href="/cv.pdf" target="_blank" rel="noreferrer">View résumé ↓</a>
-          <button className="button button-outline-pill" type="button" onClick={copyEmail}><span>{emailCopied ? "Email copied!" : <>Reach me: <u>contact.mdemonmiah@gmail.com</u></>}</span><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><rect x="5" y="2" width="9" height="10" rx="1" stroke="currentColor" strokeWidth="1.3"/><path d="M11 12v2H2V5h2" stroke="currentColor" strokeWidth="1.3"/></svg></button>
-        </div>
-        <div className="hero-specialties"><span>Flutter</span><i /> <span>Go</span><i /> <span>Next.js</span><i /> <span>Laravel</span><i /> <span>Realtime systems</span></div>
-      </div>
-      <aside className="hero-profile" aria-label="Profile">
-        <div className="profile-topline"><span>PROFILE / 2026</span><span>01 — 06</span></div>
-        <div className="profile-photo-wrap"><div className="photo-backdrop" /><img src="https://github.com/programmermdemonmiah.png?size=640" alt="MD. Emon Miah" className="profile-photo" referrerPolicy="no-referrer" /></div>
-        <div className="profile-caption"><div><strong>MD. Emon Miah</strong><span>Mobile · Backend · Full stack</span></div><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer" aria-label="Open GitHub profile"><Arrow /></a></div>
-        <div className="profile-rule" />
-        <div className="profile-facts"><div><span>CORE FOCUS</span><strong>Product engineering</strong></div><div><span>FROM</span><strong>Dhaka, Bangladesh</strong></div></div>
-      </aside>
-      <div className="hero-index"><span>01 / INTRODUCTION</span><a href="#about">SCROLL TO EXPLORE ↓</a></div>
-    </section>
-
-    <section className="intro-strip"><div className="container intro-strip-inner"><span>ENGINEERING ACROSS THE STACK</span><p>Mobile applications <b>·</b> Backend systems <b>·</b> Web platforms <b>·</b> Realtime experiences</p></div></section>
-
-    <section className="section container about-section" id="about">
-      <div className="section-label"><span>01</span><span className="label-line" /> ABOUT</div>
-      <div className="about-grid"><h2>Good software is more than code. <em>It’s how the pieces work together.</em></h2><div className="about-copy"><p>I work across the product stack: Flutter applications, Go and Laravel APIs, Next.js interfaces, administration panels, and realtime features. I care about the experience people use and the engineering decisions that keep it reliable.</p><p>My experience spans ecommerce, ERP, healthcare and finance applications, live streaming, chat, notifications, role-based administration, and Dockerized deployments. I value practical architecture, clear service boundaries, and maintainable code.</p><div className="social-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Download résumé <Arrow /></a></div></div></div>
-    </section>
-
-    <section className="work-section" id="work"><div className="container"><div className="section-head"><div><div className="section-label"><span>02</span><span className="label-line" /> SELECTED WORK</div><h2>Different domains.<br /><em>Thoughtful engineering.</em></h2></div><p>Explore production products, client work, and smaller experiments across mobile, web, ecommerce, AI utilities, and backend development.</p></div>
-      <div className="project-tools" aria-label="Filter projects">
-        <div className="project-filter-list">{projectFilters.map(filter => <button type="button" key={filter} className={"project-filter" + (projectFilter === filter ? " is-active" : "")} onClick={() => setProjectFilter(filter)} aria-pressed={projectFilter === filter}>{filter}</button>)}</div>
-        <label className="project-search"><span className="sr-only">Search projects</span><span aria-hidden="true">⌕</span><input type="search" value={projectSearch} onChange={event => setProjectSearch(event.target.value)} placeholder="Search projects or technology…" /></label>
-        <p className="project-results-count">Showing <strong>{filteredProjects.length}</strong> of {projects.length} projects</p>
-      </div>
-      <div className="projects-grid">{filteredProjects.map(project => <article className="project-card" key={project.number}>
-        <a className={'project-art art-' + project.tone} href={project.liveUrl || "#contact"} target={project.liveUrl ? "_blank" : undefined} rel={project.liveUrl ? "noreferrer" : undefined} aria-label={project.liveUrl ? 'Open ' + project.name : project.name + ' — private project'}>
-          {project.screenshot ? <img className="project-screenshot" src={project.screenshot} alt={project.name + ' live website screenshot'} loading="lazy" /> : <div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}
-          <span className="project-number">{project.number} / {String(projects.length).padStart(2, "0")}</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
-        </a>
-        <div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
-          <div className="project-links">{project.liveUrl ? <a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel}<Arrow /></a> : <span className="private-project-label">Private / no public demo</span>}</div>
-        </div></article>)}</div>
-      {filteredProjects.length === 0 && <p className="no-project-results">No projects match that search. Try another name or technology.</p>}
-      <div className="project-catalog-links"><a href="https://play.google.com/store/apps/dev?id=6275384212045783558" target="_blank" rel="noreferrer">Explore more DeepVerse Lab apps <Arrow /></a><a href="https://play.google.com/store/apps/developer?id=NIBIZ+SOFT" target="_blank" rel="noreferrer">Explore NIBIZ SOFT published apps <Arrow /></a></div>
-      <p className="project-footnote">Live products link to their website or official store listing; additional public repositories link directly to source. Private client and internal projects are listed without fabricated demos.</p>
-    </div></section>
-
-    <section className="section container capability-section" id="capabilities"><div className="section-head"><div><div className="section-label"><span>03</span><span className="label-line" /> EXPERTISE</div><h2>From first screen<br />to <em>production.</em></h2></div><p>The right tools matter. So do clear thinking, maintainable architecture, and attention to the people using the product.</p></div>
-      <div className="capability-grid">{capabilities.map(item => <article className="capability-card" key={item.number}><span className="cap-number">{item.number}</span><h3>{item.title}</h3><p>{item.text}</p><div className="cap-tags">{item.tags}</div></article>)}</div>
-    </section>
-
-    <section className="approach-section"><div className="container approach-grid"><div><div className="section-label"><span>04</span><span className="label-line" /> APPROACH</div><h2>Build with clarity.<br /><em>Ship with care.</em></h2></div><div className="approach-list"><div><span>01</span><p><strong>Understand the problem</strong><small>Start with the product goal and real user needs.</small></p></div><div><span>02</span><p><strong>Design the system</strong><small>Choose clear boundaries and practical architecture.</small></p></div><div><span>03</span><p><strong>Build and verify</strong><small>Keep implementation understandable and testable.</small></p></div><div><span>04</span><p><strong>Deliver responsibly</strong><small>Make deployment and maintenance part of the work.</small></p></div></div></div></section>
-
-    <section className="contact-section" id="contact"><div className="container contact-inner"><div className="section-label"><span>05</span><span className="label-line" /> CONTACT</div><div className="contact-content"><h2>Have something<br />worth <em>building?</em></h2><div><p>If you’re building a product, improving a backend, or bringing a complex application to life, let’s talk about the engineering behind it.</p><a className="button button-light" href="mailto:contact.mdemonmiah@gmail.com">Start a conversation <Arrow /></a></div></div><div className="contact-meta"><span>MD. EMON MIAH · SOFTWARE ENGINEER</span><span>FLUTTER / GO / NEXT.JS / LARAVEL</span></div></div></section>
-
-    <footer className="footer"><div className="container footer-inner"><a className="wordmark footer-wordmark" href="#top"><img className="wordmark-avatar" src={GITHUB_AVATAR} alt="" /><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><p>Thoughtful engineering. Useful products.</p><div className="footer-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="mailto:contact.mdemonmiah@gmail.com">Email <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Résumé ↓</a></div><span className="copyright">© 2026 MD. EMON MIAH</span></div></footer>
-  </main>;
+const marqueeImages = ["https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif","https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif","https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif","https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif","https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif","https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif","https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif","https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif","https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif","https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif","https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif","https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif","https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif","https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif","https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif","https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif","https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif","https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif","https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif","https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif","https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif"];
+const services = [{number:"01",title:"Mobile Engineering",description:"Cross-platform Flutter applications with polished user experiences, dependable state management, and maintainable architecture.",icon:Smartphone},{number:"02",title:"Backend Systems",description:"Secure, scalable APIs and business logic using Go, Gin, GORM, PHP, and Laravel.",icon:Code2},{number:"03",title:"Full-Stack Products",description:"End-to-end product development across Next.js interfaces, APIs, databases, and admin dashboards.",icon:Layers3},{number:"04",title:"Realtime Experiences",description:"Live streaming, chat, presence, notifications, WebSocket events, and LiveKit integrations.",icon:Radio},{number:"05",title:"Data & Delivery",description:"Practical database design, Dockerized services, Linux hosting, CI/CD workflows, and production deployment.",icon:Database}];
+const featured = [{number:"01",name:"SportsBD",type:"SPORTS PLATFORM",description:"A sports platform for live scoring, scorecards, tournaments, match insights, streaming, and community discovery.",tags:["Next.js","Flutter","Go","Realtime"],url:"https://sportsbd.net/",images:[projects[0].screenshot,"https://image.thum.io/get/width/1200/crop/650/noanimate/https://sportsbd.net/","https://image.thum.io/get/width/1200/crop/900/noanimate/https://sportsbd.net/"]},{number:"02",name:"VerseMart",type:"E-COMMERCE",description:"A production commerce experience backed by Go services, containerized infrastructure, product discovery, and order workflows.",tags:["Next.js","Go","PostgreSQL","Docker"],url:"https://oxewman.com/",images:[projects[1].screenshot,"https://image.thum.io/get/width/1200/crop/650/noanimate/https://oxewman.com/","https://image.thum.io/get/width/1200/crop/900/noanimate/https://oxewman.com/"]},{number:"03",name:"DeepVerse Live",type:"REALTIME STREAMING",description:"A live-streaming platform with host approvals, VIP access, realtime viewer presence, chat, and LiveKit streaming.",tags:["Flutter","Go","LiveKit","WebSocket"],url:"https://github.com/programmermdemonmiah",images:["https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif","https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif","https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif"]}];
+function ContactButton({compact=false}:{compact?:boolean}) { return <a className={"contact-button"+(compact?" compact":"")} href="mailto:contact.mdemonmiah@gmail.com">Contact Me <ArrowUpRight size={16}/></a>; }
+function FadeIn({children,delay=0,y=25,className=""}:{children:React.ReactNode;delay?:number;y?:number;className?:string}) { return <motion.div className={className} initial={{opacity:0,y:y}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"0px 0px -50px 0px"}} transition={{duration:.7,delay:delay,ease:[.25,.1,.25,1]}}>{children}</motion.div>; }
+function MarqueeSection(){const ref=useRef<HTMLElement>(null);const [offset,setOffset]=useState(0);useEffect(()=>{const update=()=>{if(!ref.current)return;const top=ref.current.getBoundingClientRect().top+window.scrollY;setOffset((window.scrollY-top+window.innerHeight)*.3)};update();window.addEventListener("scroll",update,{passive:true});return()=>window.removeEventListener("scroll",update)},[]);const a=marqueeImages.slice(0,11),b=marqueeImages.slice(11);return <section ref={ref} className="marquee-section" id="inspiration"><div className="marquee-row" style={{transform:"translate3d("+(offset-200)+"px,0,0)"}}>{[...a,...a,...a].map((src,i)=><div className="marquee-tile" key={src+i}><img src={src} alt="" loading="lazy"/></div>)}</div><div className="marquee-row marquee-row-second" style={{transform:"translate3d("+(-(offset-200))+"px,0,0)"}}>{[...b,...b,...b].map((src,i)=><div className="marquee-tile" key={src+i}><img src={src} alt="" loading="lazy"/></div>)}</div></section>}
+function ProjectStackCard({project,index}:{project:typeof featured[number];index:number}){const ref=useRef<HTMLDivElement>(null);const {scrollYProgress}=useScroll({target:ref,offset:["start end","start start"]});const scale=useTransform(scrollYProgress,[0,1],[1,1-(featured.length-1-index)*.03]);return <div ref={ref} className="project-stack-item" style={{top:96+index*28}}><motion.article className="featured-card" style={{scale}}><div className="featured-card-heading"><span className="featured-number">{project.number}</span><div className="featured-meta"><span>{project.type}</span><h3>{project.name}</h3><p>{project.description}</p><div className="tag-list">{project.tags.map(tag=><span key={tag}>{tag}</span>)}</div></div><a className="live-project-button" href={project.url} target="_blank" rel="noreferrer">View Project <ArrowUpRight size={15}/></a></div><div className="featured-image-grid"><div className="featured-image-column"><img src={project.images[0]} alt={project.name+" preview one"} loading="lazy"/><img src={project.images[1]} alt={project.name+" preview two"} loading="lazy"/></div><div className="featured-image-main"><img src={project.images[2]} alt={project.name+" preview"} loading="lazy"/></div></div></motion.article></div>}
+export default function Home(){
+const [menuOpen,setMenuOpen]=useState(false);const [projectFilter,setProjectFilter]=useState("All");const [projectSearch,setProjectSearch]=useState("");const projectFilters=["All","Mobile","Web","Commerce","AI & Tools","Realtime"];
+const filteredProjects=projects.filter(project=>{const searchable=(project.name+" "+project.category+" "+project.summary+" "+project.stack.join(" ")).toLowerCase();if(projectSearch.trim()&&!searchable.includes(projectSearch.trim().toLowerCase()))return false;if(projectFilter==="All")return true;if(projectFilter==="Mobile")return /flutter|mobile|dart|webview|customer app/.test(searchable);if(projectFilter==="Web")return /web app|django|next\\.js|react|html|css|php|website|web development|portfolio/.test(searchable);if(projectFilter==="Commerce")return /commerce|e-commerce|shop|shopping|store|ecom|wholesale|fashion/.test(searchable);if(projectFilter==="AI & Tools")return /ai|image|photo|utility|calculator|calorie|python/.test(searchable);if(projectFilter==="Realtime")return /realtime|real-time|livekit|websocket|streaming|chat|messaging|socket/.test(searchable);return true});
+return <main className="portfolio-redesign"><section className="creator-hero" id="top"><nav className="creator-nav"><a href="#top" className="creator-wordmark"><span className="creator-mark"><img src={GITHUB_AVATAR} alt=""/></span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><div className="creator-nav-links"><a href="#about">About</a><a href="#services">Expertise</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div><ContactButton compact/><button className="creator-menu-toggle" aria-label="Toggle navigation" onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X/>:<Menu/>}</button></nav>{menuOpen&&<nav className="creator-mobile-menu"><a onClick={()=>setMenuOpen(false)} href="#about">About</a><a onClick={()=>setMenuOpen(false)} href="#services">Expertise</a><a onClick={()=>setMenuOpen(false)} href="#projects">Projects</a><a onClick={()=>setMenuOpen(false)} href="#contact">Contact</a></nav>}<div className="creator-hero-main"><FadeIn className="creator-hero-kicker"><span className="creator-live-dot"/> AVAILABLE FOR SELECT PROJECTS <span>— 2026</span></FadeIn><div className="creator-heading-wrap"><FadeIn delay={.15} y={40}><h1 className="hero-heading">BUILD<br className="hero-mobile-break"/> WITH <span>INTENT.</span></h1></FadeIn></div><div className="creator-portrait"><div className="portrait-orbit portrait-orbit-one"/><div className="portrait-orbit portrait-orbit-two"/><div className="portrait-glow"/><motion.img src={GITHUB_AVATAR} alt="MD. Emon Miah portrait" initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{delay:.6,duration:.8}}/></div><div className="creator-hero-bottom"><FadeIn delay={.35} className="creator-intro-copy">A SOFTWARE ENGINEER DRIVEN BY CRAFTING USEFUL, RELIABLE AND UNFORGETTABLE DIGITAL PRODUCTS.</FadeIn><FadeIn delay={.5}><ContactButton/></FadeIn></div><div className="creator-hero-index"><span>FLUTTER / GO / NEXT.JS / LARAVEL</span><a href="#inspiration">SCROLL TO EXPLORE ↓</a></div></div><div className="hero-background-grid"/></section>
+<MarqueeSection/>
+<section className="creator-about" id="about"><img className="about-deco about-moon" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="" loading="lazy"/><img className="about-deco about-object-left" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png" alt="" loading="lazy"/><img className="about-deco about-lego" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png" alt="" loading="lazy"/><img className="about-deco about-object-right" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="" loading="lazy"/><div className="creator-about-content"><FadeIn><p className="creator-section-eyebrow">A LITTLE ABOUT THE ENGINEER</p><h2 className="hero-heading">ABOUT ME</h2></FadeIn><FadeIn delay={.15}><p className="animated-text">I build mobile applications, robust backend systems, full-stack products, and real-time experiences. I enjoy working with teams that care about thoughtful architecture, practical problem-solving, and products that make a real difference. Let’s build something meaningful together!</p></FadeIn><FadeIn delay={.25}><div className="about-socials"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={17}/> GitHub <ArrowUpRight size={15}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn <ArrowUpRight size={15}/></a></div></FadeIn></div></section>
+<section className="creator-services" id="services"><FadeIn><p className="services-eyebrow">WHAT I DO / END-TO-END ENGINEERING</p><h2>SERVICES<span>.</span></h2></FadeIn><div className="services-list">{services.map((service,i)=>{const Icon=service.icon;return <FadeIn key={service.number} delay={i*.08} className="service-row"><span className="service-number">{service.number}</span><div className="service-copy"><h3>{service.title}</h3><p>{service.description}</p></div><Icon className="service-icon" strokeWidth={1.5}/></FadeIn>})}</div></section>
+<section className="creator-projects" id="projects"><div className="featured-projects-heading"><FadeIn><p className="creator-section-eyebrow">SELECTED WORK / BUILT WITH PURPOSE</p><h2 className="hero-heading">PROJECTS<span>.</span></h2></FadeIn><p>A closer look at a few products across mobile, web, commerce, and realtime engineering.</p></div><div className="project-stack">{featured.map((project,index)=><ProjectStackCard key={project.number} project={project} index={index}/>)}</div>
+<div className="all-projects-wrap"><div className="all-projects-heading"><div><p className="creator-section-eyebrow">MORE WORK / OPEN SOURCE</p><h3>THE FULL COLLECTION<span>.</span></h3></div><p>Browse projects, prototypes, published apps, and engineering experiments.</p></div><div className="project-tools" aria-label="Filter projects"><div className="project-filter-list">{projectFilters.map(filter=><button type="button" key={filter} className={"project-filter"+(projectFilter===filter?" is-active":"")} onClick={()=>setProjectFilter(filter)} aria-pressed={projectFilter===filter}>{filter}</button>)}</div><label className="project-search"><span aria-hidden="true">⌕</span><span className="sr-only">Search projects</span><input type="search" value={projectSearch} onChange={event=>setProjectSearch(event.target.value)} placeholder="Search project or technology…"/></label><p className="project-results-count">Showing <strong>{filteredProjects.length}</strong> of {projects.length} projects</p></div><div className="projects-grid">{filteredProjects.map(project=><article className="project-card" key={project.number}><a className={"project-art art-"+project.tone} href={project.liveUrl||"#contact"} target={project.liveUrl?"_blank":undefined} rel={project.liveUrl?"noreferrer":undefined} aria-label={project.liveUrl?"Open "+project.name:project.name+" — private project"}>{project.screenshot?<img className="project-screenshot" src={project.screenshot} alt={project.name+" preview"} loading="lazy"/>:<div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}<span className="project-number">{project.number} / {String(projects.length).padStart(2,"0")}</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span></a><div className="project-details"><div className="project-title-row"><h4>{project.name}</h4><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag=><span key={tag}>{tag}</span>)}</div><div className="project-links">{project.liveUrl?<a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel||"View project"} <ArrowUpRight size={14}/></a>:<span className="private-project-label">Private / no public demo</span>}</div></div></article>)}</div>{filteredProjects.length===0&&<p className="no-project-results">No projects match that search. Try another name or technology.</p>}<div className="project-catalog-links"><a href="https://play.google.com/store/apps/dev?id=6275384212045783558" target="_blank" rel="noreferrer">More DeepVerse Lab apps <ArrowUpRight size={15}/></a><a href="https://play.google.com/store/apps/developer?id=NIBIZ+SOFT" target="_blank" rel="noreferrer">NIBIZ SOFT apps <ArrowUpRight size={15}/></a></div></div></section>
+<footer className="creator-footer" id="contact"><div className="footer-glow"/><div className="creator-footer-inner"><FadeIn><p className="creator-section-eyebrow">HAVE A PRODUCT IN MIND?</p><h2>LET’S BUILD<br/><span>SOMETHING USEFUL.</span></h2><p className="footer-description">From the first screen to production, let’s make the engineering count.</p><ContactButton/></FadeIn><div className="footer-bottom"><a href="#top" className="creator-wordmark"><span className="creator-mark"><img src={GITHUB_AVATAR} alt=""/></span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><span>© 2026 MD. EMON MIAH</span><div><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={18}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={18}/></a><a href="mailto:contact.mdemonmiah@gmail.com"><Mail size={18}/></a></div></div></div></footer></main>;
 }
