@@ -86,6 +86,42 @@ const projects = [
     summary: "Additional customer, healthcare, finance, and service applications delivered with API-driven interfaces and practical state management.",
     stack: ["Flutter", "Dart", "Go", "Laravel"],
     tone: "red", liveUrl: null, liveLabel: null, screenshot: null
+  },
+  {
+    number: "12", name: "Xovalley", category: "MOBILE APPLICATION",
+    summary: "A Flutter application built with Provider for state management and Dio for structured API communication.",
+    stack: ["Flutter", "Provider", "Dio", "REST API"],
+    tone: "orange"
+  },
+  {
+    number: "13", name: "ARACO Healthcare", category: "HEALTHCARE SOFTWARE",
+    summary: "Healthcare application work focused on practical digital workflows, user-facing features, and backend integration.",
+    stack: ["Flutter", "API Integration", "Healthcare"],
+    tone: "red"
+  },
+  {
+    number: "14", name: "CashMart", category: "FINANCE & BANKING",
+    summary: "A finance-focused application project involving customer workflows and integration with backend services.",
+    stack: ["Mobile", "Backend APIs", "Fintech"],
+    tone: "orange"
+  },
+  {
+    number: "15", name: "Propeta MVC", category: "WEB APPLICATION",
+    summary: "An MVC-based application project emphasizing organized application structure and maintainable business logic.",
+    stack: ["PHP", "MVC", "Backend Development"],
+    tone: "red"
+  },
+  {
+    number: "16", name: "DeepVerse Live", category: "REAL-TIME LIVE STREAMING",
+    summary: "A live-streaming platform with host and viewer flows, join approvals, realtime presence, and LiveKit-based streaming.",
+    stack: ["Flutter", "Go", "WebSocket", "LiveKit"],
+    tone: "orange"
+  },
+  {
+    number: "17", name: "DeepVerse Ecommerce Suite", category: "ECOMMERCE & ADMIN",
+    summary: "A multi-part commerce system covering a Next.js storefront, Go backend services, and a separate administration interface.",
+    stack: ["Next.js", "Go", "React Admin", "Docker"],
+    tone: "red"
   }
 ];
 const capabilities = [
@@ -221,17 +257,17 @@ export default function Home() {
       <div className="about-grid"><h2>Good software is more than code. <em>It’s how the pieces work together.</em></h2><div className="about-copy"><p>I work across the product stack: Flutter applications, Go and Laravel APIs, Next.js interfaces, administration panels, and realtime features. I care about the experience people use and the engineering decisions that keep it reliable.</p><p>My experience spans ecommerce, ERP, healthcare and finance applications, live streaming, chat, notifications, role-based administration, and Dockerized deployments. I value practical architecture, clear service boundaries, and maintainable code.</p><div className="social-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Download résumé <Arrow /></a></div></div></div>
     </section>
 
-    <section className="work-section" id="work"><div className="container"><div className="section-head"><div><div className="section-label"><span>02</span><span className="label-line" /> SELECTED WORK</div><h2>Different domains.<br /><em>Thoughtful engineering.</em></h2></div><p>A selection of product areas and systems I’ve worked across, from customer-facing applications to backend infrastructure.</p></div>
+    <section className="work-section" id="work"><div className="container"><div className="section-head"><div><div className="section-label"><span>02</span><span className="label-line" /> SELECTED WORK</div><h2>Different domains.<br /><em>Thoughtful engineering.</em></h2></div><p>A broader collection of mobile apps, web products, commerce systems, and real-time platforms I’ve worked on.</p></div>
       <div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}>
         <a className={'project-art art-' + project.tone} href={project.liveUrl || "#contact"} target={project.liveUrl ? "_blank" : undefined} rel={project.liveUrl ? "noreferrer" : undefined} aria-label={project.liveUrl ? 'Open ' + project.name : project.name + ' — private project'}>
           {project.screenshot ? <img className="project-screenshot" src={project.screenshot} alt={project.name + ' live website screenshot'} loading="lazy" /> : <div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}
-          <span className="project-number">{project.number} / 11</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
+          <span className="project-number">{project.number} / 17</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
         </a>
         <div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="project-links">{project.liveUrl ? <a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel}<Arrow /></a> : <span className="private-project-label">Private / no public demo</span>}</div>
         </div></article>)}</div>
       <div className="project-catalog-links"><a href="https://play.google.com/store/apps/dev?id=6275384212045783558" target="_blank" rel="noreferrer">Explore more DeepVerse Lab apps <Arrow /></a><a href="https://play.google.com/store/apps/developer?id=NIBIZ+SOFT" target="_blank" rel="noreferrer">Explore NIBIZ SOFT published apps <Arrow /></a></div>
-      <p className="project-footnote">Public projects link directly to their live website or official store listing. Some client projects are private and do not have a public demo URL.</p>
+      <p className="project-footnote">Public projects link to their live website or official store listing. Private client and internal projects are included without fabricated demo links.</p>
     </div></section>
 
     <section className="section container capability-section" id="capabilities"><div className="section-head"><div><div className="section-label"><span>03</span><span className="label-line" /> EXPERTISE</div><h2>From first screen<br />to <em>production.</em></h2></div><p>The right tools matter. So do clear thinking, maintainable architecture, and attention to the people using the product.</p></div>
