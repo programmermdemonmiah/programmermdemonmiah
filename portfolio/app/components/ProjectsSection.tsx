@@ -1,28 +1,27 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { Navigation, Pagination, Keyboard, Mousewheel, A11y, FreeMode } from "swiper/modules";
+import { Navigation, Pagination, Keyboard, Mousewheel, A11y, FreeMode, Scrollbar } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/free-mode";
 
 import {
   Search,
   ExternalLink,
   ChevronLeft,
   ChevronRight,
-  LayoutGrid,
   Smartphone,
   Globe,
   Layers,
-  ShieldCheck,
-  Github,
   CheckCircle2,
   Maximize2,
   X,
@@ -39,14 +38,6 @@ interface LightboxPayload {
   projectName: string;
   category: string;
   liveUrl?: string;
-}
-
-interface ProjectCardContentProps {
-  project: VerifiedProject;
-  index: number;
-  total: number;
-  layout?: "carousel" | "grid";
-  onOpenLightbox: (payload: LightboxPayload) => void;
 }
 
 function getScreenshotMeta(url: string, category: string) {
@@ -68,347 +59,250 @@ function getScreenshotMeta(url: string, category: string) {
   return { label: "Live System Capture", icon: "desktop" as const };
 }
 
-function ProjectScreenshotCarousel({
-  screenshots,
-  fallbackImage,
-  projectName,
-  category,
-  onOpenLightbox,
-  priority = false,
-  cardIndex,
-  totalCards,
-  status,
-}: {
-  screenshots: string[];
-  fallbackImage: string;
-  projectName: string;
-  category: string;
-  onOpenLightbox: (idx: number) => void;
-  priority?: boolean;
-  cardIndex: number;
-  totalCards: number;
-  status: string;
-}) {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(1);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-
-  const images = screenshots && screenshots.length > 0 ? screenshots : [fallbackImage];
-  const currentUrl = images[activeIdx] || fallbackImage;
-  const meta = getScreenshotMeta(currentUrl, category);
-
-  // Reset loading shimmer whenever image changes
-  useEffect(() => {
-    setIsLoaded(false);
-  }, [currentUrl]);
-
-  const handlePrev = useCallback((e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    setSlideDirection(-1);
-    setActiveIdx((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-  }, [images.length]);
-
-  const handleNext = useCallback((e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    setSlideDirection(1);
-    setActiveIdx((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-  }, [images.length]);
-
-  const handleDotClick = (e: React.MouseEvent, idx: number) => {
-    e.stopPropagation();
-    setSlideDirection(idx > activeIdx ? 1 : -1);
-    setActiveIdx(idx);
-  };
-
-  const slideVariants: Variants = {
-    enter: (dir: number) => ({
-      x: shouldReduceMotion ? 0 : dir > 0 ? 18 : -18,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: shouldReduceMotion ? 0.12 : 0.25,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-    exit: (dir: number) => ({
-      x: shouldReduceMotion ? 0 : dir > 0 ? -18 : 18,
-      opacity: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.18,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    }),
-  };
-
-  return (
-    <div className="project-screenshot-carousel">
-      {/* Top Floating Badges */}
-      <div className="project-media-top-badges">
-        <div className="project-top-badges-left">
-          <span className="project-index-pill">
-            #{String(cardIndex + 1).padStart(2, "0")} / {String(totalCards).padStart(2, "0")}
-          </span>
-          <span className="project-status-pill">
-            <span className="status-live-dot" aria-hidden="true" />
-            <span>{status}</span>
-          </span>
-        </div>
-
-        <button
-          type="button"
-          className="carousel-zoom-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpenLightbox(activeIdx);
-          }}
-          title="Inspect Full-Resolution Screenshot"
-          aria-label="Inspect Full-Resolution Screenshot"
-        >
-          <Maximize2 size={13} aria-hidden="true" />
-        </button>
-      </div>
-
-      {/* Main Image Stage with Crossfade Transition */}
-      <div
-        className="carousel-image-stage"
-        onClick={() => onOpenLightbox(activeIdx)}
-        title="Click to inspect full-resolution screenshot"
-      >
-        {/* Skeleton Shimmer Loading Placeholder */}
-        {!isLoaded && <div className="carousel-skeleton-shimmer" aria-hidden="true" />}
-
-        <AnimatePresence custom={slideDirection} mode="wait">
-          <motion.div
-            key={currentUrl}
-            custom={slideDirection}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            className="carousel-slide-motion-wrapper"
-          >
-            <Image
-              src={currentUrl}
-              alt={`${projectName} - ${meta.label} (${activeIdx + 1}/${images.length})`}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className={`project-image ${meta.icon === "store" ? "project-image-contain" : "project-image-cover"}`}
-              priority={priority}
-              draggable={false}
-              onLoad={() => setIsLoaded(true)}
-              style={{ opacity: isLoaded ? 1 : 0 }}
-            />
-            <div className="project-media-overlay" />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Multi-Screen Navigation Arrows */}
-      {images.length > 1 && (
-        <div className="carousel-nav-arrows">
-          <button
-            type="button"
-            className="carousel-nav-btn carousel-nav-prev"
-            onClick={handlePrev}
-            aria-label="Previous screenshot"
-            title="Previous screenshot"
-          >
-            <ChevronLeft size={16} aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            className="carousel-nav-btn carousel-nav-next"
-            onClick={handleNext}
-            aria-label="Next screenshot"
-            title="Next screenshot"
-          >
-            <ChevronRight size={16} aria-hidden="true" />
-          </button>
-        </div>
-      )}
-
-      {/* Bottom Bar: Source Tag & Dot Indicators */}
-      <div className="carousel-bottom-bar">
-        <span className="carousel-source-badge">
-          {meta.icon === "store" ? (
-            <Smartphone size={11} aria-hidden="true" />
-          ) : (
-            <Globe size={11} aria-hidden="true" />
-          )}
-          <span>{meta.label}</span>
-        </span>
-
-        {images.length > 1 && (
-          <div className="carousel-dots-row" role="tablist" aria-label="Screenshots">
-            {images.map((_, dotIdx) => (
-              <button
-                key={dotIdx}
-                type="button"
-                role="tab"
-                aria-selected={dotIdx === activeIdx}
-                className={`carousel-dot ${dotIdx === activeIdx ? "carousel-dot-active" : ""}`}
-                onClick={(e) => handleDotClick(e, dotIdx)}
-                title={`View screenshot ${dotIdx + 1} of ${images.length}`}
-                aria-label={`View screenshot ${dotIdx + 1} of ${images.length}`}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function ProjectCardContent({
+/**
+ * Clean Card Media Header optimized for Draggable Swiper
+ * Allows dragging the entire card while enabling click-to-zoom in Lightbox
+ */
+function ProjectCardMedia({
   project,
   index,
   total,
-  layout = "carousel",
   onOpenLightbox,
-}: ProjectCardContentProps) {
-  const isGrid = layout === "grid";
-  const allScreens =
-    project.screenshots && project.screenshots.length > 0
-      ? project.screenshots
-      : [project.image];
+}: {
+  project: VerifiedProject;
+  index: number;
+  total: number;
+  onOpenLightbox: (payload: LightboxPayload) => void;
+}) {
+  const [selectedScreenIdx, setSelectedScreenIdx] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const images = project.screenshots && project.screenshots.length > 0
+    ? project.screenshots
+    : [project.image];
+
+  const currentUrl = images[selectedScreenIdx] || images[0] || project.image;
+  const meta = getScreenshotMeta(currentUrl, project.category);
 
   return (
-    <div
-      className={`verified-project-card ${
-        isGrid ? "verified-project-grid-card" : "verified-project-carousel-card"
-      }`}
-    >
-      {/* Media Column / Card Header */}
-      <div className="project-media-col">
-        <div className="project-media-frame">
-          <ProjectScreenshotCarousel
-            screenshots={allScreens}
-            fallbackImage={project.image}
-            projectName={project.name}
-            category={project.category}
-            status={project.status}
-            cardIndex={index}
-            totalCards={total}
-            priority={index < 2}
-            onOpenLightbox={(imgIdx) => {
+    <div className="swiper-card-media-col">
+      <div
+        className="swiper-card-media-frame"
+        onClick={() =>
+          onOpenLightbox({
+            images,
+            index: selectedScreenIdx,
+            projectName: project.name,
+            category: project.category,
+            liveUrl: project.liveUrl,
+          })
+        }
+        title="Click to view full-resolution screenshot"
+      >
+        {/* Skeleton Shimmer */}
+        {!isLoaded && <div className="swiper-skeleton-shimmer" aria-hidden="true" />}
+
+        {/* Top Badges */}
+        <div className="swiper-card-top-badges">
+          <div className="swiper-top-left-group">
+            <span className="swiper-card-index-pill">
+              #{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            </span>
+            <span className="swiper-card-status-pill">
+              <span className="status-live-dot" aria-hidden="true" />
+              <span>{project.status}</span>
+            </span>
+          </div>
+
+          <button
+            type="button"
+            className="swiper-card-zoom-btn"
+            onClick={(e) => {
+              e.stopPropagation();
               onOpenLightbox({
-                images: allScreens,
-                index: imgIdx,
+                images,
+                index: selectedScreenIdx,
                 projectName: project.name,
                 category: project.category,
                 liveUrl: project.liveUrl,
               });
             }}
-          />
+            title="Inspect Full-Resolution Screenshot"
+            aria-label="Inspect Full-Resolution Screenshot"
+          >
+            <Maximize2 size={13} aria-hidden="true" />
+          </button>
         </div>
 
-        {/* Quick Highlights Box under media */}
-        <div className="project-highlights-box">
-          <p className="project-highlights-title">
-            <ShieldCheck size={14} className="highlights-icon" aria-hidden="true" />
-            <span>Verified Capabilities</span>
-          </p>
-          <ul className="project-highlights-list">
-            {project.highlights.map((h, i) => (
-              <li key={i}>{h}</li>
-            ))}
-          </ul>
+        {/* Media Image */}
+        <Image
+          src={currentUrl}
+          alt={`${project.name} - ${meta.label}`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`swiper-project-image ${meta.icon === "store" ? "swiper-project-image-contain" : "swiper-project-image-cover"}`}
+          priority={index < 2}
+          draggable={false}
+          onLoad={() => setIsLoaded(true)}
+          style={{ opacity: isLoaded ? 1 : 0 }}
+        />
+        <div className="swiper-project-media-overlay" />
+
+        {/* Bottom Source Badge & Multiple Screen Thumbnails */}
+        <div className="swiper-card-media-bottom">
+          <span className="swiper-source-badge">
+            {meta.icon === "store" ? (
+              <Smartphone size={11} aria-hidden="true" />
+            ) : (
+              <Globe size={11} aria-hidden="true" />
+            )}
+            <span>{meta.label}</span>
+          </span>
+
+          {images.length > 1 && (
+            <div
+              className="swiper-thumb-dots"
+              onClick={(e) => e.stopPropagation()}
+              role="tablist"
+              aria-label="Screenshot previews"
+            >
+              {images.slice(0, 5).map((img, dotIdx) => (
+                <button
+                  key={img + dotIdx}
+                  type="button"
+                  role="tab"
+                  aria-selected={dotIdx === selectedScreenIdx}
+                  className={`swiper-thumb-dot ${dotIdx === selectedScreenIdx ? "active" : ""}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedScreenIdx(dotIdx);
+                  }}
+                  title={`View screen ${dotIdx + 1} of ${images.length}`}
+                  aria-label={`View screen ${dotIdx + 1} of ${images.length}`}
+                />
+              ))}
+              {images.length > 5 && (
+                <span className="swiper-thumb-more">+{images.length - 5}</span>
+              )}
+            </div>
+          )}
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Content Column / Card Body */}
-      <div className="project-content-col">
+/**
+ * Swiper Project Card Component
+ */
+function ProjectSwiperCard({
+  project,
+  index,
+  total,
+  onOpenLightbox,
+}: {
+  project: VerifiedProject;
+  index: number;
+  total: number;
+  onOpenLightbox: (payload: LightboxPayload) => void;
+}) {
+  return (
+    <div className="verified-project-swiper-card">
+      {/* Media Header */}
+      <ProjectCardMedia
+        project={project}
+        index={index}
+        total={total}
+        onOpenLightbox={onOpenLightbox}
+      />
+
+      {/* Card Content Column */}
+      <div className="swiper-card-content-col">
+        {/* Category & Status Row */}
+        <div className="swiper-card-meta-row">
+          <span className="swiper-card-category-badge">{project.category}</span>
+          <span className="swiper-card-verified-tag">
+            <CheckCircle2 size={12} aria-hidden="true" />
+            <span>Verified Live</span>
+          </span>
+        </div>
+
         {/* Title & Tagline */}
-        <div className="project-header-block">
-          <div className="project-meta-row">
-            <span className="project-role-badge">{project.role}</span>
+        <div className="swiper-card-title-group">
+          <h3 className="swiper-card-project-name">{project.name}</h3>
+          <p className="swiper-card-tagline">{project.tagline}</p>
+        </div>
+
+        {/* Description */}
+        <p className="swiper-card-desc">{project.description}</p>
+
+        {/* Role & Architecture Highlights */}
+        {project.architecture && (
+          <div className="swiper-card-arch-box">
+            <span className="arch-label">Architecture:</span>
+            <p className="arch-text">{project.architecture}</p>
           </div>
-          <h3 className="project-title">{project.name}</h3>
-          <p className="project-tagline">{project.tagline}</p>
-        </div>
+        )}
 
-        {/* Narrative Description */}
-        <p className="project-narrative">{project.description}</p>
-
-        {/* Architecture Callout */}
-        <div className="project-arch-box">
-          <span className="arch-box-label">System Architecture:</span>
-          <p className="arch-box-text">{project.architecture}</p>
-        </div>
-
-        {/* Tech Stack Chips */}
-        <div className="project-tech-section">
-          <span className="tech-section-label">Technologies:</span>
-          <div className="project-tech-tags">
-            {project.stack.map((tech) => (
-              <span key={tech} className="tech-pill">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Metrics Grid */}
-        <div className="project-metrics-grid">
-          {project.metrics.map((m, mi) => (
-            <div key={mi} className="metric-cell">
-              <span className="metric-label">{m.label}</span>
-              <strong className="metric-val">{m.value}</strong>
-            </div>
+        {/* Technology Stack Pills */}
+        <div className="swiper-card-stack-row">
+          {project.stack.map((tech) => (
+            <span key={tech} className="swiper-tech-chip">
+              {tech}
+            </span>
           ))}
         </div>
 
-        {/* Action Buttons Row */}
-        <div className="project-actions-row">
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="proj-btn proj-btn-primary"
-            >
-              {project.category === "Mobile App" ? (
-                <Smartphone size={15} aria-hidden="true" />
-              ) : (
-                <Globe size={15} aria-hidden="true" />
-              )}
-              <span>
-                {project.category === "Mobile App"
-                  ? "Google Play Store"
-                  : "Verified Live System"}
-              </span>
-              <ExternalLink size={13} className="btn-arrow-icon" aria-hidden="true" />
-            </a>
-          )}
+        {/* Key Metrics */}
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="swiper-card-metrics-grid">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="swiper-metric-item">
+                <span className="swiper-metric-value">{m.value}</span>
+                <span className="swiper-metric-label">{m.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
-          {project.secondaryUrl && (
-            <a
-              href={project.secondaryUrl.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="proj-btn proj-btn-secondary"
-            >
-              <span>{project.secondaryUrl.label}</span>
-              <ExternalLink size={14} className="btn-arrow-icon" aria-hidden="true" />
-            </a>
-          )}
+        {/* Actions Row */}
+        <div className="swiper-card-actions-row">
+          <div className="swiper-actions-left">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="swiper-action-btn-primary"
+                title={`Visit live production for ${project.name}`}
+              >
+                <span>
+                  {project.category === "Mobile App"
+                    ? "Google Play Store"
+                    : "Verified Live System"}
+                </span>
+                <ExternalLink size={13} aria-hidden="true" />
+              </a>
+            )}
 
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="proj-btn proj-btn-ghost"
-              title="View Public Source Code on GitHub"
-            >
-              <Github size={15} aria-hidden="true" />
-              <span>Public GitHub</span>
-              <ExternalLink size={12} className="btn-arrow-icon" aria-hidden="true" />
-            </a>
+            {project.secondaryUrl && (
+              <a
+                href={project.secondaryUrl.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="swiper-action-btn-secondary"
+                title={project.secondaryUrl.label}
+              >
+                <span>{project.secondaryUrl.label}</span>
+                <ExternalLink size={12} aria-hidden="true" />
+              </a>
+            )}
+          </div>
+
+          {project.role && (
+            <span className="swiper-role-pill" title={project.role}>
+              {project.role.split("(")[0].trim()}
+            </span>
           )}
         </div>
       </div>
@@ -419,14 +313,13 @@ function ProjectCardContent({
 export default function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [viewMode, setViewMode] = useState<"carousel" | "grid">("carousel");
-  const [lightbox, setLightbox] = useState<LightboxPayload | null>(null);
-
-  // Swiper carousel state
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
+  const [isBeginning, setIsBeginning] = useState<boolean>(true);
+  const [isEnd, setIsEnd] = useState<boolean>(false);
+  const [lightbox, setLightbox] = useState<LightboxPayload | null>(null);
+  const prevBtnRef = useRef<HTMLButtonElement | null>(null);
+  const nextBtnRef = useRef<HTMLButtonElement | null>(null);
 
   // Filter projects by active category and search query
   const filteredProjects = useMemo(() => {
@@ -442,7 +335,7 @@ export default function ProjectsSection() {
       const matchTag = project.tagline.toLowerCase().includes(q);
       const matchDesc = project.description.toLowerCase().includes(q);
       const matchRole = project.role.toLowerCase().includes(q);
-      const matchArch = project.architecture.toLowerCase().includes(q);
+      const matchArch = project.architecture?.toLowerCase().includes(q);
       const matchStack = project.stack.some((s) => s.toLowerCase().includes(q));
 
       return matchName || matchTag || matchDesc || matchRole || matchArch || matchStack;
@@ -456,11 +349,11 @@ export default function ProjectsSection() {
     setIsEnd(swiper.isEnd);
   };
 
-  const handleCarouselPrev = () => {
+  const handlePrev = () => {
     swiperInstance?.slidePrev();
   };
 
-  const handleCarouselNext = () => {
+  const handleNext = () => {
     swiperInstance?.slideNext();
   };
 
@@ -497,37 +390,14 @@ export default function ProjectsSection() {
             </p>
           </motion.div>
 
-          {/* Header Actions: View Mode Toggle & All Projects Link */}
+          {/* Header Action: Explore All Projects */}
           <div className="projects-header-actions">
-            <div className="view-mode-toggle" role="group" aria-label="View mode toggle">
-              <button
-                type="button"
-                className={`view-mode-btn ${viewMode === "carousel" ? "view-mode-btn-active" : ""}`}
-                onClick={() => setViewMode("carousel")}
-                title="Draggable Horizontal Carousel (Mouse / Touch / Trackpad)"
-                aria-pressed={viewMode === "carousel"}
-              >
-                <GripHorizontal size={14} aria-hidden="true" />
-                <span>Draggable Carousel</span>
-              </button>
-              <button
-                type="button"
-                className={`view-mode-btn ${viewMode === "grid" ? "view-mode-btn-active" : ""}`}
-                onClick={() => setViewMode("grid")}
-                title="Grid View"
-                aria-pressed={viewMode === "grid"}
-              >
-                <LayoutGrid size={14} aria-hidden="true" />
-                <span>Grid View</span>
-              </button>
-            </div>
-
             <Link
               href="/projects"
               className="btn-outline-sm all-projects-badge-btn"
-              title="Explore all verified projects on dedicated page"
+              title="Explore all verified projects on dedicated grid page"
             >
-              <span>All Projects</span>
+              <span>Explore All Projects ({VERIFIED_PROJECTS.length})</span>
               <ExternalLink size={13} aria-hidden="true" />
             </Link>
           </div>
@@ -545,9 +415,7 @@ export default function ProjectsSection() {
                   role="tab"
                   aria-selected={isActive}
                   className={`category-tab ${isActive ? "category-tab-active" : ""}`}
-                  onClick={() => {
-                    setActiveCategory(cat);
-                  }}
+                  onClick={() => setActiveCategory(cat)}
                 >
                   {isActive && (
                     <motion.span
@@ -585,30 +453,33 @@ export default function ProjectsSection() {
           </div>
         </div>
 
-        {/* Counter & Drag Navigation Row */}
+        {/* Counter & Drag Guide Row */}
         <div className="projects-counter-row">
-          <span className="counter-text">
-            Showing <strong>{filteredProjects.length}</strong> verified production {filteredProjects.length === 1 ? "project" : "projects"}
-            {viewMode === "carousel" && filteredProjects.length > 0 && (
+          <div className="counter-left-group">
+            <span className="counter-text">
+              Showing <strong>{filteredProjects.length}</strong> verified production {filteredProjects.length === 1 ? "project" : "projects"}
+            </span>
+
+            {filteredProjects.length > 0 && (
               <span className="drag-helper-text">
-                {" · "}
-                <GripHorizontal size={13} className="inline-drag-icon" aria-hidden="true" />
-                <span>Drag horizontally with mouse or swipe</span>
+                <GripHorizontal size={14} className="inline-drag-icon" aria-hidden="true" />
+                <span>Drag with mouse &bull; Swipe on mobile &bull; Trackpad scroll</span>
               </span>
             )}
-          </span>
+          </div>
 
-          {viewMode === "carousel" && filteredProjects.length > 0 && (
-            <div className="carousel-drag-nav-controls">
+          {filteredProjects.length > 0 && (
+            <div className="swiper-nav-controls">
               <span className="card-counter-indicator" aria-live="polite">
                 {String(activeSlideIndex + 1).padStart(2, "0")} / {String(filteredProjects.length).padStart(2, "0")}
               </span>
 
-              <div className="carousel-arrow-buttons">
+              <div className="swiper-arrow-buttons">
                 <button
+                  ref={prevBtnRef}
                   type="button"
-                  className="carousel-arrow-btn"
-                  onClick={handleCarouselPrev}
+                  className="swiper-arrow-btn"
+                  onClick={handlePrev}
                   disabled={isBeginning}
                   aria-label="Previous project slide"
                   title="Previous slide (Left Arrow)"
@@ -616,9 +487,10 @@ export default function ProjectsSection() {
                   <ChevronLeft size={18} aria-hidden="true" />
                 </button>
                 <button
+                  ref={nextBtnRef}
                   type="button"
-                  className="carousel-arrow-btn"
-                  onClick={handleCarouselNext}
+                  className="swiper-arrow-btn"
+                  onClick={handleNext}
                   disabled={isEnd}
                   aria-label="Next project slide"
                   title="Next slide (Right Arrow)"
@@ -630,7 +502,7 @@ export default function ProjectsSection() {
           )}
         </div>
 
-        {/* Project Card Presentation Display */}
+        {/* Draggable Swiper Gallery */}
         {filteredProjects.length === 0 ? (
           <div className="projects-empty-state">
             <Layers size={36} className="empty-icon" aria-hidden="true" />
@@ -647,10 +519,10 @@ export default function ProjectsSection() {
               Reset Filters
             </button>
           </div>
-        ) : viewMode === "carousel" ? (
-          <div className="projects-carousel-container">
+        ) : (
+          <div className="projects-swiper-wrapper">
             <Swiper
-              modules={[Navigation, Pagination, Keyboard, Mousewheel, A11y, FreeMode]}
+              modules={[Navigation, Pagination, Keyboard, Mousewheel, A11y, FreeMode, Scrollbar]}
               onSwiper={(swiper) => {
                 setSwiperInstance(swiper);
                 setIsBeginning(swiper.isBeginning);
@@ -660,101 +532,92 @@ export default function ProjectsSection() {
               grabCursor={true}
               simulateTouch={true}
               touchEventsTarget="container"
-              touchRatio={1.2}
-              threshold={6}
+              touchRatio={1.3}
+              threshold={5}
               preventClicks={true}
               preventClicksPropagation={false}
-              speed={520}
+              freeMode={{
+                enabled: true,
+                momentum: true,
+                momentumRatio: 0.85,
+                momentumBounce: true,
+                momentumVelocityRatio: 0.9,
+              }}
+              speed={480}
               resistance={true}
-              resistanceRatio={0.75}
+              resistanceRatio={0.78}
               keyboard={{ enabled: true, onlyInViewport: true }}
               mousewheel={{ forceToAxis: true, releaseOnEdges: true, sensitivity: 1 }}
+              scrollbar={{
+                draggable: true,
+                hide: false,
+                el: ".projects-swiper-scrollbar",
+              }}
               watchSlidesProgress={true}
               breakpoints={{
                 0: {
-                  slidesPerView: 1.12,
+                  slidesPerView: 1.15,
                   spaceBetween: 16,
                 },
                 640: {
-                  slidesPerView: 1.6,
+                  slidesPerView: 1.7,
                   spaceBetween: 22,
                 },
                 1024: {
-                  slidesPerView: 2.25,
+                  slidesPerView: 2.35,
                   spaceBetween: 28,
                 },
-                1400: {
-                  slidesPerView: 2.65,
+                1440: {
+                  slidesPerView: 2.85,
                   spaceBetween: 32,
                 },
               }}
-              className="projects-draggable-swiper"
+              className="projects-main-swiper"
             >
               {filteredProjects.map((project, idx) => (
-                <SwiperSlide key={project.id} className="project-carousel-slide">
+                <SwiperSlide key={project.id} className="project-swiper-slide">
                   <motion.div
-                    initial={{ opacity: 0, y: 26, scale: 0.985 }}
+                    initial={{ opacity: 0, y: 24, scale: 0.985 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-40px" }}
                     transition={{
-                      duration: 0.48,
-                      delay: Math.min(idx * 0.08, 0.35),
+                      duration: 0.45,
+                      delay: Math.min(idx * 0.07, 0.3),
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="carousel-card-motion-shell"
+                    className="swiper-card-shell"
                   >
-                    <ProjectCardContent
+                    <ProjectSwiperCard
                       project={project}
                       index={idx}
                       total={filteredProjects.length}
-                      layout="carousel"
                       onOpenLightbox={(payload) => setLightbox(payload)}
                     />
                   </motion.div>
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
-        ) : (
-          <div className="projects-grid-container">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 26, scale: 0.985 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{
-                  duration: 0.48,
-                  delay: Math.min(idx * 0.08, 0.35),
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="grid-card-motion-wrapper"
-              >
-                <ProjectCardContent
-                  project={project}
-                  index={idx}
-                  total={filteredProjects.length}
-                  layout="grid"
-                  onOpenLightbox={(payload) => setLightbox(payload)}
-                />
-              </motion.div>
-            ))}
+
+            {/* Custom Interactive Swiper Scrollbar */}
+            <div className="projects-swiper-scrollbar-container">
+              <div className="projects-swiper-scrollbar" />
+            </div>
           </div>
         )}
 
-        {/* Project Verification Footnote & All Projects CTA */}
+        {/* Verification Footnote & All Projects Link */}
         <div className="projects-bottom-cta-row">
           <div className="projects-audit-footnote">
             <CheckCircle2 size={16} className="audit-check-icon" aria-hidden="true" />
             <span>
-              Production Verification Standard: Displaying exclusively verified, live production projects with active endpoints. Drafts and non-public work are omitted.
+              Production Verification Standard: Displaying exclusively verified, live production projects with active endpoints.
             </span>
           </div>
 
           <Link
             href="/projects"
             className="btn-primary-sm projects-all-link-btn"
-            title="Explore all verified production projects on dedicated page"
+            title="Explore all verified production projects on dedicated grid page"
           >
             <span>Explore All Projects ({VERIFIED_PROJECTS.length})</span>
             <ExternalLink size={14} aria-hidden="true" />
@@ -778,51 +641,64 @@ export default function ProjectsSection() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="screenshot-lightbox-dialog"
+              className="screenshot-lightbox-modal"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="screenshot-lightbox-header">
-                <div className="lightbox-title-wrap">
-                  <span className="lightbox-project-name">{lightbox.projectName}</span>
-                  <span className="lightbox-sep">·</span>
-                  <span className="lightbox-counter">
-                    Screen {lightbox.index + 1} of {lightbox.images.length}
-                  </span>
+              <div className="lightbox-header">
+                <div>
+                  <h3 className="lightbox-title">{lightbox.projectName}</h3>
+                  <p className="lightbox-meta">
+                    Screenshot {lightbox.index + 1} of {lightbox.images.length} &bull; {lightbox.category}
+                  </p>
                 </div>
-                <button
-                  type="button"
-                  className="lightbox-close-btn"
-                  onClick={() => setLightbox(null)}
-                  aria-label="Close screenshot modal"
-                >
-                  <X size={18} aria-hidden="true" />
-                </button>
+
+                <div className="lightbox-actions">
+                  {lightbox.liveUrl && (
+                    <a
+                      href={lightbox.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="lightbox-live-link"
+                    >
+                      <span>Visit Live</span>
+                      <ExternalLink size={14} />
+                    </a>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setLightbox(null)}
+                    className="lightbox-close-btn"
+                    aria-label="Close screenshot modal"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
               </div>
 
-              <div className="screenshot-lightbox-viewport">
+              <div className="lightbox-stage">
                 <Image
                   src={lightbox.images[lightbox.index] || lightbox.images[0]}
-                  alt={`${lightbox.projectName} high resolution capture`}
+                  alt={`${lightbox.projectName} - Full resolution`}
                   fill
-                  sizes="90vw"
-                  className="screenshot-lightbox-img"
+                  sizes="95vw"
+                  className="lightbox-img"
                   priority
                 />
               </div>
 
-              {/* Lightbox Thumbnails / Next-Prev if multi-screen */}
               {lightbox.images.length > 1 && (
-                <div className="lightbox-strip">
-                  {lightbox.images.map((img, idx) => (
+                <div className="lightbox-thumbnails-bar">
+                  {lightbox.images.map((img, tIdx) => (
                     <button
-                      key={idx}
+                      key={img + tIdx}
                       type="button"
-                      className={`lightbox-thumb-btn ${idx === lightbox.index ? "lightbox-thumb-active" : ""}`}
-                      onClick={() => setLightbox({ ...lightbox, index: idx })}
+                      className={`lightbox-thumb-btn ${tIdx === lightbox.index ? "lightbox-thumb-active" : ""}`}
+                      onClick={() => setLightbox({ ...lightbox, index: tIdx })}
                     >
                       <Image
                         src={img}
-                        alt={`Thumbnail ${idx + 1}`}
+                        alt={`Thumbnail ${tIdx + 1}`}
                         width={64}
                         height={40}
                         className="lightbox-thumb-img"

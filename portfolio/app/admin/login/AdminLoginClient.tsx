@@ -41,11 +41,11 @@ export default function AdminLoginClient() {
     }
   };
 
-  const handleQuickFill = () => {
-    setUsername("admin");
-    setPassword("AdminPassword2026!");
-    setError(null);
-  };
+  // const handleQuickFill = () => {
+  //   setUsername("admin");
+  //   setPassword("AdminPassword2026!");
+  //   setError(null);
+  // };
 
   return (
     <div className="admin-login-wrapper">
