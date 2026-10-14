@@ -1110,3 +1110,16 @@ main{overflow-x:clip;background:#0c0c0c}
 .swiper-project-count{margin:0;color:var(--muted);font-size:11px}
 @media(max-width:640px){.projects-swiper{padding-bottom:48px!important}.projects-swiper .swiper-button-prev,.projects-swiper .swiper-button-next{width:35px;height:35px}.projects-swiper .swiper-button-prev{right:47px}.projects-swiper .swiper-pagination{bottom:12px!important}.swiper-project-count{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.projects-swiper .swiper-button-prev,.projects-swiper .swiper-button-next,.projects-swiper .swiper-pagination-bullet{transition:none!important}}
+
+
+/* Keep hero copy vertically centered beside the 3D model on desktop. */
+@media (min-width: 901px) {
+  .hero {
+    align-items: center !important;
+  }
+  .hero-copy {
+    align-self: center !important;
+    margin-top: 0 !important;
+    transform: translateY(0);
+  }
+}
