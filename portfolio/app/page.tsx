@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ThreeDModel from "./components/ThreeDModel";
 import {
   ArrowUpRight,
   Code2,
@@ -513,15 +514,7 @@ export default function Home() {
               <li>Flutter</li><li>Go</li><li>Next.js</li><li>Laravel</li>
             </ul>
           </div>
-          <div className="hero-photo-wrap">
-            <img
-              className="hero-photo"
-              src="https://github.com/programmermdemonmiah.png?size=800"
-              alt="MD. Emon Miah"
-              fetchPriority="high"
-            />
-            <p className="photo-caption">MD. Emon Miah <span>· Developer</span></p>
-          </div>
+          <ThreeDModel />
         </div>
       </header>
 
