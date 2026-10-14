@@ -30,7 +30,9 @@ type PortfolioProject = {
 
 const projects: PortfolioProject[] = [
   {
-    number: "01", name: "Photo Background Remover", category: "IMAGE UTILITY",
+    number: "01",
+    name: "Photo Background Remover",
+    category: "IMAGE UTILITY",
     summary: "A Python utility for removing image backgrounds and exploring practical image-processing workflows.",
     stack: ["Python","Image Processing"],
     tone: "red",
@@ -38,7 +40,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "02", name: "Passport Photo AI", category: "AI IMAGE TOOL",
+    number: "02",
+    name: "Passport Photo AI",
+    category: "AI IMAGE TOOL",
     summary: "A Python project exploring AI-assisted passport-photo preparation and image workflows.",
     stack: ["Python","AI","Image Processing"],
     tone: "neutral",
@@ -46,7 +50,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "03", name: "Learning Management System", category: "EDUCATION · WEB APP",
+    number: "03",
+    name: "Learning Management System",
+    category: "EDUCATION · WEB APP",
     summary: "A Django-based learning management system project for education-oriented workflows and server-rendered pages.",
     stack: ["Python","Django","Web"],
     tone: "red",
@@ -54,7 +60,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "04", name: "Login UI", category: "MOBILE UI",
+    number: "04",
+    name: "Login UI",
+    category: "MOBILE UI",
     summary: "A Flutter UI project focused on login and password-recovery screens.",
     stack: ["Flutter","Dart","UI Design"],
     tone: "neutral",
@@ -62,7 +70,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "05", name: "Django Todo API", category: "REST API",
+    number: "05",
+    name: "Django Todo API",
+    category: "REST API",
     summary: "A Django API practice project for task-oriented endpoints and data operations.",
     stack: ["Python","Django","REST API"],
     tone: "red",
@@ -70,7 +80,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "06", name: "Donation Club", category: "DONATION MANAGEMENT",
+    number: "06",
+    name: "Donation Club",
+    category: "DONATION MANAGEMENT",
     summary: "A PHP web application project for donation-club workflows.",
     stack: ["PHP","Web Application"],
     tone: "neutral",
@@ -78,7 +90,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "07", name: "Todo App", category: "TASK MANAGEMENT",
+    number: "07",
+    name: "Todo App",
+    category: "TASK MANAGEMENT",
     summary: "A lightweight task-list application for organizing everyday tasks.",
     stack: ["Flutter","Dart","Productivity"],
     tone: "red",
@@ -86,7 +100,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "08", name: "Calorie Count", category: "HEALTH · WEB APP",
+    number: "08",
+    name: "Calorie Count",
+    category: "HEALTH · WEB APP",
     summary: "A Django web project focused on calorie-counting and food-tracking workflows.",
     stack: ["Python","Django","Web"],
     tone: "neutral",
@@ -94,7 +110,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "09", name: "Ecom Matrix", category: "E-COMMERCE",
+    number: "09",
+    name: "Ecom Matrix",
+    category: "E-COMMERCE",
     summary: "A commerce project repository for a multi-vendor shopping experience.",
     stack: ["E-commerce","Flutter","Mobile"],
     tone: "red",
@@ -102,7 +120,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "10", name: "Daily Income Expense", category: "PERSONAL FINANCE",
+    number: "10",
+    name: "Daily Income Expense",
+    category: "PERSONAL FINANCE",
     summary: "A project centered on tracking daily income and expenses.",
     stack: ["Python","Finance","Web App"],
     tone: "neutral",
@@ -110,7 +130,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "11", name: "Rajbari Builder", category: "BUSINESS · WEBVIEW",
+    number: "11",
+    name: "Rajbari Builder",
+    category: "BUSINESS · WEBVIEW",
     summary: "A Flutter WebView application project for bringing a web experience to mobile.",
     stack: ["Flutter","Dart","WebView"],
     tone: "red",
@@ -118,7 +140,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "12", name: "Wempro Company Task", category: "DEVELOPMENT TASK",
+    number: "12",
+    name: "Wempro Company Task",
+    category: "DEVELOPMENT TASK",
     summary: "A focused development-task repository; the source contains the implementation and deliverables.",
     stack: ["Software Development","Git"],
     tone: "neutral",
@@ -126,7 +150,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "13", name: "Recipe Project", category: "FOOD · WEB APP",
+    number: "13",
+    name: "Recipe Project",
+    category: "FOOD · WEB APP",
     summary: "A project for organizing and presenting recipe-related content and workflows.",
     stack: ["Web Development","Recipes"],
     tone: "red",
@@ -134,7 +160,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "14", name: "Cash Management", category: "FINANCE · SOFTWARE",
+    number: "14",
+    name: "Cash Management",
+    category: "FINANCE · SOFTWARE",
     summary: "A cash-management project focused on recording and organizing financial activity.",
     stack: ["Finance","Application"],
     tone: "neutral",
@@ -142,7 +170,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "15", name: "My Shop WebView", category: "MOBILE COMMERCE",
+    number: "15",
+    name: "My Shop WebView",
+    category: "MOBILE COMMERCE",
     summary: "A Flutter WebView project that wraps a shop experience for mobile access.",
     stack: ["Flutter","Dart","WebView"],
     tone: "red",
@@ -150,7 +180,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "16", name: "WhatsApp WebView", category: "WEBVIEW APP",
+    number: "16",
+    name: "WhatsApp WebView",
+    category: "WEBVIEW APP",
     summary: "A WebView-focused mobile repository. Review its source for the exact supported workflow.",
     stack: ["Flutter","WebView","Mobile"],
     tone: "neutral",
@@ -158,7 +190,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "17", name: "Library Management System", category: "LIBRARY · WEB APP",
+    number: "17",
+    name: "Library Management System",
+    category: "LIBRARY · WEB APP",
     summary: "A Django-based library-management project built with server-rendered templates.",
     stack: ["Python","Django","HTML"],
     tone: "red",
@@ -166,7 +200,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "18", name: "Wholesale Shop WebView", category: "MOBILE COMMERCE",
+    number: "18",
+    name: "Wholesale Shop WebView",
+    category: "MOBILE COMMERCE",
     summary: "A Flutter WebView project for accessing a wholesale-shop experience on mobile.",
     stack: ["Flutter","Dart","WebView"],
     tone: "neutral",
@@ -174,7 +210,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "19", name: "Django Modules", category: "BACKEND LEARNING",
+    number: "19",
+    name: "Django Modules",
+    category: "BACKEND LEARNING",
     summary: "Django module experiments and reusable learning examples.",
     stack: ["Python","Django"],
     tone: "red",
@@ -182,7 +220,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "20", name: "Calculator", category: "UTILITY APP",
+    number: "20",
+    name: "Calculator",
+    category: "UTILITY APP",
     summary: "A compact calculator project focused on a familiar everyday utility workflow.",
     stack: ["Flutter","Dart","Utility"],
     tone: "neutral",
@@ -190,7 +230,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "21", name: "Wholesale Shop", category: "E-COMMERCE · MOBILE",
+    number: "21",
+    name: "Wholesale Shop",
+    category: "E-COMMERCE · MOBILE",
     summary: "A Flutter shopping project focused on a wholesale-commerce experience.",
     stack: ["Flutter","Dart","E-commerce"],
     tone: "red",
@@ -198,7 +240,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "22", name: "WhatsApp Clone UI", category: "MESSAGING · UI CONCEPT",
+    number: "22",
+    name: "WhatsApp Clone UI",
+    category: "MESSAGING · UI CONCEPT",
     summary: "A Flutter messaging-interface concept focused on UI patterns, not an official WhatsApp integration.",
     stack: ["Flutter","Dart","UI Design"],
     tone: "neutral",
@@ -206,7 +250,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "23", name: "Quiz Application", category: "QUIZ · WEB APP",
+    number: "23",
+    name: "Quiz Application",
+    category: "QUIZ · WEB APP",
     summary: "A Django project for interactive question-and-answer workflows.",
     stack: ["Python","Django","Education"],
     tone: "red",
@@ -214,7 +260,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "24", name: "Food App", category: "FOOD · MOBILE APP",
+    number: "24",
+    name: "Food App",
+    category: "FOOD · MOBILE APP",
     summary: "A Flutter project exploring food-service interface patterns and mobile user flows.",
     stack: ["Flutter","Dart","Mobile UI"],
     tone: "neutral",
@@ -222,7 +270,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "25", name: "Blog Project", category: "CONTENT · WEB APP",
+    number: "25",
+    name: "Blog Project",
+    category: "CONTENT · WEB APP",
     summary: "A web project for presenting written content through a simple website structure.",
     stack: ["HTML","Web Development"],
     tone: "red",
@@ -230,7 +280,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "26", name: "Django Portfolio Website", category: "PERSONAL PORTFOLIO",
+    number: "26",
+    name: "Django Portfolio Website",
+    category: "PERSONAL PORTFOLIO",
     summary: "An earlier portfolio website built with Django templates.",
     stack: ["Python","Django","HTML/CSS"],
     tone: "neutral",
@@ -238,7 +290,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "27", name: "Al Hadith", category: "CONTENT · MOBILE",
+    number: "27",
+    name: "Al Hadith",
+    category: "CONTENT · MOBILE",
     summary: "A Flutter project related to Al Hadith content and mobile presentation.",
     stack: ["Flutter","Dart","Content App"],
     tone: "red",
@@ -246,7 +300,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "28", name: "Samir Imperia Real Estate & Interior", category: "REAL ESTATE · WEB",
+    number: "28",
+    name: "Samir Imperia Real Estate & Interior",
+    category: "REAL ESTATE · WEB",
     summary: "A real-estate and interior-design website project.",
     stack: ["Web Development","Real Estate","Interior"],
     tone: "neutral",
@@ -254,7 +310,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "29", name: "DeepVerse Lab", category: "SOFTWARE & PRODUCTS",
+    number: "29",
+    name: "DeepVerse Lab",
+    category: "SOFTWARE & PRODUCTS",
     summary: "A repository under the DeepVerse Lab name. Open the source to explore its actual implementation.",
     stack: ["Software Development","GitHub"],
     tone: "red",
@@ -262,7 +320,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "30", name: "Chats App", category: "MESSAGING · MOBILE",
+    number: "30",
+    name: "Chats App",
+    category: "MESSAGING · MOBILE",
     summary: "A Flutter chat-app project exploring messaging-oriented screens and mobile interaction flows.",
     stack: ["Flutter","Dart","Chat UI"],
     tone: "neutral",
@@ -270,7 +330,9 @@ const projects: PortfolioProject[] = [
     liveLabel: "View repository"
   },
   {
-    number: "31", name: "Betikrom Fashion WebView", category: "FASHION · MOBILE COMMERCE",
+    number: "31",
+    name: "Betikrom Fashion WebView",
+    category: "FASHION · MOBILE COMMERCE",
     summary: "A Flutter WebView project for accessing a fashion-shopping website through a mobile app.",
     stack: ["Flutter","Dart","WebView","E-commerce"],
     tone: "red",
