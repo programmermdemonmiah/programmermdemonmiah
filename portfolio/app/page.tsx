@@ -1,10 +1,70 @@
 const projects = [
-  { number: "01", name: "SportsBD", category: "SPORTS PLATFORM", summary: "A connected sports product spanning Flutter apps, Go APIs, realtime communication, notifications, and a Next.js administration experience.", stack: ["Flutter", "Riverpod", "Go", "Next.js", "WebSocket"], tone: "green" },
-  { number: "02", name: "Live Streaming", category: "REALTIME & VIDEO", summary: "Live rooms and streaming workflows with host approvals, VIP and moderator access, viewer presence, chat, and device-level account security.", stack: ["Flutter", "Go", "LiveKit", "WebRTC", "WebSocket"], tone: "purple" },
-  { number: "03", name: "Commerce Platforms", category: "FULL-STACK COMMERCE", summary: "Customer and admin journeys with authentication, guest-to-account cart and wishlist merging, support chat, and containerized services.", stack: ["Next.js", "Go", "Laravel", "PostgreSQL", "Docker"], tone: "blue" },
-  { number: "04", name: "ERP & Business Systems", category: "BUSINESS SOFTWARE", summary: "Business workflows and ecommerce capabilities built around structured data, API integrations, and maintainable backend features.", stack: ["PHP", "Laravel", "MySQL", "REST APIs"], tone: "orange" },
-  { number: "05", name: "Mobile Product Engineering", category: "MOBILE APPLICATIONS", summary: "Customer, healthcare, finance, and service applications with considered navigation, practical state management, and API-driven interfaces.", stack: ["Flutter", "Dart", "Dio", "GetX", "Riverpod"], tone: "green" },
-  { number: "06", name: "Delivery & Infrastructure", category: "DEVOPS & DELIVERY", summary: "Dockerized services, Linux hosting, reverse proxies, CI/CD automation, and repeatable deployment workflows.", stack: ["Docker", "Linux", "Nginx", "GitHub Actions"], tone: "blue" }
+  {
+    number: "01", name: "SportsBD", category: "SPORTS PLATFORM",
+    summary: "A grassroots sports platform for live scoring, scorecards, tournaments, match insights, live streaming, and community discovery.",
+    stack: ["Web Platform", "Sports Tech", "Live Scoring"],
+    tone: "red", liveUrl: "https://sportsbd.net/",
+    liveLabel: "Visit live website",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://sportsbd.net/"
+  },
+  {
+    number: "02", name: "VerseMart", category: "E-COMMERCE",
+    summary: "A production ecommerce platform supported by containerized backend services, product browsing, checkout, and order workflows.",
+    stack: ["Next.js", "Go", "PostgreSQL", "Docker"],
+    tone: "orange", liveUrl: "https://oxewman.com/",
+    liveLabel: "Visit live website",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://oxewman.com/"
+  },
+  {
+    number: "03", name: "Genters", category: "CUSTOMER SHOPPING APP",
+    summary: "A single-vendor shopping app for browsing products, managing a cart, and placing orders without mandatory account registration.",
+    stack: ["Flutter", "Riverpod", "E-commerce"],
+    tone: "red", liveUrl: "https://play.google.com/store/apps/details?id=com.genters.customer",
+    liveLabel: "View on Google Play",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.genters.customer"
+  },
+  {
+    number: "04", name: "Asmi", category: "ONLINE SUPERMARKET",
+    summary: "A grocery shopping app with product discovery, checkout, delivery scheduling, order tracking, and customer support.",
+    stack: ["Flutter", "Riverpod", "Mobile Commerce"],
+    tone: "orange", liveUrl: "https://apps.apple.com/us/app/asmi-the-online-super-shop/id6762031008",
+    liveLabel: "View on App Store",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://apps.apple.com/us/app/asmi-the-online-super-shop/id6762031008"
+  },
+  {
+    number: "05", name: "FantasyMart", category: "MULTI-STORE COMMERCE",
+    summary: "A multi-store customer shopping app designed to bring multiple store experiences, product discovery, and checkout into one place.",
+    stack: ["Flutter", "E-commerce", "Mobile"],
+    tone: "red", liveUrl: "https://play.google.com/store/apps/details?id=com.fantasymart.customer",
+    liveLabel: "View on Google Play",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.fantasymart.customer"
+  },
+  {
+    number: "06", name: "Medly", category: "DIGITAL READING",
+    summary: "A mobile reading experience for discovering digital books, viewing book details, and reading content chapter by chapter.",
+    stack: ["Flutter", "Mobile UI", "Content"],
+    tone: "orange", liveUrl: "https://play.google.com/store/apps/details?id=com.medly.app",
+    liveLabel: "View on Google Play",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.medly.app"
+  },
+  {
+    number: "07", name: "Live Streaming Platform", category: "REALTIME & VIDEO",
+    summary: "Realtime streaming workflows with host approval, VIP and moderator access, viewer presence, chat, and device-level account security.",
+    stack: ["Flutter", "Go", "LiveKit", "WebSocket"],
+    tone: "red", liveUrl: null, liveLabel: null, screenshot: null
+  },
+  {
+    number: "08", name: "ERP & Business Systems", category: "BUSINESS SOFTWARE",
+    summary: "Business workflows and ecommerce capabilities built around structured data, API integrations, and maintainable backend features.",
+    stack: ["PHP", "Laravel", "MySQL", "REST APIs"],
+    tone: "orange", liveUrl: null, liveLabel: null, screenshot: null
+  },
+  {
+    number: "09", name: "Mobile & Backend Products", category: "CLIENT APPLICATIONS",
+    summary: "Additional customer, healthcare, finance, and service applications delivered with API-driven interfaces and practical state management.",
+    stack: ["Flutter", "Dart", "Go", "Laravel"],
+    tone: "red", liveUrl: null, liveLabel: null, screenshot: null
+  }
 ];
 const capabilities = [
   { number: "01", title: "Mobile development", text: "Cross-platform applications with Flutter, maintainable state, and thoughtful user flows.", tags: "Flutter · Dart · GetX · Riverpod · Dio" },
@@ -51,8 +111,15 @@ export default function Home() {
     </section>
 
     <section className="work-section" id="work"><div className="container"><div className="section-head"><div><div className="section-label"><span>02</span><span className="label-line" /> SELECTED WORK</div><h2>Different domains.<br /><em>Thoughtful engineering.</em></h2></div><p>A selection of product areas and systems I’ve worked across, from customer-facing applications to backend infrastructure.</p></div>
-      <div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}><div className={'project-art art-' + project.tone}><span className="project-number">{project.number} / 06</span><span className="project-art-label">{project.category}</span><div className="art-shape"><span>{project.number}</span></div><span className="art-arrow">↗</span></div><div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div>
-      <p className="project-footnote">Project descriptions summarize areas of engineering work. Specific client details and private implementation code are not published here.</p>
+      <div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}>
+        <a className={'project-art art-' + project.tone} href={project.liveUrl || "#contact"} target={project.liveUrl ? "_blank" : undefined} rel={project.liveUrl ? "noreferrer" : undefined} aria-label={project.liveUrl ? 'Open ' + project.name : project.name + ' — private project'}>
+          {project.screenshot ? <img className="project-screenshot" src={project.screenshot} alt={project.name + ' live website screenshot'} loading="lazy" /> : <div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}
+          <span className="project-number">{project.number} / 09</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
+        </a>
+        <div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
+          <div className="project-links">{project.liveUrl ? <a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel}<Arrow /></a> : <span className="private-project-label">Private / no public demo</span>}</div>
+        </div></article>)}</div>
+      <p className="project-footnote">Screenshots are live page captures for public websites and app listings. Some client projects are private and do not have a public demo URL.</p>
     </div></section>
 
     <section className="section container capability-section" id="capabilities"><div className="section-head"><div><div className="section-label"><span>03</span><span className="label-line" /> EXPERTISE</div><h2>From first screen<br />to <em>production.</em></h2></div><p>The right tools matter. So do clear thinking, maintainable architecture, and attention to the people using the product.</p></div>
