@@ -36,13 +36,13 @@ function Model() {
   useFrame((state, delta) => {
     if (!group.current) return;
     const t = state.clock.elapsedTime;
-    const targetY = state.pointer.x * 0.22 + t * 0.055;
-    const targetX = -state.pointer.y * 0.08;
+    const targetY = state.pointer.x * 0.18 + t * 0.045;
+    const targetX = -state.pointer.y * 0.06;
 
-    group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 3.6, delta);
-    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 3.6, delta);
-    group.current.position.x = THREE.MathUtils.damp(group.current.position.x, 0.72, 3.2, delta);
-    group.current.position.y = THREE.MathUtils.damp(group.current.position.y, Math.sin(t * 0.52) * 0.055, 3.4, delta);
+    group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 2.4, delta);
+    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 2.4, delta);
+    group.current.position.x = THREE.MathUtils.damp(group.current.position.x, 0.72, 2.4, delta);
+    group.current.position.y = THREE.MathUtils.damp(group.current.position.y, Math.sin(t * 0.42) * 0.045, 2.5, delta);
   });
 
   return <group ref={group} scale={layout.scale}><primitive object={cloned} position={[-layout.center.x, -layout.center.y, -layout.center.z]} /></group>;
@@ -51,8 +51,8 @@ function Model() {
 function CameraRig() {
   const { camera } = useThree();
   useFrame((state, delta) => {
-    camera.position.x = THREE.MathUtils.damp(camera.position.x, state.pointer.x * 0.08, 3.2, delta);
-    camera.position.y = THREE.MathUtils.damp(camera.position.y, state.pointer.y * 0.045, 3.2, delta);
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, state.pointer.x * 0.06, 2.2, delta);
+    camera.position.y = THREE.MathUtils.damp(camera.position.y, state.pointer.y * 0.035, 2.2, delta);
     camera.lookAt(0.48, 0, 0);
   });
   return null;
@@ -134,7 +134,7 @@ export default function ThreeDShowcase() {
       .three-d-glow{position:absolute;z-index:0;width:min(820px,74vw);height:min(820px,74vw);left:68%;top:52%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(229,57,53,.22),rgba(229,57,53,.055) 42%,transparent 72%);filter:blur(24px);pointer-events:none}
 
       /* The 3D canvas is a true background layer. It stays behind every hero text/control layer. */
-      .three-d-stage{position:absolute;z-index:1;inset:0;pointer-events:none}
+      .three-d-stage{position:absolute;z-index:1;inset:0;pointer-events:auto}
       .three-d-stage :global(canvas){position:absolute!important;inset:0;width:100%!important;height:100%!important;display:block}
       .three-d-vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(12,12,12,.93) 0%,rgba(12,12,12,.68) 25%,rgba(12,12,12,.12) 54%,rgba(12,12,12,.24) 100%),radial-gradient(circle at 68% 50%,transparent 0%,transparent 43%,rgba(0,0,0,.48) 100%)}
 
