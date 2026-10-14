@@ -98,14 +98,13 @@ I enjoy taking a product from **idea → architecture → development → deploy
 - 🔐 Authentication, authorization and device/session security
 - 🐳 Dockerized services, CI/CD and production infrastructure
 
-### 📊 GitHub Overview
+### 📊 GitHub Contributions
 
-<p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=programmermdemonmiah&show_icons=true&theme=transparent&hide_border=true" alt="GitHub Stats" />
-  <img height="165" src="https://github-readme-streak-stats.herokuapp.com/?user=programmermdemonmiah&theme=transparent&hide_border=true" alt="GitHub Contribution Streak" />
-</p>
+<!-- CONTRIBUTION_STATS:START -->
+_Contribution statistics are being set up. No estimated or public-only stats are shown here._
+<!-- CONTRIBUTION_STATS:END -->
 
-> **Note:** GitHub Top Languages reflects language usage in analyzed public repositories, not overall expertise. It may not reliably include private repositories, so this profile avoids showing a potentially misleading language ranking.
+> **Accuracy note:** The summary above will be generated from GitHub's authenticated contribution data, so private contributions can be included without exposing private repository names or code.
 
 ### 🤝 Let's Connect
 
