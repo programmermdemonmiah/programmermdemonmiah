@@ -60,7 +60,7 @@ const periods = [
   [`Calendar year ${previousYear}`, startOfYear(previousYear), endOfYear(previousYear)]
 ];
 
-let table = "| Period | Commits | Pull requests | Issues | Total contributions |\n";
+let table = "| Period | GitHub-counted commits | Pull requests | Issues | Total contributions |\n";
 table += "|---|---:|---:|---:|---:|\n";
 for (const [label, from, to] of periods) {
   const data = await getContributions(from, to);
