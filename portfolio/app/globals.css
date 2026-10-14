@@ -183,3 +183,20 @@ h2 em{font-style:normal;color:#FF8790}
  .container{width:calc(100% - 28px)}.hero-actions{gap:8px}.button{padding:0 13px}.hero-specialties{gap:6px}.capability-grid{grid-template-columns:1fr}.capability-card{min-height:unset}.profile-facts{grid-template-columns:1fr 1fr}.project-title-row h3{font-size:19px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+
+
+/* Real project previews and live links */
+.project-art{height:220px;background:radial-gradient(ellipse at 50% 110%,#4A1720,#1D1013 62%,#09090B)}
+.project-art:before{z-index:1;background:linear-gradient(180deg,#09090B12 0%,#09090B00 35%,#09090B80 100%),linear-gradient(#FF4D5A0C 1px,transparent 1px),linear-gradient(90deg,#FF4D5A0C 1px,transparent 1px);background-size:auto,25px 25px,25px 25px;pointer-events:none}
+.project-screenshot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0;transition:transform .4s ease,filter .3s ease}
+.project-card:hover .project-screenshot{transform:scale(1.035);filter:saturate(1.05)}
+.project-art-fallback{position:relative;z-index:1;width:112px;height:112px;border:1px solid #FF4D5A80;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(145deg,#2B1117,#100D0F);box-shadow:0 0 0 14px #FF4D5A0B,0 22px 45px #0007;transform:rotate(-6deg)}
+.project-art-fallback span{font:800 32px var(--display);color:#FF6975;letter-spacing:-.08em}
+.project-art-fallback small{font-size:7px;letter-spacing:.15em;color:#B9A8AC;transform:rotate(6deg)}
+.project-links{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid #302126;min-height:39px}
+.project-links a{display:inline-flex;align-items:center;color:#FF8790;font-size:10px;font-weight:700;transition:color .2s}
+.project-links a:hover{color:#FFF0F1}
+.private-project-label{font-size:9px;color:#82777B}
+.art-orange{background:radial-gradient(ellipse at 50% 110%,#651523,#291015 60%,#09090B)}
+.art-orange .project-number,.art-orange .project-art-label{color:#FFD4D8}
+@media(max-width:700px){.project-art{height:190px}}
