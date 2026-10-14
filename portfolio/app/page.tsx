@@ -20,8 +20,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Image Processing"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/photo_bg_remover",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/photo_bg_remover"
+    liveLabel: "View repository"
   },
   {
     number: "02", name: "Passport Photo AI", category: "AI IMAGE TOOL",
@@ -29,8 +28,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","AI","Image Processing"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/passport_photo_ai",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/passport_photo_ai"
+    liveLabel: "View repository"
   },
   {
     number: "03", name: "Learning Management System", category: "EDUCATION · WEB APP",
@@ -38,8 +36,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django","Web"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/learning_management_system",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/learning_management_system"
+    liveLabel: "View repository"
   },
   {
     number: "04", name: "Login UI", category: "MOBILE UI",
@@ -47,8 +44,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","UI Design"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/login-ui",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/login-ui"
+    liveLabel: "View repository"
   },
   {
     number: "05", name: "Django Todo API", category: "REST API",
@@ -56,8 +52,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django","REST API"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/django_todo_api_test",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/django_todo_api_test"
+    liveLabel: "View repository"
   },
   {
     number: "06", name: "Donation Club", category: "DONATION MANAGEMENT",
@@ -65,8 +60,7 @@ const projects: PortfolioProject[] = [
     stack: ["PHP","Web Application"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/donation_club",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/donation_club"
+    liveLabel: "View repository"
   },
   {
     number: "07", name: "Todo App", category: "TASK MANAGEMENT",
@@ -74,8 +68,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","Productivity"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/todo_app",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/todo_app"
+    liveLabel: "View repository"
   },
   {
     number: "08", name: "Calorie Count", category: "HEALTH · WEB APP",
@@ -83,8 +76,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django","Web"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/calorie_count",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/calorie_count"
+    liveLabel: "View repository"
   },
   {
     number: "09", name: "Ecom Matrix", category: "E-COMMERCE",
@@ -92,8 +84,7 @@ const projects: PortfolioProject[] = [
     stack: ["E-commerce","Flutter","Mobile"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/ecom_matrix",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/ecom_matrix"
+    liveLabel: "View repository"
   },
   {
     number: "10", name: "Daily Income Expense", category: "PERSONAL FINANCE",
@@ -101,8 +92,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Finance","Web App"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/daily_income_expose",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/daily_income_expose"
+    liveLabel: "View repository"
   },
   {
     number: "11", name: "Rajbari Builder", category: "BUSINESS · WEBVIEW",
@@ -110,8 +100,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","WebView"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/rajbari_builder",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/rajbari_builder"
+    liveLabel: "View repository"
   },
   {
     number: "12", name: "Wempro Company Task", category: "DEVELOPMENT TASK",
@@ -119,8 +108,7 @@ const projects: PortfolioProject[] = [
     stack: ["Software Development","Git"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/wempro-company-task",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/wempro-company-task"
+    liveLabel: "View repository"
   },
   {
     number: "13", name: "Recipe Project", category: "FOOD · WEB APP",
@@ -128,8 +116,7 @@ const projects: PortfolioProject[] = [
     stack: ["Web Development","Recipes"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/recipe_project",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/recipe_project"
+    liveLabel: "View repository"
   },
   {
     number: "14", name: "Cash Management", category: "FINANCE · SOFTWARE",
@@ -137,8 +124,7 @@ const projects: PortfolioProject[] = [
     stack: ["Finance","Application"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/cash_management",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/cash_management"
+    liveLabel: "View repository"
   },
   {
     number: "15", name: "My Shop WebView", category: "MOBILE COMMERCE",
@@ -146,8 +132,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","WebView"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/my_shop_webview",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/my_shop_webview"
+    liveLabel: "View repository"
   },
   {
     number: "16", name: "WhatsApp WebView", category: "WEBVIEW APP",
@@ -155,8 +140,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","WebView","Mobile"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/whatsapp_webview",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/whatsapp_webview"
+    liveLabel: "View repository"
   },
   {
     number: "17", name: "Library Management System", category: "LIBRARY · WEB APP",
@@ -164,8 +148,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django","HTML"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/libary_management_system",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/libary_management_system"
+    liveLabel: "View repository"
   },
   {
     number: "18", name: "Wholesale Shop WebView", category: "MOBILE COMMERCE",
@@ -173,8 +156,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","WebView"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/wholesell_shop_webView",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/wholesell_shop_webView"
+    liveLabel: "View repository"
   },
   {
     number: "19", name: "Django Modules", category: "BACKEND LEARNING",
@@ -182,8 +164,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/django_module",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/django_module"
+    liveLabel: "View repository"
   },
   {
     number: "20", name: "Calculator", category: "UTILITY APP",
@@ -191,8 +172,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","Utility"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/calculator",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/calculator"
+    liveLabel: "View repository"
   },
   {
     number: "21", name: "Wholesale Shop", category: "E-COMMERCE · MOBILE",
@@ -200,8 +180,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","E-commerce"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/wholesell_shop",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/wholesell_shop"
+    liveLabel: "View repository"
   },
   {
     number: "22", name: "WhatsApp Clone UI", category: "MESSAGING · UI CONCEPT",
@@ -209,8 +188,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","UI Design"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/whatsapp-clone",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/whatsapp-clone"
+    liveLabel: "View repository"
   },
   {
     number: "23", name: "Quiz Application", category: "QUIZ · WEB APP",
@@ -218,8 +196,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django","Education"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/quiz_application",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/quiz_application"
+    liveLabel: "View repository"
   },
   {
     number: "24", name: "Food App", category: "FOOD · MOBILE APP",
@@ -227,8 +204,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","Mobile UI"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/Food-App",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/Food-App"
+    liveLabel: "View repository"
   },
   {
     number: "25", name: "Blog Project", category: "CONTENT · WEB APP",
@@ -236,8 +212,7 @@ const projects: PortfolioProject[] = [
     stack: ["HTML","Web Development"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/blog_project",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/blog_project"
+    liveLabel: "View repository"
   },
   {
     number: "26", name: "Django Portfolio Website", category: "PERSONAL PORTFOLIO",
@@ -245,8 +220,7 @@ const projects: PortfolioProject[] = [
     stack: ["Python","Django","HTML/CSS"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/portofilo_website_django",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/portofilo_website_django"
+    liveLabel: "View repository"
   },
   {
     number: "27", name: "Al Hadith", category: "CONTENT · MOBILE",
@@ -254,8 +228,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","Content App"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/al_hadith",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/al_hadith"
+    liveLabel: "View repository"
   },
   {
     number: "28", name: "Samir Imperia Real Estate & Interior", category: "REAL ESTATE · WEB",
@@ -263,8 +236,7 @@ const projects: PortfolioProject[] = [
     stack: ["Web Development","Real Estate","Interior"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/samirimperia-realstate-interior",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/samirimperia-realstate-interior"
+    liveLabel: "View repository"
   },
   {
     number: "29", name: "DeepVerse Lab", category: "SOFTWARE & PRODUCTS",
@@ -272,8 +244,7 @@ const projects: PortfolioProject[] = [
     stack: ["Software Development","GitHub"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/deepverselab",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/deepverselab"
+    liveLabel: "View repository"
   },
   {
     number: "30", name: "Chats App", category: "MESSAGING · MOBILE",
@@ -281,8 +252,7 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","Chat UI"],
     tone: "neutral",
     liveUrl: "https://github.com/programmermdemonmiah/Chats-App",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/Chats-App"
+    liveLabel: "View repository"
   },
   {
     number: "31", name: "Betikrom Fashion WebView", category: "FASHION · MOBILE COMMERCE",
@@ -290,15 +260,14 @@ const projects: PortfolioProject[] = [
     stack: ["Flutter","Dart","WebView","E-commerce"],
     tone: "red",
     liveUrl: "https://github.com/programmermdemonmiah/betikromfashion_web_view",
-    liveLabel: "View repository",
-    screenshot: "https://opengraph.githubassets.com/1/programmermdemonmiah/betikromfashion_web_view"
+    liveLabel: "View repository"
   }
 ];
 const services = [{number:"01",title:"Mobile Engineering",description:"Cross-platform Flutter applications with polished user experiences, dependable state management, and maintainable architecture.",icon:Smartphone},{number:"02",title:"Backend Systems",description:"Secure, scalable APIs and business logic using Go, Gin, GORM, PHP, and Laravel.",icon:Code2},{number:"03",title:"Full-Stack Products",description:"End-to-end product development across Next.js interfaces, APIs, databases, and admin dashboards.",icon:Layers3},{number:"04",title:"Realtime Experiences",description:"Live streaming, chat, presence, notifications, WebSocket events, and LiveKit integrations.",icon:Radio},{number:"05",title:"Data & Delivery",description:"Practical database design, Dockerized services, Linux hosting, CI/CD workflows, and production deployment.",icon:Database}];
 const featured = [
-  {number:"01",name:"DeepVerse Lab",type:"SOFTWARE & PRODUCTS",description:"Explore my own GitHub repository and the projects I maintain under the DeepVerse Lab name.",tags:["Software Engineering","GitHub","Product Development"],url:"https://github.com/programmermdemonmiah/deepverselab",images:["https://opengraph.githubassets.com/1/programmermdemonmiah/deepverselab","https://image.thum.io/get/width/1200/crop/650/noanimate/https://github.com/programmermdemonmiah/deepverselab","https://image.thum.io/get/width/1200/crop/900/noanimate/https://github.com/programmermdemonmiah/deepverselab"]},
-  {number:"02",name:"Ecom Matrix",type:"E-COMMERCE",description:"A commerce project repository for a multi-vendor shopping experience.",tags:["E-commerce","Flutter","Mobile"],url:"https://github.com/programmermdemonmiah/ecom_matrix",images:["https://opengraph.githubassets.com/1/programmermdemonmiah/ecom_matrix","https://image.thum.io/get/width/1200/crop/650/noanimate/https://github.com/programmermdemonmiah/ecom_matrix","https://image.thum.io/get/width/1200/crop/900/noanimate/https://github.com/programmermdemonmiah/ecom_matrix"]},
-  {number:"03",name:"Photo Background Remover",type:"PYTHON · IMAGE UTILITY",description:"A practical Python utility for removing image backgrounds and exploring image-processing workflows.",tags:["Python","Image Processing","Utility"],url:"https://github.com/programmermdemonmiah/photo_bg_remover",images:["https://opengraph.githubassets.com/1/programmermdemonmiah/photo_bg_remover","https://image.thum.io/get/width/1200/crop/650/noanimate/https://github.com/programmermdemonmiah/photo_bg_remover","https://image.thum.io/get/width/1200/crop/900/noanimate/https://github.com/programmermdemonmiah/photo_bg_remover"]}
+  {number:"01",name:"DeepVerse Lab",type:"SOFTWARE & PRODUCTS",description:"Explore my own GitHub repository and the projects I maintain under the DeepVerse Lab name.",tags:["Software Engineering","GitHub","Product Development"],url:"https://github.com/programmermdemonmiah/deepverselab"},
+  {number:"02",name:"Ecom Matrix",type:"E-COMMERCE",description:"A commerce project repository for a multi-vendor shopping experience.",tags:["E-commerce","Flutter","Mobile"],url:"https://github.com/programmermdemonmiah/ecom_matrix"},
+  {number:"03",name:"Photo Background Remover",type:"PYTHON · IMAGE UTILITY",description:"A practical Python utility for removing image backgrounds and exploring image-processing workflows.",tags:["Python","Image Processing","Utility"],url:"https://github.com/programmermdemonmiah/photo_bg_remover"}
 ];
 function ContactButton({compact=false}:{compact?:boolean}) { return <a className={"contact-button"+(compact?" compact":"")} href="mailto:contact.mdemonmiah@gmail.com">Contact Me <ArrowUpRight size={16}/></a>; }
 function FadeIn({children,delay=0,y=25,className=""}:{children:React.ReactNode;delay?:number;y?:number;className?:string}) { return <motion.div className={className} initial={{opacity:0,y:y}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"0px 0px -50px 0px"}} transition={{duration:.7,delay:delay,ease:[.25,.1,.25,1]}}>{children}</motion.div>; }
@@ -367,6 +336,6 @@ return <main className="portfolio-redesign"><section className="creator-hero" id
 <section className="creator-about" id="about"><div className="creator-about-content"><FadeIn><p className="creator-section-eyebrow">A LITTLE ABOUT THE ENGINEER</p><h2 className="hero-heading">ABOUT ME</h2></FadeIn><FadeIn delay={.15}><p className="animated-text">I build mobile applications, robust backend systems, full-stack products, and real-time experiences. I enjoy working with teams that care about thoughtful architecture, practical problem-solving, and products that make a real difference. Let’s build something meaningful together!</p></FadeIn><FadeIn delay={.25}><div className="about-socials"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={17}/> GitHub <ArrowUpRight size={15}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn <ArrowUpRight size={15}/></a></div></FadeIn></div></section>
 <section className="creator-services" id="services"><FadeIn><p className="services-eyebrow">WHAT I DO / END-TO-END ENGINEERING</p><h2>SERVICES<span>.</span></h2></FadeIn><div className="services-list">{services.map((service,i)=>{const Icon=service.icon;return <FadeIn key={service.number} delay={i*.08} className="service-row"><span className="service-number">{service.number}</span><div className="service-copy"><h3>{service.title}</h3><p>{service.description}</p></div><Icon className="service-icon" strokeWidth={1.5}/></FadeIn>})}</div></section>
 <section className="creator-projects" id="projects"><div className="featured-projects-heading"><FadeIn><p className="creator-section-eyebrow">SELECTED WORK / BUILT WITH PURPOSE</p><h2 className="hero-heading">PROJECTS<span>.</span></h2></FadeIn><p>A closer look at a few products across mobile, web, commerce, and realtime engineering.</p></div><div className="project-stack">{featured.map((project,index)=><ProjectStackCard key={project.number} project={project} index={index}/>)}</div>
-<div className="all-projects-wrap"><div className="all-projects-heading"><div><p className="creator-section-eyebrow">MORE WORK / OPEN SOURCE</p><h3>THE FULL COLLECTION<span>.</span></h3></div><p>Every card links to a repository owned by my GitHub account.</p></div><div className="project-tools" aria-label="Filter projects"><div className="project-filter-list">{projectFilters.map(filter=><button type="button" key={filter} className={"project-filter"+(projectFilter===filter?" is-active":"")} onClick={()=>setProjectFilter(filter)} aria-pressed={projectFilter===filter}>{filter}</button>)}</div><label className="project-search"><Search size={16} strokeWidth={1.8} aria-hidden="true"/><span className="sr-only">Search projects</span><input type="search" value={projectSearch} onChange={event=>setProjectSearch(event.target.value)} placeholder="Search project or technology…"/></label><p className="project-results-count">Showing <strong>{filteredProjects.length}</strong> of {projects.length} projects</p></div><div className="projects-grid">{filteredProjects.map(project=><article className="project-card" key={project.number}><a className={"project-art art-"+project.tone} href={project.liveUrl||"#contact"} target={project.liveUrl?"_blank":undefined} rel={project.liveUrl?"noreferrer":undefined} aria-label={project.liveUrl?"Open "+project.name:project.name+" — private project"}>{project.screenshot?<img className="project-screenshot" src={project.screenshot} alt={project.name+" preview"} loading="lazy"/>:<div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}<span className="project-number">{project.number} / {String(projects.length).padStart(2,"0")}</span><span className="project-art-label">{project.category}</span><span className="art-arrow"><ArrowUpRight size={18} strokeWidth={1.8}/></span></a><div className="project-details"><div className="project-title-row"><h4>{project.name}</h4><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag=><span key={tag}>{tag}</span>)}</div><div className="project-links">{project.liveUrl?<a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel||"View project"} <ArrowUpRight size={14}/></a>:<span className="private-project-label">Private / no public demo</span>}</div></div></article>)}</div>{filteredProjects.length===0&&<p className="no-project-results">No projects match that search. Try another name or technology.</p>}</div></section>
-<footer className="creator-footer" id="contact"><div className="footer-glow"/><div className="creator-footer-inner"><FadeIn><p className="creator-section-eyebrow">HAVE A PRODUCT IN MIND?</p><h2>LET’S BUILD<br/><span>SOMETHING USEFUL.</span></h2><p className="footer-description">From the first screen to production, let’s make the engineering count.</p><ContactButton/></FadeIn><div className="footer-bottom"><a href="#top" className="creator-wordmark"><span className="creator-mark"><img src={GITHUB_AVATAR} alt=""/></span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><span>© 2026 MD. EMON MIAH</span><div><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={18}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={18}/></a><a href="mailto:contact.mdemonmiah@gmail.com"><Mail size={18}/></a></div></div></div></footer></main>;
+<div className="all-projects-wrap"><div className="all-projects-heading"><div><p className="creator-section-eyebrow">MORE WORK / OPEN SOURCE</p><h3>THE FULL COLLECTION<span>.</span></h3></div><p>Every card links to a repository owned by my GitHub account.</p></div><div className="project-tools" aria-label="Filter projects"><div className="project-filter-list">{projectFilters.map(filter=><button type="button" key={filter} className={"project-filter"+(projectFilter===filter?" is-active":"")} onClick={()=>setProjectFilter(filter)} aria-pressed={projectFilter===filter}>{filter}</button>)}</div><label className="project-search"><Search size={16} strokeWidth={1.8} aria-hidden="true"/><span className="sr-only">Search projects</span><input type="search" value={projectSearch} onChange={event=>setProjectSearch(event.target.value)} placeholder="Search project or technology…"/></label><p className="project-results-count">Showing <strong>{filteredProjects.length}</strong> of {projects.length} projects</p></div><div className="projects-grid">{filteredProjects.map(project=><article className="project-card" key={project.number}><a className={"project-art art-"+project.tone} href={project.liveUrl||"#contact"} target={project.liveUrl?"_blank":undefined} rel={project.liveUrl?"noreferrer":undefined} aria-label={project.liveUrl?"Open "+project.name:project.name+" — private project"}>{project.screenshot?<img className="project-screenshot" src={project.screenshot} alt={project.name+" preview"} loading="lazy"/>:<div className="project-art-fallback"><span className="project-preview-number">{project.number}</span><strong>{project.name}</strong><small>{project.stack.join(" · ")}</small></div>}<span className="project-number">{project.number} / {String(projects.length).padStart(2,"0")}</span><span className="project-art-label">{project.category}</span><span className="art-arrow"><ArrowUpRight size={18} strokeWidth={1.8}/></span></a><div className="project-details"><div className="project-title-row"><h4>{project.name}</h4><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag=><span key={tag}>{tag}</span>)}</div><div className="project-links">{project.liveUrl?<a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel||"View project"} <ArrowUpRight size={14}/></a>:<span className="private-project-label">Private / no public demo</span>}</div></div></article>)}</div>{filteredProjects.length===0&&<p className="no-project-results">No projects match that search. Try another name or technology.</p>}</div></section>
+<footer className="creator-footer" id="contact"><div className="footer-glow"/><div className="creator-footer-inner"><FadeIn><p className="creator-section-eyebrow">HAVE A PRODUCT IN MIND?</p><h2>LET’S BUILD<br/><span>SOMETHING USEFUL.</span></h2><p className="footer-description">From the first screen to production, let’s make the engineering count.</p><ContactButton/></FadeIn><div className="footer-bottom"><a href="#top" className="creator-wordmark"><span className="creator-mark creator-mark-initials" aria-hidden="true">EM</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><span>© 2026 MD. EMON MIAH</span><div><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer"><Github size={18}/></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer"><Linkedin size={18}/></a><a href="mailto:contact.mdemonmiah@gmail.com"><Mail size={18}/></a></div></div></div></footer></main>;
 }
