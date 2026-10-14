@@ -128,22 +128,6 @@ My day-to-day toolkit centers on **Flutter, Go, Next.js, React, and Laravel/PHP*
 
 </div>
 
-## 05 — GitHub Activity
-
-<div align="center">
-
-<a href="https://github.com/programmermdemonmiah?tab=overview">
-  <img src="https://ghchart.rshah.org/26a641/programmermdemonmiah" alt="GitHub contribution activity for programmermdemonmiah" width="100%" />
-</a>
-
-<a href="https://github.com/programmermdemonmiah?tab=overview"><sub>Explore profile and contribution history ↗</sub></a>
-
-</div>
-
-<sub>Contribution heatmap is rendered by an external service. Enable “Include private contributions” in GitHub profile settings to display eligible private activity on your profile; private repository names and code remain hidden.</sub>
-
----
-
 <div align="center">
 
 ### Have a product worth building?
