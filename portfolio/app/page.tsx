@@ -48,19 +48,35 @@ const projects = [
     screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.medly.app"
   },
   {
-    number: "07", name: "Live Streaming Platform", category: "REALTIME & VIDEO",
+    number: "07", name: "Swish", category: "MOBILE APPLICATION",
+    summary: "A published mobile product with a dedicated Google Play listing and production release history.",
+    stack: ["Flutter", "GetX", "Mobile"],
+    tone: "red", liveUrl: "https://play.google.com/store/apps/details?id=com.swish.app",
+    liveLabel: "View on Google Play",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.swish.app"
+  },
+  {
+    number: "08", name: "Ecom Matrix", category: "MULTI-VENDOR COMMERCE",
+    summary: "A multi-vendor shopping experience for discovering products across sellers, with a separate seller app for merchant workflows.",
+    stack: ["Flutter", "E-commerce", "Customer & Seller Apps"],
+    tone: "orange", liveUrl: "https://play.google.com/store/apps/details?id=com.ecommatrix.customer",
+    liveLabel: "View on Google Play",
+    screenshot: "https://image.thum.io/get/width/1200/crop/650/noanimate/https://play.google.com/store/apps/details%3Fid%3Dcom.ecommatrix.customer"
+  },
+  {
+    number: "09", name: "Live Streaming Platform", category: "REALTIME & VIDEO",
     summary: "Realtime streaming workflows with host approval, VIP and moderator access, viewer presence, chat, and device-level account security.",
     stack: ["Flutter", "Go", "LiveKit", "WebSocket"],
     tone: "red", liveUrl: null, liveLabel: null, screenshot: null
   },
   {
-    number: "08", name: "ERP & Business Systems", category: "BUSINESS SOFTWARE",
+    number: "10", name: "ERP & Business Systems", category: "BUSINESS SOFTWARE",
     summary: "Business workflows and ecommerce capabilities built around structured data, API integrations, and maintainable backend features.",
     stack: ["PHP", "Laravel", "MySQL", "REST APIs"],
     tone: "orange", liveUrl: null, liveLabel: null, screenshot: null
   },
   {
-    number: "09", name: "Mobile & Backend Products", category: "CLIENT APPLICATIONS",
+    number: "11", name: "Mobile & Backend Products", category: "CLIENT APPLICATIONS",
     summary: "Additional customer, healthcare, finance, and service applications delivered with API-driven interfaces and practical state management.",
     stack: ["Flutter", "Dart", "Go", "Laravel"],
     tone: "red", liveUrl: null, liveLabel: null, screenshot: null
@@ -114,7 +130,7 @@ export default function Home() {
       <div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}>
         <a className={'project-art art-' + project.tone} href={project.liveUrl || "#contact"} target={project.liveUrl ? "_blank" : undefined} rel={project.liveUrl ? "noreferrer" : undefined} aria-label={project.liveUrl ? 'Open ' + project.name : project.name + ' — private project'}>
           {project.screenshot ? <img className="project-screenshot" src={project.screenshot} alt={project.name + ' live website screenshot'} loading="lazy" /> : <div className="project-art-fallback"><span>{project.number}</span><small>PROJECT PREVIEW</small></div>}
-          <span className="project-number">{project.number} / 09</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
+          <span className="project-number">{project.number} / 11</span><span className="project-art-label">{project.category}</span><span className="art-arrow">↗</span>
         </a>
         <div className="project-details"><div className="project-title-row"><h3>{project.name}</h3><span>{project.number}</span></div><p>{project.summary}</p><div className="tag-list">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="project-links">{project.liveUrl ? <a href={project.liveUrl} target="_blank" rel="noreferrer">{project.liveLabel}<Arrow /></a> : <span className="private-project-label">Private / no public demo</span>}</div>
