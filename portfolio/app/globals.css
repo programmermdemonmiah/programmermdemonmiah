@@ -1,6 +1,4 @@
-@import url('https://db.onlinewebfonts.com/c/5ac3fe7c6abd2f62067f266d89671492?family=HelveticaNowDisplay-Medium');
-@import url('https://db.onlinewebfonts.com/c/1aa3377e489837a26d019bba501e779d?family=HelveticaNowDisplayW01-Rg');
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root{
   color-scheme:dark;
@@ -16,8 +14,8 @@
   --accent:#FF4D5A;
   --accent-strong:#E11D36;
   --mint:#FF8790;
-  --sans:"DM Sans",Arial,sans-serif;
-  --display:"Manrope","DM Sans",sans-serif;
+  --sans:"Inter",Arial,sans-serif;
+  --display:"Space Grotesk","Inter",sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
@@ -210,8 +208,8 @@ h2 em{font-style:normal;color:#FF8790}
 
 /* Full-screen, mouse-scrubbed video hero */
 :root{
-  --font-heading:'HelveticaNowDisplay-Medium','Helvetica Neue',Arial,sans-serif;
-  --font-body:'HelveticaNowDisplayW01-Rg','Helvetica Neue',Arial,sans-serif;
+  --font-heading:'Space Grotesk','Inter',Arial,sans-serif;
+  --font-body:'Inter',Arial,sans-serif;
 }
 body{font-family:var(--font-body)}
 h1,h2,h3,.wordmark{font-family:var(--font-heading)}
