@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ThreeDModel from "./components/ThreeDModel";
 import MarqueeSection from "./components/MarqueeSection";
 import { motion } from "framer-motion";
+import { A11y, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import {
   ArrowUpRight,
   Code2,
@@ -81,7 +86,7 @@ function ContactLink({ compact = false }: { compact?: boolean }) {
 
 function githubPreviewUrl(url?: string | null) {
   if (!url) return null;
-  const match = url.match(/^https?:\\/\\/github\\.com\\/([^/]+)\\/([^/?#]+)/i);
+  const match = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/?#]+)/i);
   return match ? `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}` : null;
 }
 
@@ -110,15 +115,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [search, setSearch] = useState("");
-  const [activePage, setActivePage] = useState(0);
-  const [pageSize, setPageSize] = useState(3);
-
-  useEffect(() => {
-    const updatePageSize = () => setPageSize(window.innerWidth <= 640 ? 1 : window.innerWidth <= 900 ? 2 : 3);
-    updatePageSize();
-    window.addEventListener("resize", updatePageSize);
-    return () => window.removeEventListener("resize", updatePageSize);
-  }, []);
 
   const visibleProjects = projects.filter((project) => {
     const text = [project.name, project.category, project.summary, ...project.stack].join(" ").toLowerCase();
@@ -131,10 +127,6 @@ export default function Home() {
     if (activeFilter === "Realtime") return /realtime|real-time|livekit|websocket|streaming|chat|messaging/.test(text);
     return true;
   });
-  const pageCount = Math.max(1, Math.ceil(visibleProjects.length / pageSize));
-  const safePage = Math.min(activePage, pageCount - 1);
-  const pageProjects = visibleProjects.slice(safePage * pageSize, safePage * pageSize + pageSize);
-
   return (
     <main>
       <header className="site-header" id="top">
@@ -174,24 +166,28 @@ export default function Home() {
       <section className="projects section" id="projects">
         <div className="section-heading projects-heading"><div><p className="eyebrow">Selected repositories</p><h2>Things I’ve <span>built.</span></h2></div><a className="text-link" href="https://github.com/programmermdemonmiah?tab=repositories" target="_blank" rel="noreferrer">All GitHub repositories <ArrowUpRight size={16} /></a></div>
         <div className="project-tools">
-          <div className="project-filters" aria-label="Filter projects">{projectFilters.map((filter) => <button key={filter} type="button" className={activeFilter === filter ? "filter-button active" : "filter-button"} onClick={() => { setActiveFilter(filter); setActivePage(0); }} aria-pressed={activeFilter === filter}>{filter}</button>)}</div>
-          <label className="project-search"><Search size={17} aria-hidden="true" /><span className="sr-only">Search projects</span><input type="search" value={search} onChange={(event) => { setSearch(event.target.value); setActivePage(0); }} placeholder="Search projects or technologies" /></label>
+          <div className="project-filters" aria-label="Filter projects">{projectFilters.map((filter) => <button key={filter} type="button" className={activeFilter === filter ? "filter-button active" : "filter-button"} onClick={() => setActiveFilter(filter)} aria-pressed={activeFilter === filter}>{filter}</button>)}</div>
+          <label className="project-search"><Search size={17} aria-hidden="true" /><span className="sr-only">Search projects</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search projects or technologies" /></label>
           <p className="results-count">{visibleProjects.length} of {projects.length} repositories</p>
         </div>
         {visibleProjects.length ? <>
-          <div className="projects-carousel" aria-live="polite">
-            <motion.div className="projects-grid" layout>
-              {pageProjects.map((project, index) => <ProjectCard key={project.number} project={project} index={index} />)}
-            </motion.div>
-          </div>
-          <div className="project-pagination">
-            <span className="project-page-label"><strong>{String(safePage + 1).padStart(2, "0")}</strong><span> / {String(pageCount).padStart(2, "0")} · {visibleProjects.length} projects</span></span>
-            <div className="project-page-controls">
-              <button type="button" className="project-page-button" onClick={() => setActivePage((current) => (current - 1 + pageCount) % pageCount)} aria-label="Previous projects"><span>←</span> Previous</button>
-              <div className="project-page-dots" aria-label="Project pages">{Array.from({ length: pageCount }, (_, index) => <button key={index} type="button" className={index === safePage ? "project-page-dot active" : "project-page-dot"} onClick={() => setActivePage(index)} aria-label={`Show project page ${index + 1}`} aria-current={index === safePage ? "page" : undefined} />)}</div>
-              <button type="button" className="project-page-button next" onClick={() => setActivePage((current) => (current + 1) % pageCount)} aria-label="Next projects">Next <span>→</span></button>
-            </div>
-          </div>
+          <Swiper
+            className="projects-swiper"
+            modules={[Navigation, Pagination, A11y]}
+            navigation
+            pagination={{ clickable: true, dynamicBullets: true }}
+            spaceBetween={16}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            breakpoints={{ 641: { slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 16 }, 901: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 18 } }}
+            watchOverflow
+            rewind
+            grabCursor
+            a11y={{ prevSlideMessage: "Previous projects", nextSlideMessage: "Next projects" }}
+          >
+            {visibleProjects.map((project, index) => <SwiperSlide key={project.number}><ProjectCard project={project} index={index % 3} /></SwiperSlide>)}
+          </Swiper>
+          <p className="swiper-project-count">Showing {visibleProjects.length} {visibleProjects.length === 1 ? "project" : "projects"} · Swipe or use arrows to explore</p>
         </> : <p className="empty-state">No matching repositories. Try a different search.</p>}
       </section>
 
