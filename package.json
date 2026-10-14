@@ -1,0 +1,10 @@
+{
+  "name": "programmermdemonmiah-root",
+  "private": true,
+  "scripts": {
+    "dev": "yarn --cwd portfolio dev",
+    "build": "yarn --cwd portfolio build",
+    "start": "yarn --cwd portfolio start",
+    "lint": "yarn --cwd portfolio lint"
+  }
+}
