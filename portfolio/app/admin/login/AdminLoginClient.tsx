@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock, User, ArrowLeft, AlertCircle, Eye, EyeOff, Sparkles } from "lucide-react";
+import { ShieldCheck, Lock, User, ArrowLeft, AlertCircle, Eye, EyeOff } from "lucide-react";
 
 export default function AdminLoginClient() {
   const router = useRouter();
