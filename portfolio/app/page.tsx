@@ -1,3 +1,9 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+const GITHUB_AVATAR = "https://avatars.githubusercontent.com/u/121760927?v=4";
+
 const projects = [
   {
     number: "01", name: "SportsBD", category: "SPORTS PLATFORM",
@@ -90,23 +96,112 @@ const capabilities = [
   { number: "05", title: "Data & integration", text: "Persistence, caching, and data exchange chosen to fit the application.", tags: "PostgreSQL · MySQL · Redis · SQLite · Firebase" },
   { number: "06", title: "Production delivery", text: "Repeatable builds, containerized services, and deployment automation.", tags: "Docker · Linux · Nginx · CI/CD · Git" }
 ];
+
+const heroMessage = "I build polished mobile apps, dependable backends, and real-time products. Let’s make something useful.";
+function useTypewriter(text: string, speed = 34, startDelay = 650) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    let index = 0;
+    let interval: ReturnType<typeof setInterval> | undefined;
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        index += 1;
+        setDisplayed(text.slice(0, index));
+        if (index >= text.length) {
+          if (interval) clearInterval(interval);
+          setDone(true);
+        }
+      }, speed);
+    }, startDelay);
+    return () => { clearTimeout(timeout); if (interval) clearInterval(interval); };
+  }, [text, speed, startDelay]);
+  return { displayed, done };
+}
+
 function Arrow() { return <span aria-hidden="true" className="arrow">↗</span>; }
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const targetTimeRef = useRef(0);
+  const seekingRef = useRef(false);
+  const previousXRef = useRef<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [actionsVisible, setActionsVisible] = useState(false);
+  const { displayed, done } = useTypewriter(heroMessage);
+  useEffect(() => {
+    const timer = setTimeout(() => setActionsVisible(true), 400);
+    const video = videoRef.current;
+    if (!video) return () => clearTimeout(timer);
+    const seekToTarget = () => {
+      if (!video || video.seeking || seekingRef.current || !Number.isFinite(video.duration) || video.duration <= 0) return;
+      if (Math.abs(video.currentTime - targetTimeRef.current) < 0.025) return;
+      seekingRef.current = true;
+      video.currentTime = targetTimeRef.current;
+    };
+    const onSeeked = () => {
+      seekingRef.current = false;
+      if (Math.abs(video.currentTime - targetTimeRef.current) > 0.04) seekToTarget();
+    };
+    const onMouseMove = (event: MouseEvent) => {
+      if (previousXRef.current === null) { previousXRef.current = event.clientX; return; }
+      const delta = event.clientX - previousXRef.current;
+      previousXRef.current = event.clientX;
+      if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      targetTimeRef.current = Math.max(0, Math.min(video.duration, targetTimeRef.current + (delta / window.innerWidth) * 0.8 * video.duration));
+      seekToTarget();
+    };
+    const onLoaded = () => { targetTimeRef.current = Math.min(video.currentTime || 0, video.duration || 0); };
+    video.addEventListener("seeked", onSeeked);
+    video.addEventListener("loadedmetadata", onLoaded);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      video.removeEventListener("seeked", onSeeked);
+      video.removeEventListener("loadedmetadata", onLoaded);
+      window.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("contact.mdemonmiah@gmail.com");
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 1600);
+    } catch { window.location.href = "mailto:contact.mdemonmiah@gmail.com"; }
+  };
+  const [emailCopied, setEmailCopied] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
   return <main id="top">
+    <section className="hero-video-stage" aria-label="Interactive portfolio introduction">
+      <video ref={videoRef} className="hero-background-video" muted playsInline preload="auto" aria-hidden="true">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4" type="video/mp4" />
+      </video>
+      <div className="hero-video-shade" />
+    </section>
     <header className="site-header">
       <nav className="nav container" aria-label="Main navigation">
-        <a className="wordmark" href="#top" aria-label="MD Emon Miah home"><span className="wordmark-icon">em.</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a>
-        <div className="nav-links"><a href="#about">About</a><a href="#work">Selected work</a><a href="#capabilities">Expertise</a></div>
+        <a className="wordmark" href="#top" aria-label="MD Emon Miah home"><img className="wordmark-avatar" src={GITHUB_AVATAR} alt="" /><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a>
+        <div className="nav-links"><a href="#work">Projects</a><span>,</span><a href="#capabilities">Expertise</a><span>,</span><a href="#about">About</a><span>,</span><a href="#contact">Contact</a></div>
         <a className="nav-cta" href="mailto:contact.mdemonmiah@gmail.com">Get in touch <Arrow /></a>
+        <button className={'mobile-menu-toggle' + (menuOpen ? ' is-open' : '')} type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></button>
       </nav>
     </header>
+    <div className={'mobile-menu-overlay' + (menuOpen ? ' is-open' : '')} aria-hidden={!menuOpen}>
+      <nav aria-label="Mobile navigation"><a onClick={closeMenu} href="#work">Projects</a><a onClick={closeMenu} href="#capabilities">Expertise</a><a onClick={closeMenu} href="#about">About</a><a onClick={closeMenu} href="#contact">Contact</a><a className="mobile-contact-link" onClick={closeMenu} href="mailto:contact.mdemonmiah@gmail.com">Get in touch ↗</a></nav>
+    </div>
 
     <section className="hero container">
       <div className="hero-content">
-        <p className="eyebrow"><span className="availability-dot" /> SENIOR SOFTWARE ENGINEER <span className="eyebrow-divider">/</span> BANGLADESH</p>
-        <h1>Building useful products.<br /><span>Engineering what’s behind them.</span></h1>
-        <p className="hero-description">I’m MD. Emon Miah — a software engineer working across mobile, backend, and full-stack development. I turn complex requirements into dependable products, from the first interface to the services that power it.</p>
-        <div className="hero-actions"><a className="button button-primary" href="#work">Explore my work <Arrow /></a><a className="button button-secondary" href="/cv.pdf" target="_blank" rel="noreferrer">View résumé <span className="button-icon">↓</span></a></div>
+        <p className="eyebrow"><span className="availability-dot" /> MD. EMON MIAH <span className="eyebrow-divider">/</span> SOFTWARE ENGINEER</p>
+        <div className="hero-blurred-intro" aria-hidden="true">Hey there, I’m Emon.<br />Mobile, backend &amp; full-stack engineer.</div>
+        <h1>Thoughtful software.<br /><span>Built to work in the real world.</span></h1>
+        <p className="hero-description typewriter-copy">{displayed}{!done && <span className="typing-cursor" aria-hidden="true" />}</p>
+        <div className={'hero-actions hero-pill-actions' + (actionsVisible ? ' is-visible' : '')}>
+          <a className="button button-primary" href="#work">Explore my projects <Arrow /></a>
+          <a className="button button-light-pill" href="mailto:contact.mdemonmiah@gmail.com?subject=Project%20inquiry">Discuss a project</a>
+          <a className="button button-light-pill" href="#about">About my work</a>
+          <a className="button button-light-pill" href="/cv.pdf" target="_blank" rel="noreferrer">View résumé ↓</a>
+          <button className="button button-outline-pill" type="button" onClick={copyEmail}><span>{emailCopied ? "Email copied!" : <>Reach me: <u>contact.mdemonmiah@gmail.com</u></>}</span><svg viewBox="0 0 16 16" width="12" height="12" fill="none" aria-hidden="true"><rect x="5" y="2" width="9" height="10" rx="1" stroke="currentColor" strokeWidth="1.3"/><path d="M11 12v2H2V5h2" stroke="currentColor" strokeWidth="1.3"/></svg></button>
+        </div>
         <div className="hero-specialties"><span>Flutter</span><i /> <span>Go</span><i /> <span>Next.js</span><i /> <span>Laravel</span><i /> <span>Realtime systems</span></div>
       </div>
       <aside className="hero-profile" aria-label="Profile">
@@ -147,6 +242,6 @@ export default function Home() {
 
     <section className="contact-section" id="contact"><div className="container contact-inner"><div className="section-label"><span>05</span><span className="label-line" /> CONTACT</div><div className="contact-content"><h2>Have something<br />worth <em>building?</em></h2><div><p>If you’re building a product, improving a backend, or bringing a complex application to life, let’s talk about the engineering behind it.</p><a className="button button-light" href="mailto:contact.mdemonmiah@gmail.com">Start a conversation <Arrow /></a></div></div><div className="contact-meta"><span>MD. EMON MIAH · SOFTWARE ENGINEER</span><span>FLUTTER / GO / NEXT.JS / LARAVEL</span></div></div></section>
 
-    <footer className="footer"><div className="container footer-inner"><a className="wordmark footer-wordmark" href="#top"><span className="wordmark-icon">em.</span><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><p>Thoughtful engineering. Useful products.</p><div className="footer-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="mailto:contact.mdemonmiah@gmail.com">Email <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Résumé ↓</a></div><span className="copyright">© 2026 MD. EMON MIAH</span></div></footer>
+    <footer className="footer"><div className="container footer-inner"><a className="wordmark footer-wordmark" href="#top"><img className="wordmark-avatar" src={GITHUB_AVATAR} alt="" /><span>MD. EMON MIAH<small>SOFTWARE ENGINEER</small></span></a><p>Thoughtful engineering. Useful products.</p><div className="footer-links"><a href="https://github.com/programmermdemonmiah" target="_blank" rel="noreferrer">GitHub <Arrow /></a><a href="https://www.linkedin.com/in/mdemonmiah" target="_blank" rel="noreferrer">LinkedIn <Arrow /></a><a href="mailto:contact.mdemonmiah@gmail.com">Email <Arrow /></a><a href="/cv.pdf" download="MD-Emon-Miah-CV.pdf">Résumé ↓</a></div><span className="copyright">© 2026 MD. EMON MIAH</span></div></footer>
   </main>;
 }
