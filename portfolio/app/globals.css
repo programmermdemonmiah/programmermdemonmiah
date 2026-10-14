@@ -1053,3 +1053,8 @@ main{overflow-x:clip;background:#0c0c0c}
 @media(max-width:900px){.hero{grid-template-columns:minmax(0,1fr) 280px;gap:28px;padding:70px 5vw 60px}.hero h1{font-size:clamp(56px,8.2vw,88px)}.hero-model-wrap{width:100%}.hero-model-frame{min-height:350px}.marquee-intro{align-items:start;flex-direction:column}}
 @media(max-width:640px){.site-header,.section,.site-footer{padding-right:20px;padding-left:20px}.navigation{min-height:72px;padding-top:0}.hero{min-height:auto;grid-template-columns:1fr;gap:35px;padding:62px 20px 48px}.hero h1{font-size:clamp(48px,12.5vw,78px);line-height:.92}.hero-model-wrap{width:min(78%,330px);justify-self:center}.hero-model-frame{min-height:320px;border-radius:26px}.hero-actions{gap:14px}.section{padding-top:78px;padding-bottom:78px}.section-heading h2,.footer-main h2{font-size:clamp(46px,12vw,74px)}.about{gap:26px}.services,.projects{border-radius:32px 32px 0 0}.service-row{grid-template-columns:62px minmax(0,1fr);gap:14px}.service-row>svg{display:none}.service-number{font-size:clamp(38px,10vw,60px)}.projects{margin-top:-28px}.marquee-section{padding-top:78px}.marquee-intro{padding:0 20px 24px}.marquee-tile{width:260px;height:170px;border-radius:17px}.projects-grid{grid-template-columns:1fr}.project-card{border-radius:24px}}
 @media(prefers-reduced-motion:reduce){.marquee-track{transform:none!important}}
+
+
+/* Keep the full-bleed 3D hero edge-to-edge inside the site header. */
+.site-header{padding-left:0!important;padding-right:0!important;position:relative;isolation:isolate}
+.navigation{width:min(100%,var(--content-width));margin-left:auto;margin-right:auto}
