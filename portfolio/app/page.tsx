@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThreeDModel from "./components/ThreeDModel";
 import MarqueeSection from "./components/MarqueeSection";
 import { motion } from "framer-motion";
@@ -79,11 +79,21 @@ function ContactLink({ compact = false }: { compact?: boolean }) {
   return <a className={compact ? "button button-compact" : "button"} href="mailto:contact.mdemonmiah@gmail.com">Contact me <ArrowUpRight size={16} aria-hidden="true" /></a>;
 }
 
-function ProjectCard({ project }: { project: PortfolioProject }) {
+function githubPreviewUrl(url?: string | null) {
+  if (!url) return null;
+  const match = url.match(/^https?:\\/\\/github\\.com\\/([^/]+)\\/([^/?#]+)/i);
+  return match ? `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}` : null;
+}
+
+function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const preview = project.screenshot || githubPreviewUrl(project.liveUrl);
+
   return (
-    <motion.article className="project-card" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}>
+    <motion.article className="project-card" initial={{ opacity: 0, y: 26, scale: 0.975 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -12, scale: 0.98 }} transition={{ duration: 0.38, delay: index * 0.055, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6 }} layout>
       <a className={`project-art art-${project.tone}`} href={project.liveUrl || "#contact"} target={project.liveUrl ? "_blank" : undefined} rel={project.liveUrl ? "noreferrer" : undefined} aria-label={project.liveUrl ? `Open ${project.name} on GitHub` : project.name}>
-        {project.screenshot ? <img src={project.screenshot} alt={`${project.name} preview`} loading="lazy" /> : <div className="project-art-fallback"><span>{project.number}</span><strong>{project.name}</strong><small>{project.stack.join(" · ")}</small></div>}
+        {preview && !imageFailed ? <img src={preview} alt={`${project.name} preview`} loading="lazy" onError={() => setImageFailed(true)} /> : <div className="project-art-fallback"><span>{project.number}</span><strong>{project.name}</strong><small>{project.stack.join(" · ")}</small></div>}
+        <span className="project-image-shade" aria-hidden="true" />
         <span className="project-category">{project.category}</span><ArrowUpRight className="project-arrow" size={20} aria-hidden="true" />
       </a>
       <div className="project-details">
@@ -100,6 +110,15 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [search, setSearch] = useState("");
+  const [activePage, setActivePage] = useState(0);
+  const [pageSize, setPageSize] = useState(3);
+
+  useEffect(() => {
+    const updatePageSize = () => setPageSize(window.innerWidth <= 640 ? 1 : window.innerWidth <= 900 ? 2 : 3);
+    updatePageSize();
+    window.addEventListener("resize", updatePageSize);
+    return () => window.removeEventListener("resize", updatePageSize);
+  }, []);
 
   const visibleProjects = projects.filter((project) => {
     const text = [project.name, project.category, project.summary, ...project.stack].join(" ").toLowerCase();
@@ -112,6 +131,9 @@ export default function Home() {
     if (activeFilter === "Realtime") return /realtime|real-time|livekit|websocket|streaming|chat|messaging/.test(text);
     return true;
   });
+  const pageCount = Math.max(1, Math.ceil(visibleProjects.length / pageSize));
+  const safePage = Math.min(activePage, pageCount - 1);
+  const pageProjects = visibleProjects.slice(safePage * pageSize, safePage * pageSize + pageSize);
 
   return (
     <main>
@@ -152,11 +174,25 @@ export default function Home() {
       <section className="projects section" id="projects">
         <div className="section-heading projects-heading"><div><p className="eyebrow">Selected repositories</p><h2>Things I’ve <span>built.</span></h2></div><a className="text-link" href="https://github.com/programmermdemonmiah?tab=repositories" target="_blank" rel="noreferrer">All GitHub repositories <ArrowUpRight size={16} /></a></div>
         <div className="project-tools">
-          <div className="project-filters" aria-label="Filter projects">{projectFilters.map((filter) => <button key={filter} type="button" className={activeFilter === filter ? "filter-button active" : "filter-button"} onClick={() => setActiveFilter(filter)} aria-pressed={activeFilter === filter}>{filter}</button>)}</div>
-          <label className="project-search"><Search size={17} aria-hidden="true" /><span className="sr-only">Search projects</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search projects or technologies" /></label>
+          <div className="project-filters" aria-label="Filter projects">{projectFilters.map((filter) => <button key={filter} type="button" className={activeFilter === filter ? "filter-button active" : "filter-button"} onClick={() => { setActiveFilter(filter); setActivePage(0); }} aria-pressed={activeFilter === filter}>{filter}</button>)}</div>
+          <label className="project-search"><Search size={17} aria-hidden="true" /><span className="sr-only">Search projects</span><input type="search" value={search} onChange={(event) => { setSearch(event.target.value); setActivePage(0); }} placeholder="Search projects or technologies" /></label>
           <p className="results-count">{visibleProjects.length} of {projects.length} repositories</p>
         </div>
-        {visibleProjects.length ? <div className="projects-grid">{visibleProjects.map((project) => <ProjectCard key={project.number} project={project} />)}</div> : <p className="empty-state">No matching repositories. Try a different search.</p>}
+        {visibleProjects.length ? <>
+          <div className="projects-carousel" aria-live="polite">
+            <motion.div className="projects-grid" layout>
+              {pageProjects.map((project, index) => <ProjectCard key={project.number} project={project} index={index} />)}
+            </motion.div>
+          </div>
+          <div className="project-pagination">
+            <span className="project-page-label"><strong>{String(safePage + 1).padStart(2, "0")}</strong><span> / {String(pageCount).padStart(2, "0")} · {visibleProjects.length} projects</span></span>
+            <div className="project-page-controls">
+              <button type="button" className="project-page-button" onClick={() => setActivePage((current) => (current - 1 + pageCount) % pageCount)} aria-label="Previous projects"><span>←</span> Previous</button>
+              <div className="project-page-dots" aria-label="Project pages">{Array.from({ length: pageCount }, (_, index) => <button key={index} type="button" className={index === safePage ? "project-page-dot active" : "project-page-dot"} onClick={() => setActivePage(index)} aria-label={`Show project page ${index + 1}`} aria-current={index === safePage ? "page" : undefined} />)}</div>
+              <button type="button" className="project-page-button next" onClick={() => setActivePage((current) => (current + 1) % pageCount)} aria-label="Next projects">Next <span>→</span></button>
+            </div>
+          </div>
+        </> : <p className="empty-state">No matching repositories. Try a different search.</p>}
       </section>
 
       <footer className="site-footer" id="contact">
