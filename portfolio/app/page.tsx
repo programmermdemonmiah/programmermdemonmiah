@@ -309,7 +309,7 @@ function DeveloperModel() {
         const binary = atob(encoded);
         const bytes = new Uint8Array(binary.length);
         for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
-        objectUrl = URL.createObjectURL(new Blob([bytes], { type: "model/gltf-binary" }));
+        objectUrl = URL.createObjectURL(new Blob([bytes.buffer as ArrayBuffer], { type: "model/gltf-binary" }));
         await import("@google/model-viewer");
         attachViewer();
       } catch {
