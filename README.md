@@ -22,7 +22,7 @@ My day-to-day toolkit centers on **Flutter, Go, Next.js, React, and Laravel/PHP*
 
 ## 02 — Engineering Toolkit
 
-<table>
+<table width="100%">
   <tr>
     <td width="50%" valign="top">
       <h3>📱 Mobile Engineering</h3>
