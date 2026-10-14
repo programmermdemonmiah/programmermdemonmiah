@@ -18,7 +18,8 @@
     "framer-motion": "^12.38.0",
     "three": "^0.181.1",
     "@react-three/fiber": "^9.3.0",
-    "@react-three/drei": "^10.7.6"
+    "@react-three/drei": "^10.7.6",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",
