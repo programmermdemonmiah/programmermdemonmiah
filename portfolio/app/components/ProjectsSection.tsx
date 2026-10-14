@@ -26,7 +26,7 @@ import {
 
 import { VERIFIED_PROJECTS, type VerifiedProject } from "@/app/data/projectRegistry";
 
-const CATEGORIES = ["All", "Mobile App", "Enterprise SaaS", "E-Commerce", "Healthcare", "Full Stack Web"] as const;
+const CATEGORIES = ["All", "Mobile App", "Enterprise SaaS", "E-Commerce", "Full Stack Web"] as const;
 
 interface LightboxPayload {
   images: string[];

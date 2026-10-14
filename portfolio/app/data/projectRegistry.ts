@@ -92,7 +92,7 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
       "iconUrl": "https://play-lh.googleusercontent.com/372HTmVP_FVQXKodazu6JRE8Tm6_QTukuG0Bl4XzJbFrHg3PfUGLbF1Pbmv6_7J2_WMY0olpzPbBz8McaoPKDQ=s0",
       "storeUrl": "https://play.google.com/store/apps/details?id=com.swish.app&hl=en&gl=US"
     },
-    "lastSyncedAt": "2026-10-14T18:53:04.290Z",
+    "lastSyncedAt": "2026-10-14T19:36:12.049Z",
     "verifiedLive": true,
     "approved": true,
     "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
@@ -141,7 +141,7 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
       "/screenshots/laam-garments-erp-desktop.png",
       "/screenshots/laam-garments-erp-mobile.png"
     ],
-    "lastSyncedAt": "2026-10-14T18:53:09.142Z",
+    "lastSyncedAt": "2026-10-14T19:36:12.617Z",
     "verifiedLive": true,
     "approved": true,
     "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
@@ -206,55 +206,7 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
       "iconUrl": "https://play-lh.googleusercontent.com/QcGwTYseWbGq_9Ju0zdRwXxFzkZQBrnzoo36sV8B0Mq3MPUQgguG8yrB5mrPF9HJQM4at1cQ_T-hx6k3B_B0fw=s0",
       "storeUrl": "https://play.google.com/store/apps/details?id=com.xovalley.user_app&hl=en&gl=US"
     },
-    "lastSyncedAt": "2026-10-14T18:53:19.783Z",
-    "verifiedLive": true,
-    "approved": true,
-    "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
-  },
-  {
-    "id": "araco-healthcare",
-    "name": "ARACO Healthcare & Telemedicine",
-    "tagline": "Integrated healthcare ecosystem with WebRTC consultations and digital pharmacy",
-    "category": "Healthcare",
-    "status": "Live Web System",
-    "statusType": "production",
-    "description": "Comprehensive healthcare platform uniting patients, certified doctors, clinical diagnostic laboratories, and pharmacies. Incorporates digital prescription upload workflows, encrypted video/audio consultations via Zego Cloud WebRTC, and home sample collection scheduling.",
-    "architecture": "Flutter mobile client utilizing reactive GetX state management connected to Zego Cloud WebRTC pipelines and a modular Django administration backend.",
-    "stack": [
-      "Flutter (GetX)",
-      "Python (Django)",
-      "Zego Cloud WebRTC",
-      "MySQL",
-      "REST API",
-      "POS Billing"
-    ],
-    "role": "Full Stack Engineer (Flutter + Django + System Design)",
-    "liveUrl": "https://araco.com.bd",
-    "highlights": [
-      "Online pharmacy checkout with secure prescription upload and fulfillment dispatch",
-      "Encrypted one-to-one video/audio doctor consultations powered by Zego Cloud WebRTC",
-      "Clinical lab test home sample collection booking, automated digital report generation, and POS billing"
-    ],
-    "metrics": [
-      {
-        "label": "Telemedicine",
-        "value": "Zego Cloud WebRTC"
-      },
-      {
-        "label": "Modules",
-        "value": "Pharmacy + Clinic"
-      },
-      {
-        "label": "State",
-        "value": "GetX Clean Arch"
-      }
-    ],
-    "image": "/screenshots/araco-healthcare-desktop.png",
-    "screenshots": [
-      "/screenshots/araco-healthcare-desktop.png",
-      "/screenshots/araco-healthcare-mobile.png"
-    ],
-    "lastSyncedAt": "2026-10-14T18:53:21.611Z",
+    "lastSyncedAt": "2026-10-14T19:36:13.683Z",
     "verifiedLive": true,
     "approved": true,
     "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
@@ -303,7 +255,7 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
       "/screenshots/fantasymart-ecommerce-desktop.png",
       "/screenshots/fantasymart-ecommerce-mobile.png"
     ],
-    "lastSyncedAt": "2026-10-14T18:53:36.027Z",
+    "lastSyncedAt": "2026-10-14T19:36:13.951Z",
     "verifiedLive": true,
     "approved": true,
     "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
@@ -356,7 +308,115 @@ export const VERIFIED_PROJECTS: VerifiedProject[] = [
       "/screenshots/deepverselab-saas-desktop.png",
       "/screenshots/deepverselab-saas-mobile.png"
     ],
-    "lastSyncedAt": "2026-10-14T18:53:41.173Z",
+    "lastSyncedAt": "2026-10-14T19:36:14.399Z",
+    "verifiedLive": true,
+    "approved": true,
+    "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
+  },
+  {
+    "id": "barakah-food-delivery",
+    "name": "Barakah Food Delivery Logistics",
+    "tagline": "On-demand food delivery and courier dispatch platform published on Google Play",
+    "category": "Mobile App",
+    "status": "Live Application",
+    "statusType": "production",
+    "description": "On-demand food delivery and courier dispatch application published and active on Google Play. Features real-time GPS courier navigation, dynamic order state machines, instant dispatch push notifications, and automated driver earnings reconciliation.",
+    "architecture": "Reactive Flutter client architecture connected to high-performance REST and WebSocket endpoints for rider dispatch, location broadcasting, and live status handoffs.",
+    "stack": [
+      "Flutter",
+      "Dart",
+      "Google Maps SDK",
+      "REST APIs",
+      "Push Notifications",
+      "GPS Tracking",
+      "Logistics"
+    ],
+    "role": "Mobile Application Engineer (Flutter)",
+    "packageId": "com.barakahfood.deliveryman",
+    "liveUrl": "https://play.google.com/store/apps/details?id=com.barakahfood.deliveryman",
+    "highlights": [
+      "Published and active on Google Play Store with real-time order progression and fulfillment",
+      "Integrated Google Maps SDK for real-time delivery rider geolocation routing and drop-off ETA",
+      "Automated trip earnings ledger with cash collection reconciliation and payout summaries"
+    ],
+    "metrics": [
+      {
+        "label": "Google Play",
+        "value": "Verified Live"
+      },
+      {
+        "label": "Routing",
+        "value": "Real-Time GPS"
+      },
+      {
+        "label": "Architecture",
+        "value": "Flutter Mobile"
+      }
+    ],
+    "image": "https://play-lh.googleusercontent.com/eOSTVxLk-kQj6pXqI_2sUVe60lc9TGxntvMW0TLS8gotu-q6KP5TaDlCBt8-uN4XSZaJycbbIeKHXm44lcFL=w720-h1280-rw",
+    "screenshots": [
+      "https://play-lh.googleusercontent.com/eOSTVxLk-kQj6pXqI_2sUVe60lc9TGxntvMW0TLS8gotu-q6KP5TaDlCBt8-uN4XSZaJycbbIeKHXm44lcFL=w720-h1280-rw",
+      "https://play-lh.googleusercontent.com/OBVqgRK7eerY0GPfK8AOzitu5oE9ecC6kG4kURTCb1K41gpqVsN0WjmJwJh-wX8vILzpcc1kYHt56aLN2g=w720-h1280-rw",
+      "https://play-lh.googleusercontent.com/Re8X-JSw0SbEFIcX5Fndym_9vM5K0ZLuD681vG103C9r71bYtsbV8LILiBHuE1FgJM-qPFWYGkUU4bk98vLtv_k=w720-h1280-rw",
+      "https://play-lh.googleusercontent.com/vcGoKpjiDOkL9UYkSzvA-zi1s1hN1vALJvP9E4tNh3c6B3G9kG9uZG2kKyoPX2Aq1Wb05wsuGWuRBIb4zzKVvw=w720-h1280-rw",
+      "https://play-lh.googleusercontent.com/tNWPDYx35GNUrswA8yUADOR8J8zzM-BuRkEFolghH9Pg6sVfQ_g4tNVz3YXe6UtZHaU3c1mmo5pv4hYiFBdC=w720-h1280-rw",
+      "https://play-lh.googleusercontent.com/GMXZjeM8LK3IJyHvQuKtPHB14DHSYzarBJc7Zt2nTlTaM1klXDsx2H7mYTB8aMlUvNA-kG8L1HSHFnyjRVwIlXE=w720-h1280-rw"
+    ],
+    "appStoreDetails": {
+      "title": "com.barakahfood.deliveryman",
+      "iconUrl": "https://play-lh.googleusercontent.com/eOSTVxLk-kQj6pXqI_2sUVe60lc9TGxntvMW0TLS8gotu-q6KP5TaDlCBt8-uN4XSZaJycbbIeKHXm44lcFL=s0",
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.barakahfood.deliveryman&hl=en&gl=US"
+    },
+    "lastSyncedAt": "2026-10-14T19:36:14.898Z",
+    "verifiedLive": true,
+    "approved": true,
+    "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."
+  },
+  {
+    "id": "oxewman-crafts-ecommerce",
+    "name": "Oxewman Artisanal E-Commerce",
+    "tagline": "Authentic Bangladeshi artisanal crafts e-commerce web platform on Next.js",
+    "category": "E-Commerce",
+    "status": "Live Production",
+    "statusType": "production",
+    "description": "Full-stack modern e-commerce storefront showcasing handcrafted artisanal goods and heritage products. Features fast server-side rendering, responsive catalog filtering, interactive cart management, dynamic product galleries, and optimized checkout workflows.",
+    "architecture": "Next.js App Router architecture with server components for sub-second page loads, responsive image optimization, and secure state-managed shopping cart.",
+    "stack": [
+      "Next.js",
+      "React.js",
+      "Tailwind CSS",
+      "TypeScript",
+      "E-Commerce",
+      "REST API",
+      "Responsive UX"
+    ],
+    "role": "Frontend & Full Stack Developer (Next.js)",
+    "liveUrl": "https://deepverselab-ecommerce.vercel.app",
+    "highlights": [
+      "Production e-commerce storefront deployed on Vercel with responsive craft catalogs",
+      "High-performance client cart state management with persistent session caching",
+      "Mobile-first responsive UX optimized for high conversion and sub-second navigation"
+    ],
+    "metrics": [
+      {
+        "label": "Deployment",
+        "value": "Vercel Production"
+      },
+      {
+        "label": "Framework",
+        "value": "Next.js & React"
+      },
+      {
+        "label": "Catalog",
+        "value": "Artisanal Crafts"
+      }
+    ],
+    "image": "/screenshots/oxewman-crafts-ecommerce-desktop.png",
+    "screenshots": [
+      "/screenshots/oxewman-crafts-ecommerce-desktop.png",
+      "/screenshots/oxewman-crafts-ecommerce-mobile.png"
+    ],
+    "lastSyncedAt": "2026-10-14T19:36:15.617Z",
     "verifiedLive": true,
     "approved": true,
     "auditNotes": "Automatically discovered and verified via background pipeline on 10/15/2026. Backed by authenticated repositories."

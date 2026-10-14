@@ -118,8 +118,6 @@ async function runAllTests() {
   console.log("\n\x1b[1m[Suite 3: Screenshot Storage, Dimensions & Caching]\x1b[0m");
 
   const expectedScreenshots = [
-    "araco-healthcare-desktop.png",
-    "araco-healthcare-mobile.png",
     "deepverselab-saas-desktop.png",
     "deepverselab-saas-mobile.png",
     "fantasymart-ecommerce-desktop.png",
@@ -128,6 +126,8 @@ async function runAllTests() {
     "laam-garments-erp-mobile.png",
     "xovalley-ecommerce-desktop.png",
     "xovalley-ecommerce-mobile.png",
+    "oxewman-crafts-ecommerce-desktop.png",
+    "oxewman-crafts-ecommerce-mobile.png",
   ];
 
   for (const filename of expectedScreenshots) {

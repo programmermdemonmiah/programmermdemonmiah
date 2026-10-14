@@ -155,32 +155,6 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
     _repoKeywords: ["xovalley_laravel"],
   },
   {
-    id: "araco-healthcare",
-    name: "ARACO Healthcare & Telemedicine",
-    tagline: "Integrated healthcare ecosystem with WebRTC consultations and digital pharmacy",
-    category: "Healthcare",
-    status: "Live Web System",
-    statusType: "production",
-    description:
-      "Comprehensive healthcare platform uniting patients, certified doctors, clinical diagnostic laboratories, and pharmacies. Incorporates digital prescription upload workflows, encrypted video/audio consultations via Zego Cloud WebRTC, and home sample collection scheduling.",
-    architecture:
-      "Flutter mobile client utilizing reactive GetX state management connected to Zego Cloud WebRTC pipelines and a modular Django administration backend.",
-    stack: ["Flutter (GetX)", "Python (Django)", "Zego Cloud WebRTC", "MySQL", "REST API", "POS Billing"],
-    role: "Full Stack Engineer (Flutter + Django + System Design)",
-    liveUrl: "https://araco.com.bd",
-    highlights: [
-      "Online pharmacy checkout with secure prescription upload and fulfillment dispatch",
-      "Encrypted one-to-one video/audio doctor consultations powered by Zego Cloud WebRTC",
-      "Clinical lab test home sample collection booking, automated digital report generation, and POS billing",
-    ],
-    metrics: [
-      { label: "Telemedicine", value: "Zego Cloud WebRTC" },
-      { label: "Modules", value: "Pharmacy + Clinic" },
-      { label: "State", value: "GetX Clean Arch" },
-    ],
-    _repoKeywords: ["araco_healthcare", "araco_healthcare_backend"],
-  },
-  {
     id: "fantasymart-ecommerce",
     name: "FantasyMart Multi-Module Platform",
     tagline: "Next.js modern e-commerce platform with Laravel multi-module backend & rider logistics",
@@ -235,5 +209,58 @@ export const VERIFIED_PROJECT_DEFINITIONS = [
       { label: "Status", value: "Live Production" },
     ],
     _repoKeywords: ["deepverselab", "deepverselab_ecommerce", "deepverselab_ecom_go", "deepverse-docker-reverse-proxy"],
+  },
+  {
+    id: "barakah-food-delivery",
+    name: "Barakah Food Delivery Logistics",
+    tagline: "On-demand food delivery and courier dispatch platform published on Google Play",
+    category: "Mobile App",
+    status: "Live Application",
+    statusType: "production",
+    description:
+      "On-demand food delivery and courier dispatch application published and active on Google Play. Features real-time GPS courier navigation, dynamic order state machines, instant dispatch push notifications, and automated driver earnings reconciliation.",
+    architecture:
+      "Reactive Flutter client architecture connected to high-performance REST and WebSocket endpoints for rider dispatch, location broadcasting, and live status handoffs.",
+    stack: ["Flutter", "Dart", "Google Maps SDK", "REST APIs", "Push Notifications", "GPS Tracking", "Logistics"],
+    role: "Mobile Application Engineer (Flutter)",
+    packageId: "com.barakahfood.deliveryman",
+    liveUrl: "https://play.google.com/store/apps/details?id=com.barakahfood.deliveryman",
+    highlights: [
+      "Published and active on Google Play Store with real-time order progression and fulfillment",
+      "Integrated Google Maps SDK for real-time delivery rider geolocation routing and drop-off ETA",
+      "Automated trip earnings ledger with cash collection reconciliation and payout summaries",
+    ],
+    metrics: [
+      { label: "Google Play", value: "Verified Live" },
+      { label: "Routing", value: "Real-Time GPS" },
+      { label: "Architecture", value: "Flutter Mobile" },
+    ],
+    _repoKeywords: ["barakah_food_deliveryman_app", "barakah_food"],
+  },
+  {
+    id: "oxewman-crafts-ecommerce",
+    name: "Oxewman Artisanal E-Commerce",
+    tagline: "Authentic Bangladeshi artisanal crafts e-commerce web platform on Next.js",
+    category: "E-Commerce",
+    status: "Live Production",
+    statusType: "production",
+    description:
+      "Full-stack modern e-commerce storefront showcasing handcrafted artisanal goods and heritage products. Features fast server-side rendering, responsive catalog filtering, interactive cart management, dynamic product galleries, and optimized checkout workflows.",
+    architecture:
+      "Next.js App Router architecture with server components for sub-second page loads, responsive image optimization, and secure state-managed shopping cart.",
+    stack: ["Next.js", "React.js", "Tailwind CSS", "TypeScript", "E-Commerce", "REST API", "Responsive UX"],
+    role: "Frontend & Full Stack Developer (Next.js)",
+    liveUrl: "https://deepverselab-ecommerce.vercel.app",
+    highlights: [
+      "Production e-commerce storefront deployed on Vercel with responsive craft catalogs",
+      "High-performance client cart state management with persistent session caching",
+      "Mobile-first responsive UX optimized for high conversion and sub-second navigation",
+    ],
+    metrics: [
+      { label: "Deployment", value: "Vercel Production" },
+      { label: "Framework", value: "Next.js & React" },
+      { label: "Catalog", value: "Artisanal Crafts" },
+    ],
+    _repoKeywords: ["deepverselab_ecommerce"],
   },
 ];

@@ -4673,7 +4673,7 @@ ul, ol {
 
 .all-projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
   margin-top: 24px;
 }
@@ -4905,9 +4905,17 @@ ul, ol {
   gap: 16px;
 }
 
+@media (max-width: 1120px) {
+  .all-projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
 @media (max-width: 768px) {
   .all-projects-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .projects-bottom-cta-row {
     flex-direction: column;

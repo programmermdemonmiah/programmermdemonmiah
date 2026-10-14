@@ -26,7 +26,6 @@ const CATEGORIES = [
   "Mobile App",
   "Enterprise SaaS",
   "E-Commerce",
-  "Healthcare",
   "Full Stack Web",
 ] as const;
 
@@ -208,8 +207,16 @@ export default function AllProjectsPage() {
         ) : (
           <div className="all-projects-grid">
             {filteredProjects.map((project, idx) => (
-              <article
+              <motion.article
                 key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{
+                  duration: 0.48,
+                  delay: Math.min((idx % 3) * 0.08, 0.25),
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 className="all-project-card"
               >
                 {/* Visual Media Header */}
@@ -347,7 +354,7 @@ export default function AllProjectsPage() {
                     )}
                   </footer>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
         )}
