@@ -1,5 +1,4 @@
-/* Responsive layout layer for the portfolio.
-   Keep this file as a small, predictable override layer for the existing visual system. */
+/* Responsive layout layer for the portfolio. */
 
 html,
 body {
@@ -9,16 +8,12 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  min-height: 100dvh;
-}
+body { min-height: 100dvh; }
 
 img,
 video,
 svg,
-canvas {
-  max-width: 100%;
-}
+canvas { max-width: 100%; }
 
 .section-container,
 .nav-container,
@@ -35,177 +30,85 @@ canvas {
 
 @media (max-width: 1100px) {
   :root { --header-height: 72px; }
-
   .nav-container { gap: 16px; }
   .nav-links { gap: 18px; }
   .nav-actions { gap: 8px; }
-
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
-    gap: clamp(28px, 5vw, 48px);
-  }
-
-  .about-grid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-  }
-
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr); gap: clamp(28px, 5vw, 48px); }
+  .about-grid { grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr); }
   .contact-card-grid { gap: clamp(28px, 5vw, 48px); }
   .hero-actions { flex-wrap: wrap; }
 }
 
 @media (max-width: 980px) {
   :root { --header-height: 68px; }
-
   .desktop-nav { display: none; }
-
   .nav-actions .btn-primary-sm,
   .nav-actions .cv-btn { display: none; }
-
-  .menu-toggle-btn {
-    display: inline-flex;
-    flex: 0 0 42px;
-    width: 42px;
-    height: 42px;
-  }
-
+  .menu-toggle-btn { display: inline-flex; flex: 0 0 42px; width: 42px; height: 42px; }
   .mobile-backdrop { display: block; }
-
-  .mobile-drawer {
-    display: flex;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .mobile-drawer-open {
-    visibility: visible;
-    pointer-events: auto;
-  }
-
+  .mobile-drawer { display: flex; visibility: hidden; pointer-events: none; }
+  .mobile-drawer-open { visibility: visible; pointer-events: auto; }
   .hero-grid,
   .about-grid,
   .contact-card-grid { grid-template-columns: 1fr; }
-
   .hero-section { min-height: auto; }
   .hero-content { order: 1; min-width: 0; }
-
-  .hero-visual {
-    order: 2;
-    width: min(100%, 620px);
-    margin-inline: auto;
-    min-width: 0;
-  }
-
+  .hero-visual { order: 2; width: min(100%, 620px); margin-inline: auto; min-width: 0; }
   .profile-card { width: 100%; }
-
-  .about-sidebar-column {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-
+  .about-sidebar-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .contact-channels,
   .vertical-swiper-project-card,
   .project-card,
   .service-card,
   .stat-card { min-width: 0; }
-
   .projects-grid,
   .project-grid,
   .services-grid,
-  .expertise-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .expertise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 640px) {
   html { scroll-padding-top: calc(var(--header-height) + 16px); }
-
   .section-container,
-  .nav-container {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
+  .nav-container { padding-left: 16px; padding-right: 16px; }
   .nav-container { gap: 10px; }
   .site-header { height: var(--header-height); }
 
-  .brand {
-    min-width: 0;
-    max-width: calc(100vw - 76px);
-    gap: 10px;
-  }
-
+  /* Mobile header: compact, readable, and always above the background layer. */
+  .site-header { background: rgba(12, 12, 12, 0.94); border-bottom-color: rgba(229, 57, 53, 0.24); }
+  .site-header-scrolled { background: rgba(12, 12, 12, 0.98); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32); }
+  .brand { min-width: 0; max-width: calc(100vw - 76px); gap: 10px; }
   .brand-meta { min-width: 0; overflow: hidden; }
-
   .brand-name,
-  .brand-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .brand-name { font-size: 0.82rem; }
-  .brand-title { font-size: 0.64rem; }
-
-  .brand-avatar-box {
-    width: 36px;
-    height: 36px;
-    flex: 0 0 36px;
-  }
-
-  .menu-toggle-btn {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
-  }
+  .brand-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .brand-name { font-size: 0.82rem; color: #FFFFFF; }
+  .brand-title { font-size: 0.64rem; color: #B8BCC8; }
+  .brand-avatar-box { width: 36px; height: 36px; flex: 0 0 36px; border-color: rgba(229, 57, 53, 0.65); box-shadow: 0 0 18px rgba(229, 57, 53, 0.20); }
+  .menu-toggle-btn { width: 40px; height: 40px; flex-basis: 40px; border: 1px solid rgba(229, 57, 53, 0.38); color: #FFFFFF; background: rgba(229, 57, 53, 0.10); border-radius: 10px; }
+  .menu-toggle-btn:active { background: rgba(229, 57, 53, 0.20); }
 
   .hero-section,
   .about-section,
   .projects-section,
-  .contact-footer-section {
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
-
+  .contact-footer-section { padding-top: 64px; padding-bottom: 64px; }
   .hero-section { padding-top: 48px; }
-
-  .hero-name {
-    font-size: clamp(2.35rem, 12vw, 4rem);
-    line-height: 0.98;
-    overflow-wrap: anywhere;
-  }
-
+  .hero-name { font-size: clamp(2.35rem, 12vw, 4rem); line-height: 0.98; overflow-wrap: anywhere; }
   .hero-role { font-size: clamp(1rem, 4.5vw, 1.3rem); }
-
   .hero-summary,
   .section-subtitle,
   .contact-desc { font-size: 0.94rem; }
-
   .section-header { margin-bottom: 34px; }
   .section-eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; }
   .section-title { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.08; }
-
   .hero-stack-tags { max-width: 100%; gap: 7px; }
   .stack-tag { max-width: 100%; font-size: 0.72rem; overflow-wrap: anywhere; }
-
-  .hero-actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-
+  .hero-actions { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .hero-actions .btn-primary,
   .hero-actions .btn-secondary,
-  .hero-actions .btn-icon {
-    width: 100%;
-    min-width: 0;
-  }
-
+  .hero-actions .btn-icon { width: 100%; min-width: 0; }
   .profile-card-footer { flex-wrap: wrap; gap: 14px; }
   .profile-metric,
   .profile-github-link { min-width: 0; }
-
   .profile-github-link,
   .job-company,
   .job-period,
@@ -213,85 +116,45 @@ canvas {
   .edu-degree,
   .principle-item span,
   .email-address-link,
-  .contact-phone-link {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
+  .contact-phone-link { overflow-wrap: anywhere; word-break: break-word; }
   .about-sidebar-column,
   .projects-grid,
   .project-grid,
   .services-grid,
   .expertise-grid,
   .stats-grid { grid-template-columns: 1fr; }
-
   .timeline-title-row,
-  .job-meta {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
-  }
-
+  .job-meta { align-items: flex-start; flex-direction: column; gap: 6px; }
   .about-social-links,
   .channel-links-grid { grid-template-columns: 1fr; }
-
   .project-actions-row { flex-wrap: wrap; }
   .project-actions-row > * { max-width: 100%; }
-
-  .contact-headline {
-    font-size: clamp(1.8rem, 8vw, 2.7rem);
-    line-height: 1.08;
-  }
-
+  .contact-headline { font-size: clamp(1.8rem, 8vw, 2.7rem); line-height: 1.08; }
   .contact-meta-pills { align-items: stretch; }
   .contact-meta-item { min-width: 0; overflow-wrap: anywhere; }
-
   .contact-send-btn,
   .mobile-full-btn { width: 100%; min-height: 46px; }
-
   .contact-phone-numbers { flex-wrap: wrap; row-gap: 8px; }
-
-  .sub-footer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 24px;
-  }
-
-  .footer-actions {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
+  .sub-footer { flex-direction: column; align-items: stretch; gap: 24px; }
+  .footer-actions { width: 100%; flex-direction: column; align-items: stretch; }
   .footer-nav { flex-wrap: wrap; gap: 12px 18px; }
   .scroll-top-btn { align-self: flex-start; }
 
-  .mobile-drawer {
-    width: min(360px, 92vw);
-    padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
-  }
-
-  .mobile-nav-link { min-height: 48px; }
+  /* Drawer gets its own opaque surface so menu items remain readable over the canvas. */
+  .mobile-backdrop { background: rgba(0, 0, 0, 0.68); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+  .mobile-drawer { width: min(360px, 92vw); padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)); background: #121014; border-left: 1px solid rgba(229, 57, 53, 0.30); box-shadow: -18px 0 50px rgba(0, 0, 0, 0.45); z-index: 1002; }
+  .mobile-drawer-header { border-bottom-color: rgba(229, 57, 53, 0.18); }
+  .mobile-brand { color: #FFFFFF; }
+  .mobile-nav-link { min-height: 50px; color: #F8F9FA; border-bottom-color: #2C2634; }
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible { color: #FF6B67; background: rgba(229, 57, 53, 0.08); }
 }
 
 @media (max-width: 400px) {
   .section-container,
-  .nav-container {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .brand-avatar-box {
-    width: 34px;
-    height: 34px;
-    flex-basis: 34px;
-  }
-
-  .brand {
-    gap: 8px;
-    max-width: calc(100vw - 64px);
-  }
-
+  .nav-container { padding-left: 12px; padding-right: 12px; }
+  .brand-avatar-box { width: 34px; height: 34px; flex-basis: 34px; }
+  .brand { gap: 8px; max-width: calc(100vw - 64px); }
   .brand-name { font-size: 0.76rem; }
   .brand-title { display: none; }
   .hero-actions { grid-template-columns: 1fr; }
@@ -302,13 +165,7 @@ canvas {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-
   *,
   *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
