@@ -1,1 +1,314 @@
-/* ==========================================================================\n   MD. Emon Miah Portfolio — Responsive Safety Layer\n   Keeps the existing visual system intact while preventing overflow,\n   cramped layouts, broken navigation, and unreadable content on smaller screens.\n   ========================================================================== */\n\nhtml,\nbody {\n  width: 100%;\n  min-width: 0;\n  overflow-x: clip;\n}\n\nbody {\n  min-height: 100dvh;\n}\n\n.section-container,\n.nav-container,\n.hero-grid,\n.about-grid,\n.contact-card-grid {\n  min-width: 0;\n}\n\n/* Large tablets / compact laptops */\n@media (max-width: 1100px) {\n  .nav-links {\n    gap: 18px;\n  }\n\n  .nav-actions {\n    gap: 8px;\n  }\n\n  .hero-grid {\n    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);\n    gap: clamp(28px, 5vw, 56px);\n  }\n\n  .about-grid {\n    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);\n  }\n\n  .contact-card-grid {\n    gap: clamp(28px, 5vw, 56px);\n  }\n\n  .hero-actions {\n    flex-wrap: wrap;\n  }\n\n  .hero-stack-tags {\n    max-width: 100%;\n  }\n}\n\n/* Tablet */\n@media (max-width: 900px) {\n  :root {\n    --header-height: 68px;\n  }\n\n  .desktop-nav {\n    display: none;\n  }\n\n  .nav-actions .btn-primary-sm,\n  .nav-actions .cv-btn {\n    display: none;\n  }\n\n  .menu-toggle-btn {\n    display: inline-flex;\n  }\n\n  .mobile-backdrop,\n  .mobile-drawer {\n    display: flex;\n  }\n\n  .mobile-backdrop {\n    display: block;\n  }\n\n  .hero-grid,\n  .about-grid,\n  .contact-card-grid {\n    grid-template-columns: 1fr;\n  }\n\n  .hero-section {\n    min-height: auto;\n  }\n\n  .hero-content {\n    order: 1;\n  }\n\n  .hero-visual {\n    order: 2;\n    width: min(100%, 620px);\n    margin-inline: auto;\n  }\n\n  .profile-card {\n    width: 100%;\n  }\n\n  .about-sidebar-column {\n    display: grid;\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n    gap: 20px;\n  }\n\n  .contact-channels {\n    min-width: 0;\n  }\n\n  .vertical-swiper-project-card {\n    min-width: 0;\n  }\n}\n\n/* Phones */\n@media (max-width: 640px) {\n  html {\n    scroll-padding-top: calc(var(--header-height) + 16px);\n  }\n\n  .section-container,\n  .nav-container {\n    padding-left: 16px;\n    padding-right: 16px;\n  }\n\n  .site-header {\n    height: var(--header-height);\n  }\n\n  .brand {\n    min-width: 0;\n    max-width: calc(100vw - 72px);\n  }\n\n  .brand-meta {\n    min-width: 0;\n  }\n\n  .brand-name,\n  .brand-title {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n  }\n\n  .brand-name {\n    font-size: 0.82rem;\n  }\n\n  .brand-title {\n    font-size: 0.66rem;\n  }\n\n  .brand-avatar-box {\n    width: 36px;\n    height: 36px;\n  }\n\n  .hero-section,\n  .about-section,\n  .projects-section,\n  .contact-footer-section {\n    padding-top: 64px;\n    padding-bottom: 64px;\n  }\n\n  .hero-section {\n    padding-top: 48px;\n  }\n\n  .hero-name {\n    font-size: clamp(2.35rem, 12vw, 4rem);\n    line-height: 0.98;\n    overflow-wrap: anywhere;\n  }\n\n  .hero-role {\n    font-size: clamp(1rem, 4.5vw, 1.35rem);\n  }\n\n  .hero-summary,\n  .section-subtitle,\n  .contact-desc {\n    font-size: 0.94rem;\n  }\n\n  .hero-stack-tags {\n    gap: 7px;\n  }\n\n  .stack-tag {\n    max-width: 100%;\n    font-size: 0.72rem;\n  }\n\n  .hero-actions {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 10px;\n  }\n\n  .hero-actions .btn-primary,\n  .hero-actions .btn-secondary {\n    width: 100%;\n  }\n\n  .hero-actions .btn-icon {\n    width: 100%;\n  }\n\n  .profile-card-footer {\n    flex-wrap: wrap;\n    gap: 14px;\n  }\n\n  .profile-metric,\n  .profile-github-link {\n    min-width: 0;\n  }\n\n  .profile-github-link {\n    overflow-wrap: anywhere;\n  }\n\n  .about-sidebar-column {\n    grid-template-columns: 1fr;\n  }\n\n  .timeline-title-row,\n  .job-meta {\n    align-items: flex-start;\n    flex-direction: column;\n  }\n\n  .job-company,\n  .job-period,\n  .job-role,\n  .edu-degree,\n  .principle-item span {\n    overflow-wrap: anywhere;\n  }\n\n  .about-social-links {\n    grid-template-columns: 1fr;\n  }\n\n  .project-actions-row {\n    flex-wrap: wrap;\n  }\n\n  .project-actions-row > * {\n    max-width: 100%;\n  }\n\n  .contact-headline {\n    font-size: clamp(1.8rem, 8vw, 2.7rem);\n    line-height: 1.08;\n  }\n\n  .contact-meta-pills {\n    align-items: stretch;\n  }\n\n  .contact-meta-item {\n    min-width: 0;\n    overflow-wrap: anywhere;\n  }\n\n  .email-address-link,\n  .contact-phone-link {\n    overflow-wrap: anywhere;\n    word-break: break-word;\n  }\n\n  .contact-send-btn {\n    width: 100%;\n  }\n\n  .contact-phone-numbers {\n    flex-wrap: wrap;\n    row-gap: 8px;\n  }\n\n  .channel-links-grid {\n    grid-template-columns: 1fr;\n  }\n\n  .sub-footer {\n    flex-direction: column;\n    align-items: stretch;\n    gap: 24px;\n  }\n\n  .footer-actions {\n    width: 100%;\n    flex-direction: column;\n    align-items: stretch;\n  }\n\n  .footer-nav {\n    flex-wrap: wrap;\n    gap: 12px 18px;\n  }\n\n  .scroll-top-btn {\n    align-self: flex-start;\n  }\n\n  .mobile-drawer {\n    width: min(340px, 92vw);\n    padding: 20px;\n  }\n}\n\n/* Small phones */\n@media (max-width: 400px) {\n  .section-container,\n  .nav-container {\n    padding-left: 12px;\n    padding-right: 12px;\n  }\n\n  .brand-avatar-box {\n    width: 34px;\n    height: 34px;\n  }\n\n  .brand {\n    gap: 8px;\n  }\n\n  .brand-name {\n    font-size: 0.76rem;\n  }\n\n  .brand-title {\n    display: none;\n  }\n\n  .hero-actions {\n    grid-template-columns: 1fr;\n  }\n\n  .hero-actions .btn-icon {\n    width: 100%;\n  }\n\n  .profile-frame-bar {\n    gap: 8px;\n  }\n\n  .frame-tag {\n    font-size: 0.62rem;\n  }\n\n  .frame-live {\n    font-size: 0.62rem;\n  }\n}\n\n/* Accessibility / motion */\n@media (prefers-reduced-motion: reduce) {\n  html {\n    scroll-behavior: auto;\n  }\n\n  *,\n  *::before,\n  *::after {\n    animation-duration: 0.01ms !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: 0.01ms !important;\n    scroll-behavior: auto !important;\n  }\n}\n
+/* Responsive layout layer for the portfolio.
+   Keep this file as a small, predictable override layer for the existing visual system. */
+
+html,
+body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+img,
+video,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+.section-container,
+.nav-container,
+.hero-grid,
+.about-grid,
+.contact-card-grid,
+.project-grid,
+.projects-grid,
+.expertise-grid,
+.stats-grid,
+.services-grid {
+  min-width: 0;
+}
+
+@media (max-width: 1100px) {
+  :root { --header-height: 72px; }
+
+  .nav-container { gap: 16px; }
+  .nav-links { gap: 18px; }
+  .nav-actions { gap: 8px; }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+    gap: clamp(28px, 5vw, 48px);
+  }
+
+  .about-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  }
+
+  .contact-card-grid { gap: clamp(28px, 5vw, 48px); }
+  .hero-actions { flex-wrap: wrap; }
+}
+
+@media (max-width: 980px) {
+  :root { --header-height: 68px; }
+
+  .desktop-nav { display: none; }
+
+  .nav-actions .btn-primary-sm,
+  .nav-actions .cv-btn { display: none; }
+
+  .menu-toggle-btn {
+    display: inline-flex;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobile-backdrop { display: block; }
+
+  .mobile-drawer {
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-drawer-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .hero-grid,
+  .about-grid,
+  .contact-card-grid { grid-template-columns: 1fr; }
+
+  .hero-section { min-height: auto; }
+  .hero-content { order: 1; min-width: 0; }
+
+  .hero-visual {
+    order: 2;
+    width: min(100%, 620px);
+    margin-inline: auto;
+    min-width: 0;
+  }
+
+  .profile-card { width: 100%; }
+
+  .about-sidebar-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .contact-channels,
+  .vertical-swiper-project-card,
+  .project-card,
+  .service-card,
+  .stat-card { min-width: 0; }
+
+  .projects-grid,
+  .project-grid,
+  .services-grid,
+  .expertise-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  html { scroll-padding-top: calc(var(--header-height) + 16px); }
+
+  .section-container,
+  .nav-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .nav-container { gap: 10px; }
+  .site-header { height: var(--header-height); }
+
+  .brand {
+    min-width: 0;
+    max-width: calc(100vw - 76px);
+    gap: 10px;
+  }
+
+  .brand-meta { min-width: 0; overflow: hidden; }
+
+  .brand-name,
+  .brand-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .brand-name { font-size: 0.82rem; }
+  .brand-title { font-size: 0.64rem; }
+
+  .brand-avatar-box {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+  }
+
+  .menu-toggle-btn {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .hero-section,
+  .about-section,
+  .projects-section,
+  .contact-footer-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .hero-section { padding-top: 48px; }
+
+  .hero-name {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-role { font-size: clamp(1rem, 4.5vw, 1.3rem); }
+
+  .hero-summary,
+  .section-subtitle,
+  .contact-desc { font-size: 0.94rem; }
+
+  .section-header { margin-bottom: 34px; }
+  .section-eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; }
+  .section-title { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.08; }
+
+  .hero-stack-tags { max-width: 100%; gap: 7px; }
+  .stack-tag { max-width: 100%; font-size: 0.72rem; overflow-wrap: anywhere; }
+
+  .hero-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary,
+  .hero-actions .btn-icon {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .profile-card-footer { flex-wrap: wrap; gap: 14px; }
+  .profile-metric,
+  .profile-github-link { min-width: 0; }
+
+  .profile-github-link,
+  .job-company,
+  .job-period,
+  .job-role,
+  .edu-degree,
+  .principle-item span,
+  .email-address-link,
+  .contact-phone-link {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .about-sidebar-column,
+  .projects-grid,
+  .project-grid,
+  .services-grid,
+  .expertise-grid,
+  .stats-grid { grid-template-columns: 1fr; }
+
+  .timeline-title-row,
+  .job-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .about-social-links,
+  .channel-links-grid { grid-template-columns: 1fr; }
+
+  .project-actions-row { flex-wrap: wrap; }
+  .project-actions-row > * { max-width: 100%; }
+
+  .contact-headline {
+    font-size: clamp(1.8rem, 8vw, 2.7rem);
+    line-height: 1.08;
+  }
+
+  .contact-meta-pills { align-items: stretch; }
+  .contact-meta-item { min-width: 0; overflow-wrap: anywhere; }
+
+  .contact-send-btn,
+  .mobile-full-btn { width: 100%; min-height: 46px; }
+
+  .contact-phone-numbers { flex-wrap: wrap; row-gap: 8px; }
+
+  .sub-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .footer-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-nav { flex-wrap: wrap; gap: 12px 18px; }
+  .scroll-top-btn { align-self: flex-start; }
+
+  .mobile-drawer {
+    width: min(360px, 92vw);
+    padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+  }
+
+  .mobile-nav-link { min-height: 48px; }
+}
+
+@media (max-width: 400px) {
+  .section-container,
+  .nav-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .brand-avatar-box {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .brand {
+    gap: 8px;
+    max-width: calc(100vw - 64px);
+  }
+
+  .brand-name { font-size: 0.76rem; }
+  .brand-title { display: none; }
+  .hero-actions { grid-template-columns: 1fr; }
+  .hero-actions .btn-icon { width: 100%; }
+  .mobile-drawer { width: min(340px, 94vw); }
+  .mobile-drawer-header { padding-bottom: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
