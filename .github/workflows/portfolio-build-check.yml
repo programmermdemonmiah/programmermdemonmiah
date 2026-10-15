@@ -1,0 +1,38 @@
+name: Portfolio Build Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "portfolio/**"
+      - ".github/workflows/portfolio-build-check.yml"
+  pull_request:
+    paths:
+      - "portfolio/**"
+      - ".github/workflows/portfolio-build-check.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+          cache-dependency-path: portfolio/yarn.lock
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: NEXT_TELEMETRY_DISABLED=1 yarn build
