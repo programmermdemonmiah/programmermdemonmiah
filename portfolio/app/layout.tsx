@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./responsive-fixes.css";
 
 export const metadata: Metadata = {
   title: "MD. Emon Miah — Senior Software Engineer | Flutter · Go · Next.js · Laravel",
