@@ -17,12 +17,12 @@ const WORK_EXPERIENCE = [
     company: "N. I. Biz Soft",
     location: "Uttara-15, Dhaka",
     period: "Dec 2023 – May 2026",
-    current: true,
+    current: false,
     highlights: [
-      "Leading full stack system development across Flutter mobile apps and backend systems.",
-      "Designing scalable real-time architectures using WebSocket for fintech, e-commerce, and live streaming.",
-      "Backend API architecture in Go (Gin), Laravel, and Django with performance optimization.",
-      "Mentoring developers, reviewing code structure, and handling production deployments.",
+      "Led full stack system development across Flutter mobile apps and backend systems.",
+      "Designed scalable real-time architectures using WebSocket for fintech, e-commerce, and live streaming.",
+      "Developed backend APIs in Go (Gin), Laravel, and Django with performance optimization.",
+      "Mentored developers, reviewed code structure, and handled production deployments.",
     ],
   },
   {
@@ -42,8 +42,8 @@ const WORK_EXPERIENCE = [
     location: "Uttara-15, Dhaka",
     period: "Early Career",
     highlights: [
-      "Cross-platform mobile application development for Android and iOS using Flutter and Dart.",
-      "State management implementation with GetX and Provider following Clean Architecture patterns.",
+      "Built cross-platform mobile applications for Android and iOS using Flutter and Dart.",
+      "Implemented state management with GetX and Provider following clean architecture patterns.",
     ],
   },
 ];
@@ -70,7 +70,6 @@ export default function AboutSection() {
   return (
     <section className="about-section" id="about" aria-label="About MD. Emon Miah">
       <div className="section-container">
-        {/* Section Header */}
         <div className="section-header">
           <p className="section-eyebrow">
             <span className="eyebrow-dot" aria-hidden="true" />
@@ -85,9 +84,7 @@ export default function AboutSection() {
           </p>
         </div>
 
-        {/* Content Grid */}
         <div className="about-grid">
-          {/* Left Column: Narrative & Experience Timeline */}
           <div className="about-experience-column">
             <div className="about-timeline-card">
               <div className="timeline-card-header">
@@ -102,7 +99,7 @@ export default function AboutSection() {
                     <div className="timeline-body">
                       <div className="timeline-title-row">
                         <h4 className="job-role">{job.role}</h4>
-                        {job.current && <span className="job-badge">Current / Recent</span>}
+                        {job.current && <span className="job-badge">Current</span>}
                       </div>
                       <div className="job-meta">
                         <span className="job-company">
@@ -159,9 +156,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right Column: Education & Core Strengths */}
           <div className="about-sidebar-column">
-            {/* Education Card */}
             <div className="about-sidebar-card">
               <div className="sidebar-card-header">
                 <GraduationCap size={20} className="timeline-icon" aria-hidden="true" />
@@ -178,7 +173,6 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Core Strengths Card */}
             <div className="about-sidebar-card">
               <h3 className="about-card-title">Core Engineering Strengths</h3>
               <div className="about-principles">
