@@ -1,4 +1,5 @@
-/* Responsive layout layer for the portfolio. */
+/* Responsive layout layer for the portfolio.
+   Keep this file as a small, predictable override layer for the existing visual system. */
 
 html,
 body {
@@ -8,12 +9,16 @@ body {
   overflow-x: hidden;
 }
 
-body { min-height: 100dvh; }
+body {
+  min-height: 100dvh;
+}
 
 img,
 video,
 svg,
-canvas { max-width: 100%; }
+canvas {
+  max-width: 100%;
+}
 
 .section-container,
 .nav-container,
@@ -73,20 +78,14 @@ canvas { max-width: 100%; }
   .nav-container { padding-left: 16px; padding-right: 16px; }
   .nav-container { gap: 10px; }
   .site-header { height: var(--header-height); }
-
-  /* Mobile header: compact, readable, and always above the background layer. */
-  .site-header { background: rgba(12, 12, 12, 0.94); border-bottom-color: rgba(229, 57, 53, 0.24); }
-  .site-header-scrolled { background: rgba(12, 12, 12, 0.98); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32); }
   .brand { min-width: 0; max-width: calc(100vw - 76px); gap: 10px; }
   .brand-meta { min-width: 0; overflow: hidden; }
   .brand-name,
   .brand-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .brand-name { font-size: 0.82rem; color: #FFFFFF; }
-  .brand-title { font-size: 0.64rem; color: #B8BCC8; }
-  .brand-avatar-box { width: 36px; height: 36px; flex: 0 0 36px; border-color: rgba(229, 57, 53, 0.65); box-shadow: 0 0 18px rgba(229, 57, 53, 0.20); }
-  .menu-toggle-btn { width: 40px; height: 40px; flex-basis: 40px; border: 1px solid rgba(229, 57, 53, 0.38); color: #FFFFFF; background: rgba(229, 57, 53, 0.10); border-radius: 10px; }
-  .menu-toggle-btn:active { background: rgba(229, 57, 53, 0.20); }
-
+  .brand-name { font-size: 0.82rem; }
+  .brand-title { font-size: 0.64rem; }
+  .brand-avatar-box { width: 36px; height: 36px; flex: 0 0 36px; }
+  .menu-toggle-btn { width: 40px; height: 40px; flex-basis: 40px; }
   .hero-section,
   .about-section,
   .projects-section,
@@ -140,14 +139,97 @@ canvas { max-width: 100%; }
   .footer-nav { flex-wrap: wrap; gap: 12px 18px; }
   .scroll-top-btn { align-self: flex-start; }
 
-  /* Drawer gets its own opaque surface so menu items remain readable over the canvas. */
-  .mobile-backdrop { background: rgba(0, 0, 0, 0.68); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
-  .mobile-drawer { width: min(360px, 92vw); padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)); background: #121014; border-left: 1px solid rgba(229, 57, 53, 0.30); box-shadow: -18px 0 50px rgba(0, 0, 0, 0.45); z-index: 1002; }
-  .mobile-drawer-header { border-bottom-color: rgba(229, 57, 53, 0.18); }
+  /* Mobile navigation: a clearly separated dark glass drawer with a complete shadow. */
+  .mobile-backdrop {
+    display: block;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1001;
+  }
+
+  .mobile-drawer {
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+    width: min(360px, 92vw);
+    padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
+    background: rgba(18, 16, 20, 0.985);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(229, 57, 53, 0.14), transparent 42%),
+      linear-gradient(180deg, rgba(23, 20, 27, 0.99) 0%, rgba(12, 11, 15, 0.995) 100%);
+    border-left: 1px solid rgba(229, 57, 53, 0.42);
+    box-shadow:
+      -28px 0 70px rgba(0, 0, 0, 0.72),
+      -8px 0 28px rgba(0, 0, 0, 0.55),
+      inset 1px 0 0 rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    z-index: 1002;
+    isolation: isolate;
+  }
+
+  .mobile-drawer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(229, 57, 53, 0.75), rgba(229, 57, 53, 0.08) 55%, transparent);
+    pointer-events: none;
+  }
+
+  .mobile-drawer-open {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer-header {
+    border-bottom: 1px solid rgba(229, 57, 53, 0.22);
+    padding-bottom: 16px;
+  }
+
   .mobile-brand { color: #FFFFFF; }
-  .mobile-nav-link { min-height: 50px; color: #F8F9FA; border-bottom-color: #2C2634; }
+
+  .mobile-close-btn {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  }
+
+  .mobile-nav { position: relative; z-index: 1; }
+
+  .mobile-nav-list { gap: 8px; }
+
+  .mobile-nav-link {
+    min-height: 52px;
+    color: #F8F9FA;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-bottom-color: rgba(255, 255, 255, 0.11);
+    border-radius: 10px;
+    padding: 13px 14px;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.24);
+  }
+
   .mobile-nav-link:hover,
-  .mobile-nav-link:focus-visible { color: #FF6B67; background: rgba(229, 57, 53, 0.08); }
+  .mobile-nav-link:focus-visible,
+  .mobile-nav-link:active {
+    color: #FFFFFF;
+    background: rgba(229, 57, 53, 0.13);
+    border-color: rgba(229, 57, 53, 0.38);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34), 0 0 18px rgba(229, 57, 53, 0.10);
+  }
+
+  .mobile-drawer-footer {
+    position: relative;
+    z-index: 1;
+    border-top-color: rgba(229, 57, 53, 0.20);
+  }
 }
 
 @media (max-width: 400px) {
