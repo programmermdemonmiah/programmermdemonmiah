@@ -139,13 +139,13 @@ canvas {
   .footer-nav { flex-wrap: wrap; gap: 12px 18px; }
   .scroll-top-btn { align-self: flex-start; }
 
-  /* Mobile navigation: premium red/obsidian glass panel with a visible surface. */
+  /* Mobile navigation: a clearly separated dark glass drawer with a complete shadow. */
   .mobile-backdrop {
     display: block;
-    background: rgba(2, 2, 4, 0.66) !important;
-    backdrop-filter: blur(12px) saturate(125%);
-    -webkit-backdrop-filter: blur(12px) saturate(125%);
-    z-index: 1001 !important;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1001;
   }
 
   .mobile-drawer {
@@ -154,48 +154,30 @@ canvas {
     pointer-events: none;
     width: min(360px, 92vw);
     padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
-    background-color: rgba(19, 16, 23, 0.92) !important;
+    background: rgba(18, 16, 20, 0.985);
     background-image:
-      radial-gradient(ellipse 120% 46% at 100% 0%, rgba(229, 57, 53, 0.24), transparent 62%),
-      radial-gradient(circle at 8% 88%, rgba(56, 189, 248, 0.075), transparent 38%),
-      linear-gradient(180deg, rgba(30, 24, 34, 0.88) 0%, rgba(12, 11, 16, 0.94) 100%) !important;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    border-left: 1px solid rgba(229, 57, 53, 0.55) !important;
+      radial-gradient(circle at 100% 0%, rgba(229, 57, 53, 0.14), transparent 42%),
+      linear-gradient(180deg, rgba(23, 20, 27, 0.99) 0%, rgba(12, 11, 15, 0.995) 100%);
+    border-left: 1px solid rgba(229, 57, 53, 0.42);
     box-shadow:
-      -34px 0 90px rgba(0, 0, 0, 0.82),
-      -10px 0 34px rgba(0, 0, 0, 0.58),
-      inset 1px 0 0 rgba(255, 255, 255, 0.07),
-      inset 0 1px 0 rgba(255, 255, 255, 0.035);
-    backdrop-filter: blur(30px) saturate(135%);
-    -webkit-backdrop-filter: blur(30px) saturate(135%);
-    z-index: 1002 !important;
+      -28px 0 70px rgba(0, 0, 0, 0.72),
+      -8px 0 28px rgba(0, 0, 0, 0.55),
+      inset 1px 0 0 rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    z-index: 1002;
     isolation: isolate;
-    overflow: hidden;
   }
 
   .mobile-drawer::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent 12%),
-      radial-gradient(circle at 100% 0%, rgba(229, 57, 53, 0.12), transparent 35%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .mobile-drawer::after {
-    content: "";
-    position: absolute;
     top: 0;
     right: 0;
-    width: 3px;
+    width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, rgba(255, 107, 103, 0.95), rgba(229, 57, 53, 0.42) 46%, rgba(229, 57, 53, 0.02) 100%);
-    box-shadow: 0 0 22px rgba(229, 57, 53, 0.3);
+    background: linear-gradient(180deg, rgba(229, 57, 53, 0.75), rgba(229, 57, 53, 0.08) 55%, transparent);
     pointer-events: none;
-    z-index: 3;
   }
 
   .mobile-drawer-open {
@@ -204,61 +186,49 @@ canvas {
   }
 
   .mobile-drawer-header {
-    position: relative;
-    z-index: 2;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid rgba(229, 57, 53, 0.22);
     padding-bottom: 16px;
   }
 
-  .mobile-brand {
-    color: #FFFFFF !important;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.72);
-  }
+  .mobile-brand { color: #FFFFFF; }
 
   .mobile-close-btn {
-    position: relative;
-    z-index: 2;
-    color: #FFFFFF !important;
-    background: rgba(255, 255, 255, 0.075) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    border-radius: 9px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.42);
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   }
 
-  .mobile-nav {
-    position: relative;
-    z-index: 2;
-  }
+  .mobile-nav { position: relative; z-index: 1; }
 
-  .mobile-nav-list {
-    gap: 9px;
-  }
+  .mobile-nav-list { gap: 8px; }
 
   .mobile-nav-link {
     min-height: 52px;
-    color: #FFFFFF !important;
-    background: rgba(255, 255, 255, 0.055) !important;
-    border: 1px solid rgba(255, 255, 255, 0.105) !important;
+    color: #F8F9FA;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-bottom-color: rgba(255, 255, 255, 0.11);
     border-radius: 10px;
     padding: 13px 14px;
-    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.72);
-    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.24);
   }
 
   .mobile-nav-link:hover,
   .mobile-nav-link:focus-visible,
   .mobile-nav-link:active {
-    color: #FFFFFF !important;
-    background: rgba(229, 57, 53, 0.18) !important;
-    border-color: rgba(229, 57, 53, 0.52) !important;
-    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.40), 0 0 20px rgba(229, 57, 53, 0.13);
+    color: #FFFFFF;
+    background: rgba(229, 57, 53, 0.13);
+    border-color: rgba(229, 57, 53, 0.38);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34), 0 0 18px rgba(229, 57, 53, 0.10);
   }
 
   .mobile-drawer-footer {
     position: relative;
-    z-index: 2;
-    border-top-color: rgba(255, 255, 255, 0.10);
-    padding-top: 16px;
+    z-index: 1;
+    border-top-color: rgba(229, 57, 53, 0.20);
   }
 }
 
